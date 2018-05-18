@@ -1,0 +1,21 @@
+{
+  "id": "93608206-ba27-a76a-93ae-255c0ab10d41",
+  "version": 3,
+  "crypto": {
+    "cipher": "aes-128-ctr",
+    "cipherparams": {
+      "iv": "8bebab643352956d6fc3369475627f18"
+    },
+    "ciphertext": "4f00c21bf5036fc263c88e5ffb2b3a1642f684da0e40ae9ca0d2132a21185716",
+    "kdf": "pbkdf2",
+    "kdfparams": {
+      "c": 10240,
+      "dklen": 32,
+      "prf": "hmac-sha256",
+      "salt": "749677afe391c5661295077956fcfb1774f6020bc2910a2a1629a40b94ac88b5"
+    },
+    "mac": "001fecc049bd55da9956db036bbed25f57979943981cd252b40eeeda2ec9acf7"
+  },
+  "address": "006db7698b897b842a42a1c3ce423b07c2656ecd",
+  "name": "master6"
+}

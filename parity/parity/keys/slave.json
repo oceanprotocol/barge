@@ -1,0 +1,22 @@
+{
+  "id": "e628edcc-7656-ae63-16b4-681829162ef4",
+  "version": 3,
+  "crypto": {
+    "cipher": "aes-128-ctr",
+    "cipherparams": {
+      "iv": "60e33a6f2dd51b76789446a05bb6955e"
+    },
+    "ciphertext": "cd9d1386c72b9a3b79ba83b12d62737197198c58eb976da892ad45e69d06a375",
+    "kdf": "pbkdf2",
+    "kdfparams": {
+      "c": 10240,
+      "dklen": 32,
+      "prf": "hmac-sha256",
+      "salt": "91c370dd20a35536ee73554c2bc0758eaef56e9d778f92bdfc34cd068cc7cc50"
+    },
+    "mac": "e73e3cb1f8ec1498b148fbe62819e8e19380ae70d21491cc2cc2d44a6c0a0a7b"
+  },
+  "address": "00e3d1aa965aafd61217635e5f99f7c1e567978f",
+  "name": "SLAVE",
+  "meta": "{\"passwordHint\":\"\",\"timestamp\":1490892369465}"
+}
