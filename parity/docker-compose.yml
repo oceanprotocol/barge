@@ -10,6 +10,7 @@ services:
       --ui-interface 0.0.0.0
       --unsafe-expose
       --jsonrpc-cors all
+      --unlock 0x00bd138abd70e2f00903268f3db08f2d25677c9e
     volumes:
       - ./parity/config:/parity/config:ro
       - validator0:/root/.local/share/io.parity.ethereum/
@@ -53,21 +54,6 @@ services:
       my_net:
         ipv4_address: 172.16.0.12
 
-  validator3:
-    image: parity/parity:latest
-    command:
-      --config /parity/config/validator.toml
-      --engine-signer 0x00050e34c6ce4edc8ba451aeef2ebb48d7688b8e
-    volumes:
-      - ./parity/config:/parity/config:ro
-      - validator3:/root/.local/share/io.parity.ethereum/
-      - ./parity/authorities/validator3.json:/root/.local/share/io.parity.ethereum/keys/${NETWORK_NAME}/validator.json:ro
-      - ./parity/authorities/validator3.pwd:/parity/validator.pwd:ro
-      - ./parity/node3.network.key:/root/.local/share/io.parity.ethereum/network/key:ro
-    networks:
-      my_net:
-        ipv4_address: 172.16.0.13
-
   user0:
     image: parity/parity:latest
     command:
@@ -87,50 +73,11 @@ services:
       my_net:
         ipv4_address: 172.16.0.20
 
-  user1:
-    image: parity/parity:latest
-    command:
-      --config /parity/config/member.toml
-    volumes:
-      - ./parity/config:/parity/config:ro
-    networks:
-      my_net:
-        ipv4_address: 172.16.0.21
-
-  user2:
-    image: parity/parity:latest
-    command:
-      --config /parity/config/member.toml
-    volumes:
-      - ./parity/config:/parity/config:ro
-    networks:
-      my_net:
-        ipv4_address: 172.16.0.22
-
-  monitor:
-    image: buythewhale/ethstats_monitor
-    volumes:
-      - ./monitor/app.json:/home/ethnetintel/eth-net-intelligence-api/app.json:ro
-    networks:
-      my_net:
-        ipv4_address: 172.16.0.100
-
-
-  dashboard:
-    image: buythewhale/ethstats
-    volumes:
-      - ./dashboard/ws_secret.json:/eth-netstats/ws_secret.json:ro
-    ports:
-      - 3001:3000
-    networks:
-      my_net:
-        ipv4_address: 172.16.0.200
 
 volumes:
   validator0:
   validator1:
   validator2:
-  validator3:
 networks:
   my_net:
     driver: bridge
