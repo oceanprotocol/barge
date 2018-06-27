@@ -1,5 +1,5 @@
 {
-  "name": "ocean-protocol",
+  "name": "ocean-network",
   "engine": {
     "authorityRound": {
       "params": {
@@ -7,7 +7,7 @@
         "validators": {
           "list": [
             "0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e",
-            "0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2",
+            "0x00Aa39d30F0D20FF03a22cCfc30B7EfbFca597C2",
             "0x002e28950558fbede1a9675cb113f0bd20912019"
           ]
         },
@@ -20,8 +20,13 @@
   "params": {
     "maximumExtraDataSize": "0x20",
     "minGasLimit": "0x1388",
-    "networkID": "0x2323",	
-	"gasLimitBoundDivisor": "0x400"
+    "networkID": "0x2323",
+    "gasLimitBoundDivisor": "0x400",
+    "eip140Transition": 0,
+    "eip211Transition": 0,
+    "eip214Transition": 0,
+    "eip658Transition": 0
+
   },
   "genesis": {
     "seal": {
@@ -83,10 +88,10 @@
       }
     },
     "0x6B0c56d1Ad5144b4d37fa6e27DC9afd5C2435c3B": {
-      "balance": "10"
+      "balance": "1000"
     },
     "0x0011598De1016A350ad719D23586273804076774": {
-      "balance": "10"
+      "balance": "100500"
     },
 
 

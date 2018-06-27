@@ -1,11 +1,11 @@
 version: '2.1'
 services:
   validator0:
-    image: parity/parity:latest
+    image: parity/parity:stable
     command:
       --config /parity/config/validator.toml
       --engine-signer 0x00bd138abd70e2f00903268f3db08f2d25677c9e
-      --dapps-interface 0.0.0.0
+      --jsonrpc-interface 0.0.0.0
       --ws-interface 0.0.0.0
       --ui-interface 0.0.0.0
       --unsafe-expose
@@ -25,7 +25,7 @@ services:
         ipv4_address: 172.16.0.10
 
   validator1:
-    image: parity/parity:latest
+    image: parity/parity:stable
     command:
       --config /parity/config/validator.toml
       --engine-signer 0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2
@@ -40,7 +40,7 @@ services:
         ipv4_address: 172.16.0.11
 
   validator2:
-    image: parity/parity:latest
+    image: parity/parity:stable
     command:
       --config /parity/config/validator.toml
       --engine-signer 0x002e28950558fbede1a9675cb113f0bd20912019
@@ -55,10 +55,10 @@ services:
         ipv4_address: 172.16.0.12
 
   user0:
-    image: parity/parity:latest
+    image: parity/parity:stable
     command:
       --config /parity/config/member.toml
-      --dapps-interface 0.0.0.0
+      --jsonrpc-interface 0.0.0.0
       --ws-interface 0.0.0.0
       --ui-interface 0.0.0.0
       --unsafe-expose
