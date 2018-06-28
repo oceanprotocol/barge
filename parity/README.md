@@ -94,3 +94,18 @@ volumes:
 ```
   * The problem is reported in `https://github.com/paritytech/parity/issues/8503` and `https://github.com/ethereum/solidity/issues/3969`
   
+## The ocean test net
+The private test net is running on Azure VM `ocn-hackaton` with ip address `40.115.16.244`
+
+To connect to the network, provide the ip address and use port `8545`
+
+To deploy keeper-contracts, use the following in your truffle.js file:
+```
+ocean_poa_net: {
+    host: 'http://40.115.16.244',
+    port: 8545,
+    network_id: '*',
+    gas: 6000000,
+    from: "0x00bd138abd70e2f00903268f3db08f2d25677c9e"
+},
+```
