@@ -8,6 +8,7 @@ services:
     ports:
     - "27017:27017"
     command: mongod
+
   bigchaindb:
     depends_on:
     - mongodb
@@ -31,6 +32,7 @@ services:
       interval: 3s
       timeout: 5s
       retries: 3
+
   tendermint:
     image: tendermint/tendermint:0.19.9
     # volumes:
@@ -40,21 +42,34 @@ services:
     - "46656:46656"
     - "46657:46657"
     command: sh -c "tendermint init && tendermint node --consensus.create_empty_blocks=false --proxy_app=tcp://bigchaindb:46658"
+
   #bdb:
   #  image: busybox
   #  depends_on:
   #    bigchaindb:
   #      condition: service_healthy
   # curl client to check the health of development env
+
   curl-client:
     image: appropriate/curl
     command: /bin/sh -c "curl -s http://bigchaindb:9984/ > /dev/null && curl -s http://tendermint:46657/ > /dev/null"
+
   vdocs:
     image: nginx
     ports:
     - '33333:80'
     volumes:
     - ../docs/server/build/html:/usr/share/nginx/html
+
+  keeper-contracts:
+    image: oceanprotocol/keeper-contracts
+    ports:
+    - 8545:8545
+    networks:
+    - backend
+    volumes:
+    - ./artifacts/:/keeper-contracts/build/contracts/
+
   provider-backend:
     image: oceanprotocol/provider-backend
     ports:
@@ -63,16 +78,15 @@ services:
     - backend
     depends_on:
     - keeper-contracts
-  keeper-contracts:
-    image: oceanprotocol/keeper-contracts
-    ports:
-    - 8545:8545
-    networks:
-    - backend
+
   pleuston:
     image: oceanprotocol/pleuston
     ports:
     - 3000:3000
+    depends_on:
+    - keeper-contracts
+    volumes:
+    - ./artifacts/:/pleuston/node_modules/@oceanprotocol/keeper-contracts/build/contracts/
 
 networks:
   backend:
