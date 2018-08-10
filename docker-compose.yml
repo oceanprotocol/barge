@@ -78,6 +78,8 @@ services:
     - backend
     depends_on:
     - keeper-contracts
+    volumes:
+    - ./artifacts/:/usr/local/lib/python3.6/site-packages/contracts/
 
   pleuston:
     image: oceanprotocol/pleuston
