@@ -69,6 +69,10 @@ services:
     - 8545:8545
     networks:
     - backend
+  pleuston:
+    image: oceanprotocol/pleuston
+    ports:
+    - 3000:3000
 
 networks:
   backend:
