@@ -1,8 +1,8 @@
 version: '2.1'
 
+# Run: docker-compose --project-name=ocean up
+
 services:
-  # Build: docker-compose build -d bigchaindb
-  # Run: docker-compose run -d bdb
   mongodb:
     image: mongo:3.6
     ports:
@@ -14,7 +14,6 @@ services:
   bigchaindb:
     depends_on:
     - mongodb
-    - tendermint
     image: bigchaindb/bigchaindb:2.0.0-beta1
     environment:
       BIGCHAINDB_DATABASE_BACKEND: localmongodb
@@ -38,6 +37,8 @@ services:
     - backend
 
   tendermint:
+    depends_on:
+    - bigchaindb
     image: tendermint/tendermint:0.19.9
     # volumes:
     #   - ./tmdata:/tendermint
