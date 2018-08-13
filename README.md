@@ -25,7 +25,10 @@ Ocean Keeper implementation where we put the following modules together:
 
 ## Get Started
 
-For local development you can use Docker.
+For local development you can use Docker & Docker Compose. To do that you need to have the newest versions available of both:
+
+* [Docker](https://www.docker.com/get-started)
+* [Docker Compose](https://docs.docker.com/compose/)
 
 ### Docker
 
@@ -35,7 +38,24 @@ The most simple way to get started is with Docker compose:
 docker-compose --project-name=ocean up
 ```
 
-This will give you a local instance of ocean protocol.
+This will give you a local instance of Ocean Protocol.
+
+After having everything running, you could open the browser and access to the **pleuston frontend** application:
+
+```
+http://localhost:3000
+```
+
+## Ocean components
+
+The Ocean Docker compose starts the following components:
+
+* **Pleuston** frontend application. Listening the **3000** port.
+* **Provider backend**. Listening the **5000** port.
+* **Keeper contracts**. Listening the **8545** port.
+* **BigchainDB**. Listening the **9984** port.
+
+![Ocean Docker Images](doc/img/docker-images.jpg)
 
 ## Contributing
 
