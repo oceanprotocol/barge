@@ -32,7 +32,7 @@ For local development you can use Docker.
 The most simple way to get started is with Docker compose:
 
 ```bash
-docker-compose up
+docker-compose up --project-name=ocean
 ```
 
 This will give you a local instance of ocean protocol.
