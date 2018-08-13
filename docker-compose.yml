@@ -57,7 +57,7 @@ services:
     networks:
     - backend
     volumes:
-    - ./artifacts/:/keeper-contracts/build/contracts/
+    - ./artifacts/:/keeper-contracts/artifacts/
 
   provider-backend:
     image: oceanprotocol/provider-backend
