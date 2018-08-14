@@ -54,7 +54,7 @@ services:
     image: oceanprotocol/keeper-contracts
     ports:
     - 8545:8545
-    networkso:
+    networks:
     - backend
     volumes:
     - artifacts:/keeper-contracts/artifacts/
