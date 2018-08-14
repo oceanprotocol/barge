@@ -77,7 +77,7 @@ services:
     depends_on:
     - keeper-contracts
     volumes:
-    - ./artifacts/:/pleuston/node_modules/@oceanprotocol/keeper-contracts/build/contracts/
+    - ./artifacts/:/pleuston/node_modules/@oceanprotocol/artifacts/contracts/
 
 networks:
   backend:
