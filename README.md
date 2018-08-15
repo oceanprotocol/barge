@@ -2,17 +2,10 @@
 
 <h1 align="center">docker-images</h1>
 
-> 💧 Integration of TCRs, CPM and Ocean Tokens in Solidity
+> 💧 Ocean Protocol & Docker
 > [oceanprotocol.com](https://oceanprotocol.com)
 
-[![Build Status](https://travis-ci.com/oceanprotocol/keeper-contracts.svg?token=soMi2nNfCZq19zS1Rx4i&branch=master)](https://travis-ci.com/oceanprotocol/keeper-contracts)
-[![js ascribe](https://img.shields.io/badge/js-ascribe-39BA91.svg)](https://github.com/ascribe/javascript)
-
-Ocean Keeper implementation where we put the following modules together:
-
-* **TCRs**: users create challenges and resolve them through voting to maintain registries;
-* **Ocean Tokens**: the intrinsic tokens circulated inside Ocean network, which is used in the voting of TCRs;
-* **Marketplace**: the core marketplace where people can transact with each other with Ocean tokens.
+Docker compose and tools running the complete Ocean Protocol stack
 
 ## Table of Contents
 
