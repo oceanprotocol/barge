@@ -68,7 +68,7 @@ services:
     depends_on:
     - keeper-contracts
     volumes:
-    - artifacts:/usr/local/contracts/
+    - artifacts:/usr/local/contracts/:ro
 
   pleuston:
     image: oceanprotocol/pleuston
