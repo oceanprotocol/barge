@@ -1,0 +1,103 @@
+{
+  "name": "ocean-network",
+  "engine": {
+    "authorityRound": {
+      "params": {
+        "stepDuration": "1",
+        "validators": {
+          "list": [
+            "0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e",
+            "0x00Aa39d30F0D20FF03a22cCfc30B7EfbFca597C2",
+            "0x002e28950558fbede1a9675cb113f0bd20912019"
+          ]
+        },
+        "validateScoreTransition": 1000000000,
+        "validateStepTransition": 1500000000,
+		"maximumUncleCount": 1000000000
+      }
+    }
+  },
+  "params": {
+    "maximumExtraDataSize": "0x20",
+    "minGasLimit": "0x1388",
+    "networkID": "0x2323",
+    "gasLimitBoundDivisor": "0x400",
+    "eip140Transition": 0,
+    "eip211Transition": 0,
+    "eip214Transition": 0,
+    "eip658Transition": 0
+
+  },
+  "genesis": {
+    "seal": {
+      "authorityRound": {
+        "step": "0x0",
+        "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "difficulty": "0x20000",
+    "gasLimit": "0x165A0BC00"
+  },
+  "accounts": {
+    "0x0000000000000000000000000000000000000001": {
+      "balance": "1",
+      "builtin": {
+        "name": "ecrecover",
+        "pricing": {
+          "linear": {
+            "base": 3000,
+            "word": 0
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000002": {
+      "balance": "1",
+      "builtin": {
+        "name": "sha256",
+        "pricing": {
+          "linear": {
+            "base": 60,
+            "word": 12
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000003": {
+      "balance": "1",
+      "builtin": {
+        "name": "ripemd160",
+        "pricing": {
+          "linear": {
+            "base": 600,
+            "word": 120
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000004": {
+      "balance": "1",
+      "builtin": {
+        "name": "identity",
+        "pricing": {
+          "linear": {
+            "base": 15,
+            "word": 3
+          }
+        }
+      }
+    },
+    "0x6B0c56d1Ad5144b4d37fa6e27DC9afd5C2435c3B": {
+      "balance": "1000"
+    },
+    "0x0011598De1016A350ad719D23586273804076774": {
+      "balance": "100500"
+    },
+
+
+    "0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e": {
+      "balance": "10000000111000111000111000"
+    }
+
+  }
+}
