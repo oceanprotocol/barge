@@ -59,8 +59,8 @@ services:
     volumes:
     - artifacts:/keeper-contracts/artifacts/
 
-  provider-backend:
-    image: oceanprotocol/provider-backend
+  provider:
+    image: oceanprotocol/provider
     ports:
     - 5000:5000
     networks:
