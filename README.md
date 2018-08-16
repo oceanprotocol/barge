@@ -33,7 +33,7 @@ docker-compose --project-name=ocean up
 
 This will give you a local instance of Ocean Protocol.
 
-After having everything running, you could open the browser and access to the **pleuston frontend** application:
+After getting everything running, you could open the browser and access the **Pleuston Frontend** application:
 
 ```
 http://localhost:3000
@@ -43,10 +43,10 @@ http://localhost:3000
 
 The Ocean Docker compose starts the following components:
 
-* **Pleuston** frontend application. Listening the **3000** port.
-* **Provider backend**. Listening the **5000** port.
-* **Keeper contracts**. Listening the **8545** port.
-* **BigchainDB**. Listening the **9984** port.
+* **Pleuston** frontend application. Listening on port **3000**.
+* **Provider backend**. Listening on port **5000**.
+* **Keeper contracts**. Listening on port **8545**.
+* **BigchainDB**. Listening on port on port **9984**.
 
 ![Ocean Docker Images](doc/img/docker-images.jpg)
 
