@@ -9,12 +9,19 @@ Docker compose and tools running the complete Ocean Protocol stack
 
 ## Table of Contents
 
-  - [Get Started](#get-started)
-     - [Docker](#docker)
-  - [Contributing](#contributing)
-  - [License](#license)
+* [Table of Contents](#table-of-contents)
+* [Disclaimer](#disclaimer)
+* [Get Started](#get-started)
+  - [Docker](#docker)
+* [Ocean components](#ocean-components)
+* [Contributing](#contributing)
+* [License](#license)
 
 ---
+
+## Disclaimer
+
+Current implementation is an **alpha version**, so you can expect running into problems. The current implementation only support assets stored in Microsoft Azure storage.
 
 ## Get Started
 
