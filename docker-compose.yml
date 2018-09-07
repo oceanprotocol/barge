@@ -51,7 +51,7 @@ services:
     - backend
 
   keeper-contracts:
-    image: oceanprotocol/keeper-contracts
+    image: oceanprotocol/keeper-contracts:0.1
     ports:
     - 8545:8545
     networks:
@@ -60,7 +60,7 @@ services:
     - artifacts:/keeper-contracts/artifacts/
 
   provider:
-    image: oceanprotocol/provider
+    image: oceanprotocol/provider:0.1
     ports:
     - 5000:5000
     networks:
@@ -71,7 +71,7 @@ services:
     - artifacts:/usr/local/contracts/:ro
 
   pleuston:
-    image: oceanprotocol/pleuston
+    image: oceanprotocol/pleuston:0.1
     ports:
     - 3000:3000
     depends_on:
