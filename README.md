@@ -54,7 +54,6 @@ The Ocean Docker compose starts the following components:
 * **Pleuston** frontend application. Listening on port **3000**.
 * **Provider backend**. Listening on port **5000**.
 * **Keeper contracts**. Listening on port **8545**.
-* **BigchainDB**. Listening on port on port **9984**.
 
 ## Ocean components versions
 
