@@ -14,6 +14,7 @@ Docker compose and tools running the complete Ocean Protocol stack
 * [Get Started](#get-started)
   - [Docker](#docker)
 * [Ocean components](#ocean-components)
+* [Ocean components versions](#ocean-components-versions)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -53,7 +54,15 @@ The Ocean Docker compose starts the following components:
 * **Pleuston** frontend application. Listening on port **3000**.
 * **Provider backend**. Listening on port **5000**.
 * **Keeper contracts**. Listening on port **8545**.
-* **BigchainDB**. Listening on port on port **9984**.
+
+## Ocean components versions
+
+The version of the Ocean components can be configured setting the environment variable `OCEAN_VERSION`. By default `master` branch runs the latest stable version release, and `develop` branch runs the code generated in the `master` branch of the Ocean components. If you want to run the component's code of `develop` branch:
+
+```bash
+export OCEAN_VERSION=latest
+docker-compose --project-name=ocean up
+```
 
 ![Ocean Docker Images](doc/img/docker-images.jpg)
 
