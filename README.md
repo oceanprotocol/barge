@@ -54,6 +54,8 @@ The Ocean Docker compose starts the following components:
 * [🐋 provider](https://github.com/oceanprotocol/provider). Backend listening on port `5000`.
 * [💧 keeper-contracts](https://github.com/oceanprotocol/keeper-contracts). RPC client listening on port `8545`.
 
+![Ocean Protocol Components](doc/img/ocean-components@2x.png)
+
 ### Versions
 
 The version of the Ocean components can be configured setting the environment variable `OCEAN_VERSION`. By default `master` branch runs the latest stable version release, and `develop` branch runs the code generated in the `master` branch of the Ocean components. If you want to run the component's code of `develop` branch:
@@ -62,8 +64,6 @@ The version of the Ocean components can be configured setting the environment va
 export OCEAN_VERSION=latest
 docker-compose --project-name=ocean up
 ```
-
-![Ocean Docker Images](doc/img/docker-images.jpg)
 
 ## Contributing
 
