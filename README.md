@@ -2,60 +2,61 @@
 
 <h1 align="center">docker-images</h1>
 
-> 💧 Ocean Protocol & Docker
+> 🐳 Docker compose and tools running the complete Ocean Protocol network stack.
 > [oceanprotocol.com](https://oceanprotocol.com)
 
-Docker compose and tools running the complete Ocean Protocol stack
+---
+
+**🐲🦑 THERE BE DRAGONS AND SQUIDS. This is in alpha state and you can expect running into problems. If you run into them, please open up [a new issue](https://github.com/oceanprotocol/docker-images/issues). 🦑🐲**
+
+---
 
 ## Table of Contents
 
-* [Table of Contents](#table-of-contents)
-* [Disclaimer](#disclaimer)
+* [Prerequisites](#prerequisites)
 * [Get Started](#get-started)
-  - [Docker](#docker)
-* [Ocean components](#ocean-components)
-* [Ocean components versions](#ocean-components-versions)
+* [Ocean Protocol components](#ocean-protocol-components)
+    - [Versions](#versions)
 * [Contributing](#contributing)
 * [License](#license)
 
 ---
 
-## Disclaimer
+## Prerequisites
 
-Current implementation is an **alpha version**, so you can expect running into problems. The current implementation only support assets stored in Microsoft Azure storage.
-
-## Get Started
-
-For local development you can use Docker & Docker Compose. To do that you need to have the newest versions available of both:
+You need to have the newest versions available of both:
 
 * [Docker](https://www.docker.com/get-started)
 * [Docker Compose](https://docs.docker.com/compose/)
 
-### Docker
+## Get Started
 
-The most simple way to get started is with Docker compose:
+Then bring up an instance of the whole Ocean Protocol network stack with:
 
 ```bash
+git clone git@github.com:oceanprotocol/docker-images.git
+cd docker-images/
+
 docker-compose --project-name=ocean up
 ```
 
-This will give you a local instance of Ocean Protocol.
-
-After getting everything running, you could open the browser and access the **Pleuston Frontend** application:
+After getting everything running, you can open the **Pleuston Frontend** application in your browser:
 
 ```
 http://localhost:3000
 ```
 
-## Ocean components
+## Ocean Protocol components
 
 The Ocean Docker compose starts the following components:
 
-* **Pleuston** frontend application. Listening on port **3000**.
-* **Provider backend**. Listening on port **5000**.
-* **Keeper contracts**. Listening on port **8545**.
+* [🦄 pleuston](https://github.com/oceanprotocol/pleuston). Frontend listening on port `3000`.
+* [🐋 provider](https://github.com/oceanprotocol/provider). Backend listening on port `5000`.
+* [💧 keeper-contracts](https://github.com/oceanprotocol/keeper-contracts). RPC client listening on port `8545`.
 
-## Ocean components versions
+![Ocean Protocol Components](doc/img/ocean-components@2x.png)
+
+### Versions
 
 The version of the Ocean components can be configured setting the environment variable `OCEAN_VERSION`. By default `master` branch runs the latest stable version release, and `develop` branch runs the code generated in the `master` branch of the Ocean components. If you want to run the component's code of `develop` branch:
 
@@ -64,15 +65,13 @@ export OCEAN_VERSION=latest
 docker-compose --project-name=ocean up
 ```
 
-![Ocean Docker Images](doc/img/docker-images.jpg)
-
 ## Contributing
 
 We use GitHub as a means for maintaining and tracking issues and source code development.
 
 If you would like to contribute, please fork this repository, do work in a feature branch, and finally open a pull request for maintainers to review your changes.
 
-Ocean Protocol uses [C4 Standard process](https://github.com/unprotocols/rfc/blob/master/1/README.md) to manage changes in the source code.  Find here more details about [Ocean C4 OEP](https://github.com/oceanprotocol/OEPs/tree/master/1).
+Ocean Protocol uses [C4 Standard process](https://github.com/unprotocols/rfc/blob/master/1/README.md) to manage changes in the source code. Find here more details about [Ocean C4 OEP](https://github.com/oceanprotocol/OEPs/tree/master/1).
 
 ## License
 
