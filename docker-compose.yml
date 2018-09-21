@@ -32,7 +32,7 @@ services:
       KEEPER_HOST: http://keeper-contracts
       DB_HOSTNAME: mongodb
     volumes:
-    - artifacts:/usr/local/contracts/:ro
+    - artifacts:/usr/local/keeper-contracts/:ro
 
   pleuston:
     image: oceanprotocol/pleuston:${OCEAN_VERSION:-stable}
