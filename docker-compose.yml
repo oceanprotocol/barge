@@ -17,6 +17,8 @@ services:
     - 8545:8545
     networks:
     - backend
+    environment:
+      LOCAL_CONTRACTS: 'true'
     volumes:
     - artifacts:/keeper-contracts/artifacts/
 
@@ -31,6 +33,7 @@ services:
     environment:
       KEEPER_HOST: http://keeper-contracts
       DB_HOSTNAME: mongodb
+      LOCAL_CONTRACTS: 'true'
     volumes:
     - artifacts:/usr/local/keeper-contracts/:ro
 
@@ -43,6 +46,7 @@ services:
     environment:
       KEEPER_HOST: keeper-contracts
       OCEAN_HOST: provider
+      LOCAL_CONTRACTS: 'true'
     volumes:
     - artifacts:/pleuston/node_modules/@oceanprotocol/keeper-contracts/artifacts/:ro
 
