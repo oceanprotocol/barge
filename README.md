@@ -37,6 +37,16 @@ Then bring up an instance of the whole Ocean Protocol network stack with:
 git clone git@github.com:oceanprotocol/docker-images.git
 cd docker-images/
 
+./start_ocean.sh
+
+```
+
+Or
+
+```bash
+git clone git@github.com:oceanprotocol/docker-images.git
+cd docker-images/
+
 docker-compose --project-name=ocean up
 ```
 
@@ -64,6 +74,22 @@ The version of the Ocean components can be configured setting the environment va
 export OCEAN_VERSION=latest
 docker-compose --project-name=ocean up
 ```
+
+### Options
+
+The keeper-contracts component runs with ganache by default and every run will produce and deploy new instances of the keeper contracts.
+Ganache can be run with a specific database path by setting the env var `REUSE_DATABASE` to "true". By default, the ganache database will be setup in the cwd.
+
+The following env vars enable some customization:
+* DEPLOY_CONTRACTS: skip deploying smart contracts by setting this to "false", in this case `REUSE_DATABASE` should be set to True in the previous run when using ganache
+* KEEPER_NETWORK_NAME: set to one of "ganache" (default), "kovan", or "ocean_poa_net_local" 
+* ARTIFACTS_FOLDER: this is where the deployed smart contracts abi files will be available. This can be pointed at any path you like. When running a separate pleuston instance, it may be necessary to copy the abi files from this artifacts folder to the @oceanprotocol/keeper-contracts/artifacts folder in pleuston
+
+A subset of the components can be run by modifying the docker-compose file directly or by using one 
+of the other pre-built compose files:
+* `docker-compose-no-pleuston.yml` runs all components without the pleuston. This is useful for developing/debugging 
+the front-end app. So first the docker compose container can be started then pleuston can be started separately from source. You can also use `./start_ocean.sh --no-pleuston` to do this
+* `docker-compose-local-parity-node.yml` is similar to the above with no pleuston, but runs a local parity POA node instead of ganache-cli. You can also use `./start_ocean.sh --local-parity-node` instead
 
 ## Contributing
 
