@@ -1,0 +1,72 @@
+version: '2.1'
+
+# Run: docker-compose --project-name=ocean up
+
+services:
+  mongodb:
+    image: mongo:3.6
+    ports:
+    - "27017:27017"
+    command: mongod
+    networks:
+    - backend
+
+  parity-node:
+    image: parity/parity:stable
+    command:
+      --config /parity/config/validator.toml
+      --engine-signer 0x00bd138abd70e2f00903268f3db08f2d25677c9e
+      --jsonrpc-interface 0.0.0.0
+      --ws-interface 0.0.0.0
+      --ui-interface 0.0.0.0
+      --unsafe-expose
+      --jsonrpc-cors all
+      --unlock 0x00bd138abd70e2f00903268f3db08f2d25677c9e
+    volumes:
+      - ./parity/parity/config:/parity/config:ro
+      - parity-node:/root/.local/share/io.parity.ethereum/
+      - ./parity/parity/authorities/validator0.json:/root/.local/share/io.parity.ethereum/keys/ocean-network/validator.json:ro
+      - ./parity/parity/keys:/root/.local/share/io.parity.ethereum/keys/ocean-network
+      - ./parity/parity/authorities/validator0.pwd:/parity/validator.pwd:ro
+      - ./parity/parity/node0.network.key:/root/.local/share/io.parity.ethereum/network/key:ro
+    ports:
+      - 8545:8545
+    networks:
+    - backend
+
+  keeper-contracts:
+    image: oceanprotocol/keeper-contracts:${OCEAN_VERSION:-stable}
+    networks:
+    - backend
+    environment:
+      LOCAL_CONTRACTS: "true"
+      DEPLOY_CONTRACTS: ${DEPLOY_CONTRACTS}
+      DATABASE_PATH: "/ganache-db"
+      REUSE_DATABASE: ${REUSE_DATABASE}
+      NETWORK_NAME: ${KEEPER_NETWORK_NAME}
+      POA_HOST: "parity-node"
+    volumes:
+    - ${ARTIFACTS_FOLDER}:/keeper-contracts/artifacts/
+    - ${GANACHE_DATABASE_PATH}/ganache-db:/ganache-db
+
+  provider:
+    image: oceanprotocol/provider:${OCEAN_VERSION:-stable}
+    ports:
+    - 5000:5000
+    networks:
+    - backend
+    depends_on:
+    - keeper-contracts
+    environment:
+      KEEPER_HOST: http://parity-node
+      DB_HOSTNAME: mongodb
+      LOCAL_CONTRACTS: 'true'
+    volumes:
+    - ${ARTIFACTS_FOLDER}:/usr/local/keeper-contracts/:ro
+
+
+networks:
+  backend:
+
+volumes:
+  parity-node:
