@@ -42,19 +42,6 @@ services:
     volumes:
     - ${ARTIFACTS_FOLDER}:/usr/local/keeper-contracts/:ro
 
-  pleuston:
-    image: oceanprotocol/pleuston:${OCEAN_VERSION:-stable}
-    ports:
-    - 3000:3000
-    depends_on:
-    - keeper-contracts
-    environment:
-      KEEPER_HOST: keeper-contracts
-      OCEAN_HOST: provider
-      LOCAL_CONTRACTS: 'true'
-    volumes:
-    - ${ARTIFACTS_FOLDER}:/pleuston/node_modules/@oceanprotocol/keeper-contracts/artifacts/:ro
-
 networks:
   backend:
 
