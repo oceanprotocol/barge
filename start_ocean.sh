@@ -11,7 +11,7 @@ export ARTIFACTS_FOLDER=~/.ocean/keeper-contracts/artifacts
 
 # default to `stable` versions of all components
 # unless `--latest` argument is given
-if [ "$1" == "--latest" ]; then
+if [ "$1" == "--latest" ] || [ "$2" == "--latest" ]; then
     export OCEAN_VERSION=latest
 else
     export OCEAN_VERSION=stable
