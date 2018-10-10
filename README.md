@@ -39,6 +39,8 @@ cd docker-images/
 ./start_ocean.sh
 ```
 
+<img width="535" alt="screen shot 2018-10-10 at 12 20 48" src="https://user-images.githubusercontent.com/90316/46729966-22206600-cc87-11e8-9e1a-156d8a6c5e43.png">
+
 This will bring up the `stable` versions of all components, referring to their respective `master` branches.
 
 To get the `latest` versions of all components, referring to their `develop` branches, pass the argument `--latest`:
