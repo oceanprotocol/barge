@@ -17,17 +17,16 @@ else
     export OCEAN_VERSION=stable
 fi
 
-if [ "$1" == "--no-pleuston" ]
-then
-export REUSE_DATABASE="true"
-docker-compose -f docker-compose-no-pleuston.yml up
+if [ "$1" == "--no-pleuston" ]; then
 
-elif [ "$1" == "--local-parity-node" ]
-then
-export KEEPER_NETWORK_NAME="ocean_poa_net_local"
-docker-compose -f docker-compose-local-parity-node.yml up
+    export REUSE_DATABASE="true"
+    docker-compose --project-name=ocean -f docker-compose-no-pleuston.yml up
+
+elif [ "$1" == "--local-parity-node" ]; then
+
+    export KEEPER_NETWORK_NAME="ocean_poa_net_local"
+    docker-compose --project-name=ocean -f docker-compose-local-parity-node.yml up
 
 else
-docker-compose up
-
+    docker-compose --project-name=ocean up
 fi
