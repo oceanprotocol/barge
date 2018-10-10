@@ -38,8 +38,10 @@ while :; do
             export OCEAN_VERSION=latest
             printf $COLOR_Y'Switched to latest components...\n\n'$COLOR_RESET
             ;;
-        --no-pleuston)
+        --reuse-database)
             export REUSE_DATABASE="true"
+            ;;
+        --no-pleuston)
             COMPOSE_FILE='docker-compose-no-pleuston.yml'
             printf $COLOR_Y'Starting without Pleuston...\n\n'$COLOR_RESET
             ;;
