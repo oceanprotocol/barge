@@ -40,6 +40,7 @@ while :; do
             ;;
         --reuse-database)
             export REUSE_DATABASE="true"
+            printf $COLOR_Y'Starting and reusing the database ...\n\n'$COLOR_RESET
             ;;
         --no-pleuston)
             COMPOSE_FILE='docker-compose-no-pleuston.yml'

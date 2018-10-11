@@ -66,6 +66,7 @@ Option | Description
 `--latest` | Get the `latest` versions of all components, referring to their `develop` branches.
 `--no-pleuston` | Start up Ocean without an instance of `pleuston`. Helpful for development on `pleuston`.
 `--local-parity-node` | Runs a local parity POA node instead of ganache-cli.
+`--reuse-database` | Start up Ocean and reuse the Database from ganache. Helpful for development.
 
 ## Ocean Protocol components
 
