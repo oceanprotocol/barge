@@ -49,8 +49,8 @@ services:
     - ${ARTIFACTS_FOLDER}:/keeper-contracts/artifacts/
     - ${GANACHE_DATABASE_PATH}/ganache-db:/ganache-db
 
-  provider:
-    image: oceanprotocol/provider:${OCEAN_VERSION:-stable}
+  aquarius:
+    image: oceanprotocol/aquarius:${OCEAN_VERSION:-stable}
     ports:
     - 5000:5000
     networks:

@@ -27,8 +27,8 @@ services:
     - ${ARTIFACTS_FOLDER}:/keeper-contracts/artifacts/
     - ${GANACHE_DATABASE_PATH}/ganache-db:/ganache-db
 
-  provider:
-    image: oceanprotocol/provider:${OCEAN_VERSION:-stable}
+  aquarius:
+    image: oceanprotocol/aquarius:${OCEAN_VERSION:-stable}
     ports:
     - 5000:5000
     networks:
@@ -50,7 +50,7 @@ services:
     - keeper-contracts
     environment:
       KEEPER_HOST: keeper-contracts
-      OCEAN_HOST: provider
+      OCEAN_HOST: aquarius
       LOCAL_CONTRACTS: 'true'
     volumes:
     - ${ARTIFACTS_FOLDER}:/pleuston/node_modules/@oceanprotocol/keeper-contracts/artifacts/:ro
