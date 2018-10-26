@@ -73,7 +73,7 @@ Option | Description
 The Ocean Docker compose starts the following components:
 
 * [🦄 pleuston](https://github.com/oceanprotocol/pleuston). Frontend listening on port `3000`.
-* [🐋 provider](https://github.com/oceanprotocol/provider). Backend listening on port `5000`.
+* [🐋 aquarius](https://github.com/oceanprotocol/aquarius). Backend listening on port `5000`.
 * [💧 keeper-contracts](https://github.com/oceanprotocol/keeper-contracts). RPC client listening on port `8545`.
 
 ![Ocean Protocol Components](doc/img/ocean-components@2x.png)
