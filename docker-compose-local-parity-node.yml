@@ -14,7 +14,10 @@ services:
   parity-node:
     image: parity/parity:stable
     command:
-      --config /parity/config/validator.toml
+      --config /home/parity/parity/config/validator.toml
+      --db-path /home/parity/chains
+      --keys-path /home/parity/.local/share/io.parity.ethereum/keys
+      --base-path /home/parity/base
       --engine-signer 0x00bd138abd70e2f00903268f3db08f2d25677c9e
       --jsonrpc-interface 0.0.0.0
       --ws-interface 0.0.0.0
@@ -22,13 +25,14 @@ services:
       --unsafe-expose
       --jsonrpc-cors all
       --unlock 0x00bd138abd70e2f00903268f3db08f2d25677c9e
+    # entrypoint: tail -f /dev/null
     volumes:
-      - ./parity/parity/config:/parity/config:ro
-      - parity-node:/root/.local/share/io.parity.ethereum/
-      - ./parity/parity/authorities/validator0.json:/root/.local/share/io.parity.ethereum/keys/ocean-network/validator.json:ro
-      - ./parity/parity/keys:/root/.local/share/io.parity.ethereum/keys/ocean-network
-      - ./parity/parity/authorities/validator0.pwd:/parity/validator.pwd:ro
-      - ./parity/parity/node0.network.key:/root/.local/share/io.parity.ethereum/network/key:ro
+      - ./parity/parity/config:/home/parity/parity/config
+      - parity-node:/home/parity/.local/share/io.parity.ethereum/
+      - ./parity/parity/authorities/validator0.json:/home/parity/.local/share/io.parity.ethereum/keys/ocean-network/validator.json
+      - ./parity/parity/keys:/home/parity/.local/share/io.parity.ethereum/keys/ocean-network
+      - ./parity/parity/authorities/validator0.pwd:/home/parity/parity/validator.pwd
+      - ./parity/parity/node0.network.key:/home/parity/.local/share/io.parity.ethereum/network/key
     ports:
       - 8545:8545
     networks:
