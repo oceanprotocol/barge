@@ -42,6 +42,20 @@ services:
     volumes:
     - ${ARTIFACTS_FOLDER}:/usr/local/keeper-contracts/:ro
 
+  brizo:
+    image: oceanprotocol/brizo:${OCEAN_VERSION:-stable}
+    ports:
+    - 8030:8030
+    networks:
+    - backend
+    depends_on:
+    - keeper-contracts
+    environment:
+      KEEPER_URL: http://keeper-contracts:8545
+      LOCAL_CONTRACTS: "true"
+    volumes:
+    - ${ARTIFACTS_FOLDER}:/usr/local/keeper-contracs/:ro
+
 networks:
   backend:
 
