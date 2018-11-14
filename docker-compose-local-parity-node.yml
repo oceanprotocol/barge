@@ -13,18 +13,20 @@ services:
         ipv4_address: 172.15.0.11
 
   parity-node:
-    image: parity/parity:stable
+    image: oceanprotocol/parity-ethereum:beta
+    entrypoint: /opt/parity/parity
     command:
-      --config /home/parity/parity/config/validator.toml
+      --config /home/parity/parity/config/secretstoreclient.toml
       --db-path /home/parity/chains
       --keys-path /home/parity/.local/share/io.parity.ethereum/keys
       --base-path /home/parity/base
       --engine-signer 0x00bd138abd70e2f00903268f3db08f2d25677c9e
-      --jsonrpc-interface 0.0.0.0
-      --ws-interface 0.0.0.0
-      --ui-interface 0.0.0.0
-      --unsafe-expose
+      --ws-interface all
       --jsonrpc-cors all
+      --jsonrpc-interface all
+      --jsonrpc-hosts all
+      --jsonrpc-apis all
+      --unsafe-expose
       --unlock 0x00bd138abd70e2f00903268f3db08f2d25677c9e
     volumes:
       - ./parity/parity/config:/home/parity/parity/config
@@ -51,6 +53,7 @@ services:
     - ./parity/secret_store/keys/:/parity_data/keys/ocean-network/
     ports:
     - 12000:12000
+    - 12001:12001
     networks:
       backend:
         ipv4_address: 172.15.0.13
