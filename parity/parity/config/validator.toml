@@ -1,5 +1,5 @@
 [parity]
-chain = "/parity/config/chain.json"
+chain = "/home/parity/parity/config/chain.json"
 
 [rpc]
 interface = "0.0.0.0"
@@ -15,7 +15,7 @@ bootnodes = [
 ]
 
 [account]
-password = ["/parity/validator.pwd"]
+password = ["/home/parity/parity/validator.pwd"]
 
 [mining]
 reseal_on_txs = "none"
