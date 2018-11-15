@@ -19,3 +19,6 @@ password = ["/home/parity/parity/validator.pwd"]
 
 [mining]
 reseal_on_txs = "none"
+
+[secretstore]
+disable = true

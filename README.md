@@ -80,7 +80,7 @@ The Ocean Docker compose starts the following components:
 
 ### Environment Variables
 
-The `start_ocean.sh` script sets defaults for the following environment variables but you can use these in combination with the Docker Compose files for further customization, e.g.:
+The `start_ocean.sh` script and `.env` file sets defaults for the following environment variables but you can use these in combination with the Docker Compose files for further customization, e.g.:
 
 ```bash
 export REUSE_DATABASE="true"

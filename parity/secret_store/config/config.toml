@@ -1,0 +1,60 @@
+[parity]
+chain = "/etc/parity/secretstore/chain.json"
+base_path = "/parity_data"
+
+[ui]
+disable = true
+
+[rpc]
+disable = false
+port = 8545
+interface = "all"
+cors = ["all"]
+apis = ["web3", "eth", "pubsub", "net", "parity", "parity_pubsub", "traces", "rpc", "shh", "shh_pubsub"]
+hosts = ["all"]
+
+[ipc]
+disable = true
+
+[dapps]
+disable = true
+
+[websockets]
+disable = true
+
+[mining]
+engine_signer = "0xa1345ed0b2d1e193aead673e33dac56515af128a"
+reseal_on_txs = "none"
+usd_per_tx = "0"
+
+[network]
+port = 30303
+bootnodes = [
+  "enode://16bddd0215f9bb8a9328671b7b1554a7811cf310065fde04248ce4cea92fe2831412894c912e6b9e45019d5011631452055a5c1873f2d6760baa95f51c449787@172.15.0.13:30303",
+  "enode://bd97feab0fdd069c3fe1f260285053f6a6fa6eaa840bfd6730a1ce6b0b9eccef616bfca7b498fb04c02f5fb9ecd8c40617c32acbdd4b55d306a3f4468b6885f2@172.15.0.12:30303"
+]
+
+[ipfs]
+enable = false
+
+[snapshots]
+disable_periodic = true
+
+[secretstore]
+self_secret = "a1345ed0b2d1e193aead673e33dac56515af128a"
+disable = false
+disable_http = false      # This node will expose a Secret Store HTTP API
+http_interface = "all"  # The HTTP API is available locally only
+http_port = 12001          # The Secret Store HTTP API is available at this port
+acl_contract = "none"     # Insecure, will be changed later on
+server_set_contract = "none"
+nodes = [
+  "7cb22f9a17e8880f8009b519b3506fa9d52fe0ff315f68d0dc0be9576f116818be5f3843c3e4e57aecea40bdd14c8539f5714a51d3254c2955d8a9f1ea9723dc@172.15.0.13:12000"
+]
+interface = "all"
+port = 12000               # port used to communicated with other Secret Store nodes
+path = "/parity_data/secret_store"
+
+[account]
+password = ["/etc/parity/secretstore/password"]
+
