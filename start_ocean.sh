@@ -8,6 +8,7 @@ export REUSE_DATABASE="false"
 # Specify which ethereum client to run or connect to: kovan, ganache, or ocean_poa_net_local
 export KEEPER_NETWORK_NAME="ganache"
 export ARTIFACTS_FOLDER=~/.ocean/keeper-contracts/artifacts
+export PROJECT_NAME="ocean"
 
 # colors
 COLOR_R="\033[0;31m"    # red
@@ -51,6 +52,17 @@ while :; do
             COMPOSE_FILE='docker-compose-local-parity-node.yml'
             printf $COLOR_Y'Starting with local Parity node...\n\n'$COLOR_RESET
             ;;
+        --clean-all)
+            docker network rm $PROJECT_NAME_backend || true
+            docker volume rm $PROJECT_NAME_parity-node || true
+            docker volume rm $PROJECT_NAME_secret-store || true
+            read -p "Are you sure you want to delete $ARTIFACTS_FOLDER? " -n 1 -r
+            echo
+            if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                rm -rf $ARTIFACTS_FOLDER
+            fi
+            ;;
         --) # End of all options.
              shift
              break
@@ -61,7 +73,7 @@ while :; do
              ;;
         *)
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
-            docker-compose --project-name=ocean -f $COMPOSE_FILE up
+            docker-compose --project-name=$PROJECT_NAME -f $COMPOSE_FILE up
             break
     esac
     shift

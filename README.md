@@ -61,12 +61,13 @@ http://localhost:3000
 
 The script provides the following options:
 
-Option | Description 
----    | --- 
+Option | Description
+---    | ---
 `--latest` | Get the `latest` versions of all components, referring to their `develop` branches.
 `--no-pleuston` | Start up Ocean without an instance of `pleuston`. Helpful for development on `pleuston`.
 `--local-parity-node` | Runs a local parity POA node and Secret Store instead of ganache-cli.
 `--reuse-database` | Start up Ocean and reuse the Database from ganache. Helpful for development.
+`--clean-all` | Remove the volumes, local folder and networks used by the script.
 
 For example, the following command would run the latest version of the stack, without Pleuston and with the Parity + Secret Store nodes:
 
@@ -102,8 +103,8 @@ export REUSE_DATABASE="true"
 docker-compose --project-name=ocean -f docker-compose-no-pleuston.yml up
 ```
 
-Variable | Description 
----      | --- 
+Variable | Description
+---      | ---
 `REUSE_DATABASE` | The keeper-contracts component runs with ganache by default and every run will produce and deploy new instances of the keeper contracts. Ganache can be run with a specific database path by setting the env var `REUSE_DATABASE` to `"true"`. By default, the ganache database will be setup in the cwd.
 `DEPLOY_CONTRACTS` | skip deploying smart contracts by setting this to `"false"`, in this case `REUSE_DATABASE` should be set to `"true"` in the previous run when using ganache
 `KEEPER_NETWORK_NAME` | set to one of `"ganache"` (default), `"kovan"`, or `"ocean_poa_net_local"`
@@ -111,8 +112,8 @@ Variable | Description
 
 A subset of the components can be run by modifying the docker-compose file directly or by using one of the other pre-built compose files:
 
-Compose file | Description 
----          | --- 
+Compose file | Description
+---          | ---
 `docker-compose-no-pleuston.yml` | runs all components without the pleuston. This is useful for developing/debugging the front-end app. So first the docker compose container can be started then pleuston can be started separately from source. You can also use `./start_ocean.sh --no-pleuston` to do this
 `docker-compose-local-parity-node.yml` | similar to the above with no pleuston, but runs a local parity POA node instead of ganache-cli. You can also use `./start_ocean.sh --local-parity-node` instead
 
