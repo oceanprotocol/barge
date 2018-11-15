@@ -9,13 +9,15 @@ Docker compose and tools running the complete Ocean Protocol stack
 
 ## Table of Contents
 
-* [Table of Contents](#table-of-contents)
-* [Disclaimer](#disclaimer)
-* [Get Started](#get-started)
-  - [Docker](#docker)
-* [Ocean components](#ocean-components)
-* [Contributing](#contributing)
-* [License](#license)
+   * [docker-images](#docker-images)
+      * [Table of Contents](#table-of-contents)
+      * [Disclaimer](#disclaimer)
+      * [Get Started](#get-started)
+         * [Docker](#docker)
+         * [Running options](#running-options)
+      * [Ocean components](#ocean-components)
+      * [Contributing](#contributing)
+      * [License](#license)
 
 ---
 
@@ -46,14 +48,36 @@ After getting everything running, you could open the browser and access the **Pl
 http://localhost:3000
 ```
 
+### Running options
+
+This repository provides an script with different options to facilitate the execution of different setups:
+
+```bash
+./start_ocean.sh
+```
+
+By default the script starts Ganache and deploy the keeper-contracts there. If you want to use a **Parity Client** and **Secret Store** running in local, you can use the option `--local-parity-node`.
+```bash
+./start_ocean.sh --latest --no-pleuston --local-parity-node
+```
+
+If you need an account with balance in that parity client, you can use the following:
+
+```
+parity.address="0x00bd138abd70e2f00903268f3db08f2d25677c9e"
+parity.password="node0"
+```
+
 ## Ocean components
 
 The Ocean Docker compose starts the following components:
 
 * **Pleuston** frontend application. Listening on port **3000**.
-* **Provider backend**. Listening on port **5000**.
+* **Aquarius**. Listening on port **5000**.
+* **Brizo**. Listening on port **8030**.
 * **Keeper contracts**. Listening on port **8545**.
-* **BigchainDB**. Listening on port on port **9984**.
+* **MongoDB**. Listening on port **27017**.
+* **Secret Store**. Listening on port **12001**.
 
 ![Ocean Docker Images](doc/img/docker-images.jpg)
 
