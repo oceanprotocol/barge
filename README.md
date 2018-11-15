@@ -65,8 +65,12 @@ Option | Description
 ---    | --- 
 `--latest` | Get the `latest` versions of all components, referring to their `develop` branches.
 `--no-pleuston` | Start up Ocean without an instance of `pleuston`. Helpful for development on `pleuston`.
-`--local-parity-node` | Runs a local parity POA node instead of ganache-cli.
+`--local-parity-node` | Runs a local parity POA node and Secret Store instead of ganache-cli.
 `--reuse-database` | Start up Ocean and reuse the Database from ganache. Helpful for development.
+
+For example, the following command would run the latest version of the stack, without Pleuston and with the Parity + Secret Store nodes:
+
+`./start_ocean.sh --latest --no-pleuston --local-parity-node`
 
 ## Ocean Protocol components
 
@@ -75,8 +79,19 @@ The Ocean Docker compose starts the following components:
 * [🦄 pleuston](https://github.com/oceanprotocol/pleuston). Frontend listening on port `3000`.
 * [🐋 aquarius](https://github.com/oceanprotocol/aquarius). Backend listening on port `5000`.
 * [💧 keeper-contracts](https://github.com/oceanprotocol/keeper-contracts). RPC client listening on port `8545`.
+* [💧 secret-store](https://github.com/oceanprotocol/parity-ethereum). HTTP client listening on port `12001`.
 
 ![Ocean Protocol Components](doc/img/ocean-components@2x.png)
+
+### Parity Client Accounts
+
+If you run the `start_ocean.sh` script with the `--local-parity-node` option, you will have available a Parity Client instance with the following accounts enabled:
+
+Account | Password | Balance
+--------|----------|--------
+0x00bd138abd70e2f00903268f3db08f2d25677c9e | node0 | 10000000111000111000111000
+0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0 | secret | 100000000
+0xa99d43d86a0758d5632313b8fa3972b6088a21bb | secret | 100000000
 
 ### Environment Variables
 
