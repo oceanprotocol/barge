@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 # Must be set to true for the first run, change it to "false" to avoid migrating the smart contracts on each run.
 export DEPLOY_CONTRACTS="true"
 # Ganache specific option, these two options have no effect when not running ganache-cli
@@ -20,6 +21,12 @@ COLOR_C="\033[0;36m"    # cyan
 # reset
 COLOR_RESET="\033[00m"
 
+function error {
+    local message="$1"
+    echo -e "$COLOR_R$message$COLOR_RESET"
+    exit 1
+}
+
 function show_banner {
     local output=$(cat .banner)
     echo -e "$COLOR_B$output$COLOR_RESET"
@@ -32,6 +39,10 @@ show_banner
 export OCEAN_VERSION=stable
 COMPOSE_FILE='docker-compose.yml'
 
+# other default values
+KOVAN_ADDRESS_FILE="$DIR/parity/kovan/account.json"
+KOVAN_PASSWORD_FILE="$DIR/parity/kovan/password"
+
 while :; do
     case $1 in
         --latest)
@@ -43,13 +54,21 @@ while :; do
             printf $COLOR_Y'Starting and reusing the database ...\n\n'$COLOR_RESET
             ;;
         --no-pleuston)
-            COMPOSE_FILE='docker-compose-no-pleuston.yml'
+            COMPOSE_FILE="$DIR/docker-compose-no-pleuston.yml"
             printf $COLOR_Y'Starting without Pleuston...\n\n'$COLOR_RESET
             ;;
         --local-parity-node)
             export KEEPER_NETWORK_NAME="ocean_poa_net_local"
-            COMPOSE_FILE='docker-compose-local-parity-node.yml'
+            COMPOSE_FILE="$DIR/docker-compose-local-parity-node.yml"
             printf $COLOR_Y'Starting with local Parity node...\n\n'$COLOR_RESET
+            ;;
+        --kovan-parity-node)
+            [ -f "$KOVAN_ADDRESS_FILE" ] || error "Kovan account json file not found in $KOVAN_ADDRESS_FILE"
+            [ -f "$KOVAN_PASSWORD_FILE" ] || error "Kovan account password file not found in $KOVAN_PASSWORD_FILE"
+            [ -z "$UNLOCK_ADDRESS" ] && error "Kovan account address must be exported in variable \$UNLOCK_ADDRESS"
+            COMPOSE_FILE='docker-compose-only-parity.yml'
+            ;;
+        --testnet-parity-node)
             ;;
         --) # End of all options.
              shift

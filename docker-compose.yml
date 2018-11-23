@@ -36,7 +36,7 @@ services:
     depends_on:
     - keeper-contracts
     environment:
-      KEEPER_URL: http://keeper-contracts:8545 
+      KEEPER_URL: http://keeper-contracts:8545
       DB_HOSTNAME: mongodb
       LOCAL_CONTRACTS: "true"
     volumes:

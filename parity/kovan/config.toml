@@ -1,0 +1,42 @@
+[parity]
+chain = "kovan"
+base_path = "/parity_data"
+
+[ui]
+disable = true
+
+[rpc]
+disable = true
+interface = "0.0.0.0"
+cors = ["all"]
+hosts = ["all"]
+apis = ["web3", "eth", "net", "parity", "traces", "rpc", "personal", "parity_accounts", "signer", "parity_set"]
+
+[ipc]
+disable = true
+
+[dapps]
+disable = true
+
+[websockets]
+disable = true
+port = 8546
+interface = "local"
+origins = ["none"]
+apis = ["all"]
+hosts = ["all"]
+
+[network]
+port = 30304
+
+[ipfs]
+enable = false
+
+[snapshots]
+disable_periodic = true
+
+[secretstore]
+disable = true
+
+[account]
+password = ["/etc/parity/password"]
