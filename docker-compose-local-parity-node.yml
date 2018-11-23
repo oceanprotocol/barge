@@ -64,8 +64,7 @@ services:
     ports:
       - 12001:12001
     networks:
-      backend:
-        ipv4_address: 172.15.0.16
+    - backend
     command: nginx -g 'daemon off;'
 
   keeper-contracts:
