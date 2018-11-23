@@ -51,9 +51,22 @@ services:
     - ./parity/secret_store/keys/:/parity_data/keys/ocean-network/
     ports:
     - 12000:12000
-    - 12001:12001
+    - 12001
     networks:
     - backend
+
+  secret-store-cors-proxy:
+    image: nginx:alpine
+    volumes:
+      - ./cors-proxy.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - secret-store
+    ports:
+      - 12001:12001
+    networks:
+      backend:
+        ipv4_address: 172.15.0.16
+    command: nginx -g 'daemon off;'
 
   keeper-contracts:
     image: oceanprotocol/keeper-contracts:${OCEAN_VERSION:-stable}

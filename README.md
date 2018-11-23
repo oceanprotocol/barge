@@ -18,6 +18,7 @@
      - [Script Options](#script-options)
   - [Ocean Protocol components](#ocean-protocol-components)
      - [Environment Variables](#environment-variables)
+     - [Parity Client Accounts](#parity-client-accounts)
   - [Contributing](#contributing)
   - [License](#license)
 
