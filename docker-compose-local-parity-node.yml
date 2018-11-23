@@ -9,8 +9,7 @@ services:
     - "27017:27017"
     command: mongod
     networks:
-      backend:
-        ipv4_address: 172.15.0.11
+    - backend
 
   parity-node:
     image: oceanprotocol/parity-ethereum:beta
@@ -29,17 +28,16 @@ services:
       --unsafe-expose
       --unlock 0x00bd138abd70e2f00903268f3db08f2d25677c9e
     volumes:
-      - ./parity/parity/config:/home/parity/parity/config
-      - parity-node:/home/parity/.local/share/io.parity.ethereum/
-      - ./parity/parity/authorities/validator0.json:/home/parity/.local/share/io.parity.ethereum/keys/ocean-network/validator.json
-      - ./parity/parity/keys:/home/parity/.local/share/io.parity.ethereum/keys/ocean-network
-      - ./parity/parity/authorities/validator0.pwd:/home/parity/parity/validator.pwd
-      - ./parity/parity/node0.network.key:/home/parity/.local/share/io.parity.ethereum/network/key
+    - ./parity/parity/config:/home/parity/parity/config
+    - parity-node:/home/parity/.local/share/io.parity.ethereum/
+    - ./parity/parity/authorities/validator0.json:/home/parity/.local/share/io.parity.ethereum/keys/ocean-network/validator.json
+    - ./parity/parity/keys:/home/parity/.local/share/io.parity.ethereum/keys/ocean-network
+    - ./parity/parity/authorities/validator0.pwd:/home/parity/parity/validator.pwd
+    - ./parity/parity/node0.network.key:/home/parity/.local/share/io.parity.ethereum/network/key
     ports:
-      - 8545:8545
+    - 8545:8545
     networks:
-      backend:
-        ipv4_address: 172.15.0.12
+    - backend
 
   secret-store:
     image: oceanprotocol/parity-ethereum:master
@@ -55,14 +53,12 @@ services:
     - 12000:12000
     - 12001:12001
     networks:
-      backend:
-        ipv4_address: 172.15.0.13
+    - backend
 
   keeper-contracts:
     image: oceanprotocol/keeper-contracts:${OCEAN_VERSION:-stable}
     networks:
-      backend:
-        ipv4_address: 172.15.0.14
+    - backend
     environment:
       LOCAL_CONTRACTS: "true"
       DEPLOY_CONTRACTS: ${DEPLOY_CONTRACTS}
@@ -79,8 +75,7 @@ services:
     ports:
     - 5000:5000
     networks:
-      backend:
-        ipv4_address: 172.15.0.15
+    - backend
     depends_on:
     - keeper-contracts
     environment:
@@ -95,10 +90,10 @@ services:
     ports:
     - 8030:8030
     networks:
-      backend:
-        ipv4_address: 172.15.0.16
+    - backend
     depends_on:
     - keeper-contracts
+    - parity-node
     environment:
       KEEPER_URL: http://keeper-contracts:8545
       LOCAL_CONTRACTS: "true"
@@ -108,12 +103,6 @@ services:
 
 networks:
   backend:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-      - subnet: 172.15.0.1/24
-        gateway: 172.15.0.1
 
 volumes:
   parity-node:
