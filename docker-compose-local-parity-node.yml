@@ -109,7 +109,7 @@ services:
     - 8030:8030
     networks:
       backend:
-        ipv4_address: 172.15.0.16
+        ipv4_address: 172.15.0.17
     depends_on:
     - keeper-contracts
     environment:
