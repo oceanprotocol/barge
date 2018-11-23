@@ -112,8 +112,9 @@ services:
         ipv4_address: 172.15.0.17
     depends_on:
     - keeper-contracts
+    - parity-node
     environment:
-      KEEPER_URL: http://keeper-contracts:8545
+      KEEPER_URL: http://parity-node:8545
       LOCAL_CONTRACTS: "true"
       KEEPER_NETWORK_NAME: ${KEEPER_NETWORK_NAME}
     volumes:
