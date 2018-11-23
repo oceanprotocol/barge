@@ -1,3 +1,5 @@
 .idea/
 artifacts/
 ganache-db/
+parity/kovan/account.json
+parity/kovan/password
