@@ -6,11 +6,7 @@ base_path = "/parity_data"
 disable = true
 
 [rpc]
-disable = true
-interface = "0.0.0.0"
-cors = ["all"]
-hosts = ["all"]
-apis = ["web3", "eth", "net", "parity", "traces", "rpc", "personal", "parity_accounts", "signer", "parity_set"]
+disable = false
 
 [ipc]
 disable = true
@@ -27,7 +23,7 @@ apis = ["all"]
 hosts = ["all"]
 
 [network]
-port = 30304
+port = 30303
 
 [ipfs]
 enable = false
@@ -39,4 +35,4 @@ disable_periodic = true
 disable = true
 
 [account]
-password = ["/etc/parity/password"]
+password = ["/etc/parity/kovan/password"]

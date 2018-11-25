@@ -1,5 +1,7 @@
 .idea/
 artifacts/
 ganache-db/
+parity/ocean-network/account.json
+parity/ocean-network/password
 parity/kovan/account.json
 parity/kovan/password

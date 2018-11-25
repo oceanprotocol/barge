@@ -42,6 +42,8 @@ COMPOSE_FILE='docker-compose.yml'
 # other default values
 KOVAN_ADDRESS_FILE="$DIR/parity/kovan/account.json"
 KOVAN_PASSWORD_FILE="$DIR/parity/kovan/password"
+TESTNET_ADDRESS_FILE="$DIR/parity/ocean-network/account.json"
+TESTNET_PASSWORD_FILE="$DIR/parity/ocean-network/password"
 
 while :; do
     case $1 in
@@ -63,12 +65,18 @@ while :; do
             printf $COLOR_Y'Starting with local Parity node...\n\n'$COLOR_RESET
             ;;
         --kovan-parity-node)
-            [ -f "$KOVAN_ADDRESS_FILE" ] || error "Kovan account json file not found in $KOVAN_ADDRESS_FILE"
-            [ -f "$KOVAN_PASSWORD_FILE" ] || error "Kovan account password file not found in $KOVAN_PASSWORD_FILE"
-            [ -z "$UNLOCK_ADDRESS" ] && error "Kovan account address must be exported in variable \$UNLOCK_ADDRESS"
+            export NETWORK="kovan"
+            [ -f "$KOVAN_ADDRESS_FILE" ] || error "Account json file not found in $KOVAN_ADDRESS_FILE"
+            [ -f "$KOVAN_PASSWORD_FILE" ] || error "Account password file not found in $KOVAN_PASSWORD_FILE"
+            [ -z "$UNLOCK_ADDRESS" ] && error "Account address must be exported in variable \$UNLOCK_ADDRESS"
             COMPOSE_FILE='docker-compose-only-parity.yml'
             ;;
         --testnet-parity-node)
+            export NETWORK="ocean-network"
+            [ -f "$TESTNET_ADDRESS_FILE" ] || error "Account json file not found in $TESTNET_ADDRESS_FILE"
+            [ -f "$TESTNET_PASSWORD_FILE" ] || error "Account password file not found in $TESTNET_PASSWORD_FILE"
+            [ -z "$UNLOCK_ADDRESS" ] && error "Account address must be exported in variable \$UNLOCK_ADDRESS"
+            COMPOSE_FILE='docker-compose-only-parity.yml'
             ;;
         --) # End of all options.
              shift

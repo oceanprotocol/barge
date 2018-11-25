@@ -1,0 +1,44 @@
+[parity]
+chain = "/etc/parity/ocean-network/chain.json"
+base_path = "/parity_data"
+
+[ui]
+disable = true
+
+[rpc]
+disable = false
+
+[ipc]
+disable = true
+
+[dapps]
+disable = true
+
+[websockets]
+disable = true
+port = 8546
+interface = "local"
+origins = ["none"]
+apis = ["all"]
+hosts = ["all"]
+
+[network]
+port = 30303
+bootnodes = [
+  "enode://8464300e65029bbd6f4296cc03ffffbf2c058101327dd8ef9d0c41893618395aa7065a63ab73b169b44b01c5a0aa712f94d8366dfc196c7b5cc3856be720894d@18.210.120.241:30303",
+  "enode://fb84d1a761dbe3685da472ea6de2b73c02f2b85cf66ba138f3a472645b922f12b246b54ce24b0c13f49446fc55656b2294f4c5eeeb5a6c5f1248d54e43b9861f@35.171.30.2:30303",
+  "enode://b68bc8509a7121b11e3f96a493e46e0d8469a68c364aa8ca92a10129554f2c8094561dcdd74dd7a8ead4ae03a0b8c291fa5ddc703e37fc81498700872cbff8cf@54.163.9.188:30303"
+]
+discovery = true
+
+[ipfs]
+enable = false
+
+[snapshots]
+disable_periodic = true
+
+[secretstore]
+disable = true
+
+[account]
+password = ["/etc/parity/ocean-network/password"]
