@@ -12,13 +12,10 @@ services:
       --jsonrpc-hosts all
       --jsonrpc-apis all
       --unsafe-expose
-      --unlock $UNLOCK_ADDRESS
     volumes:
       - ./parity/$NETWORK/config.toml:/etc/parity/$NETWORK/config.toml
       - ./parity/$NETWORK/chain.json:/etc/parity/$NETWORK/chain.json
       - parity-$NETWORK-node:/parity_data/
-      - ./parity/$NETWORK/account.json:/parity_data/keys/$NETWORK/account.json
-      - ./parity/$NETWORK/password:/etc/parity/$NETWORK/password
 
 volumes:
   parity-kovan-node:

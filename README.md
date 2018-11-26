@@ -128,11 +128,7 @@ Finally, if you do:
 ./start_ocean.sh --testnet-parity-node
 ```
 
-then `docker-compose-only-parity.yml` Docker Compose file will be used. It will start only one container (`oceanprotocol/parity-ethereum:master`) that will connect to the Ocean testnet network. The parity client is configure to allow connections with the RPC interface. With this option, you must place in `./parity/ocean-network/account.json` your account json and in `./parity/ocean-network/password` a file with the account passsword (default locations). Also you must export the variable `UNLOCK_ADDRESS` with the account address of this account. For example:
-
-```bash
-export UNLOCK_ADDRESS="0x00bd138abd70e2f00903268f3db08f2d25677c9e"
-```
+then `docker-compose-only-parity.yml` Docker Compose file will be used. It will start only one container (`oceanprotocol/parity-ethereum:master`) that will connect to the Ocean testnet network. The parity client is configure to allow connections with the RPC interface.
 
 Or if you do:
 
@@ -140,11 +136,7 @@ Or if you do:
 ./start_ocean.sh --kovan-parity-node
 ```
 
-then `docker-compose-only-parity.yml` Docker Compose file will be used. It will start only one container (`oceanprotocol/parity-ethereum:master`) that will connect to the Kovan testnet network. The parity client is configure to allow connections with the RPC interface. With this option, you must place in `./parity/kovan/account.json` your account json and in `./parity/kovan/password` a file with the account passsword (default locations). Also you must export the variable `UNLOCK_ADDRESS` with the account address of this account. For example:
-
-```bash
-export UNLOCK_ADDRESS="0x00bd138abd70e2f00903268f3db08f2d25677c9e"
-```
+then `docker-compose-only-parity.yml` Docker Compose file will be used. It will start only one container (`oceanprotocol/parity-ethereum:master`) that will connect to the Kovan testnet network. The parity client is configure to allow connections with the RPC interface.
 
 ### Connecting to local components
 
@@ -188,7 +180,6 @@ Variable | Description
 `DEPLOY_CONTRACTS` | skip deploying smart contracts by setting this to `"false"`, in this case `REUSE_DATABASE` should be set to `"true"` in the previous run when using ganache
 `KEEPER_NETWORK_NAME` | set to one of `"ganache"` (default), `"kovan"`, or `"ocean_poa_net_local"`
 `ARTIFACTS_FOLDER` | this is where the deployed smart contracts abi files will be available. This can be pointed at any path you like.
-`UNLOCK_ADDRESS` | Account address to unlock when running `--testnet-parity-node` or `--kovan-parity-node`
 
 ## Contributing
 
