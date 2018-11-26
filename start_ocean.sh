@@ -21,6 +21,21 @@ COLOR_C="\033[0;36m"    # cyan
 # reset
 COLOR_RESET="\033[00m"
 
+function usage {
+    cat <<EOF
+Usage: $(basename "$0") [--help] [--latest] [--reuse-database] [--no-pleuston] [--local-secret-store] [--kovan-parity-node] [--testnet-parity-node]
+
+where:
+  --help: Shows this help
+  --latest: Use the tag "latest" of the ocean docker images
+  --reuse-database: Reuse Ganache database if used
+  --no-pleuston: Do not deploy pleuston
+  --local-secret-store: Deploy Ocean stack with Secret-store and parity client
+  --kovan-parity-node: Deploy only a parity node connected to Kovan testnet
+  --testnet-parity-node: Deploy only a parity node connected to Ocean testnet
+EOF
+}
+
 function error {
     local message="$1"
     echo -e "$COLOR_R$message$COLOR_RESET"
@@ -40,13 +55,17 @@ export OCEAN_VERSION=stable
 COMPOSE_FILE='docker-compose.yml'
 
 # other default values
-KOVAN_ADDRESS_FILE="$DIR/parity/kovan/account.json"
-KOVAN_PASSWORD_FILE="$DIR/parity/kovan/password"
-TESTNET_ADDRESS_FILE="$DIR/parity/ocean-network/account.json"
-TESTNET_PASSWORD_FILE="$DIR/parity/ocean-network/password"
+KOVAN_ADDRESS_FILE="${KOVAN_ADDRESS_FILE:-$DIR/parity/kovan/account.json}"
+KOVAN_PASSWORD_FILE="${KOVAN_PASSWORD_FILE:-$DIR/parity/kovan/password}"
+TESTNET_ADDRESS_FILE="${TESTNET_ADDRESS_FILE:-$DIR/parity/ocean-network/account.json}"
+TESTNET_PASSWORD_FILE="${TESTNET_PASSWORD_FILE:-$DIR/parity/ocean-network/password}"
 
 while :; do
     case $1 in
+        --help)
+            usage
+            exit 0
+            ;;
         --latest)
             export OCEAN_VERSION=latest
             printf $COLOR_Y'Switched to latest components...\n\n'$COLOR_RESET
@@ -56,12 +75,14 @@ while :; do
             printf $COLOR_Y'Starting and reusing the database ...\n\n'$COLOR_RESET
             ;;
         --no-pleuston)
+            [ "$COMPOSE_FILE" = *"docker-compose-local-secret-store.yml" ] || error "Option --no-plueston is not compatible with option --local-secret-store"
             COMPOSE_FILE="$DIR/docker-compose-no-pleuston.yml"
             printf $COLOR_Y'Starting without Pleuston...\n\n'$COLOR_RESET
             ;;
-        --local-parity-node)
+        --local-secret-store)
+            [ "$COMPOSE_FILE" = *"docker-compose-no-pleuston.yml" ] || error "Option --no-plueston is not compatible with option --local-secret-store"
             export KEEPER_NETWORK_NAME="ocean_poa_net_local"
-            COMPOSE_FILE="$DIR/docker-compose-local-parity-node.yml"
+            COMPOSE_FILE="$DIR/docker-compose-local-secret-store.yml"
             printf $COLOR_Y'Starting with local Parity node...\n\n'$COLOR_RESET
             ;;
         --kovan-parity-node)

@@ -64,8 +64,10 @@ Option | Description
 ---    | ---
 `--latest` | Get the `latest` versions of all components, referring to their `develop` branches.
 `--no-pleuston` | Start up Ocean without an instance of `pleuston`. Helpful for development on `pleuston`.
-`--local-parity-node` | Runs a local parity POA node and Secret Store instead of ganache-cli.
+`--local-secret-store` | Runs a local parity POA node and Secret Store instead of ganache-cli.
 `--reuse-database` | Start up Ocean and reuse the Database from ganache. Helpful for development.
+`--testnet-parity-node` | Start up a parity client connected to Ocean testnet.
+`--kovan-parity-node` | Start up a parity client connected to Kovan testnet.
 
 For example, if you do:
 
@@ -99,22 +101,54 @@ then [docker-compose-no-pleuston.yml](docker-compose-no-pleuston.yml) will be us
 If you do:
 
 ```bash
-./start_ocean.sh --latest --local-parity-node
+./start_ocean.sh --latest --local-secret-store
 ```
 
-then [docker-compose-local-parity-node.yml](docker-compose-local-parity-node.yml) will be used. Read it to see what images it starts. Note that it _doesn't_ start Pleuston, and it _does_ start a Parity Secret Store.
+then [docker-compose-local-secret-store.yml](docker-compose-local-secret-store.yml) will be used. Note that it _doesn't_ start Pleuston, and it _does_ start a Parity Secret Store. The images that are started would be:
+
+- mongo:3.6
+- oceanprotocol/parity-ethereum:master (for parity client)
+- oceanprotocol/parity-ethereum:master (for secret store)
+- nginx:alpine (for secret store cluster)
+- oceanprotocol/keeper-contracts:latest
+- oceanprotocol/aquarius:latest
+- oceanprotocol/brizo:latest
 
 If you do:
 
 ```bash
-./start_ocean.sh --latest --no-pleuston --local-parity-node
+./start_ocean.sh --latest --no-pleuston --local-secret-store
 ```
 
-then the last-selected Docker Compose file will be used, i.e. the one selected by `--local-parity-node`: [docker-compose-local-parity-node.yml](docker-compose-local-parity-node.yml).
+then the last-selected Docker Compose file will be used, i.e. the one selected by `--local-secret-store`: [docker-compose-local-secret-store.yml](docker-compose-local-secret-store.yml).
+
+Finally, if you do:
+
+```bash
+./start_ocean.sh --testnet-parity-node
+```
+
+then `docker-compose-only-parity.yml` Docker Compose file will be used. It will start only one container (`oceanprotocol/parity-ethereum:master`) that will connect to the Ocean testnet network. The parity client is configure to allow connections with the RPC interface. With this option, you must place in `./parity/ocean-network/account.json` your account json and in `./parity/ocean-network/password` a file with the account passsword (default locations). Also you must export the variable `UNLOCK_ADDRESS` with the account address of this account. For example:
+
+```bash
+export UNLOCK_ADDRESS="0x00bd138abd70e2f00903268f3db08f2d25677c9e"
+```
+
+Or if you do:
+
+```bash
+./start_ocean.sh --kovan-parity-node
+```
+
+then `docker-compose-only-parity.yml` Docker Compose file will be used. It will start only one container (`oceanprotocol/parity-ethereum:master`) that will connect to the Kovan testnet network. The parity client is configure to allow connections with the RPC interface. With this option, you must place in `./parity/kovan/account.json` your account json and in `./parity/kovan/password` a file with the account passsword (default locations). Also you must export the variable `UNLOCK_ADDRESS` with the account address of this account. For example:
+
+```bash
+export UNLOCK_ADDRESS="0x00bd138abd70e2f00903268f3db08f2d25677c9e"
+```
 
 ### Parity Client Accounts
 
-If you run the `start_ocean.sh` script with the `--local-parity-node` option, you will have available a Parity Client instance with the following accounts enabled:
+If you run the `start_ocean.sh` script with the `--local-secret-store` option, you will have available a Parity Client instance with the following accounts enabled:
 
 Account | Password | Balance
 --------|----------|--------
@@ -137,6 +171,7 @@ Variable | Description
 `DEPLOY_CONTRACTS` | skip deploying smart contracts by setting this to `"false"`, in this case `REUSE_DATABASE` should be set to `"true"` in the previous run when using ganache
 `KEEPER_NETWORK_NAME` | set to one of `"ganache"` (default), `"kovan"`, or `"ocean_poa_net_local"`
 `ARTIFACTS_FOLDER` | this is where the deployed smart contracts abi files will be available. This can be pointed at any path you like.
+`UNLOCK_ADDRESS` | Account address to unlock when running `--testnet-parity-node` or `--kovan-parity-node`
 
 ## Contributing
 
