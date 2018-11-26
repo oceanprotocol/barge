@@ -146,6 +146,23 @@ then `docker-compose-only-parity.yml` Docker Compose file will be used. It will 
 export UNLOCK_ADDRESS="0x00bd138abd70e2f00903268f3db08f2d25677c9e"
 ```
 
+### Connecting to local components
+
+You can connect to the components deployed with these docker compose files. For example, to avoid exposing the unlocked account when running `--kovan-parity-node` or `--testnet-parity-node`, the RPC port (8545) is not exposed locally. In this case, you can get the container ip runing the command:
+
+```bash
+PARITY_CLIENT_IP=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps | grep 'ocean_parity-node_1_' | cut -d' ' -f1))
+echo $PARITY_CLIENT_IP
+```
+
+And then using that ip to connect from your host. In case you want to connect from another container, you must attach that container to the same network as the parity client:
+
+```bash
+docker run -ti --network ocean_default --rm --entrypoint=/bin/sh oceanprotocol/keeper-contracts:latest
+
+# Now can connect with $PARITY_CLIENT_IP
+```
+
 ### Parity Client Accounts
 
 If you run the `start_ocean.sh` script with the `--local-secret-store` option, you will have available a Parity Client instance with the following accounts enabled:

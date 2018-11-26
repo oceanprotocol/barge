@@ -2,9 +2,6 @@ version: '2.1'
 services:
   parity-node:
     image: oceanprotocol/parity-ethereum:master
-    # entrypoint: tail
-    # command: ["-f", "/dev/null"]
-    # network_mode: host
     entrypoint: /opt/parity/parity
     command:
       --config /etc/parity/$NETWORK/config.toml
