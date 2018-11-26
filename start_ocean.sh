@@ -69,12 +69,12 @@ while :; do
             printf $COLOR_Y'Starting and reusing the database ...\n\n'$COLOR_RESET
             ;;
         --no-pleuston)
-            [ "$COMPOSE_FILE" = *"docker-compose-local-secret-store.yml" ] || error "Option --no-plueston is not compatible with option --local-secret-store"
+            [ "$COMPOSE_FILE" = *"docker-compose-local-secret-store.yml" ] || error "Option --no-pleuston is not compatible with option --local-secret-store"
             COMPOSE_FILE="$DIR/docker-compose-no-pleuston.yml"
             printf $COLOR_Y'Starting without Pleuston...\n\n'$COLOR_RESET
             ;;
         --local-secret-store)
-            [ "$COMPOSE_FILE" = *"docker-compose-no-pleuston.yml" ] || error "Option --no-plueston is not compatible with option --local-secret-store"
+            [ "$COMPOSE_FILE" = *"docker-compose-no-pleuston.yml" ] || error "Option --no-pleuston is not compatible with option --local-secret-store"
             export KEEPER_NETWORK_NAME="ocean_poa_net_local"
             COMPOSE_FILE="$DIR/docker-compose-local-secret-store.yml"
             printf $COLOR_Y'Starting with local Parity node...\n\n'$COLOR_RESET
