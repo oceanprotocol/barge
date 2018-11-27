@@ -33,6 +33,3 @@ disable_periodic = true
 
 [secretstore]
 disable = true
-
-[account]
-password = ["/etc/parity/kovan/password"]
