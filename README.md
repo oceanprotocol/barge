@@ -1,8 +1,8 @@
-[![banner](doc/img/repo-banner@2x.png)](https://oceanprotocol.com)
+[![banner](https://raw.githubusercontent.com/oceanprotocol/art/master/github/repo-banner%402x.png)](https://oceanprotocol.com)
 
 <h1 align="center">docker-images</h1>
 
-> 🐳 Docker compose and tools running the complete Ocean Protocol network stack.
+> 🐳 Docker images and Compose for the full Ocean Protocol Network stack.
 > [oceanprotocol.com](https://oceanprotocol.com)
 
 ---
