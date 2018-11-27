@@ -36,7 +36,7 @@ services:
     depends_on:
     - keeper-contracts
     environment:
-      KEEPER_URL: http://keeper-contracts:8545 
+      KEEPER_URL: http://keeper-contracts:8545
       DB_HOSTNAME: mongodb
       LOCAL_CONTRACTS: "true"
     volumes:
@@ -53,6 +53,16 @@ services:
     environment:
       KEEPER_URL: http://keeper-contracts:8545
       LOCAL_CONTRACTS: "true"
+      KEEPER_NETWORK_NAME: ${KEEPER_NETWORK_NAME}
+      AQUARIUS_URL: http://aquarius:5000
+      AZURE_ACCOUNT_NAME: "${AZURE_ACCOUNT_NAME}"
+      AZURE_ACCOUNT_KEY: "${AZURE_ACCOUNT_KEY}"
+      AZURE_RESOURCE_GROUP: "${AZURE_RESOURCE_GROUP}"
+      AZURE_LOCATION: "${AZURE_LOCATION}"
+      AZURE_CLIENT_ID: "${AZURE_CLIENT_ID}"
+      AZURE_CLIENT_SECRET: "${AZURE_CLIENT_SECRET}"
+      AZURE_TENANT_ID: "${AZURE_TENANT_ID}"
+      AZURE_SUBSCRIPTION_ID: "${AZURE_SUBSCRIPTION_ID}"
     volumes:
     - ${ARTIFACTS_FOLDER}:/usr/local/keeper-contracts/:ro
 
