@@ -63,9 +63,9 @@ services:
     depends_on:
     - keeper-contracts
     environment:
-      NODE_HOST: keeper-contracts
-      AQUARIUS_HOST: aquarius
-      BRIZO_HOST: brizo
+      NODE_HOST: localhost
+      AQUARIUS_HOST: localhost
+      BRIZO_HOST: localhost
       LOCAL_CONTRACTS: 'true'
     volumes:
     - ${ARTIFACTS_FOLDER}:/pleuston/node_modules/@oceanprotocol/keeper-contracts/artifacts/:ro
