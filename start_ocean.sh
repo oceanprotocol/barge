@@ -28,8 +28,8 @@ function show_banner {
 
 show_banner
 
-# default to stable versions
-export OCEAN_VERSION=stable
+# default to latest versions
+export OCEAN_VERSION=latest
 COMPOSE_FILE='docker-compose.yml'
 
 while :; do
