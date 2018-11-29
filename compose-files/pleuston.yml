@@ -1,0 +1,17 @@
+version: '2.1'
+services:
+  pleuston:
+    image: oceanprotocol/pleuston:${OCEAN_VERSION:-stable}
+    networks:
+      backend:
+        ipv4_address: 172.15.0.18
+    ports:
+    - 3000:3000
+    # depends_on:
+    # - keeper-contracts
+    environment:
+      KEEPER_HOST: keeper-contracts
+      OCEAN_HOST: aquarius
+      LOCAL_CONTRACTS: 'true'
+    volumes:
+    - ${ARTIFACTS_FOLDER}:/pleuston/node_modules/@oceanprotocol/keeper-contracts/artifacts/:ro

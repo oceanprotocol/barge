@@ -1,0 +1,23 @@
+version: '2.1'
+services:
+  parity-node:
+    image: oceanprotocol/parity-ethereum:master
+    entrypoint: /opt/parity/parity
+    command:
+      --config /etc/parity/$NETWORK/config.toml
+      --base-path /parity_data
+      --ws-interface all
+      --jsonrpc-cors all
+      --jsonrpc-interface all
+      --jsonrpc-hosts all
+      --jsonrpc-apis all
+      --unsafe-expose
+    volumes:
+      - $DIR/parity/$NETWORK/config.toml:/etc/parity/$NETWORK/config.toml
+      - $DIR/parity/$NETWORK/chain.json:/etc/parity/$NETWORK/chain.json
+      - parity-$NETWORK-node:/parity_data/
+    ports:
+      - 8545:8545
+    networks:
+      backend:
+        ipv4_address: 172.15.0.19

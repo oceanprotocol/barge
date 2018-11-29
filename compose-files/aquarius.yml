@@ -1,0 +1,17 @@
+version: '2.1'
+services:
+  aquarius:
+    image: oceanprotocol/aquarius:${OCEAN_VERSION:-stable}
+    ports:
+    - 5000:5000
+    networks:
+      backend:
+        ipv4_address: 172.15.0.15
+    # depends_on:
+    # - keeper-contracts
+    environment:
+      KEEPER_HOST: http://parity-node
+      DB_HOSTNAME: mongodb
+      LOCAL_CONTRACTS: 'true'
+    volumes:
+    - ${ARTIFACTS_FOLDER}:/usr/local/keeper-contracts/:ro
