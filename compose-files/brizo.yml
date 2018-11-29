@@ -1,0 +1,19 @@
+version: '2.1'
+services:
+  brizo:
+    image: oceanprotocol/brizo:${OCEAN_VERSION:-stable}
+    ports:
+    - 8030:8030
+    networks:
+      backend:
+        ipv4_address: 172.15.0.17
+    depends_on:
+    - keeper-contracts
+    - parity-node
+    environment:
+      KEEPER_URL: http://parity-node:8545
+      LOCAL_CONTRACTS: "true"
+      KEEPER_NETWORK_NAME: ${KEEPER_NETWORK_NAME}
+      AQUARIUS_URL: http://aquarius:5000
+    volumes:
+    - ${ARTIFACTS_FOLDER}:/usr/local/keeper-contracts/:ro
