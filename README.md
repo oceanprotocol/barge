@@ -143,11 +143,7 @@ In addition to these variables, when running Brizo you need to provide the Azure
 
 ## Contributing
 
-We use GitHub as a means for maintaining and tracking issues and source code development.
-
-If you would like to contribute, please fork this repository, do work in a feature branch, and finally open a pull request for maintainers to review your changes.
-
-Ocean Protocol uses [C4 Standard process](https://github.com/unprotocols/rfc/blob/master/1/README.md) to manage changes in the source code. Find here more details about [Ocean C4 OEP](https://github.com/oceanprotocol/OEPs/tree/master/1).
+See the page titled "[Ways to Contribute](https://docs.oceanprotocol.com/concepts/contributing/)" in the Ocean Protocol documentation.
 
 ## License
 
