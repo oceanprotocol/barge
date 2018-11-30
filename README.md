@@ -66,6 +66,7 @@ Option | Description
 `--no-pleuston` | Start up Ocean without an instance of `pleuston`. Helpful for development on `pleuston`.
 `--local-parity-node` | Runs a local parity POA node and Secret Store instead of ganache-cli.
 `--reuse-database` | Start up Ocean and reuse the Database from ganache. Helpful for development.
+`--purge` | Remove the volumes, local folder and networks used by the script.
 
 For example, if you do:
 
