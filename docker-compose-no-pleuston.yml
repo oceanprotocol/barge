@@ -50,11 +50,10 @@ services:
     - backend
     depends_on:
     - keeper-contracts
-    environment:
-      KEEPER_URL: http://keeper-contracts:8545
-      LOCAL_CONTRACTS: "true"
+    env_file:
+      - ${BRIZO_ENV_FILE}
     volumes:
-    - ${ARTIFACTS_FOLDER}:/usr/local/keeper-contracs/:ro
+    - ${ARTIFACTS_FOLDER}:/usr/local/keeper-contracts/:ro
 
 networks:
   backend:

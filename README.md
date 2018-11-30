@@ -1,8 +1,8 @@
-[![banner](doc/img/repo-banner@2x.png)](https://oceanprotocol.com)
+[![banner](https://raw.githubusercontent.com/oceanprotocol/art/master/github/repo-banner%402x.png)](https://oceanprotocol.com)
 
 <h1 align="center">docker-images</h1>
 
-> 🐳 Docker compose and tools running the complete Ocean Protocol network stack.
+> 🐳 Docker images and Compose for the full Ocean Protocol Network stack.
 > [oceanprotocol.com](https://oceanprotocol.com)
 
 ---
@@ -18,6 +18,7 @@
      - [Script Options](#script-options)
   - [Ocean Protocol components](#ocean-protocol-components)
      - [Environment Variables](#environment-variables)
+     - [Parity Client Accounts](#parity-client-accounts)
   - [Contributing](#contributing)
   - [License](#license)
 
@@ -53,13 +54,11 @@ To get the `latest` versions of all components, referring to their `develop` bra
 
 After getting everything running, you can open the **Pleuston Frontend** application in your browser:
 
-```
-http://localhost:3000
-```
+[http://localhost:3000](http://localhost:3000)
 
 ### Script Options
 
-The script provides the following options:
+The `start_ocean.sh` script provides the following options:
 
 Option | Description
 ---    | ---
@@ -67,22 +66,52 @@ Option | Description
 `--no-pleuston` | Start up Ocean without an instance of `pleuston`. Helpful for development on `pleuston`.
 `--local-parity-node` | Runs a local parity POA node and Secret Store instead of ganache-cli.
 `--reuse-database` | Start up Ocean and reuse the Database from ganache. Helpful for development.
-`--clean-all` | Remove the volumes, local folder and networks used by the script.
+`--purge` | Remove the volumes, local folder and networks used by the script.
 
-For example, the following command would run the latest version of the stack, without Pleuston and with the Parity + Secret Store nodes:
+For example, if you do:
 
-`./start_ocean.sh --latest --no-pleuston --local-parity-node`
+```bash
+./start_ocean.sh --latest
+```
 
-## Ocean Protocol components
+then the main/default [docker-compose.yml](docker-compose.yml) will be used, so the following Docker images will all be started:
 
-The Ocean Docker compose starts the following components:
+- mongo:3.6
+- oceanprotocol/keeper-contracts:latest
+- oceanprotocol/aquarius:latest
+- oceanprotocol/brizo:latest
+- oceanprotocol/pleuston:latest
 
-* [🦄 pleuston](https://github.com/oceanprotocol/pleuston). Frontend listening on port `3000`.
-* [🐋 aquarius](https://github.com/oceanprotocol/aquarius). Backend listening on port `5000`.
-* [💧 keeper-contracts](https://github.com/oceanprotocol/keeper-contracts). RPC client listening on port `8545`.
-* [💧 secret-store](https://github.com/oceanprotocol/parity-ethereum). HTTP client listening on port `12001`.
+To see what ports each of those listens on, read [docker-compose.yml](docker-compose.yml). Note that `keeper-contracts` runs a local Ganache node (not a local Parity Ethereum POA node).
 
-![Ocean Protocol Components](doc/img/ocean-components@2x.png)
+If you do:
+
+```bash
+./start_ocean.sh --no-pleuston
+```
+
+then [docker-compose-no-pleuston.yml](docker-compose-no-pleuston.yml) will be used, so these images will be started:
+
+- mongo:3.6
+- oceanprotocol/keeper-contracts:stable
+- oceanprotocol/aquarius:stable
+- oceanprotocol/brizo:stable
+
+If you do:
+
+```bash
+./start_ocean.sh --latest --local-parity-node
+```
+
+then [docker-compose-local-parity-node.yml](docker-compose-local-parity-node.yml) will be used. Read it to see what images it starts. Note that it _doesn't_ start Pleuston, and it _does_ start a Parity Secret Store.
+
+If you do:
+
+```bash
+./start_ocean.sh --latest --no-pleuston --local-parity-node
+```
+
+then the last-selected Docker Compose file will be used, i.e. the one selected by `--local-parity-node`: [docker-compose-local-parity-node.yml](docker-compose-local-parity-node.yml).
 
 ### Parity Client Accounts
 
@@ -110,12 +139,7 @@ Variable | Description
 `KEEPER_NETWORK_NAME` | set to one of `"ganache"` (default), `"kovan"`, or `"ocean_poa_net_local"`
 `ARTIFACTS_FOLDER` | this is where the deployed smart contracts abi files will be available. This can be pointed at any path you like.
 
-A subset of the components can be run by modifying the docker-compose file directly or by using one of the other pre-built compose files:
-
-Compose file | Description
----          | ---
-`docker-compose-no-pleuston.yml` | runs all components without the pleuston. This is useful for developing/debugging the front-end app. So first the docker compose container can be started then pleuston can be started separately from source. You can also use `./start_ocean.sh --no-pleuston` to do this
-`docker-compose-local-parity-node.yml` | similar to the above with no pleuston, but runs a local parity POA node instead of ganache-cli. You can also use `./start_ocean.sh --local-parity-node` instead
+In addition to these variables, when running Brizo you need to provide the Azure credentials to allow Brizo connect to Azure. These variables can be configured in the file `brizo.env`.
 
 ## Contributing
 
@@ -127,7 +151,7 @@ Ocean Protocol uses [C4 Standard process](https://github.com/unprotocols/rfc/blo
 
 ## License
 
-```
+```text
 Copyright 2018 Ocean Protocol Foundation
 
 Licensed under the Apache License, Version 2.0 (the "License");

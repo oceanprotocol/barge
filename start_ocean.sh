@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Must be set to true for the first run, change it to "false" to avoid migrating the smart contracts on each run.
-export DEPLOY_CONTRACTS="true"
+export DEPLOY_CONTRACTS="false"
 # Ganache specific option, these two options have no effect when not running ganache-cli
 export GANACHE_DATABASE_PATH="."
 export REUSE_DATABASE="false"
@@ -9,6 +9,7 @@ export REUSE_DATABASE="false"
 export KEEPER_NETWORK_NAME="ganache"
 export ARTIFACTS_FOLDER=~/.ocean/keeper-contracts/artifacts
 export PROJECT_NAME="ocean"
+export BRIZO_ENV_FILE=./brizo.env
 
 # colors
 COLOR_R="\033[0;31m"    # red
@@ -29,8 +30,8 @@ function show_banner {
 
 show_banner
 
-# default to stable versions
-export OCEAN_VERSION=stable
+# default to latest versions
+export OCEAN_VERSION=latest
 COMPOSE_FILE='docker-compose.yml'
 
 while :; do
@@ -52,8 +53,9 @@ while :; do
             COMPOSE_FILE='docker-compose-local-parity-node.yml'
             printf $COLOR_Y'Starting with local Parity node...\n\n'$COLOR_RESET
             ;;
-        --clean-all)
+        --purge)
             docker network rm $PROJECT_NAME_backend || true
+            docker network rm $PROJECT_NAME_default || true
             docker volume rm $PROJECT_NAME_parity-node || true
             docker volume rm $PROJECT_NAME_secret-store || true
             read -p "Are you sure you want to delete $ARTIFACTS_FOLDER? " -n 1 -r
@@ -64,13 +66,13 @@ while :; do
             fi
             ;;
         --) # End of all options.
-             shift
-             break
-             ;;
+            shift
+            break
+            ;;
         -?*)
-             printf $COLOR_R'WARN: Unknown option (ignored): %s\n'$COLOR_RESET "$1" >&2
-             break
-             ;;
+            printf $COLOR_R'WARN: Unknown option (ignored): %s\n'$COLOR_RESET "$1" >&2
+            break
+            ;;
         *)
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
             docker-compose --project-name=$PROJECT_NAME -f $COMPOSE_FILE up
