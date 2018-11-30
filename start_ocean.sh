@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Must be set to true for the first run, change it to "false" to avoid migrating the smart contracts on each run.
-export DEPLOY_CONTRACTS="false"
+export DEPLOY_CONTRACTS="true"
 # Ganache specific option, these two options have no effect when not running ganache-cli
 export GANACHE_DATABASE_PATH="."
 export REUSE_DATABASE="false"
