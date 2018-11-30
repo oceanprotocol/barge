@@ -138,6 +138,8 @@ Variable | Description
 `KEEPER_NETWORK_NAME` | set to one of `"ganache"` (default), `"kovan"`, or `"ocean_poa_net_local"`
 `ARTIFACTS_FOLDER` | this is where the deployed smart contracts abi files will be available. This can be pointed at any path you like.
 
+In addition to these variables, when running Brizo you need to provide the Azure credentials to allow Brizo connect to Azure. These variables can be configured in the file `brizo.env`.
+
 ## Contributing
 
 We use GitHub as a means for maintaining and tracking issues and source code development.
