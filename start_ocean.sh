@@ -3,13 +3,14 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 COMPOSE_DIR="${DIR}/compose-files"
 # Must be set to true for the first run, change it to "false" to avoid migrating the smart contracts on each run.
-export DEPLOY_CONTRACTS="true"
+export DEPLOY_CONTRACTS="false"
 # Ganache specific option, these two options have no effect when not running ganache-cli
 export GANACHE_DATABASE_PATH="${DIR}"
 export REUSE_DATABASE="false"
 # Specify which ethereum client to run or connect to: kovan, ganache, or ocean_poa_net_local
 export KEEPER_NETWORK_NAME="ganache"
 export ARTIFACTS_FOLDER=$HOME/.ocean/keeper-contracts/artifacts
+export BRIZO_ENV_FILE=$DIR/brizo.env
 
 # colors
 COLOR_R="\033[0;31m"    # red
@@ -30,8 +31,8 @@ function show_banner {
 
 show_banner
 
-# default to stable versions
-export OCEAN_VERSION=stable
+# default to latest versions
+export OCEAN_VERSION=latest
 
 COMPOSE_FILES=""
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
