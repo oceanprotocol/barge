@@ -2,8 +2,6 @@ version: '2.1'
 services:
   mongodb:
     image: mongo:3.6
-    ports:
-    - "27017:27017"
     command: mongod
     networks:
       backend:
