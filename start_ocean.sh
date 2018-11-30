@@ -8,6 +8,7 @@ export REUSE_DATABASE="false"
 # Specify which ethereum client to run or connect to: kovan, ganache, or ocean_poa_net_local
 export KEEPER_NETWORK_NAME="ganache"
 export ARTIFACTS_FOLDER=~/.ocean/keeper-contracts/artifacts
+export PROJECT_NAME="ocean"
 export BRIZO_ENV_FILE=./brizo.env
 
 # colors
@@ -52,17 +53,29 @@ while :; do
             COMPOSE_FILE='docker-compose-local-parity-node.yml'
             printf $COLOR_Y'Starting with local Parity node...\n\n'$COLOR_RESET
             ;;
+        --purge)
+            docker network rm $PROJECT_NAME_backend || true
+            docker network rm $PROJECT_NAME_default || true
+            docker volume rm $PROJECT_NAME_parity-node || true
+            docker volume rm $PROJECT_NAME_secret-store || true
+            read -p "Are you sure you want to delete $ARTIFACTS_FOLDER? " -n 1 -r
+            echo
+            if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                rm -rf $ARTIFACTS_FOLDER
+            fi
+            ;;
         --) # End of all options.
-             shift
-             break
-             ;;
+            shift
+            break
+            ;;
         -?*)
-             printf $COLOR_R'WARN: Unknown option (ignored): %s\n'$COLOR_RESET "$1" >&2
-             break
-             ;;
+            printf $COLOR_R'WARN: Unknown option (ignored): %s\n'$COLOR_RESET "$1" >&2
+            break
+            ;;
         *)
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
-            docker-compose --project-name=ocean -f $COMPOSE_FILE up
+            docker-compose --project-name=$PROJECT_NAME -f $COMPOSE_FILE up
             break
     esac
     shift
