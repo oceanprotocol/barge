@@ -12,7 +12,7 @@ export KEEPER_NETWORK_NAME="ganache"
 export ARTIFACTS_FOLDER=$HOME/.ocean/keeper-contracts/artifacts
 export BRIZO_ENV_FILE=$DIR/brizo.env
 # Specify the ethereum default RPC container provider
-RPC_URL='keeper-contracts'
+export RPC_URL='keeper-contracts'
 
 # colors
 COLOR_R="\033[0;31m"    # red
@@ -61,7 +61,7 @@ while :; do
         --local-parity-node)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/parity_client.yml"
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
-            RPC_URL='parity-node'
+            export RPC_URL='parity-node'
             export KEEPER_NETWORK_NAME="ocean_poa_net_local"
             printf $COLOR_Y'Starting with local Parity node...\n\n'$COLOR_RESET
             ;;
