@@ -3,7 +3,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 COMPOSE_DIR="${DIR}/compose-files"
 # Must be set to true for the first run, change it to "false" to avoid migrating the smart contracts on each run.
-export DEPLOY_CONTRACTS="false"
+export DEPLOY_CONTRACTS="true"
 # Ganache specific option, these two options have no effect when not running ganache-cli
 export GANACHE_DATABASE_PATH="${DIR}"
 export REUSE_DATABASE="false"
@@ -11,6 +11,7 @@ export REUSE_DATABASE="false"
 export KEEPER_NETWORK_NAME="ganache"
 export ARTIFACTS_FOLDER=$HOME/.ocean/keeper-contracts/artifacts
 export BRIZO_ENV_FILE=$DIR/brizo.env
+export PROJECT_NAME="ocean"
 # Specify the ethereum default RPC container provider
 export RPC_URL='keeper-contracts'
 
@@ -65,6 +66,18 @@ while :; do
             export KEEPER_NETWORK_NAME="ocean_poa_net_local"
             printf $COLOR_Y'Starting with local Parity node...\n\n'$COLOR_RESET
             ;;
+        --purge)
+            docker network rm $PROJECT_NAME_backend || true
+            docker network rm $PROJECT_NAME_default || true
+            docker volume rm $PROJECT_NAME_parity-node || true
+            docker volume rm $PROJECT_NAME_secret-store || true
+            read -p "Are you sure you want to delete $ARTIFACTS_FOLDER? " -n 1 -r
+            echo
+            if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                rm -rf $ARTIFACTS_FOLDER
+            fi
+            ;;
         --) # End of all options.
             shift
             break
@@ -75,7 +88,7 @@ while :; do
             ;;
         *)
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
-            docker-compose --project-name=ocean $COMPOSE_FILES up
+            docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES up
             break
     esac
     shift
