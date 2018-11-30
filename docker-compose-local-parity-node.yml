@@ -1,7 +1,5 @@
 version: '2.1'
 
-# Run: docker-compose --project-name=ocean up
-
 services:
   mongodb:
     image: mongo:3.6
