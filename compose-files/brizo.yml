@@ -11,7 +11,7 @@ services:
     - keeper-contracts
     - parity-node
     environment:
-      KEEPER_URL: http://parity-node:8545
+      KEEPER_URL: http://${RPC_URL}:8545
       LOCAL_CONTRACTS: "true"
       KEEPER_NETWORK_NAME: ${KEEPER_NETWORK_NAME}
       AQUARIUS_URL: http://aquarius:5000
