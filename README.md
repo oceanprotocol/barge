@@ -31,6 +31,9 @@ You need to have the newest versions available of both:
 * [Docker](https://www.docker.com/get-started)
 * [Docker Compose](https://docs.docker.com/compose/)
 
+Populate the following in `brizo.env` file:
+* All of the `AZURE_`... related variables: necessary for `Brizo` to serve consume requests
+
 ## Get Started
 
 Then bring up an instance of the whole Ocean Protocol network stack with the `start_ocean.sh` script:
@@ -48,6 +51,8 @@ This will bring up the `stable` versions of all components, referring to their r
 
 To get the `latest` versions of all components, referring to their `develop` branches, pass the argument `--latest`:
 
+To run as a publisher, `Brizo` configuration must be set with valid Azure account credentials. This is done in 
+ 
 ```bash
 ./start_ocean.sh --latest
 ```
@@ -117,11 +122,14 @@ then the last-selected Docker Compose file will be used, i.e. the one selected b
 
 If you run the `start_ocean.sh` script with the `--local-parity-node` option, you will have available a Parity Client instance with the following accounts enabled:
 
-Account | Password | Balance
+Account | Password | Balance    
 --------|----------|--------
 0x00bd138abd70e2f00903268f3db08f2d25677c9e | node0 | 10000000111000111000111000
 0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0 | secret | 100000000
 0xa99d43d86a0758d5632313b8fa3972b6088a21bb | secret | 100000000
+
+
+Use one of the above accounts to populate `PARITY_ADDRESS` and `PARITY_PASSWORD` in `brizo.env` file to avoid asccount `locked` issues from the keeper contracts.
 
 ### Environment Variables
 
@@ -139,7 +147,7 @@ Variable | Description
 `KEEPER_NETWORK_NAME` | set to one of `"ganache"` (default), `"kovan"`, or `"ocean_poa_net_local"`
 `ARTIFACTS_FOLDER` | this is where the deployed smart contracts abi files will be available. This can be pointed at any path you like.
 
-In addition to these variables, when running Brizo you need to provide the Azure credentials to allow Brizo connect to Azure. These variables can be configured in the file `brizo.env`.
+In addition to these variables, when running Brizo you need to provide the Azure credentials to allow Brizo to connect to Azure. These variables can be configured in the file `brizo.env`.
 
 ## Contributing
 
