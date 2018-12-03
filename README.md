@@ -32,7 +32,6 @@ You need to have the newest versions available of both:
 * [Docker Compose](https://docs.docker.com/compose/)
 
 Populate the following in `brizo.env` file:
-* `PARITY_ADDRESS` and `PARITY_PASSWORD`: necessary for interacting with the keeper-contracts. Use one of the accounts in [Parity Client Accounts](#parity-client-accounts)
 * All of the `AZURE_`... related variables: necessary for `Brizo` to serve consume requests
 
 ## Get Started
