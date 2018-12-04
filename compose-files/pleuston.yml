@@ -8,10 +8,12 @@ services:
     ports:
     - 3000:3000
     depends_on:
-    - keeper-contracts
+    - aquarius
+    - brizo
     environment:
-      KEEPER_HOST: keeper-contracts
-      OCEAN_HOST: aquarius
+      # Need browser to connect to exposed ports
+      KEEPER_HOST: localhost
+      AQUARIUS_HOST: localhost
       LOCAL_CONTRACTS: 'true'
     volumes:
     - ${ARTIFACTS_FOLDER}:/pleuston/node_modules/@oceanprotocol/keeper-contracts/artifacts/:ro
