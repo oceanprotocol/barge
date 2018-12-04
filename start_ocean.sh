@@ -14,6 +14,8 @@ export BRIZO_ENV_FILE=$DIR/brizo.env
 export PROJECT_NAME="ocean"
 # Specify the ethereum default RPC container provider
 export RPC_URL='keeper-contracts'
+export KEEPER_PORT='8545'
+
 
 # colors
 COLOR_R="\033[0;31m"    # red
@@ -64,6 +66,7 @@ while :; do
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
             export RPC_URL='parity-node'
             export KEEPER_NETWORK_NAME="ocean_poa_net_local"
+            export KEEPER_PORT='8546'
             printf $COLOR_Y'Starting with local Parity node...\n\n'$COLOR_RESET
             ;;
         --purge)

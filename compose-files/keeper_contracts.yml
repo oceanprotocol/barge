@@ -2,6 +2,8 @@ version: '2.1'
 services:
   keeper-contracts:
     image: oceanprotocol/keeper-contracts:${OCEAN_VERSION:-stable}
+    ports:
+      - "${KEEPER_PORT}:8545"
     networks:
       backend:
         ipv4_address: 172.15.0.14
