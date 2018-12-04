@@ -11,5 +11,3 @@ services:
     - mongodb
     environment:
       DB_HOSTNAME: mongodb
-    volumes:
-    - ${ARTIFACTS_FOLDER}:/usr/local/keeper-contracts/:ro
