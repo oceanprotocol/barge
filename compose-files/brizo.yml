@@ -9,7 +9,6 @@ services:
         ipv4_address: 172.15.0.17
     depends_on:
     - keeper-contracts
-    - parity-node
     env_file:
     - ${BRIZO_ENV_FILE}
     environment:
