@@ -10,5 +10,5 @@ networks:
         gateway: 172.15.0.1
 
 volumes:
-  parity-node:
+  keeper-node:
   secret-store:

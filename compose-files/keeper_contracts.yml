@@ -14,6 +14,6 @@ services:
       KEEPER_RPC_PORT: ${KEEPER_RPC_PORT}
       KEEPER_RPC_URL: ${KEEPER_RPC_URL}
     depends_on:
-      - blockchain-node
+      - keeper-node
     volumes:
     - ${KEEPER_ARTIFACTS_FOLDER}:/keeper-contracts/artifacts/

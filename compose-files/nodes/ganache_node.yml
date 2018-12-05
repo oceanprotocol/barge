@@ -1,6 +1,6 @@
 version: '2.1'
 services:
-  blockchain-node:
+  keeper-node:
     image: trufflesuite/ganache-cli:latest
     ports:
       - 8545:8545

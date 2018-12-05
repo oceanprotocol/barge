@@ -1,6 +1,6 @@
 version: '2.1'
 services:
-  blockchain-node:
+  keeper-node:
     image: oceanprotocol/parity-ethereum:beta
     entrypoint: /opt/parity/parity
     command:

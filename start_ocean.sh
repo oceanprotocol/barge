@@ -9,7 +9,7 @@ export PROJECT_NAME="ocean"
 export KEEPER_DEPLOY_CONTRACTS="true"
 export KEEPER_ARTIFACTS_FOLDER=$HOME/.ocean/keeper-contracts/artifacts
 # Specify which ethereum client to run or connect to: development, kovan, or ocean_poa_net_local
-export KEEPER_NETWORK_NAME="development"
+export KEEPER_NETWORK_NAME="ocean_poa_net_local"
 
 # Ganache specific option, these two options have no effect when not running ganache-cli
 export GANACHE_DATABASE_PATH="${DIR}"
@@ -18,7 +18,7 @@ export GANACHE_REUSE_DATABASE="false"
 export BRIZO_ENV_FILE=$DIR/brizo.env
 
 # Specify the ethereum default RPC container provider
-export KEEPER_RPC_HOST='blockchain-node'
+export KEEPER_RPC_HOST='keeper-node'
 export KEEPER_RPC_PORT='8545'
 export KEEPER_RPC_URL="http://"${KEEPER_RPC_HOST}:${KEEPER_RPC_PORT}
 
@@ -47,7 +47,6 @@ export NODE_FILE=${COMPOSE_DIR}/nodes/pond_node.yml
 
 COMPOSE_FILES=""
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
-COMPOSE_FILES+=" -f ${COMPOSE_DIR}/mongodb.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
@@ -79,17 +78,11 @@ while :; do
         #################################################
         # Node type switches
         #################################################
-        # connect you to kovan
+        # connects you to kovan
         --local-kovan-node)
             export NODE_FILE=${COMPOSE_DIR}/nodes/kovan_node.yml
             export KEEPER_NETWORK_NAME="kovan"
             printf $COLOR_Y'Starting with local Kovan node...\n\n'$COLOR_RESET
-            ;;
-        # connects to ocean testnet
-        --local-lake-node)
-            export NODE_FILE=${COMPOSE_DIR}/nodes/lake_node.yml
-            export KEEPER_NETWORK_NAME="ocean_poa_aws"
-            printf $COLOR_Y'Starting with local Pond node...\n\n'$COLOR_RESET
             ;;
         # spins up a new ganache blockchain
         --local-ganache-node)
@@ -98,6 +91,12 @@ while :; do
             export KEEPER_NETWORK_NAME="development"
             export KEEPER_DEPLOY_CONTRACTS="true"
             printf $COLOR_Y'Starting with local Ganache node...\n\n'$COLOR_RESET
+            ;;
+        # connects you to ocean testnet
+        --local-lake-node)
+            export NODE_FILE=${COMPOSE_DIR}/nodes/lake_node.yml
+            export KEEPER_NETWORK_NAME="ocean_poa_aws"
+            printf $COLOR_Y'Starting with local Lake node...\n\n'$COLOR_RESET
             ;;
         # spins up pond local testnet
         --local-pond-node)
@@ -113,7 +112,7 @@ while :; do
         --purge)
             docker network rm ${PROJECT_NAME}_backend || true
             docker network rm ${PROJECT_NAME}_default || true
-            docker volume rm ${PROJECT_NAME}_parity-node || true
+            docker volume rm ${PROJECT_NAME}_keeper-node || true
             docker volume rm ${PROJECT_NAME}_secret-store || true
             read -p "Are you sure you want to delete $KEEPER_ARTIFACTS_FOLDER? " -n 1 -r
             echo
