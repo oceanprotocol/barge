@@ -6,7 +6,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 export PROJECT_NAME="ocean"
 
 # keeper options
-export KEEPER_DEPLOY_CONTRACTS="false"
+export KEEPER_DEPLOY_CONTRACTS="true"
 export KEEPER_ARTIFACTS_FOLDER=$HOME/.ocean/keeper-contracts/artifacts
 # Specify which ethereum client to run or connect to: development, kovan, or ocean_poa_net_local
 export KEEPER_NETWORK_NAME="development"
@@ -44,10 +44,11 @@ show_banner
 
 # default to latest versions
 export OCEAN_VERSION=latest
+export NODE_FILE=${COMPOSE_DIR}/nodes/pond_node.yml
 
 COMPOSE_FILES=""
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
-COMPOSE_FILES+=" -f ${COMPOSE_DIR}/mongo.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/mongodb.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
@@ -81,20 +82,20 @@ while :; do
         #################################################
         # connect you to kovan
         --local-kovan-node)
-            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/nodes/kovan_node.yml"
+            export NODE_FILE=${COMPOSE_DIR}/nodes/kovan_node.yml
             export KEEPER_NETWORK_NAME="kovan"
             printf $COLOR_Y'Starting with local Kovan node...\n\n'$COLOR_RESET
             ;;
         # connects to ocean testnet
         --local-lake-node)
-            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/nodes/lake_node.yml"
+            export NODE_FILE=${COMPOSE_DIR}/nodes/lake_node.yml
             export KEEPER_NETWORK_NAME="ocean_poa_aws"
             printf $COLOR_Y'Starting with local Pond node...\n\n'$COLOR_RESET
             ;;
         # spins up a new ganache blockchain
         --local-ganache-node)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
-            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/nodes/ganache_node.yml"
+            export NODE_FILE=${COMPOSE_DIR}/nodes/ganache_node.yml
             export KEEPER_NETWORK_NAME="development"
             export KEEPER_DEPLOY_CONTRACTS="true"
             printf $COLOR_Y'Starting with local Ganache node...\n\n'$COLOR_RESET
@@ -102,7 +103,7 @@ while :; do
         # spins up pond local testnet
         --local-pond-node)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
-            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/nodes/pond_node.yml"
+            export NODE_FILE=${COMPOSE_DIR}/nodes/pond_node.yml
             export KEEPER_NETWORK_NAME="ocean_poa_net_local"
             export KEEPER_DEPLOY_CONTRACTS="true"
             printf $COLOR_Y'Starting with local Pond node...\n\n'$COLOR_RESET
@@ -132,7 +133,7 @@ while :; do
             ;;
         *)
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
-            docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES up
+            docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_FILE} up
             break
     esac
     shift
