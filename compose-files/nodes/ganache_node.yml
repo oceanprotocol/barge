@@ -1,0 +1,9 @@
+version: '2.1'
+services:
+  blockchain-node:
+    image: trufflesuite/ganache-cli:latest
+    ports:
+      - 8545:8545
+    networks:
+      backend:
+        ipv4_address: 172.15.0.12

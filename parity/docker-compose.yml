@@ -14,8 +14,8 @@ services:
     volumes:
       - ./parity/config:/parity/config:ro
       - validator0:/root/.local/share/io.parity.ethereum/
-      - ./parity/authorities/validator0.json:/root/.local/share/io.parity.ethereum/keys/${NETWORK_NAME}/validator.json:ro
-      - ./parity/keys:/root/.local/share/io.parity.ethereum/keys/${NETWORK_NAME}
+      - ./parity/authorities/validator0.json:/root/.local/share/io.parity.ethereum/keys/${KEEPER_NETWORK_NAME}/validator.json:ro
+      - ./parity/keys:/root/.local/share/io.parity.ethereum/keys/${KEEPER_NETWORK_NAME}
       - ./parity/authorities/validator0.pwd:/parity/validator.pwd:ro
       - ./parity/node0.network.key:/root/.local/share/io.parity.ethereum/network/key:ro
     ports:
@@ -32,7 +32,7 @@ services:
     volumes:
       - ./parity/config:/parity/config:ro
       - validator1:/root/.local/share/io.parity.ethereum/
-      - ./parity/authorities/validator1.json:/root/.local/share/io.parity.ethereum/keys/${NETWORK_NAME}/validator.json:ro
+      - ./parity/authorities/validator1.json:/root/.local/share/io.parity.ethereum/keys/${KEEPER_NETWORK_NAME}/validator.json:ro
       - ./parity/authorities/validator1.pwd:/parity/validator.pwd:ro
       - ./parity/node1.network.key:/root/.local/share/io.parity.ethereum/network/key:ro
     networks:
@@ -47,7 +47,7 @@ services:
     volumes:
       - ./parity/config:/parity/config:ro
       - validator2:/root/.local/share/io.parity.ethereum/
-      - ./parity/authorities/validator2.json:/root/.local/share/io.parity.ethereum/keys/${NETWORK_NAME}/validator.json:ro
+      - ./parity/authorities/validator2.json:/root/.local/share/io.parity.ethereum/keys/${KEEPER_NETWORK_NAME}/validator.json:ro
       - ./parity/authorities/validator2.pwd:/parity/validator.pwd:ro
       - ./parity/node2.network.key:/root/.local/share/io.parity.ethereum/network/key:ro
     networks:
@@ -64,7 +64,7 @@ services:
       --unsafe-expose
     volumes:
       - ./parity/config:/parity/config:ro
-      - ./parity/keys:/root/.local/share/io.parity.ethereum/keys/${NETWORK_NAME}
+      - ./parity/keys:/root/.local/share/io.parity.ethereum/keys/${KEEPER_NETWORK_NAME}
     ports:
       - 8180:8180
       - 8546:8546

@@ -2,18 +2,16 @@ version: '2.1'
 services:
   keeper-contracts:
     image: oceanprotocol/keeper-contracts:${OCEAN_VERSION:-stable}
-    ports:
-      - "${KEEPER_PORT}:8545"
     networks:
       backend:
         ipv4_address: 172.15.0.14
     environment:
-      LOCAL_CONTRACTS: "true"
+      LOCAL_CONTRACTS: "false"
       DEPLOY_CONTRACTS: ${DEPLOY_CONTRACTS}
-      DATABASE_PATH: "/ganache-db"
-      REUSE_DATABASE: ${REUSE_DATABASE}
+      REUSE_DATABASE: "false"
       NETWORK_NAME: ${KEEPER_NETWORK_NAME}
-      POA_HOST: "parity-node"
+      POA_HOST: ${KEEPER_RPC_URL}
+    depends_on:
+      - blockchain-node
     volumes:
-    - ${ARTIFACTS_FOLDER}:/keeper-contracts/artifacts/
-    - ${GANACHE_DATABASE_PATH}/ganache-db:/ganache-db
+    - ${KEEPER_ARTIFACTS_FOLDER}:/keeper-contracts/artifacts/
