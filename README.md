@@ -31,8 +31,9 @@ You need to have the newest versions available of both:
 * [Docker](https://www.docker.com/get-started)
 * [Docker Compose](https://docs.docker.com/compose/)
 
-Populate the following in `brizo.env` file:
-* All of the `AZURE_`... related variables: necessary for `Brizo` to serve consume requests
+Populate the following in the `brizo.env` file:
+
+* All of the `AZURE_`... related variables: necessary for `Brizo` to serve consume requests. You will get the values if you go through the [Azure Storage tutorial in the Ocean Protocol docs](https://docs.oceanprotocol.com/tutorials/azure-for-brizo/).
 
 ## Get Started
 
