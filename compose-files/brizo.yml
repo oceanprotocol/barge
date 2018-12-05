@@ -12,6 +12,6 @@ services:
     env_file:
     - ${BRIZO_ENV_FILE}
     environment:
-      KEEPER_URL: http://${KEEPER_RPC_URL}:${KEEPER_RPC_PORT}
+      KEEPER_URL: ${KEEPER_RPC_URL}
     volumes:
-    - ${ARTIFACTS_FOLDER}:/usr/local/keeper-contracts/:ro
+    - ${KEEPER_ARTIFACTS_FOLDER}:/usr/local/keeper-contracts/:ro

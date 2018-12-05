@@ -6,11 +6,13 @@ services:
       backend:
         ipv4_address: 172.15.0.14
     environment:
-      LOCAL_CONTRACTS: "false"
-      DEPLOY_CONTRACTS: ${DEPLOY_CONTRACTS}
-      REUSE_DATABASE: "false"
+      DEPLOY_CONTRACTS: ${KEEPER_DEPLOY_CONTRACTS}
+      REUSE_DATABASE: ${GANACHE_REUSE_DATABASE}
+      DATABASE_PATH: "/ganache-db"
       NETWORK_NAME: ${KEEPER_NETWORK_NAME}
-      POA_HOST: ${KEEPER_RPC_URL}
+      KEEPER_RPC_HOST: ${KEEPER_RPC_HOST}
+      KEEPER_RPC_PORT: ${KEEPER_RPC_PORT}
+      KEEPER_RPC_URL: ${KEEPER_RPC_URL}
     depends_on:
       - blockchain-node
     volumes:

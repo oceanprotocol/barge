@@ -18,10 +18,9 @@ export GANACHE_REUSE_DATABASE="false"
 export BRIZO_ENV_FILE=$DIR/brizo.env
 
 # Specify the ethereum default RPC container provider
-export KEEPER_RPC_URL='blockchain-node'
+export KEEPER_RPC_HOST='blockchain-node'
 export KEEPER_RPC_PORT='8545'
-export KEEPER_URL="http://"${KEEPER_RPC_URL}:${KEEPER_RPC_PORT}
-
+export KEEPER_RPC_URL="http://"${KEEPER_RPC_HOST}:${KEEPER_RPC_PORT}
 
 # colors
 COLOR_R="\033[0;31m"    # red
@@ -112,15 +111,15 @@ while :; do
         # Cleaning switches
         #################################################
         --purge)
-            docker network rm $PROJECT_NAME_backend || true
-            docker network rm $PROJECT_NAME_default || true
-            docker volume rm $PROJECT_NAME_parity-node || true
-            docker volume rm $PROJECT_NAME_secret-store || true
-            read -p "Are you sure you want to delete $ARTIFACTS_FOLDER? " -n 1 -r
+            docker network rm ${PROJECT_NAME}_backend || true
+            docker network rm ${PROJECT_NAME}_default || true
+            docker volume rm ${PROJECT_NAME}_parity-node || true
+            docker volume rm ${PROJECT_NAME}_secret-store || true
+            read -p "Are you sure you want to delete $KEEPER_ARTIFACTS_FOLDER? " -n 1 -r
             echo
             if [[ $REPLY =~ ^[Yy]$ ]]
             then
-                rm -rf $ARTIFACTS_FOLDER
+                rm -rf ${KEEPER_ARTIFACTS_FOLDER}
             fi
             ;;
         --) # End of all options.
