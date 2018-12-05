@@ -107,6 +107,7 @@ while :; do
             COMPOSE_FILES=${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/keeper_contracts.yml/}
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/parity_client.yml"
             export NETWORK="ocean-network"
+	    ;;
         --purge)
             docker network rm $PROJECT_NAME_backend || true
             docker network rm $PROJECT_NAME_default || true
