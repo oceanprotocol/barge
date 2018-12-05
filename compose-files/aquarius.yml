@@ -11,3 +11,10 @@ services:
     - mongodb
     environment:
       DB_HOSTNAME: mongodb
+
+  mongodb:
+    image: mongo:3.6
+    command: mongod
+    networks:
+      backend:
+        ipv4_address: 172.15.0.11

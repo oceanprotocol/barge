@@ -2,20 +2,25 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 COMPOSE_DIR="${DIR}/compose-files"
-# Must be set to true for the first run, change it to "false" to avoid migrating the smart contracts on each run.
-export DEPLOY_CONTRACTS="true"
+
+export PROJECT_NAME="ocean"
+
+# keeper options
+export KEEPER_DEPLOY_CONTRACTS="true"
+export KEEPER_ARTIFACTS_FOLDER=$HOME/.ocean/keeper-contracts/artifacts
+# Specify which ethereum client to run or connect to: development, kovan, or ocean_poa_net_local
+export KEEPER_NETWORK_NAME="ocean_poa_net_local"
+
 # Ganache specific option, these two options have no effect when not running ganache-cli
 export GANACHE_DATABASE_PATH="${DIR}"
-export REUSE_DATABASE="false"
-# Specify which ethereum client to run or connect to: kovan, ganache, or ocean_poa_net_local
-export KEEPER_NETWORK_NAME="ganache"
-export ARTIFACTS_FOLDER=$HOME/.ocean/keeper-contracts/artifacts
-export BRIZO_ENV_FILE=$DIR/brizo.env
-export PROJECT_NAME="ocean"
-# Specify the ethereum default RPC container provider
-export RPC_URL='keeper-contracts'
-export KEEPER_PORT='8545'
+export GANACHE_REUSE_DATABASE="false"
 
+export BRIZO_ENV_FILE=$DIR/brizo.env
+
+# Specify the ethereum default RPC container provider
+export KEEPER_RPC_HOST='keeper-node'
+export KEEPER_RPC_PORT='8545'
+export KEEPER_RPC_URL="http://"${KEEPER_RPC_HOST}:${KEEPER_RPC_PORT}
 
 # colors
 COLOR_R="\033[0;31m"    # red
@@ -38,47 +43,82 @@ show_banner
 
 # default to latest versions
 export OCEAN_VERSION=latest
+export NODE_FILE=${COMPOSE_DIR}/nodes/pond_node.yml
 
 COMPOSE_FILES=""
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
-COMPOSE_FILES+=" -f ${COMPOSE_DIR}/mongo.yml"
-COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 
 while :; do
     case $1 in
+        #################################################
+        # Version switches
+        #################################################
         --latest)
             export OCEAN_VERSION=latest
             printf $COLOR_Y'Switched to latest components...\n\n'$COLOR_RESET
             ;;
-        --reuse-database)
-            export REUSE_DATABASE="true"
-            printf $COLOR_Y'Starting and reusing the database ...\n\n'$COLOR_RESET
-            ;;
+        #################################################
+        # Exclude switches
+        #################################################
         --no-pleuston)
             COMPOSE_FILES=${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/pleuston.yml/}
             printf $COLOR_Y'Starting without Pleuston...\n\n'$COLOR_RESET
             ;;
-        --local-parity-node)
-            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/parity_client.yml"
-            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
-            export RPC_URL='parity-node'
-            export KEEPER_NETWORK_NAME="ocean_poa_net_local"
-            export KEEPER_PORT='8546'
-            printf $COLOR_Y'Starting with local Parity node...\n\n'$COLOR_RESET
+        #################################################
+        # Contract/Storage switches
+        #################################################
+        --reuse-ganache-database)
+            export GANACHE_REUSE_DATABASE="true"
+            printf $COLOR_Y'Starting and reusing the database ...\n\n'$COLOR_RESET
             ;;
+        #################################################
+        # Node type switches
+        #################################################
+        # connects you to kovan
+        --local-kovan-node)
+            export NODE_FILE=${COMPOSE_DIR}/nodes/kovan_node.yml
+            export KEEPER_NETWORK_NAME="kovan"
+            printf $COLOR_Y'Starting with local Kovan node...\n\n'$COLOR_RESET
+            ;;
+        # spins up a new ganache blockchain
+        --local-ganache-node)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
+            export NODE_FILE=${COMPOSE_DIR}/nodes/ganache_node.yml
+            export KEEPER_NETWORK_NAME="development"
+            export KEEPER_DEPLOY_CONTRACTS="true"
+            printf $COLOR_Y'Starting with local Ganache node...\n\n'$COLOR_RESET
+            ;;
+        # connects you to ocean testnet
+        --local-lake-node)
+            export NODE_FILE=${COMPOSE_DIR}/nodes/lake_node.yml
+            export KEEPER_NETWORK_NAME="ocean_poa_aws"
+            printf $COLOR_Y'Starting with local Lake node...\n\n'$COLOR_RESET
+            ;;
+        # spins up pond local testnet
+        --local-pond-node)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
+            export NODE_FILE=${COMPOSE_DIR}/nodes/pond_node.yml
+            export KEEPER_NETWORK_NAME="ocean_poa_net_local"
+            export KEEPER_DEPLOY_CONTRACTS="true"
+            printf $COLOR_Y'Starting with local Pond node...\n\n'$COLOR_RESET
+            ;;
+        #################################################
+        # Cleaning switches
+        #################################################
         --purge)
-            docker network rm $PROJECT_NAME_backend || true
-            docker network rm $PROJECT_NAME_default || true
-            docker volume rm $PROJECT_NAME_parity-node || true
-            docker volume rm $PROJECT_NAME_secret-store || true
-            read -p "Are you sure you want to delete $ARTIFACTS_FOLDER? " -n 1 -r
+            docker network rm ${PROJECT_NAME}_backend || true
+            docker network rm ${PROJECT_NAME}_default || true
+            docker volume rm ${PROJECT_NAME}_keeper-node || true
+            docker volume rm ${PROJECT_NAME}_secret-store || true
+            read -p "Are you sure you want to delete $KEEPER_ARTIFACTS_FOLDER? " -n 1 -r
             echo
             if [[ $REPLY =~ ^[Yy]$ ]]
             then
-                rm -rf $ARTIFACTS_FOLDER
+                rm -rf ${KEEPER_ARTIFACTS_FOLDER}
             fi
             ;;
         --) # End of all options.
@@ -91,7 +131,7 @@ while :; do
             ;;
         *)
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
-            docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES up
+            docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_FILE} up
             break
     esac
     shift

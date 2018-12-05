@@ -8,10 +8,10 @@ services:
       backend:
         ipv4_address: 172.15.0.17
     depends_on:
-    - keeper-contracts
+    - keeper-node
     env_file:
     - ${BRIZO_ENV_FILE}
     environment:
-      KEEPER_URL: http://${RPC_URL}:8545
+      KEEPER_URL: ${KEEPER_RPC_URL}
     volumes:
-    - ${ARTIFACTS_FOLDER}:/usr/local/keeper-contracts/:ro
+    - ${KEEPER_ARTIFACTS_FOLDER}:/usr/local/keeper-contracts/:ro

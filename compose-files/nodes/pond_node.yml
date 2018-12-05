@@ -1,6 +1,6 @@
 version: '2.1'
 services:
-  parity-node:
+  keeper-node:
     image: oceanprotocol/parity-ethereum:beta
     entrypoint: /opt/parity/parity
     command:
@@ -18,7 +18,7 @@ services:
       --unlock 0x00bd138abd70e2f00903268f3db08f2d25677c9e
     volumes:
       - ../parity/parity/config:/home/parity/parity/config
-      - parity-node:/home/parity/.local/share/io.parity.ethereum/
+      - keeper-node:/home/parity/.local/share/io.parity.ethereum/
       - ../parity/parity/authorities/validator0.json:/home/parity/.local/share/io.parity.ethereum/keys/ocean-network/validator.json
       - ../parity/parity/keys:/home/parity/.local/share/io.parity.ethereum/keys/ocean-network
       - ../parity/parity/authorities/validator0.pwd:/home/parity/parity/validator.pwd
