@@ -1,8 +1,8 @@
-[![banner](doc/img/repo-banner@2x.png)](https://oceanprotocol.com)
+[![banner](https://raw.githubusercontent.com/oceanprotocol/art/master/github/repo-banner%402x.png)](https://oceanprotocol.com)
 
 <h1 align="center">docker-images</h1>
 
-> 🐳 Docker compose and tools running the complete Ocean Protocol network stack.
+> 🐳 Docker images and Compose for the full Ocean Protocol Network stack.
 > [oceanprotocol.com](https://oceanprotocol.com)
 
 ---
@@ -31,6 +31,9 @@ You need to have the newest versions available of both:
 * [Docker](https://www.docker.com/get-started)
 * [Docker Compose](https://docs.docker.com/compose/)
 
+Populate the following in `brizo.env` file:
+* All of the `AZURE_`... related variables: necessary for `Brizo` to serve consume requests
+
 ## Get Started
 
 Then bring up an instance of the whole Ocean Protocol network stack with the `start_ocean.sh` script:
@@ -47,6 +50,8 @@ cd docker-images/
 This will bring up the `stable` versions of all components, referring to their respective `master` branches.
 
 To get the `latest` versions of all components, referring to their `develop` branches, pass the argument `--latest`:
+
+To run as a publisher, `Brizo` configuration must be set with valid Azure account credentials. This is done in
 
 ```bash
 ./start_ocean.sh --latest
@@ -68,6 +73,7 @@ Option | Description
 `--reuse-database` | Start up Ocean and reuse the Database from ganache. Helpful for development.
 `--testnet-parity-node` | Start up a parity client connected to Ocean testnet.
 `--kovan-parity-node` | Start up a parity client connected to Kovan testnet.
+`--purge` | Remove the volumes, local folder and networks used by the script.
 
 For example, if you do:
 
@@ -165,6 +171,9 @@ Account | Password | Balance
 0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0 | secret | 100000000
 0xa99d43d86a0758d5632313b8fa3972b6088a21bb | secret | 100000000
 
+
+Use one of the above accounts to populate `PARITY_ADDRESS` and `PARITY_PASSWORD` in `brizo.env` file to avoid asccount `locked` issues from the keeper contracts.
+
 ### Environment Variables
 
 The `start_ocean.sh` script and `.env` file sets defaults for the following environment variables but you can use these in combination with the Docker Compose files for further customization, e.g.:
@@ -181,13 +190,11 @@ Variable | Description
 `KEEPER_NETWORK_NAME` | set to one of `"ganache"` (default), `"kovan"`, or `"ocean_poa_net_local"`
 `ARTIFACTS_FOLDER` | this is where the deployed smart contracts abi files will be available. This can be pointed at any path you like.
 
+In addition to these variables, when running Brizo you need to provide the Azure credentials to allow Brizo to connect to Azure. These variables can be configured in the file `brizo.env`.
+
 ## Contributing
 
-We use GitHub as a means for maintaining and tracking issues and source code development.
-
-If you would like to contribute, please fork this repository, do work in a feature branch, and finally open a pull request for maintainers to review your changes.
-
-Ocean Protocol uses [C4 Standard process](https://github.com/unprotocols/rfc/blob/master/1/README.md) to manage changes in the source code. Find here more details about [Ocean C4 OEP](https://github.com/oceanprotocol/OEPs/tree/master/1).
+See the page titled "[Ways to Contribute](https://docs.oceanprotocol.com/concepts/contributing/)" in the Ocean Protocol documentation.
 
 ## License
 

@@ -1,7 +1,5 @@
 version: '2.1'
 
-# Run: docker-compose --project-name=ocean up
-
 services:
   mongodb:
     image: mongo:3.6
@@ -48,9 +46,10 @@ services:
     - backend
     depends_on:
     - keeper-contracts
+    env_file:
+      - ${BRIZO_ENV_FILE}
     environment:
       KEEPER_URL: http://keeper-contracts:8545
-      LOCAL_CONTRACTS: "true"
     volumes:
     - ${ARTIFACTS_FOLDER}:/usr/local/keeper-contracts/:ro
 
