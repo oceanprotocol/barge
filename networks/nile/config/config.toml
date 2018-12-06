@@ -9,10 +9,7 @@ port = 8545
 interface = "0.0.0.0"
 cors = ["all"]
 hosts = ["all"]
-apis = ["web3", "secretstore", "eth", "pubsub", "net", "parity", "parity_pubsub", "parity_accounts", "traces", "rpc", "shh", "shh_pubsub"]
-
-[secretstore]
-disable = true # users do not run a secret store node
+apis = ["web3", "eth", "pubsub", "net", "parity", "parity_pubsub", "parity_accounts", "traces", "rpc", "shh", "shh_pubsub"]
 
 [network]
 port = 30303

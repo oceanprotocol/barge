@@ -1,18 +1,17 @@
-# Users config file in users.toml
-# This configuration file can be used for either Alice, Bob or Charlie
-
 [parity]
-chain = "/home/parity/parity/config/chain.json"
+chain = "/home/parity/config/chain.json"
 
 [rpc]
-port = 8545
 interface = "0.0.0.0"
 cors = ["all"]
 hosts = ["all"]
-apis = ["all"]
-
-[mining]
-engine_signer = "0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e"
+apis = ["web3", "eth", "net", "parity", "traces", "rpc", "personal", "parity_accounts", "signer", "parity_set"]
 
 [account]
-password = ["/home/parity/parity/validator.pwd"]
+password = ["/home/parity/validator.pwd"]
+
+[mining]
+engine_signer = "0x00bd138abd70e2f00903268f3db08f2d25677c9e"
+reseal_on_txs = "none"
+force_sealing = true
+reseal_min_period = 500
