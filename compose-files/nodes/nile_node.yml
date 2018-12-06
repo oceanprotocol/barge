@@ -16,12 +16,12 @@ services:
       --unsafe-expose
       --unlock 0x00bd138abd70e2f00903268f3db08f2d25677c9e
     volumes:
-      - ../networks/lake/config:/home/parity/parity/config
+      - ../networks/nile/config:/home/parity/parity/config
       - keeper-node:/home/parity/.local/share/io.parity.ethereum/
-      - ../networks/lake/authorities/validator0.json:/home/parity/.local/share/io.parity.ethereum/keys/lake/validator.json
-      - ../networks/lake/keys:/home/parity/.local/share/io.parity.ethereum/keys/lake
-      - ../networks/lake/authorities/validator0.pwd:/home/parity/parity/validator.pwd
-      - ../networks/lake/node0.network.key:/home/parity/.local/share/io.parity.ethereum/network/key
+      - ../networks/nile/authorities/validator0.json:/home/parity/.local/share/io.parity.ethereum/keys/nile/validator.json
+      - ../networks/nile/keys:/home/parity/.local/share/io.parity.ethereum/keys/nile
+      - ../networks/nile/authorities/validator0.pwd:/home/parity/parity/validator.pwd
+      - ../networks/nile/node0.network.key:/home/parity/.local/share/io.parity.ethereum/network/key
     ports:
       - 8545:8545
     networks:

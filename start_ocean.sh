@@ -4,12 +4,15 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 COMPOSE_DIR="${DIR}/compose-files"
 
 export PROJECT_NAME="ocean"
+# default to latest versions
+export OCEAN_VERSION=latest
 
 # keeper options
 export KEEPER_DEPLOY_CONTRACTS="true"
 export KEEPER_ARTIFACTS_FOLDER=$HOME/.ocean/keeper-contracts/artifacts
-# Specify which ethereum client to run or connect to: development, kovan, or ocean_poa_net_local
-export KEEPER_NETWORK_NAME="ocean_poa_net_local"
+# Specify which ethereum client to run or connect to: development, kovan, spree or nile
+export KEEPER_NETWORK_NAME="nile"
+export NODE_FILE=${COMPOSE_DIR}/nodes/nile_node.yml
 
 # Ganache specific option, these two options have no effect when not running ganache-cli
 export GANACHE_DATABASE_PATH="${DIR}"
@@ -40,10 +43,6 @@ function show_banner {
 }
 
 show_banner
-
-# default to latest versions
-export OCEAN_VERSION=latest
-export NODE_FILE=${COMPOSE_DIR}/nodes/pond_node.yml
 
 COMPOSE_FILES=""
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
@@ -104,19 +103,19 @@ while :; do
             export KEEPER_DEPLOY_CONTRACTS="true"
             printf $COLOR_Y'Starting with local Ganache node...\n\n'$COLOR_RESET
             ;;
-        # connects you to ocean testnet
-        --local-lake-node)
-            export NODE_FILE=${COMPOSE_DIR}/nodes/lake_node.yml
-            export KEEPER_NETWORK_NAME="ocean_poa_aws"
-            printf $COLOR_Y'Starting with local Lake node...\n\n'$COLOR_RESET
+        # connects you to nile ocean testnet
+        --local-nile-node)
+            export NODE_FILE=${COMPOSE_DIR}/nodes/nile_node.yml
+            export KEEPER_NETWORK_NAME="nile"
+            printf $COLOR_Y'Starting with local Nile node...\n\n'$COLOR_RESET
             ;;
-        # spins up pond local testnet
-        --local-pond-node)
+        # spins up spree local testnet
+        --local-spree-node)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
-            export NODE_FILE=${COMPOSE_DIR}/nodes/pond_node.yml
-            export KEEPER_NETWORK_NAME="ocean_poa_net_local"
+            export NODE_FILE=${COMPOSE_DIR}/nodes/spree_node.yml
+            export KEEPER_NETWORK_NAME="spree"
             export KEEPER_DEPLOY_CONTRACTS="true"
-            printf $COLOR_Y'Starting with local Pond node...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Starting with local Spree node...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Cleaning switches

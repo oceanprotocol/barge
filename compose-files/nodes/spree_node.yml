@@ -13,9 +13,9 @@ services:
       --jsonrpc-hosts all
       --jsonrpc-apis all
     volumes:
-      - ../networks/pond/config:/home/parity/parity/config
-      - ../networks/pond/keys/validator.pwd:/home/parity/parity/validator.pwd
-      - ../networks/pond/keys:/home/parity/.local/share/io.parity.ethereum/keys/pond
+      - ../networks/spree/config:/home/parity/parity/config
+      - ../networks/spree/keys/validator.pwd:/home/parity/parity/validator.pwd
+      - ../networks/spree/keys:/home/parity/.local/share/io.parity.ethereum/keys/spree
     ports:
       - 8545:8545
     networks:
