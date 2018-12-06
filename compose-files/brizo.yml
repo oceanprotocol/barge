@@ -14,4 +14,4 @@ services:
     environment:
       KEEPER_URL: ${KEEPER_RPC_URL}
     volumes:
-    - ${KEEPER_ARTIFACTS_FOLDER}:/usr/local/keeper-contracts/:ro
+    - ${KEEPER_ARTIFACTS_FOLDER}:/usr/local/artifacts:ro
