@@ -142,7 +142,7 @@ while :; do
             ;;
         *)
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
-            docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_FILE} up
+            docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_FILE} up --remove-orphans
             break
     esac
     shift
