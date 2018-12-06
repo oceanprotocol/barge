@@ -1,28 +1,21 @@
 version: '2.1'
 services:
   keeper-node:
-    image: oceanprotocol/parity-ethereum:beta
-    entrypoint: /opt/parity/parity
+    image: parity/parity:stable
     command:
-      --config /home/parity/parity/config/secretstoreclient.toml
-      --db-path /home/parity/chains
+      --config /home/parity/parity/config/config.toml
       --keys-path /home/parity/.local/share/io.parity.ethereum/keys
       --base-path /home/parity/base
-      --engine-signer 0x00bd138abd70e2f00903268f3db08f2d25677c9e
-      --ws-interface all
+      --min-gas-price 0
+      --reseal-min-period 0
       --jsonrpc-cors all
       --jsonrpc-interface all
       --jsonrpc-hosts all
       --jsonrpc-apis all
-      --unsafe-expose
-      --unlock 0x00bd138abd70e2f00903268f3db08f2d25677c9e
     volumes:
-      - ../parity/parity/config:/home/parity/parity/config
-      - keeper-node:/home/parity/.local/share/io.parity.ethereum/
-      - ../parity/parity/authorities/validator0.json:/home/parity/.local/share/io.parity.ethereum/keys/ocean-network/validator.json
-      - ../parity/parity/keys:/home/parity/.local/share/io.parity.ethereum/keys/ocean-network
-      - ../parity/parity/authorities/validator0.pwd:/home/parity/parity/validator.pwd
-      - ../parity/parity/node0.network.key:/home/parity/.local/share/io.parity.ethereum/network/key
+      - ../networks/pond/config:/home/parity/parity/config
+      - ../networks/pond/keys/validator.pwd:/home/parity/parity/validator.pwd
+      - ../networks/pond/keys:/home/parity/.local/share/io.parity.ethereum/keys/pond
     ports:
       - 8545:8545
     networks:

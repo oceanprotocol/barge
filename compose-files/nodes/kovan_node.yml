@@ -1,8 +1,7 @@
 version: '2.1'
 services:
   keeper-node:
-    image: oceanprotocol/parity-ethereum:beta
-    entrypoint: /opt/parity/parity
+    image: parity/parity:stable
     command:
       --chain kovan
       --light

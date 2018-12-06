@@ -68,6 +68,18 @@ while :; do
             COMPOSE_FILES=${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/pleuston.yml/}
             printf $COLOR_Y'Starting without Pleuston...\n\n'$COLOR_RESET
             ;;
+        --no-brizo)
+            COMPOSE_FILES=${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/brizo.yml/}
+            printf $COLOR_Y'Starting without Brizo...\n\n'$COLOR_RESET
+            ;;
+        --no-aquarius)
+            COMPOSE_FILES=${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}
+            printf $COLOR_Y'Starting without Aquarius...\n\n'$COLOR_RESET
+            ;;
+        --no-secret-store)
+            COMPOSE_FILES=${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}
+            printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
+            ;;
         #################################################
         # Contract/Storage switches
         #################################################
