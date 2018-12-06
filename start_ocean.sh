@@ -8,7 +8,7 @@ export PROJECT_NAME="ocean"
 export OCEAN_VERSION=latest
 
 # keeper options
-export KEEPER_DEPLOY_CONTRACTS="true"
+export KEEPER_DEPLOY_CONTRACTS="false"
 export KEEPER_ARTIFACTS_FOLDER=$HOME/.ocean/keeper-contracts/artifacts
 # Specify which ethereum client to run or connect to: development, kovan, spree or nile
 export KEEPER_NETWORK_NAME="nile"
