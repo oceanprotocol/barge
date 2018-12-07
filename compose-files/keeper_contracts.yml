@@ -1,7 +1,8 @@
 version: '2.1'
 services:
   keeper-contracts:
-    image: oceanprotocol/keeper-contracts:${OCEAN_VERSION:-stable}
+    #image: oceanprotocol/keeper-contracts:${OCEAN_VERSION:-stable}
+    image: oceanprotocol/keeper-contracts:feature_docker
     networks:
       backend:
         ipv4_address: 172.15.0.14
