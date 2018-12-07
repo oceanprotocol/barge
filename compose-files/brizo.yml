@@ -15,4 +15,4 @@ services:
       KEEPER_URL: ${KEEPER_RPC_URL}
       LOCAL_CONTRACTS: ${KEEPER_DEPLOY_CONTRACTS}
     volumes:
-      - ${KEEPER_ARTIFACTS_FOLDER}:/usr/local/artifacts:ro
+      - ${KEEPER_ARTIFACTS_FOLDER}:/usr/local/keeper-contracts:ro

@@ -101,6 +101,7 @@ while :; do
             export NODE_FILE=${COMPOSE_DIR}/nodes/ganache_node.yml
             export KEEPER_NETWORK_NAME="development"
             export KEEPER_DEPLOY_CONTRACTS="true"
+            rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.development.json
             printf $COLOR_Y'Starting with local Ganache node...\n\n'$COLOR_RESET
             ;;
         # connects you to nile ocean testnet
@@ -115,6 +116,7 @@ while :; do
             export NODE_FILE=${COMPOSE_DIR}/nodes/spree_node.yml
             export KEEPER_NETWORK_NAME="spree"
             export KEEPER_DEPLOY_CONTRACTS="true"
+            rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.development.json
             printf $COLOR_Y'Starting with local Spree node...\n\n'$COLOR_RESET
             ;;
         #################################################
