@@ -1,0 +1,29 @@
+version: '2.1'
+services:
+  keeper-node:
+    image: parity/parity:stable
+    command:
+      --config /home/parity/parity/config/config.toml
+      --db-path /home/parity/chains
+      --keys-path /home/parity/.local/share/io.parity.ethereum/keys
+      --base-path /home/parity/base
+      --engine-signer 0x00bd138abd70e2f00903268f3db08f2d25677c9e
+      --ws-interface all
+      --jsonrpc-cors all
+      --jsonrpc-interface all
+      --jsonrpc-hosts all
+      --jsonrpc-apis all
+      --unsafe-expose
+      --unlock 0x00bd138abd70e2f00903268f3db08f2d25677c9e
+    volumes:
+      - ../networks/nile/config:/home/parity/parity/config
+      - keeper-node:/home/parity/.local/share/io.parity.ethereum/
+      - ../networks/nile/authorities/validator0.json:/home/parity/.local/share/io.parity.ethereum/keys/nile/validator.json
+      - ../networks/nile/keys:/home/parity/.local/share/io.parity.ethereum/keys/nile
+      - ../networks/nile/authorities/validator0.pwd:/home/parity/parity/validator.pwd
+      - ../networks/nile/node0.network.key:/home/parity/.local/share/io.parity.ethereum/network/key
+    ports:
+      - 8545:8545
+    networks:
+      backend:
+        ipv4_address: 172.15.0.12

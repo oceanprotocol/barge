@@ -1,0 +1,18 @@
+version: '2.1'
+services:
+  brizo:
+    image: oceanprotocol/brizo:${OCEAN_VERSION:-stable}
+    ports:
+      - 8030:8030
+    networks:
+      backend:
+        ipv4_address: 172.15.0.17
+    depends_on:
+      - keeper-node
+    env_file:
+      - ${BRIZO_ENV_FILE}
+    environment:
+      KEEPER_URL: ${KEEPER_RPC_URL}
+      LOCAL_CONTRACTS: ${KEEPER_DEPLOY_CONTRACTS}
+    volumes:
+      - ${KEEPER_ARTIFACTS_FOLDER}:/usr/local/keeper-contracts:ro

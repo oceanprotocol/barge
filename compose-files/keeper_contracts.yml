@@ -1,0 +1,20 @@
+version: '2.1'
+services:
+  keeper-contracts:
+    image: oceanprotocol/keeper-contracts:${OCEAN_VERSION:-stable}
+    networks:
+      backend:
+        ipv4_address: 172.15.0.14
+    environment:
+      DEPLOY_CONTRACTS: ${KEEPER_DEPLOY_CONTRACTS}
+      LOCAL_CONTRACTS: ${KEEPER_DEPLOY_CONTRACTS}
+      REUSE_DATABASE: ${GANACHE_REUSE_DATABASE}
+      DATABASE_PATH: "/ganache-db"
+      NETWORK_NAME: ${KEEPER_NETWORK_NAME}
+      KEEPER_RPC_HOST: ${KEEPER_RPC_HOST}
+      KEEPER_RPC_PORT: ${KEEPER_RPC_PORT}
+      KEEPER_RPC_URL: ${KEEPER_RPC_URL}
+    depends_on:
+      - keeper-node
+    volumes:
+    - ${KEEPER_ARTIFACTS_FOLDER}:/keeper-contracts/artifacts/

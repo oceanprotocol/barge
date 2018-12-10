@@ -1,0 +1,11 @@
+version: '2.1'
+services:
+  keeper-node:
+    image: trufflesuite/ganache-cli:latest
+    command:
+      -d
+    ports:
+      - 8545:8545
+    networks:
+      backend:
+        ipv4_address: 172.15.0.12

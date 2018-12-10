@@ -1,0 +1,20 @@
+version: '2.1'
+services:
+  aquarius:
+    image: oceanprotocol/aquarius:${OCEAN_VERSION:-stable}
+    ports:
+    - 5000:5000
+    networks:
+      backend:
+        ipv4_address: 172.15.0.15
+    depends_on:
+    - mongodb
+    environment:
+      DB_HOSTNAME: mongodb
+
+  mongodb:
+    image: mongo:3.6
+    command: mongod
+    networks:
+      backend:
+        ipv4_address: 172.15.0.11

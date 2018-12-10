@@ -16,9 +16,6 @@ hosts = ["all"]
 [ipc]
 disable = true
 
-[dapps]
-disable = true
-
 [websockets]
 disable = true
 

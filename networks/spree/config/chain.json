@@ -1,32 +1,39 @@
 {
-  "name": "ocean-network",
+  "name": "spree",
   "engine": {
     "authorityRound": {
       "params": {
         "stepDuration": "1",
         "validators": {
           "list": [
-            "0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e",
-            "0x00Aa39d30F0D20FF03a22cCfc30B7EfbFca597C2",
-            "0x002e28950558fbede1a9675cb113f0bd20912019"
+            "0x00bd138abd70e2f00903268f3db08f2d25677c9e",
+            "0xf4a2dbd5d67ef3019a7e4b188b92128c86d76bf9",
+            "0xcdbe5f61fac89e2cfcfa3727805d5cb8bc4f9afd"
           ]
         },
         "validateScoreTransition": 1000000000,
         "validateStepTransition": 1500000000,
-		"maximumUncleCount": 1000000000
+        "maximumUncleCount": 1000000000
       }
     }
   },
   "params": {
+    "gasLimitBoundDivisor": "0x0400",
+    "accountStartNonce": "0x0",
     "maximumExtraDataSize": "0x20",
     "minGasLimit": "0x1388",
     "networkID": "0x2324",
-    "gasLimitBoundDivisor": "0x400",
-    "eip140Transition": 0,
-    "eip211Transition": 0,
-    "eip214Transition": 0,
-    "eip658Transition": 0
-
+    "eip140Transition": "0x0",
+    "eip211Transition": "0x0",
+    "eip214Transition": "0x0",
+    "eip658Transition": "0x0",
+    "wasmActivationTransition": "0x0",
+    "eip145Transition": "0x0",
+    "eip1014Transition": "0x0",
+    "eip1052Transition": "0x0",
+    "eip1283Transition": "0x0",
+    "kip4Transition": "0x0",
+    "kip6Transition": "0x0"
   },
   "genesis": {
     "seal": {
@@ -83,6 +90,57 @@
           "linear": {
             "base": 15,
             "word": 3
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000005": {
+      "balance": "1",
+      "builtin": {
+        "name": "modexp",
+        "activate_at": 0,
+        "pricing": {
+          "modexp": {
+            "divisor": 20
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000006": {
+      "balance": "1",
+      "builtin": {
+        "name": "alt_bn128_add",
+        "activate_at": 0,
+        "pricing": {
+          "linear": {
+            "base": 500,
+            "word": 0
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000007": {
+      "balance": "1",
+      "builtin": {
+        "name": "alt_bn128_mul",
+        "activate_at": 0,
+        "pricing": {
+          "linear": {
+            "base": 40000,
+            "word": 0
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000008": {
+      "balance": "1",
+      "builtin": {
+        "name": "alt_bn128_pairing",
+        "activate_at": 0,
+        "pricing": {
+          "alt_bn128_pairing": {
+            "base": 100000,
+            "pair": 80000
           }
         }
       }

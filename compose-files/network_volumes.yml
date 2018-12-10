@@ -1,0 +1,14 @@
+version: '2.1'
+
+networks:
+  backend:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 172.15.0.1/24
+        gateway: 172.15.0.1
+
+volumes:
+  keeper-node:
+  secret-store:
