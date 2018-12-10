@@ -30,6 +30,7 @@ You need to have the newest versions available of both:
 
 * [Docker](https://www.docker.com/get-started)
 * [Docker Compose](https://docs.docker.com/compose/)
+* Linux/MacOS. Currently Windows OS is not supported.
 
 Populate the following in the `brizo.env` file:
 
