@@ -18,7 +18,7 @@ export NODE_FILE=${COMPOSE_DIR}/nodes/nile_node.yml
 export GANACHE_DATABASE_PATH="${DIR}"
 export GANACHE_REUSE_DATABASE="false"
 
-export BRIZO_ENV_FILE=$DIR/brizo.env
+export BRIZO_ENV_FILE="${DIR}/brizo.env"
 
 # Specify the ethereum default RPC container provider
 export KEEPER_RPC_HOST='keeper-node'
@@ -144,6 +144,7 @@ while :; do
             ;;
         *)
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
+            echo ${BRIZO_ENV_FILE}
             docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_FILE} up --remove-orphans
             break
     esac
