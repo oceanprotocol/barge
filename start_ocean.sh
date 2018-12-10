@@ -144,7 +144,6 @@ while :; do
             ;;
         *)
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
-            echo ${BRIZO_ENV_FILE}
             docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_FILE} up --remove-orphans
             break
     esac
