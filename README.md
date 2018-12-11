@@ -116,6 +116,7 @@ Hostname   | External Port | Internal Url       | Local Url             | Descri
 ### Keeper Node
 
 Controlled by the `--local-*-node` config switches will start a container `keeper-node` that uses port `8545` to expose an rpc endpoint to the Ethereum Protocol.
+You can find a detailed explanation of how to use this in the [script options](#script-options) section of this document.
 
 Hostname      | External Port | Internal Url            | Local Url             | Description
 --------------|---------------|-------------------------|-----------------------|--------------
