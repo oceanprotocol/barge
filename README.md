@@ -155,7 +155,7 @@ Use one of the above accounts to populate `PARITY_ADDRESS` and `PARITY_PASSWORD`
 
 ### Nile Network
 
-tbd
+Please see [Nile Testnet](https://docs.oceanprotocol.com/concepts/testnets/#nile-testnet) for details.
 
 ## Contributing
 
