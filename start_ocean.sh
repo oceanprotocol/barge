@@ -5,14 +5,14 @@ COMPOSE_DIR="${DIR}/compose-files"
 
 export PROJECT_NAME="ocean"
 # default to latest versions
-export OCEAN_VERSION=latest
+export OCEAN_VERSION=stable
 
 # keeper options
 export KEEPER_DEPLOY_CONTRACTS="false"
 export KEEPER_ARTIFACTS_FOLDER=$HOME/.ocean/keeper-contracts/artifacts
 # Specify which ethereum client to run or connect to: development, kovan, spree or nile
 export KEEPER_NETWORK_NAME="nile"
-export NODE_FILE=${COMPOSE_DIR}/nodes/nile_node.yml
+export NODE_COMPOSE_FILE=${COMPOSE_DIR}/nodes/nile_node.yml
 
 # Ganache specific option, these two options have no effect when not running ganache-cli
 export GANACHE_DATABASE_PATH="${DIR}"
@@ -144,7 +144,7 @@ while :; do
             ;;
         *)
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
-            docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_FILE} up --remove-orphans
+            docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_COMPOSE_FILE} up --remove-orphans
             break
     esac
     shift

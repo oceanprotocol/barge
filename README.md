@@ -16,12 +16,17 @@
   - [Prerequisites](#prerequisites)
   - [Get Started](#get-started)
      - [Script Options](#script-options)
-  - [Ocean Protocol components](#ocean-protocol-components)
-     - [Environment Variables](#environment-variables)
-     - [Parity Client Accounts](#parity-client-accounts)
+  - [Docker Building Blocks](#docker-building-blocks)
+    - [Pleuston](#pleuston)
+    - [Aquarius](#aquarius)
+    - [Brizo](#brizo)
+    - [Keeper Node](#keeper-node)
+    - [Secret Store](#secret-store)
+  - [Spree Network](#spree-network)
+  - [Nile Network](#nile-network)
   - [Contributing](#contributing)
   - [License](#license)
-
+  
 ---
 
 ## Prerequisites
@@ -32,13 +37,11 @@ You need to have the newest versions available of both:
 * [Docker Compose](https://docs.docker.com/compose/)
 * Linux/MacOS. Currently Windows OS is not supported.
 
-Populate the following in the `brizo.env` file:
-
-* All of the `AZURE_`... related variables: necessary for `Brizo` to serve consume requests. You will get the values if you go through the [Azure Storage tutorial in the Ocean Protocol docs](https://docs.oceanprotocol.com/tutorials/azure-for-brizo/).
+**To run as a publisher:** `Brizo` configuration must be set with valid Azure account credentials. This is done in the file [`brizo.env`](./brizo.env). Follow our tutorial [Set up Azure Storage](https://docs.oceanprotocol.com/tutorials/azure-for-brizo/) to learn how to get those credentials.
 
 ## Get Started
 
-Then bring up an instance of the whole Ocean Protocol network stack with the `start_ocean.sh` script:
+Then bring up an instance of the whole Ocean Protocol network stack with the `./start_ocean.sh` script:
 
 ```bash
 git clone git@github.com:oceanprotocol/docker-images.git
@@ -49,11 +52,11 @@ cd docker-images/
 
 <img width="535" alt="screen shot 2018-10-10 at 12 20 48" src="https://user-images.githubusercontent.com/90316/46729966-22206600-cc87-11e8-9e1a-156d8a6c5e43.png">
 
+---
+
 This will bring up the `stable` versions of all components, referring to their respective `master` branches.
 
 To get the `latest` versions of all components, referring to their `develop` branches, pass the argument `--latest`:
-
-To run as a publisher, `Brizo` configuration must be set with valid Azure account credentials. This is done in 
  
 ```bash
 ./start_ocean.sh --latest
@@ -65,91 +68,95 @@ After getting everything running, you can open the **Pleuston Frontend** applica
 
 ### Script Options
 
-The `start_ocean.sh` script provides the following options:
+The `./start_ocean.sh` script provides the following options:
 
-Option | Description
----    | ---
-`--latest` | Get the `latest` versions of all components, referring to their `develop` branches.
-`--no-pleuston` | Start up Ocean without an instance of `pleuston`. Helpful for development on `pleuston`.
-`--local-parity-node` | Runs a local parity POA node and Secret Store instead of ganache-cli.
-`--reuse-database` | Start up Ocean and reuse the Database from ganache. Helpful for development.
-`--purge` | Remove the volumes, local folder and networks used by the script.
+Option                      | Description
+----------------------------| -----------
+`--latest`                  | `latest` means to use the latest `develop` branches whereas `stable` means to use the last `stable` releases.
+`--no-pleuston`             | Start up Ocean without the `pleuston` Building Block. Helpful for development on `pleuston`.
+`--no-aquarius`             | Start up Ocean without the `aquarius` Building Block.
+`--no-brizo`                | Start up Ocean without the `brizo` Building Block.
+`--no-secret-store`         | Start up Ocean without the `secret-store` Building Block.
+`--local-ganache-node`      | Runs a local `ganache` node.
+`--local-spree-node`        | Runs a node of the local `spree` network.
+`--local-nile-node`         | Runs a node of the `nile` network and connects the node to the `nile` network.
+`--local-kovan-node`        | Runs a light node of the `kovan` network and connects the node to the `kovan` network.
+`--reuse-ganache-database`  | Configures a running `ganache` node to use a persistent database.
+`--purge`                   | Removes the containers, volumes, artifact folder and networks used by the script.
 
-For example, if you do:
+## Docker Building Blocks
 
-```bash
-./start_ocean.sh --latest
-```
+Ocean compose consists of a set of building blocks that can be combined to form a local test environment. By default all building blocks will be started with the `./start_ocean.sh` script.
 
-then the main/default [docker-compose.yml](docker-compose.yml) will be used, so the following Docker images will all be started:
+### Pleuston
 
-- mongo:3.6
-- oceanprotocol/keeper-contracts:latest
-- oceanprotocol/aquarius:latest
-- oceanprotocol/brizo:latest
-- oceanprotocol/pleuston:latest
+By default it will start one container. This Building Block can be disabled by setting the `--no-pleuston` flag. 
 
-To see what ports each of those listens on, read [docker-compose.yml](docker-compose.yml). Note that `keeper-contracts` runs a local Ganache node (not a local Parity Ethereum POA node).
+Hostname   | External Port | Internal Url          | Local Url             | Description
+-----------|---------------|-----------------------|-----------------------|--------------
+`pleuston` | `3000`        | http://pleuston:3000  | http://localhost:3000 | [Pleuston](https://github.com/oceanprotocol/pleuston)
 
-If you do:
+### Aquarius
 
-```bash
-./start_ocean.sh --no-pleuston
-```
+By default it will start two containers. This Building Block can be disabled by setting the `--no-aquarius` flag. 
 
-then [docker-compose-no-pleuston.yml](docker-compose-no-pleuston.yml) will be used, so these images will be started:
+Hostname   | External Port | Internal Url         | Local Url             | Description
+-----------|---------------|----------------------|-----------------------|--------------
+`aquarius` | `5000`        | http://aquarius:5000 | http://localhost:5000 | [Aquarius](https://github.com/oceanprotocol/aquarius)
+`mongodb`  |               |                      |                       | MongoDB used by Aquarius
 
-- mongo:3.6
-- oceanprotocol/keeper-contracts:stable
-- oceanprotocol/aquarius:stable
-- oceanprotocol/brizo:stable
+### Brizo
 
-If you do:
+By default it will start one container. This Building Block can be disabled by setting the `--no-brizo` flag. 
 
-```bash
-./start_ocean.sh --latest --local-parity-node
-```
+Hostname   | External Port | Internal Url       | Local Url             | Description
+-----------|---------------|--------------------|-----------------------|--------------
+`brizo`    | `8030`        | http://brizo:8030  | http://localhost:8030 | [Brizo](https://github.com/oceanprotocol/brizo)
 
-then [docker-compose-local-parity-node.yml](docker-compose-local-parity-node.yml) will be used. Read it to see what images it starts. Note that it _doesn't_ start Pleuston, and it _does_ start a Parity Secret Store.
+### Keeper Node
 
-If you do:
+Controlled by the `--local-*-node` config switches will start a container `keeper-node` that uses port `8545` to expose an rpc endpoint to the Ethereum Protocol.
+You can find a detailed explanation of how to use this in the [script options](#script-options) section of this document.
 
-```bash
-./start_ocean.sh --latest --no-pleuston --local-parity-node
-```
+Hostname      | External Port | Internal Url            | Local Url             | Description
+--------------|---------------|-------------------------|-----------------------|--------------
+`keeper-node` | `8545`        | http://keeper-node:8545 | http://localhost:8545 | An Ethereum RPC node
 
-then the last-selected Docker Compose file will be used, i.e. the one selected by `--local-parity-node`: [docker-compose-local-parity-node.yml](docker-compose-local-parity-node.yml).
+This node can be one of the following types:
 
-### Parity Client Accounts
+Node      | Description
+----------|-------------
+`ganache` | Runs a local `ganache-cli` node that is not persistent by default. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.
+`spree`   | Runs a local node of the `spree` network. See [Spree Network](#spree-network) for details. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.
+`nile`    | Runs an instance of the `nile` network and connects to the Nile testnet. See [Nile Network](#nile-network) for details.
+`kovan`   | Runs an instance of the `kovan` network and connects to the Kovan testnet.
 
-If you run the `start_ocean.sh` script with the `--local-parity-node` option, you will have available a Parity Client instance with the following accounts enabled:
+### Secret Store
 
-Account | Password | Balance    
---------|----------|--------
-0x00bd138abd70e2f00903268f3db08f2d25677c9e | node0 | 10000000111000111000111000
-0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0 | secret | 100000000
-0xa99d43d86a0758d5632313b8fa3972b6088a21bb | secret | 100000000
+By default it will start three container. This Building Block can be disabled by setting the `--no-secret-store` flag. 
 
+Hostname                    | External Ports   | Internal Url                          | Local Url              | Description
+----------------------------|------------------|---------------------------------------|------------------------|--------------
+`secret-store`              | `12000`, `32771` | http://secret-store:12000             | http://localhost:12000 | An instance of the Ocean Secret Store
+`secret-store-cors-proxy`   | `12001`          | http://secret-store-cors-proxy:12001  | http://localhost:12001 | A nginx proxy to enable CORS on the secret store
+`secret-store-signing-node` | `9545`           | http://secret-store-signing-node:9545 | http://localhost:9545  | A parity node to `sign` messages for the secret store and to `decrypt` and `encrypt`
 
-Use one of the above accounts to populate `PARITY_ADDRESS` and `PARITY_PASSWORD` in `brizo.env` file to avoid asccount `locked` issues from the keeper contracts.
+### Spree Network
 
-### Environment Variables
+If you run the `./start_ocean.sh` script with the `--local-spree-node` option (please see [Keeper Node](#keeper-node) section of this document for more details).
+You will have available a keeper node in the local and private `spree` network with the following accounts enabled:
 
-The `start_ocean.sh` script and `.env` file sets defaults for the following environment variables but you can use these in combination with the Docker Compose files for further customization, e.g.:
+Account                                      | Password   | Balance    
+---------------------------------------------|------------|--------
+`0x00bd138abd70e2f00903268f3db08f2d25677c9e` | node0      | 10000000111000111000111000
+`0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0` | secret     | 100000000
+`0xa99d43d86a0758d5632313b8fa3972b6088a21bb` | secret     | 100000000
 
-```bash
-export REUSE_DATABASE="true"
-docker-compose --project-name=ocean -f docker-compose-no-pleuston.yml up
-```
+Use one of the above accounts to populate `PARITY_ADDRESS` and `PARITY_PASSWORD` in `brizo.env` file to avoid account `locked` issues from the keeper contracts.
 
-Variable | Description
----      | ---
-`REUSE_DATABASE` | The keeper-contracts component runs with ganache by default and every run will produce and deploy new instances of the keeper contracts. Ganache can be run with a specific database path by setting the env var `REUSE_DATABASE` to `"true"`. By default, the ganache database will be setup in the cwd.
-`DEPLOY_CONTRACTS` | skip deploying smart contracts by setting this to `"false"`, in this case `REUSE_DATABASE` should be set to `"true"` in the previous run when using ganache
-`KEEPER_NETWORK_NAME` | set to one of `"ganache"` (default), `"kovan"`, or `"ocean_poa_net_local"`
-`ARTIFACTS_FOLDER` | this is where the deployed smart contracts abi files will be available. This can be pointed at any path you like.
+### Nile Network
 
-In addition to these variables, when running Brizo you need to provide the Azure credentials to allow Brizo to connect to Azure. These variables can be configured in the file `brizo.env`.
+Please see [Nile Testnet](https://docs.oceanprotocol.com/concepts/testnets/#nile-testnet) for details.
 
 ## Contributing
 
