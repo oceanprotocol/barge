@@ -89,7 +89,7 @@ Option                      | Description
 
 ## Docker Building Blocks
 
-Ocean compose consist of a set of building Blocks that can be combined to form a local test environment.
+Ocean compose consists of a set of building blocks that can be combined to form a local test environment.
 
 ### Keeper Node
 
