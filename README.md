@@ -143,7 +143,8 @@ Hostname                    | External Ports   | Internal Url                   
 
 ### Spree Network
 
-If you run the `./start_ocean.sh` script with the `--local-spree-node` option, you will have available a keeper node instance with the following accounts enabled:
+If you run the `./start_ocean.sh` script with the `--local-spree-node` option (please see [Keeper Node](#keeper-node) section of this document for more details).
+You will have available a keeper node in the local and private `spree` network with the following accounts enabled:
 
 Account                                      | Password   | Balance    
 ---------------------------------------------|------------|--------
