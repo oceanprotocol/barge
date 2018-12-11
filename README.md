@@ -17,12 +17,13 @@
   - [Get Started](#get-started)
      - [Script Options](#script-options)
   - [Docker Building Blocks](#docker-building-blocks)
-    - [Keeper Node](#keeper-node)  
-    - [Aquarius](#aquarius)  
-    - [Brizo](#brizo)  
-    - [Secret Store](#secret-store)  
-  - [Spree Network](#spree-network)  
-  - [Nile Network](#nile-network)  
+    - [Pleuston](#pleuston)
+    - [Aquarius](#aquarius)
+    - [Brizo](#brizo)
+    - [Keeper Node](#keeper-node)
+    - [Secret Store](#secret-store)
+  - [Spree Network](#spree-network)
+  - [Nile Network](#nile-network)
   - [Contributing](#contributing)
   - [License](#license)
   
@@ -36,13 +37,11 @@ You need to have the newest versions available of both:
 * [Docker Compose](https://docs.docker.com/compose/)
 * Linux/MacOS. Currently Windows OS is not supported.
 
-Populate the following in the `brizo.env` file:
-
-* All of the `AZURE_`... related variables: necessary for `Brizo` to serve consume requests. You will get the values if you go through the [Azure Storage tutorial in the Ocean Protocol docs](https://docs.oceanprotocol.com/tutorials/azure-for-brizo/).
+**To run as a publisher:** `Brizo` configuration must be set with valid Azure account credentials. This is done in the file [`brizo.env`](./brizo.env). Follow our tutorial [Set up Azure Storage](https://docs.oceanprotocol.com/tutorials/azure-for-brizo/) to learn how to get those credentials.
 
 ## Get Started
 
-Then bring up an instance of the whole Ocean Protocol network stack with the `start_ocean.sh` script:
+Then bring up an instance of the whole Ocean Protocol network stack with the `./start_ocean.sh` script:
 
 ```bash
 git clone git@github.com:oceanprotocol/docker-images.git
@@ -57,8 +56,6 @@ cd docker-images/
 
 This will bring up the `stable` versions of all components, referring to their respective `master` branches.
 
-To run as a publisher, `Brizo` configuration must be set with valid Azure account credentials. This is done in the file [brizo.env](./brizo.env).
-
 To get the `latest` versions of all components, referring to their `develop` branches, pass the argument `--latest`:
  
 ```bash
@@ -71,46 +68,37 @@ After getting everything running, you can open the **Pleuston Frontend** applica
 
 ### Script Options
 
-The `start_ocean.sh` script provides the following options:
+The `./start_ocean.sh` script provides the following options:
 
 Option                      | Description
 ----------------------------| -----------
-`--latest`                  | Get the `latest` versions of all components instead of stable, referring to their `develop` branches.
-`--no-pleuston`             | Start up Ocean without an instance of `pleuston`. Helpful for development on `pleuston`.
-`--no-aquarius`             | Start up Ocean without an instance of `aquarius` and `mongodb`.
-`--no-brizo`                | Start up Ocean without an instance of `brizo`.
-`--no-secret-store`         | Start up Ocean without an instance of `secret-store`.
+`--latest`                  | Get the `latest` versions of all components instead of `stable`, referring to their `develop` branches.
+`--no-pleuston`             | Start up Ocean without the `pleuston` Building Block. Helpful for development on `pleuston`.
+`--no-aquarius`             | Start up Ocean without the `aquarius` Building Block.
+`--no-brizo`                | Start up Ocean without the `brizo` Building Block.
+`--no-secret-store`         | Start up Ocean without the `secret-store` Building Block.
 `--local-ganache-node`      | Runs a local ganache node.
-`--local-spree-node`        | Runs a local node of the `spree` network.
-`--local-nile-node`         | Runs a node of the `nile` network and connects to the `nile` network.
-`--local-kovan-node`        | Runs a light node of the `kovan` network and connects to the `kovan` network.
+`--local-spree-node`        | Runs a node of the local `spree` network.
+`--local-nile-node`         | Runs a node of the `nile` network and connects the node to the `nile` network.
+`--local-kovan-node`        | Runs a light node of the `kovan` network and connects the node to the `kovan` network.
 `--reuse-ganache-database`  | Runs the ganache node with a persistent database.
 `--purge`                   | Removes the containers, volumes, artifact folder and networks used by the script.
 
 ## Docker Building Blocks
 
-Ocean compose consists of a set of building blocks that can be combined to form a local test environment.
+Ocean compose consists of a set of building blocks that can be combined to form a local test environment. By default all building blocks will be started with the `./start_ocean.sh` script.
 
-### Keeper Node
+### Pleuston
 
-Controlled by the `--local-*-node` config switches will start a container `keeper-node` that uses port `8545` to expose an rpc endpoint to the Ethereum Protocol. Internal Url: `http://keeper-node:8545`.
+By default it will start one container. This Building Block can be disabled by setting the `--no-pleuston` flag. 
 
-Hostname      | External Port | Internal Url            | Local Url             | Description
---------------|---------------|-------------------------|-----------------------|--------------
-`keeper-node` | `8545`        | http://keeper-node:8545 | http://localhost:8545 | An Ethereum RPC node
-
-This node can be one of the following implementations:
-
-Node      | Description
-----------|-------------
-`ganache` | Runs a local `ganache-cli` node that is not persistent by default. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.
-`spree`   | Runs a local instance of the `spree` network. See [Spree Network](#spree-network) for details.
-`nile`    | Runs a instance of the `nile` network and connects to the Nile testnet. See [Nile Network](#nile-network) for details.
-`kovan`   | Runs a instance of the `kovan` network and connects to the Kovan testnet.
+Hostname   | External Port | Internal Url          | Local Url             | Description
+-----------|---------------|-----------------------|-----------------------|--------------
+`pleuston` | `3000`        | http://pleuston:3000  | http://localhost:3000 | [Pleuston](https://github.com/oceanprotocol/pleuston)
 
 ### Aquarius
 
-Controlled by the `--no-aquarius` config switch will start two containers:
+By default it will start two containers. This Building Block can be disabled by setting the `--no-aquarius` flag. 
 
 Hostname   | External Port | Internal Url         | Local Url             | Description
 -----------|---------------|----------------------|-----------------------|--------------
@@ -119,25 +107,32 @@ Hostname   | External Port | Internal Url         | Local Url             | Desc
 
 ### Brizo
 
-Controlled by the `--no-brizo` config switch will start one container:
+By default it will start one container. This Building Block can be disabled by setting the `--no-brizo` flag. 
 
 Hostname   | External Port | Internal Url       | Local Url             | Description
 -----------|---------------|--------------------|-----------------------|--------------
 `brizo`    | `8030`        | http://brizo:8030  | http://localhost:8030 | [Brizo](https://github.com/oceanprotocol/brizo)
 
-### Pleuston
+### Keeper Node
 
-Controlled by the `--no-pleuston` config switch will start one container:
+Controlled by the `--local-*-node` config switches will start a container `keeper-node` that uses port `8545` to expose an rpc endpoint to the Ethereum Protocol.
 
-Hostname   | External Port | Internal Url          | Local Url             | Description
------------|---------------|-----------------------|-----------------------|--------------
-`pleuston` | `3000`        | http://pleuston:3000  | http://localhost:3000 | [Pleuston](https://github.com/oceanprotocol/pleuston)
+Hostname      | External Port | Internal Url            | Local Url             | Description
+--------------|---------------|-------------------------|-----------------------|--------------
+`keeper-node` | `8545`        | http://keeper-node:8545 | http://localhost:8545 | An Ethereum RPC node
 
-You can reach it on http://localhost:3000
+This node can be one of the following types:
+
+Node      | Description
+----------|-------------
+`ganache` | Runs a local `ganache-cli` node that is not persistent by default. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.
+`spree`   | Runs a local node of the `spree` network. See [Spree Network](#spree-network) for details. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.
+`nile`    | Runs an instance of the `nile` network and connects to the Nile testnet. See [Nile Network](#nile-network) for details.
+`kovan`   | Runs an instance of the `kovan` network and connects to the Kovan testnet.
 
 ### Secret Store
 
-Controlled by the `--no-secret-store` config switch will start three containers:
+By default it will start three container. This Building Block can be disabled by setting the `--no-secret-store` flag. 
 
 Hostname                    | External Ports   | Internal Url                          | Local Url              | Description
 ----------------------------|------------------|---------------------------------------|------------------------|--------------
@@ -147,7 +142,7 @@ Hostname                    | External Ports   | Internal Url                   
 
 ### Spree Network
 
-If you run the `start_ocean.sh` script with the `--local-spree-node` option, you will have available a keeper node instance with the following accounts enabled:
+If you run the `./start_ocean.sh` script with the `--local-spree-node` option, you will have available a keeper node instance with the following accounts enabled:
 
 Account                                      | Password   | Balance    
 ---------------------------------------------|------------|--------
