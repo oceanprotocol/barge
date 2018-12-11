@@ -77,11 +77,11 @@ Option                      | Description
 `--no-aquarius`             | Start up Ocean without the `aquarius` Building Block.
 `--no-brizo`                | Start up Ocean without the `brizo` Building Block.
 `--no-secret-store`         | Start up Ocean without the `secret-store` Building Block.
-`--local-ganache-node`      | Runs a local ganache node.
+`--local-ganache-node`      | Runs a local `ganache` node.
 `--local-spree-node`        | Runs a node of the local `spree` network.
 `--local-nile-node`         | Runs a node of the `nile` network and connects the node to the `nile` network.
 `--local-kovan-node`        | Runs a light node of the `kovan` network and connects the node to the `kovan` network.
-`--reuse-ganache-database`  | Runs the ganache node with a persistent database.
+`--reuse-ganache-database`  | Configures a running `ganache` node to use a persistent database.
 `--purge`                   | Removes the containers, volumes, artifact folder and networks used by the script.
 
 ## Docker Building Blocks
