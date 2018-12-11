@@ -95,9 +95,9 @@ Ocean compose consist of a set of building Blocks that can be combined to form a
 
 Controlled by the `--local-*-node` config switches will start a container `keeper-node` that uses port `8545` to expose an rpc endpoint to the Ethereum Protocol. Internal Url: `http://keeper-node:8545`.
 
-Hostname      | External Port | Internal Url            | Description
---------------|---------------|-------------------------|-------------------
-`keeper-node` | `8545`        | http://keeper-node:8545 | An Ethereum RPC node
+Hostname      | External Port | Internal Url            | Local Url             | Description
+--------------|---------------|-------------------------|-----------------------|--------------
+`keeper-node` | `8545`        | http://keeper-node:8545 | http://localhost:8545 | An Ethereum RPC node
 
 This node can be one of the following implementations:
 
@@ -112,26 +112,26 @@ Node      | Description
 
 Controlled by the `--no-aquarius` config switch will start two containers:
 
-Hostname   | External Port | Internal Url         | Description
------------|---------------|----------------------|-------------------
-`aquarius` | `5000`        | http://aquarius:5000 | [Aquarius](https://github.com/oceanprotocol/aquarius)
-`mongodb`  |               |                      | MongoDB used by Aquarius
+Hostname   | External Port | Internal Url         | Local Url             | Description
+-----------|---------------|----------------------|-----------------------|--------------
+`aquarius` | `5000`        | http://aquarius:5000 | http://localhost:5000 | [Aquarius](https://github.com/oceanprotocol/aquarius)
+`mongodb`  |               |                      |                       | MongoDB used by Aquarius
 
 ### Brizo
 
 Controlled by the `--no-brizo` config switch will start one container:
 
-Hostname   | External Port | Internal Url       | Description
------------|---------------|--------------------|-------------------
-`brizo`    | `8030`        | http://brizo:8030  | [Brizo](https://github.com/oceanprotocol/brizo)
+Hostname   | External Port | Internal Url       | Local Url             | Description
+-----------|---------------|--------------------|-----------------------|--------------
+`brizo`    | `8030`        | http://brizo:8030  | http://localhost:8030 | [Brizo](https://github.com/oceanprotocol/brizo)
 
 ### Pleuston
 
 Controlled by the `--no-pleuston` config switch will start one container:
 
-Hostname   | External Port | Internal Url          | Description
------------|---------------|-----------------------|-------------------
-`pleuston` | `3000`        | http://pleuston:3000  | [Pleuston](https://github.com/oceanprotocol/pleuston)
+Hostname   | External Port | Internal Url          | Local Url             | Description
+-----------|---------------|-----------------------|-----------------------|--------------
+`pleuston` | `3000`        | http://pleuston:3000  | http://localhost:3000 | [Pleuston](https://github.com/oceanprotocol/pleuston)
 
 You can reach it on http://localhost:3000
 
@@ -139,21 +139,21 @@ You can reach it on http://localhost:3000
 
 Controlled by the `--no-secret-store` config switch will start three containers:
 
-Hostname                    | External Ports  | Internal Url                          | Description
-----------------------------|-----------------|---------------------------------------|-------------------
-`secret-store`              | `12000`, `32771` | http://secret-store:12000             | An instance of the Ocean Secret Store
-`secret-store-cors-proxy`   | `12001`         | http://secret-store-cors-proxy:12001  | A nginx proxy to enable CORS on the secret store
-`secret-store-signing-node` | `9545`          | http://secret-store-signing-node:9545 | A parity node to `sign` messages for the secret store and to `decrypt` and `encrypt`
+Hostname                    | External Ports   | Internal Url                          | Local Url              | Description
+----------------------------|------------------|---------------------------------------|------------------------|--------------
+`secret-store`              | `12000`, `32771` | http://secret-store:12000             | http://localhost:12000 | An instance of the Ocean Secret Store
+`secret-store-cors-proxy`   | `12001`          | http://secret-store-cors-proxy:12001  | http://localhost:12001 | A nginx proxy to enable CORS on the secret store
+`secret-store-signing-node` | `9545`           | http://secret-store-signing-node:9545 | http://localhost:9545  | A parity node to `sign` messages for the secret store and to `decrypt` and `encrypt`
 
 ### Spree Network
 
 If you run the `start_ocean.sh` script with the `--local-spree-node` option, you will have available a keeper node instance with the following accounts enabled:
 
-Account                                    | Password   | Balance    
--------------------------------------------|------------|--------
-0x00bd138abd70e2f00903268f3db08f2d25677c9e | node0      | 10000000111000111000111000
-0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0 | secret     | 100000000
-0xa99d43d86a0758d5632313b8fa3972b6088a21bb | secret     | 100000000
+Account                                      | Password   | Balance    
+---------------------------------------------|------------|--------
+`0x00bd138abd70e2f00903268f3db08f2d25677c9e` | node0      | 10000000111000111000111000
+`0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0` | secret     | 100000000
+`0xa99d43d86a0758d5632313b8fa3972b6088a21bb` | secret     | 100000000
 
 Use one of the above accounts to populate `PARITY_ADDRESS` and `PARITY_PASSWORD` in `brizo.env` file to avoid asccount `locked` issues from the keeper contracts.
 
