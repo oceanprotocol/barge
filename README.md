@@ -155,7 +155,7 @@ Account                                      | Password   | Balance
 `0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0` | secret     | 100000000
 `0xa99d43d86a0758d5632313b8fa3972b6088a21bb` | secret     | 100000000
 
-Use one of the above accounts to populate `PARITY_ADDRESS` and `PARITY_PASSWORD` in `brizo.env` file to avoid asccount `locked` issues from the keeper contracts.
+Use one of the above accounts to populate `PARITY_ADDRESS` and `PARITY_PASSWORD` in `brizo.env` file to avoid account `locked` issues from the keeper contracts.
 
 ### Nile Network
 
