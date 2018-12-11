@@ -72,7 +72,7 @@ The `./start_ocean.sh` script provides the following options:
 
 Option                      | Description
 ----------------------------| -----------
-`--latest`                  | Get the `latest` versions of all components instead of `stable`, referring to their `develop` branches.
+`--latest`                  | `latest` means to use the latest `develop` branches whereas `stable` means to use the last `stable` releases.
 `--no-pleuston`             | Start up Ocean without the `pleuston` Building Block. Helpful for development on `pleuston`.
 `--no-aquarius`             | Start up Ocean without the `aquarius` Building Block.
 `--no-brizo`                | Start up Ocean without the `brizo` Building Block.
