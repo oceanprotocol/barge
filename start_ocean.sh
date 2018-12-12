@@ -91,14 +91,14 @@ while :; do
         #################################################
         # connects you to kovan
         --local-kovan-node)
-            export NODE_FILE=${COMPOSE_DIR}/nodes/kovan_node.yml
+            export NODE_COMPOSE_FILE=${COMPOSE_DIR}/nodes/kovan_node.yml
             export KEEPER_NETWORK_NAME="kovan"
             printf $COLOR_Y'Starting with local Kovan node...\n\n'$COLOR_RESET
             ;;
         # spins up a new ganache blockchain
         --local-ganache-node)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
-            export NODE_FILE=${COMPOSE_DIR}/nodes/ganache_node.yml
+            export NODE_COMPOSE_FILE=${COMPOSE_DIR}/nodes/ganache_node.yml
             export KEEPER_NETWORK_NAME="development"
             export KEEPER_DEPLOY_CONTRACTS="true"
             #rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.development.json
@@ -106,14 +106,14 @@ while :; do
             ;;
         # connects you to nile ocean testnet
         --local-nile-node)
-            export NODE_FILE=${COMPOSE_DIR}/nodes/nile_node.yml
+            export NODE_COMPOSE_FILE=${COMPOSE_DIR}/nodes/nile_node.yml
             export KEEPER_NETWORK_NAME="nile"
             printf $COLOR_Y'Starting with local Nile node...\n\n'$COLOR_RESET
             ;;
         # spins up spree local testnet
         --local-spree-node)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
-            export NODE_FILE=${COMPOSE_DIR}/nodes/spree_node.yml
+            export NODE_COMPOSE_FILE=${COMPOSE_DIR}/nodes/spree_node.yml
             export KEEPER_NETWORK_NAME="spree"
             export KEEPER_DEPLOY_CONTRACTS="true"
             #rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.development.json
