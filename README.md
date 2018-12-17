@@ -73,6 +73,7 @@ The `./start_ocean.sh` script provides the following options:
 Option                      | Description
 ----------------------------| -----------
 `--latest`                  | `latest` means to use the latest `develop` branches whereas `stable` means to use the last `stable` releases.
+`--force-pull`              | Force pulling the latest revision of the used docker images.
 `--no-pleuston`             | Start up Ocean without the `pleuston` Building Block. Helpful for development on `pleuston`.
 `--no-aquarius`             | Start up Ocean without the `aquarius` Building Block.
 `--no-brizo`                | Start up Ocean without the `brizo` Building Block.
