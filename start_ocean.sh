@@ -4,6 +4,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 COMPOSE_DIR="${DIR}/compose-files"
 
 export PROJECT_NAME="ocean"
+export forcepull="false"
+
 # default to latest versions
 export OCEAN_VERSION=stable
 
@@ -59,6 +61,10 @@ while :; do
         --latest)
             export OCEAN_VERSION=latest
             printf $COLOR_Y'Switched to latest components...\n\n'$COLOR_RESET
+            ;;
+        --force-pull)
+            export forcepull='true'
+            printf $COLOR_Y'Pulling latest components...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Exclude switches
@@ -123,8 +129,11 @@ while :; do
         # Cleaning switches
         #################################################
         --purge)
-            docker network rm ${PROJECT_NAME}_backend || true
+            printf $COLOR_R'Doing a deep clean ...\n\n'$COLOR_RESET
+            docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_COMPOSE_FILE} down
             docker network rm ${PROJECT_NAME}_default || true
+            docker network rm ${PROJECT_NAME}_backend || true
+            docker network rm ${PROJECT_NAME}_secretstore || true
             docker volume rm ${PROJECT_NAME}_keeper-node || true
             docker volume rm ${PROJECT_NAME}_secret-store || true
             read -p "Are you sure you want to delete $KEEPER_ARTIFACTS_FOLDER? " -n 1 -r
@@ -144,6 +153,10 @@ while :; do
             ;;
         *)
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
+            if [[ forcepull == 'true' ]]
+            then
+                docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_COMPOSE_FILE} pull
+            fi
             docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_COMPOSE_FILE} up --remove-orphans
             break
     esac
