@@ -1,9 +1,8 @@
 [![banner](https://raw.githubusercontent.com/oceanprotocol/art/master/github/repo-banner%402x.png)](https://oceanprotocol.com)
 
-<h1 align="center">docker-images</h1>
+<h1 align="center">barge</h1>
 
-> 🐳 Docker images and Compose for the full Ocean Protocol Network stack.
-> [oceanprotocol.com](https://oceanprotocol.com)
+🐳 Docker Compose files for the full Ocean Protocol stack. It's called "barge" because barges carry containers on the water.
 
 ---
 
@@ -31,7 +30,7 @@
 
 ## Prerequisites
 
-You need to have the newest versions available of both:
+You need to have the newest versions of:
 
 * [Docker](https://www.docker.com/get-started)
 * [Docker Compose](https://docs.docker.com/compose/)
@@ -41,11 +40,11 @@ You need to have the newest versions available of both:
 
 ## Get Started
 
-Then bring up an instance of the whole Ocean Protocol network stack with the `./start_ocean.sh` script:
+Bring up an instance of the whole Ocean Protocol network stack with the `./start_ocean.sh` script:
 
 ```bash
-git clone git@github.com:oceanprotocol/docker-images.git
-cd docker-images/
+git clone git@github.com:oceanprotocol/barge.git
+cd barge
 
 ./start_ocean.sh
 ```
