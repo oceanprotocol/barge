@@ -25,7 +25,7 @@
   - [Nile Network](#nile-network)
   - [Contributing](#contributing)
   - [License](#license)
-  
+
 ---
 
 ## Prerequisites
@@ -56,7 +56,7 @@ cd barge
 This will bring up the `stable` versions of all components, referring to their respective `master` branches.
 
 To get the `latest` versions of all components, referring to their `develop` branches, pass the argument `--latest`:
- 
+
 ```bash
 ./start_ocean.sh --latest
 ```
@@ -90,7 +90,7 @@ Ocean compose consists of a set of building blocks that can be combined to form 
 
 ### Pleuston
 
-By default it will start one container. This Building Block can be disabled by setting the `--no-pleuston` flag. 
+By default it will start one container. This Building Block can be disabled by setting the `--no-pleuston` flag.
 
 Hostname   | External Port | Internal Url          | Local Url             | Description
 -----------|---------------|-----------------------|-----------------------|--------------
@@ -98,7 +98,7 @@ Hostname   | External Port | Internal Url          | Local Url             | Des
 
 ### Aquarius
 
-By default it will start two containers. This Building Block can be disabled by setting the `--no-aquarius` flag. 
+By default it will start two containers. This Building Block can be disabled by setting the `--no-aquarius` flag.
 
 Hostname   | External Port | Internal Url         | Local Url             | Description
 -----------|---------------|----------------------|-----------------------|--------------
@@ -107,7 +107,7 @@ Hostname   | External Port | Internal Url         | Local Url             | Desc
 
 ### Brizo
 
-By default it will start one container. This Building Block can be disabled by setting the `--no-brizo` flag. 
+By default it will start one container. This Building Block can be disabled by setting the `--no-brizo` flag.
 
 Hostname   | External Port | Internal Url       | Local Url             | Description
 -----------|---------------|--------------------|-----------------------|--------------
@@ -133,7 +133,7 @@ Node      | Description
 
 ### Secret Store
 
-By default it will start three container. This Building Block can be disabled by setting the `--no-secret-store` flag. 
+By default it will start three container. This Building Block can be disabled by setting the `--no-secret-store` flag.
 
 Hostname                    | External Ports   | Internal Url                          | Local Url              | Description
 ----------------------------|------------------|---------------------------------------|------------------------|--------------
@@ -146,7 +146,7 @@ Hostname                    | External Ports   | Internal Url                   
 If you run the `./start_ocean.sh` script with the `--local-spree-node` option (please see [Keeper Node](#keeper-node) section of this document for more details).
 You will have available a keeper node in the local and private `spree` network with the following accounts enabled:
 
-Account                                      | Password   | Balance    
+Account                                      | Password   | Balance
 ---------------------------------------------|------------|--------
 `0x00bd138abd70e2f00903268f3db08f2d25677c9e` | node0      | 10000000111000111000111000
 `0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0` | secret     | 100000000
