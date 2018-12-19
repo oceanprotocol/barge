@@ -63,7 +63,7 @@ while :; do
             printf $COLOR_Y'Switched to latest components...\n\n'$COLOR_RESET
             ;;
         --force-pull)
-            export forcepull='true'
+            export forcepull="true"
             printf $COLOR_Y'Pulling latest components...\n\n'$COLOR_RESET
             ;;
         #################################################
@@ -153,7 +153,7 @@ while :; do
             ;;
         *)
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
-            if [[ forcepull == 'true' ]]
+            if [[ $forcepull == "true" ]]
             then
                 docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_COMPOSE_FILE} pull
             fi
