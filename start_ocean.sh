@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+DIR="${DIR/ /\\ }"
 COMPOSE_DIR="${DIR}/compose-files"
 
 export PROJECT_NAME="ocean"
@@ -11,10 +12,10 @@ export OCEAN_VERSION=stable
 
 # keeper options
 export KEEPER_DEPLOY_CONTRACTS="false"
-export KEEPER_ARTIFACTS_FOLDER=$HOME/.ocean/keeper-contracts/artifacts
+export KEEPER_ARTIFACTS_FOLDER="${HOME}/.ocean/keeper-contracts/artifacts"
 # Specify which ethereum client to run or connect to: development, kovan, spree or nile
 export KEEPER_NETWORK_NAME="nile"
-export NODE_COMPOSE_FILE=${COMPOSE_DIR}/nodes/nile_node.yml
+export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/nile_node.yml"
 
 # Ganache specific option, these two options have no effect when not running ganache-cli
 export GANACHE_DATABASE_PATH="${DIR}"
@@ -61,6 +62,10 @@ while :; do
         --latest)
             export OCEAN_VERSION=latest
             printf $COLOR_Y'Switched to latest components...\n\n'$COLOR_RESET
+            export AQUARIUS_VERSION=${AQUARIUS_VERSION:-$OCEAN_VERSION}
+            export BRIZO_VERSION=${BRIZO_VERSION:-$OCEAN_VERSION}
+            export KEEPER_VERSION=${KEEPER_VERSION:-$OCEAN_VERSION}
+            export PLEUSTON_VERSION=${PLEUSTON_VERSION:-$OCEAN_VERSION}
             ;;
         --force-pull)
             export forcepull="true"
@@ -70,19 +75,19 @@ while :; do
         # Exclude switches
         #################################################
         --no-pleuston)
-            COMPOSE_FILES=${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/pleuston.yml/}
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/pleuston.yml/}"
             printf $COLOR_Y'Starting without Pleuston...\n\n'$COLOR_RESET
             ;;
         --no-brizo)
-            COMPOSE_FILES=${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/brizo.yml/}
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/brizo.yml/}"
             printf $COLOR_Y'Starting without Brizo...\n\n'$COLOR_RESET
             ;;
         --no-aquarius)
-            COMPOSE_FILES=${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}"
             printf $COLOR_Y'Starting without Aquarius...\n\n'$COLOR_RESET
             ;;
         --no-secret-store)
-            COMPOSE_FILES=${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
             printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
             ;;
         #################################################
@@ -97,14 +102,14 @@ while :; do
         #################################################
         # connects you to kovan
         --local-kovan-node)
-            export NODE_COMPOSE_FILE=${COMPOSE_DIR}/nodes/kovan_node.yml
+            export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/kovan_node.yml"
             export KEEPER_NETWORK_NAME="kovan"
             printf $COLOR_Y'Starting with local Kovan node...\n\n'$COLOR_RESET
             ;;
         # spins up a new ganache blockchain
         --local-ganache-node)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
-            export NODE_COMPOSE_FILE=${COMPOSE_DIR}/nodes/ganache_node.yml
+            export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/ganache_node.yml"
             export KEEPER_NETWORK_NAME="development"
             export KEEPER_DEPLOY_CONTRACTS="true"
             #rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.development.json
@@ -112,14 +117,14 @@ while :; do
             ;;
         # connects you to nile ocean testnet
         --local-nile-node)
-            export NODE_COMPOSE_FILE=${COMPOSE_DIR}/nodes/nile_node.yml
+            export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/nile_node.yml"
             export KEEPER_NETWORK_NAME="nile"
             printf $COLOR_Y'Starting with local Nile node...\n\n'$COLOR_RESET
             ;;
         # spins up spree local testnet
         --local-spree-node)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
-            export NODE_COMPOSE_FILE=${COMPOSE_DIR}/nodes/spree_node.yml
+            export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/spree_node.yml"
             export KEEPER_NETWORK_NAME="spree"
             export KEEPER_DEPLOY_CONTRACTS="true"
             #rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.development.json
@@ -140,7 +145,7 @@ while :; do
             echo
             if [[ $REPLY =~ ^[Yy]$ ]]
             then
-                rm -rf ${KEEPER_ARTIFACTS_FOLDER}
+                rm -rf "${KEEPER_ARTIFACTS_FOLDER}"
             fi
             ;;
         --) # End of all options.
