@@ -82,6 +82,7 @@ Option                      | Description
 `--local-nile-node`         | Runs a node of the `nile` network and connects the node to the `nile` network.
 `--local-kovan-node`        | Runs a light node of the `kovan` network and connects the node to the `kovan` network.
 `--reuse-ganache-database`  | Configures a running `ganache` node to use a persistent database.
+`--acl-contract`            | Configures secret-store `acl_contract` option to enable secret-store authorization.
 `--purge`                   | Removes the containers, volumes, artifact folder and networks used by the script.
 
 ## Docker Building Blocks
