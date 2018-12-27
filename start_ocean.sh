@@ -28,6 +28,9 @@ export KEEPER_RPC_HOST='keeper-node'
 export KEEPER_RPC_PORT='8545'
 export KEEPER_RPC_URL="http://"${KEEPER_RPC_HOST}:${KEEPER_RPC_PORT}
 
+# Enable acl-contract validation in Secret-store
+export CONFIGURE_ACL="false"
+
 # colors
 COLOR_R="\033[0;31m"    # red
 COLOR_G="\033[0;32m"    # green
@@ -95,7 +98,14 @@ while :; do
         #################################################
         --reuse-ganache-database)
             export GANACHE_REUSE_DATABASE="true"
-            printf $COLOR_Y'Starting and reusing the database ...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Starting and reusing the database...\n\n'$COLOR_RESET
+            ;;
+        #################################################
+        # Secret-Store validation switch
+        #################################################
+        --acl-contract)
+            export CONFIGURE_ACL="true"
+            printf $COLOR_Y'Enabling acl validation in secret-store...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Node type switches
