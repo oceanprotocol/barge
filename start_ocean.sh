@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+export BRIZO_ENV_FILE="${DIR}/brizo.env"
+
+# Patch $DIR if spaces (BRIZO_ENV_FILE does not need patch)
 DIR="${DIR/ /\\ }"
 COMPOSE_DIR="${DIR}/compose-files"
 
@@ -20,8 +23,6 @@ export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/nile_node.yml"
 # Ganache specific option, these two options have no effect when not running ganache-cli
 export GANACHE_DATABASE_PATH="${DIR}"
 export GANACHE_REUSE_DATABASE="false"
-
-export BRIZO_ENV_FILE="${DIR}/brizo.env"
 
 # Specify the ethereum default RPC container provider
 export KEEPER_RPC_HOST='keeper-node'
@@ -172,7 +173,7 @@ while :; do
             then
                 docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_COMPOSE_FILE} pull
             fi
-            docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_COMPOSE_FILE} up --remove-orphans
+            eval docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_COMPOSE_FILE} up --remove-orphans
             break
     esac
     shift
