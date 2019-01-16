@@ -8,7 +8,7 @@ DIR="${DIR/ /\\ }"
 COMPOSE_DIR="${DIR}/compose-files"
 
 export PROJECT_NAME="ocean"
-export forcepull="false"
+export FORCEPULL="false"
 
 # default to latest versions
 export OCEAN_VERSION=stable
@@ -58,8 +58,17 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 
+DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
+
 while :; do
     case $1 in
+        #################################################
+        # Disable color
+        #################################################
+        --no-ansi)
+            DOCKER_COMPOSE_EXTRA_OPTS+=" --no-ansi"
+            unset COLOR_R COLOR_G COLOR_Y COLOR_B COLOR_M COLOR_C COLOR_RESET
+            ;;
         #################################################
         # Version switches
         #################################################
@@ -72,7 +81,7 @@ while :; do
             export PLEUSTON_VERSION=${PLEUSTON_VERSION:-$OCEAN_VERSION}
             ;;
         --force-pull)
-            export forcepull="true"
+            export FORCEPULL="true"
             printf $COLOR_Y'Pulling latest components...\n\n'$COLOR_RESET
             ;;
         #################################################
@@ -93,6 +102,17 @@ while :; do
         --no-secret-store)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
             printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
+            ;;
+
+        #################################################
+        # Only Secret Store
+        #################################################
+        --only-secret-store)
+            COMPOSE_FILES=""
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
+            NODE_COMPOSE_FILE=""
+            printf $COLOR_Y'Starting only Secret Store...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Contract/Storage switches
@@ -169,11 +189,9 @@ while :; do
             ;;
         *)
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
-            if [[ $forcepull == "true" ]]
-            then
-                docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_COMPOSE_FILE} pull
-            fi
-            eval docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_COMPOSE_FILE} up --remove-orphans
+            [ ! -z ${NODE_COMPOSE_FILE} ] && COMPOSE_FILES+=" -f ${NODE_COMPOSE_FILE}"
+            [ ${FORCEPULL} = "true" ] && docker-compose $DOCKER_COMPOSE_EXTRA_OPTS --project-name=$PROJECT_NAME $COMPOSE_FILES pull
+            eval docker-compose $DOCKER_COMPOSE_EXTRA_OPTS --project-name=$PROJECT_NAME $COMPOSE_FILES up --remove-orphans
             break
     esac
     shift
