@@ -32,6 +32,10 @@ export KEEPER_RPC_URL="http://"${KEEPER_RPC_HOST}:${KEEPER_RPC_PORT}
 # Enable acl-contract validation in Secret-store
 export CONFIGURE_ACL="false"
 
+# Export User UID and GID
+export LOCAL_USER_ID=$(id -u)
+export LOCAL_GROUP_ID=$(id -g)
+
 # colors
 COLOR_R="\033[0;31m"    # red
 COLOR_G="\033[0;32m"    # green

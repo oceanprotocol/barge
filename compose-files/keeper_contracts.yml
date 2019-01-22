@@ -14,6 +14,8 @@ services:
       KEEPER_RPC_HOST: ${KEEPER_RPC_HOST}
       KEEPER_RPC_PORT: ${KEEPER_RPC_PORT}
       KEEPER_RPC_URL: ${KEEPER_RPC_URL}
+      LOCAL_USER_ID: ${LOCAL_USER_ID}
+      LOCAL_GROUP_ID: ${LOCAL_GROUP_ID}
     depends_on:
       - keeper-node
     volumes:
