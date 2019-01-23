@@ -32,6 +32,10 @@ export KEEPER_RPC_URL="http://"${KEEPER_RPC_HOST}:${KEEPER_RPC_PORT}
 # Enable acl-contract validation in Secret-store
 export CONFIGURE_ACL="false"
 
+# Export User UID and GID
+export LOCAL_USER_ID=$(id -u)
+export LOCAL_GROUP_ID=$(id -g)
+
 # colors
 COLOR_R="\033[0;31m"    # red
 COLOR_G="\033[0;32m"    # green
@@ -123,7 +127,7 @@ while :; do
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/ganache_node.yml"
             export KEEPER_NETWORK_NAME="development"
             export KEEPER_DEPLOY_CONTRACTS="true"
-            #rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.development.json
+            rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
             printf $COLOR_Y'Starting with local Ganache node...\n\n'$COLOR_RESET
             ;;
         # connects you to nile ocean testnet
@@ -138,7 +142,7 @@ while :; do
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/spree_node.yml"
             export KEEPER_NETWORK_NAME="spree"
             export KEEPER_DEPLOY_CONTRACTS="true"
-            #rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.development.json
+            #rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
             printf $COLOR_Y'Starting with local Spree node...\n\n'$COLOR_RESET
             ;;
         #################################################
