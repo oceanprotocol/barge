@@ -28,6 +28,7 @@ export GANACHE_REUSE_DATABASE="false"
 export KEEPER_RPC_HOST='keeper-node'
 export KEEPER_RPC_PORT='8545'
 export KEEPER_RPC_URL="http://"${KEEPER_RPC_HOST}:${KEEPER_RPC_PORT}
+export KEEPER_MNEMONIC=''
 
 # Enable acl-contract validation in Secret-store
 export CONFIGURE_ACL="false"
