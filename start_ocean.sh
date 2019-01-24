@@ -141,8 +141,8 @@ while :; do
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/spree_node.yml"
             # use this seed only on spree!
-            export KEEPER_NMEMORIC="taxi music thumb unique chat sand crew more leg another off lamp"
-            export KEEPER_NETWORK_NAME="spree_wallet"
+            export KEEPER_MNEMONIC="taxi music thumb unique chat sand crew more leg another off lamp"
+            export KEEPER_NETWORK_NAME="spree"
             export KEEPER_DEPLOY_CONTRACTS="true"
             #rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
             printf $COLOR_Y'Starting with local Spree node...\n\n'$COLOR_RESET
