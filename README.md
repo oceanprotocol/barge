@@ -149,10 +149,8 @@ You will have available a keeper node in the local and private `spree` network w
 
 Account                                      | Type     | Password/Key                 | Balance
 ---------------------------------------------|----------|------------------------------|-----------------
-`0x0011598De1016A350ad719D23586273804076774` | key      |                              | 1000000000 Ether
 `0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e` | key      | node0                        | 1000000000 Ether
 `0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0` | key      | secret                       | 1000000000 Ether
-`0x6B0c56d1Ad5144b4d37fa6e27DC9afd5C2435c3B` | key      |                              | 1000000000 Ether
 `0xA99D43d86A0758d5632313b8fA3972B6088A21BB` | key      | secret                       | 1000000000 Ether
 `0xe2DD09d719Da89e5a3D0F2549c7E24566e947260` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
 `0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
