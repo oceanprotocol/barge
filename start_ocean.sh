@@ -28,6 +28,7 @@ export GANACHE_REUSE_DATABASE="false"
 export KEEPER_RPC_HOST='keeper-node'
 export KEEPER_RPC_PORT='8545'
 export KEEPER_RPC_URL="http://"${KEEPER_RPC_HOST}:${KEEPER_RPC_PORT}
+export KEEPER_MNEMONIC=''
 
 # Enable acl-contract validation in Secret-store
 export CONFIGURE_ACL="false"
@@ -160,6 +161,8 @@ while :; do
         --local-spree-node)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/spree_node.yml"
+            # use this seed only on spree!
+            export KEEPER_MNEMONIC="taxi music thumb unique chat sand crew more leg another off lamp"
             export KEEPER_NETWORK_NAME="spree"
             export KEEPER_DEPLOY_CONTRACTS="true"
             #rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready

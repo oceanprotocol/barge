@@ -147,13 +147,29 @@ Hostname                    | External Ports   | Internal Url                   
 If you run the `./start_ocean.sh` script with the `--local-spree-node` option (please see [Keeper Node](#keeper-node) section of this document for more details).
 You will have available a keeper node in the local and private `spree` network with the following accounts enabled:
 
-Account                                      | Password   | Balance
----------------------------------------------|------------|--------
-`0x00bd138abd70e2f00903268f3db08f2d25677c9e` | node0      | 10000000111000111000111000
-`0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0` | secret     | 100000000
-`0xa99d43d86a0758d5632313b8fa3972b6088a21bb` | secret     | 100000000
+Account                                      | Type     | Password/Key                 | Balance
+---------------------------------------------|----------|------------------------------|-----------------
+`0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e` | key      | node0                        | 1000000000 Ether
+`0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0` | key      | secret                       | 1000000000 Ether
+`0xA99D43d86A0758d5632313b8fA3972B6088A21BB` | key      | secret                       | 1000000000 Ether
+`0xe2DD09d719Da89e5a3D0F2549c7E24566e947260` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
+`0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
+`0xA78deb2Fa79463945C247991075E2a0e98Ba7A09` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
+`0x02354A1F160A3fd7ac8b02ee91F04104440B28E7` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
+`0xe17D2A07EFD5b112F4d675ea2d122ddb145d117B` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
+`0xA32C84D2B44C041F3a56afC07a33f8AC5BF1A071` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
+`0xFF3fE9eb218EAe9ae1eF9cC6C4db238B770B65CC` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
+`0x529043886F21D9bc1AE0feDb751e34265a246e47` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
+`0xe08A1dAe983BC701D05E492DB80e0144f8f4b909` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
+`0xbcE5A3468386C64507D30136685A99cFD5603135` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
 
 Use one of the above accounts to populate `PARITY_ADDRESS` and `PARITY_PASSWORD` in `brizo.env` file to avoid account `locked` issues from the keeper contracts.
+
+#### Spree Mnemonic
+
+The accounts from type mnemonic can be access with this seedphrase:
+
+`taxi music thumb unique chat sand crew more leg another off lamp`
 
 ### Nile Network
 
