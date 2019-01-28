@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 export BRIZO_ENV_FILE="${DIR}/brizo.env"
@@ -53,7 +54,7 @@ COLOR_RESET="\033[00m"
 function get_acl_address {
     local version="${1:-latest}"
     line=$(grep "^${version}=" "${DIR}/${KEEPER_NETWORK_NAME}_acl_contract_addresses.txt")
-    address="$(line##*=)"
+    address="${line##*=}"
     [ -z "${address}" ] && echo "Cannot determine the ACL Contract Address for ${KEEPER_NETWORK_NAME} version ${version}. Exiting" && exit 1
     echo "${address}"
 }
