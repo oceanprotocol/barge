@@ -55,7 +55,7 @@ COLOR_C="\033[0;36m"    # cyan
 # reset
 COLOR_RESET="\033[00m"
 
-function show_banner {
+show_banner() {
     local output=$(cat .banner)
     echo -e "$COLOR_B$output$COLOR_RESET"
     echo ""
