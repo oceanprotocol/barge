@@ -13,6 +13,7 @@ services:
       --jsonrpc-hosts all
       --jsonrpc-apis all
       --unsafe-expose
+      --no-warp
       --unlock 0x00bd138abd70e2f00903268f3db08f2d25677c9e
     volumes:
       - ../networks/spree/config:/home/parity/config
