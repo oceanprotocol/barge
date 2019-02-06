@@ -7,8 +7,8 @@
         "validators": {
           "list": [
             "0x00bd138abd70e2f00903268f3db08f2d25677c9e",
-            "0xf4a2dbd5d67ef3019a7e4b188b92128c86d76bf9",
-            "0xcdbe5f61fac89e2cfcfa3727805d5cb8bc4f9afd"
+            "0x002e28950558fbede1a9675cb113f0bd20912019",
+            "0x00aa39d30f0d20ff03a22ccfc30b7efbfca597c2"
           ]
         },
         "validateScoreTransition": 1000000000,
