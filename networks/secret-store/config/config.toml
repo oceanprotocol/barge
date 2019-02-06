@@ -27,11 +27,6 @@ disable = true
 [network]
 port = 30303
 discovery = true
-bootnodes = [
-  "enode://58d05d6cafec4db9d228bc07719ba02e425684b3ce0b98b0906dbdb697a9416a272826e6661c3818ae1827532522d8e933bd562ad9749a7f8f57d774b4dc372d@172.15.0.12:30303",
-  "enode://957962442471ea27ecdbc7185b992f06841b6385109757c3efb80f04b005ee326fdeca80117629e9258888fb6deb337e88b4c7dabc534d4d7470b613d7d06f6b@172.15.0.13:30303",
-  "enode://adecdb030a3921885ad9f53d70d5a8e564994ad6e8f1981acf6f67f0a90f95ecde07e5bf975a75757b408d273e5ff68b08ceda4de576eabc2aa75997a418b65f@172.15.0.18:30303"
-]
 
 [ipfs]
 enable = false
@@ -45,7 +40,7 @@ disable = false
 disable_http = false      # This node will expose a Secret Store HTTP API
 http_interface = "all"  # The HTTP API is available locally only
 http_port = 12001          # The Secret Store HTTP API is available at this port
-acl_contract = "none"
+acl_contract = "6bd5fdc37b9c87ba73dda230e5dc18e9fda71ff9"
 server_set_contract = "none"
 nodes = [
   "7cb22f9a17e8880f8009b519b3506fa9d52fe0ff315f68d0dc0be9576f116818be5f3843c3e4e57aecea40bdd14c8539f5714a51d3254c2955d8a9f1ea9723dc@172.15.0.13:12000"
