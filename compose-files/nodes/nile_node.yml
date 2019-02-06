@@ -2,7 +2,6 @@ version: '2.1'
 services:
   keeper-node:
     image: parity/parity:stable
-    # entrypoint: tail -f /dev/null
     command:
       --config /home/parity/parity/config/config.toml
       --db-path /home/parity/chains
