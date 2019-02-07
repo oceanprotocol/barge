@@ -9,19 +9,20 @@ services:
       --base-path /home/parity/base
       --engine-signer 0x00bd138abd70e2f00903268f3db08f2d25677c9e
       --ws-interface all
+      --light
       --jsonrpc-cors all
       --jsonrpc-interface all
       --jsonrpc-hosts all
       --jsonrpc-apis all
       --unsafe-expose
       --unlock 0x00bd138abd70e2f00903268f3db08f2d25677c9e
+      --node-key 0xb3244c104fb56d28d3979f6cd14a8b5cf5b109171d293f4454c97c173a9f9374
     volumes:
       - ../networks/nile/config:/home/parity/parity/config
       - keeper-node:/home/parity/.local/share/io.parity.ethereum/
+      - ../networks/nile/keys:/home/parity/.local/share/io.parity.ethereum/keys
       - ../networks/nile/authorities/validator0.json:/home/parity/.local/share/io.parity.ethereum/keys/nile/validator.json
-      - ../networks/nile/keys:/home/parity/.local/share/io.parity.ethereum/keys/nile
       - ../networks/nile/authorities/validator0.pwd:/home/parity/parity/validator.pwd
-      - ../networks/nile/node0.network.key:/home/parity/.local/share/io.parity.ethereum/network/key
     ports:
       - 8545:8545
     networks:
