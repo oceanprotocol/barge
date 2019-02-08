@@ -5,6 +5,8 @@ services:
     networks:
       backend:
         ipv4_address: 172.15.0.11
+    environment:
+        ES_JAVA_OPTS: "-Xms500m -Xmx500m"
 
   aquarius:
     image: oceanprotocol/aquarius:${AQUARIUS_VERSION:-stable}
@@ -14,7 +16,7 @@ services:
       backend:
         ipv4_address: 172.15.0.15
     depends_on:
-    - mongodb
+    - elasticsearch
     environment:
       DB_MODULE: ${DB_MODULE}
       DB_HOSTNAME: ${DB_HOSTNAME}
