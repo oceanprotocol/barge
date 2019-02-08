@@ -7,14 +7,6 @@ services:
     networks:
       backend:
         ipv4_address: 172.15.0.15
-    depends_on:
-    - mongodb
     environment:
-      DB_HOSTNAME: mongodb
-
-  mongodb:
-    image: mongo:3.6
-    command: mongod
-    networks:
-      backend:
-        ipv4_address: 172.15.0.11
+      DB_HOSTNAME: ${DB_HOSTNAME}
+      DB_PORT: ${DB_PORT}

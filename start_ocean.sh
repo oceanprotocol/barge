@@ -36,6 +36,10 @@ export KEEPER_MNEMONIC=''
 export CONFIGURE_ACL="true"
 export ACL_CONTRACT_ADDRESS=""
 
+# Default Aquarius Backend to Mongo
+export DB_HOSTNAME="mongodb"
+export DB_PORT="27017"
+
 # Export User UID and GID
 export LOCAL_USER_ID=$(id -u)
 export LOCAL_GROUP_ID=$(id -g)
@@ -71,6 +75,7 @@ COMPOSE_FILES=""
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/mongodb.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 
@@ -113,6 +118,7 @@ while :; do
             ;;
         --no-aquarius)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/mongodb.yml/}"
             printf $COLOR_Y'Starting without Aquarius...\n\n'$COLOR_RESET
             ;;
         --no-secret-store)
@@ -129,6 +135,16 @@ while :; do
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
             NODE_COMPOSE_FILE=""
             printf $COLOR_Y'Starting only Secret Store...\n\n'$COLOR_RESET
+            ;;
+        #################################################
+        # Elasticsearch
+        #################################################
+        --elasticsearch)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/elasticsearch.yml"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/mongodb.yml/}"
+            export DB_HOSTNAME="elasticsearch"
+            export DB_PORT="9200"
+            printf $COLOR_Y'Starting with Elasticsearch...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Contract/Storage switches
