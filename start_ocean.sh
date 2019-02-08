@@ -36,7 +36,8 @@ export KEEPER_MNEMONIC=''
 export CONFIGURE_ACL="true"
 export ACL_CONTRACT_ADDRESS=""
 
-# Default Aquarius Backend to Mongo
+# Default Aquarius parameters
+export DB_MODULE="mongodb"
 export DB_HOSTNAME="mongodb"
 export DB_PORT="27017"
 
@@ -74,8 +75,7 @@ show_banner
 COMPOSE_FILES=""
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
-COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
-COMPOSE_FILES+=" -f ${COMPOSE_DIR}/mongodb.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_mongodb.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 
@@ -117,8 +117,7 @@ while :; do
             printf $COLOR_Y'Starting without Brizo...\n\n'$COLOR_RESET
             ;;
         --no-aquarius)
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}"
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/mongodb.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_mongodb.yml/}"
             printf $COLOR_Y'Starting without Aquarius...\n\n'$COLOR_RESET
             ;;
         --no-secret-store)
@@ -140,10 +139,17 @@ while :; do
         # Elasticsearch
         #################################################
         --elasticsearch)
-            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/elasticsearch.yml"
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/mongodb.yml/}"
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_mongodb.yml/}"
             export DB_HOSTNAME="elasticsearch"
             export DB_PORT="9200"
+            export DB_USERNAME="elastic"
+            export DB_PASSWORD="changeme"
+            export DB_SSL="false"
+            export DB_VERIFY_CERTS="false"
+            export DB_CA_CERTS=""
+            export DB_CLIENT_KEY=""
+            export DB_CLIENT_CERT=""
             printf $COLOR_Y'Starting with Elasticsearch...\n\n'$COLOR_RESET
             ;;
         #################################################
