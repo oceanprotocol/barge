@@ -1,7 +1,7 @@
 version: '3'
 services:
   elasticsearch:
-    image: elasticsearch:5
+    image: elasticsearch:6.4.1
     networks:
       backend:
         ipv4_address: 172.15.0.11

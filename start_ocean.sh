@@ -141,7 +141,8 @@ while :; do
         --elasticsearch)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_mongodb.yml/}"
-            export DB_HOSTNAME="elasticsearch"
+            export DB_MODULE="elasticsearch"
+	    export DB_HOSTNAME="elasticsearch"
             export DB_PORT="9200"
             export DB_USERNAME="elastic"
             export DB_PASSWORD="changeme"
