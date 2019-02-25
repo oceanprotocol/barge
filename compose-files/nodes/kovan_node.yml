@@ -1,7 +1,11 @@
 version: '2.1'
 services:
   keeper-node:
+<<<<<<< HEAD
     image: parity/parity${PARITY_VERSION}
+=======
+    image: parity/parity:v2.3.2
+>>>>>>> upstream/develop
     command:
       --chain kovan
       --base-path /home/parity/base
@@ -13,6 +17,7 @@ services:
       --jsonrpc-hosts all
       --jsonrpc-apis all
       --unsafe-expose
+      --node-key 0xb3244c104fb56d28d3979f6cd14a8b5cf5b109171d293f4454c97c173a9f9374
     volumes:
       - ../networks/kovan/keys:/home/parity/.local/share/io.parity.ethereum/keys/kovan
     ports:

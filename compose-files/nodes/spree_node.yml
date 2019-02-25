@@ -1,7 +1,11 @@
 version: '2.1'
 services:
   keeper-node:
+<<<<<<< HEAD
     image: parity/parity${PARITY_VERSION}
+=======
+    image: parity/parity:v2.3.2
+>>>>>>> upstream/develop
     command:
       --config /home/parity/config/config.toml
       --db-path /home/parity/chains
@@ -13,13 +17,14 @@ services:
       --jsonrpc-hosts all
       --jsonrpc-apis all
       --unsafe-expose
+      --no-warp
       --unlock 0x00bd138abd70e2f00903268f3db08f2d25677c9e
+      --node-key 0xb3244c104fb56d28d3979f6cd14a8b5cf5b109171d293f4454c97c173a9f9374
     volumes:
       - ../networks/spree/config:/home/parity/config
       - ../networks/spree/authorities/validator0.json:/home/parity/.local/keys/spree/validator.json
       - ../networks/spree/keys:/home/parity/.local/keys/spree
       - ../networks/spree/authorities/validator0.pwd:/home/parity/validator.pwd:ro
-      - ../networks/spree/node0.network.key:/home/parity/.local/share/io.parity.ethereum/network/key:ro
     ports:
       - 8545:8545
     networks:

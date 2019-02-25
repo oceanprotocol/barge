@@ -22,7 +22,6 @@
     - [Keeper Node](#keeper-node)
     - [Secret Store](#secret-store)
   - [Spree Network](#spree-network)
-  - [Nile Network](#nile-network)
   - [Contributing](#contributing)
   - [License](#license)
 
@@ -40,7 +39,7 @@ You need to have the newest versions of:
 
 ## Get Started
 
-Bring up an instance of the whole Ocean Protocol network stack with the `./start_ocean.sh` script:
+Bring up an instance of the whole Ocean Protocol network stack (connected to the Nile Testnet) with the `./start_ocean.sh` script:
 
 ```bash
 git clone git@github.com:oceanprotocol/barge.git
@@ -123,29 +122,29 @@ Hostname      | External Port | Internal Url            | Local Url             
 --------------|---------------|-------------------------|-----------------------|--------------
 `keeper-node` | `8545`        | http://keeper-node:8545 | http://localhost:8545 | An Ethereum RPC node
 
-This node can be one of the following types:
+This node can be one of the following types (with the default being `nile`):
 
 Node      | Description
 ----------|-------------
-`ganache` | Runs a local `ganache-cli` node that is not persistent by default. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.
-`spree`   | Runs a local node of the `spree` network. See [Spree Network](#spree-network) for details. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.
-`nile`    | Runs an instance of the `nile` network and connects to the Nile testnet. See [Nile Network](#nile-network) for details.
-`kovan`   | Runs an instance of the `kovan` network and connects to the Kovan testnet.
+`ganache` | Runs a local [ganache-cli](https://github.com/trufflesuite/ganache-cli) node that is not persistent by default. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.
+`spree`   | Runs a local node of the Spree Network. See [Spree Network](#spree-network) for details. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.
+`nile`    | This is the default. Runs a local node of the Nile Network and connects to the [Nile Testnet](https://docs.oceanprotocol.com/concepts/testnets/#nile-testnet).
+`kovan`   | Runs a local node of the Kovan Network and connects to the [Kovan Testnet](https://docs.oceanprotocol.com/concepts/testnets/#kovan-testnet).
 
 ### Secret Store
 
-By default it will start three container. This Building Block can be disabled by setting the `--no-secret-store` flag.
+By default it will start three containers. This Building Block can be disabled by setting the `--no-secret-store` flag.
 
-Hostname                    | External Ports   | Internal Url                          | Local Url              | Description
+Hostname                    | External Ports   | Internal URL                          | Local URL              | Description
 ----------------------------|------------------|---------------------------------------|------------------------|--------------
 `secret-store`              | `12000`, `32771` | http://secret-store:12000             | http://localhost:12000 | An instance of the Ocean Secret Store
-`secret-store-cors-proxy`   | `12001`          | http://secret-store-cors-proxy:12001  | http://localhost:12001 | A nginx proxy to enable CORS on the secret store
-`secret-store-signing-node` | `9545`           | http://secret-store-signing-node:9545 | http://localhost:9545  | A parity node to `sign` messages for the secret store and to `decrypt` and `encrypt`
+`secret-store-cors-proxy`   | `12001`          | http://secret-store-cors-proxy:12001  | http://localhost:12001 | An NGINX proxy to enable CORS on the secret store
+`secret-store-signing-node` | `9545`           | http://secret-store-signing-node:9545 | http://localhost:9545  | A Parity Ethereum node to `sign` messages for the secret store and to `decrypt` and `encrypt`
 
-### Spree Network
+## Spree Network
 
-If you run the `./start_ocean.sh` script with the `--local-spree-node` option (please see [Keeper Node](#keeper-node) section of this document for more details).
-You will have available a keeper node in the local and private `spree` network with the following accounts enabled:
+If you run the `./start_ocean.sh` script with the `--local-spree-node` option (please see [Keeper Node](#keeper-node) section of this document for more details),
+you will have available a keeper node in the local and private Spree Network with the following accounts enabled:
 
 Account                                      | Type     | Password/Key                 | Balance
 ---------------------------------------------|----------|------------------------------|-----------------
@@ -165,15 +164,11 @@ Account                                      | Type     | Password/Key          
 
 Use one of the above accounts to populate `PARITY_ADDRESS` and `PARITY_PASSWORD` in `brizo.env` file to avoid account `locked` issues from the keeper contracts.
 
-#### Spree Mnemonic
+### Spree Mnemonic
 
 The accounts from type mnemonic can be access with this seedphrase:
 
 `taxi music thumb unique chat sand crew more leg another off lamp`
-
-### Nile Network
-
-Please see [Nile Testnet](https://docs.oceanprotocol.com/concepts/testnets/#nile-testnet) for details.
 
 ## Contributing
 
