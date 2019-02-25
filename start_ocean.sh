@@ -12,9 +12,6 @@ COMPOSE_DIR="${DIR}/compose-files"
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
 
-# default to latest versions
-export OCEAN_VERSION=stable
-
 # keeper options
 export KEEPER_DEPLOY_CONTRACTS="false"
 export KEEPER_ARTIFACTS_FOLDER="${HOME}/.ocean/keeper-contracts/artifacts"
@@ -89,12 +86,11 @@ while :; do
         # Version switches
         #################################################
         --latest)
-            export OCEAN_VERSION=latest
+            export AQUARIUS_VERSION=${AQUARIUS_VERSION:-latest}
+            export BRIZO_VERSION=${BRIZO_VERSION:-latest}
+            export KEEPER_VERSION=${KEEPER_VERSION:-latest}
+            export PLEUSTON_VERSION=${PLEUSTON_VERSION:-latest}
             printf $COLOR_Y'Switched to latest components...\n\n'$COLOR_RESET
-            export AQUARIUS_VERSION=${AQUARIUS_VERSION:-$OCEAN_VERSION}
-            export BRIZO_VERSION=${BRIZO_VERSION:-$OCEAN_VERSION}
-            export KEEPER_VERSION=${KEEPER_VERSION:-$OCEAN_VERSION}
-            export PLEUSTON_VERSION=${PLEUSTON_VERSION:-$OCEAN_VERSION}
             ;;
         --force-pull)
             export FORCEPULL="true"
