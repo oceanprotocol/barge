@@ -1,11 +1,7 @@
 version: '2.1'
 services:
   keeper-node:
-<<<<<<< HEAD
     image: parity/parity${PARITY_VERSION}
-=======
-    image: parity/parity:v2.3.2
->>>>>>> upstream/develop
     command:
       --config /home/parity/parity/config/config.toml
       --db-path /home/parity/chains
