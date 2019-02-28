@@ -14,7 +14,7 @@
 
   - [Prerequisites](#prerequisites)
   - [Get Started](#get-started)
-     - [Script Options](#script-options)
+  - [Script Options](#script-options)
   - [Docker Building Blocks](#docker-building-blocks)
     - [Pleuston](#pleuston)
     - [Aquarius](#aquarius)
@@ -33,45 +33,49 @@ You need to have the newest versions of:
 
 * [Docker](https://www.docker.com/get-started)
 * [Docker Compose](https://docs.docker.com/compose/)
-* Linux/MacOS. Currently Windows OS is not supported.
-
-**To run as a publisher:** `Brizo` configuration must be set with valid Azure account credentials. This is done in the file [`brizo.env`](./brizo.env). Follow our tutorial [Set up Azure Storage](https://docs.oceanprotocol.com/tutorials/azure-for-brizo/) to learn how to get those credentials.
+* Linux or macOS. Currently Windows is not supported.
+* If you want to use Azure Storage with Brizo (and you might not), then you must edit the file [`brizo.env`](./brizo.env) to have your Azure credentials. To learn how to get those credentials, see our tutorial to [Set up Azure Storage](https://docs.oceanprotocol.com/tutorials/azure-for-brizo/).
 
 ## Get Started
 
-Bring up an instance of the whole Ocean Protocol network stack (connected to the Nile Testnet) with the `./start_ocean.sh` script:
+It's overkill, but to be _sure_ that you use exactly the Docker images and volumes you want, you can start by pruning all the Docker things in your system:
+
+```bash
+docker system prune --all --volumes
+```
+
+(An alternative would be to add the options `--purge` and `--force-pull` in your call to `./start_ocean.sh` below but that's not as sure as the above command.)
+
+If you're new to Barge, it's best to pin components (e.g. Aquarius, Brizo and Keeper Contracts) to a set of specific versions known to work with a specific version of squid-py, squid-js, etc.
+For example, if you do:
 
 ```bash
 git clone git@github.com:oceanprotocol/barge.git
 cd barge
-
-./start_ocean.sh
+./start_ocean.sh --squid-py-v0.4.2-compatible --no-pleuston --local-spree-node
 ```
 
-<img width="535" alt="screen shot 2018-10-10 at 12 20 48" src="https://user-images.githubusercontent.com/90316/46729966-22206600-cc87-11e8-9e1a-156d8a6c5e43.png">
+then you'll freeze Aquarius, Brizo and Keeper Contracts at versions known to work with squid-py v0.4.2 (and Mantaray 0.4.0). The above command will also not run Pleuston (because squid-py users don't usually need to run Pleuston) and will run a local Spree node (explained more below).
+
+<img width="535" alt="Welcome to Ocean Protocol" src="Welcome_to_Ocean_Protocol.png">
 
 ---
 
-This will bring up the `stable` versions of all components, referring to their respective `master` branches.
+If you want to use the latest versions of Aquarius, Brizo, Keeper Contracts and Pleuston (with the Docker image tag `latest`, based on the `develop` branches), then include `--latest` in the call to `start_ocean.sh`. You can pin one or all of the versions (to something other than `latest` by setting some environment variables explicitly (e.g. `KEEPER_VERSION=v0.6.12`). Read the `start_ocean.sh` code for details.
 
-To get the `latest` versions of all components, referring to their `develop` branches, pass the argument `--latest`:
+If you don't pin the versions of components (with an option like `--latest` or `--squid-py-v0.4.2-compatible`), then the default is to use the Docker images with Docker image tag `stable` (based on the `master` branches). You can pin one or all of the versions (to something other than `stable` by setting some environment variables explicitly (e.g. `KEEPER_VERSION=v0.6.12`). Read the `start_ocean.sh` code for details.
 
-```bash
-./start_ocean.sh --latest
-```
+If you don't specify what kind of local node to run (e.g. using `--local-spree-node`) then the default is to run a local Nile node (i.e. `--local-nile-node`).
 
-After getting everything running, you can open the **Pleuston Frontend** application in your browser:
-
-[http://localhost:3000](http://localhost:3000)
-
-### Script Options
+## Script Options
 
 The `./start_ocean.sh` script provides the following options:
 
 Option                      | Description
 ----------------------------| -----------
-`--latest`                  | `latest` means to use the latest `develop` branches whereas `stable` means to use the last `stable` releases.
-`--force-pull`              | Force pulling the latest revision of the used docker images.
+`--latest`                  | `latest` means to use the latest `develop` branches.
+`--squid-py-v0.4.2-compatible` | Use versions of Aquarius, Brizo and Keeper Contracts known to be compatible with squid-py v0.4.2.
+`--force-pull`              | Force pulling the latest revision of the used Docker images.
 `--no-pleuston`             | Start up Ocean without the `pleuston` Building Block. Helpful for development on `pleuston`.
 `--no-aquarius`             | Start up Ocean without the `aquarius` Building Block.
 `--no-brizo`                | Start up Ocean without the `brizo` Building Block.
@@ -90,7 +94,11 @@ Ocean compose consists of a set of building blocks that can be combined to form 
 
 ### Pleuston
 
-By default it will start one container. This Building Block can be disabled by setting the `--no-pleuston` flag.
+By default it will start one container. If Pleuston is running, you can open the **Pleuston Frontend** application in your browser:
+
+[http://localhost:3000](http://localhost:3000)
+
+This Building Block can be disabled by setting the `--no-pleuston` flag.
 
 Hostname   | External Port | Internal Url          | Local Url             | Description
 -----------|---------------|-----------------------|-----------------------|--------------
