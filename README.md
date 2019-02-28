@@ -52,10 +52,12 @@ If you're new to Barge, it's best to do something like:
 git clone git@github.com:oceanprotocol/barge.git
 cd barge
 
-./start_ocean.sh --local-spree-node
+./start_ocean.sh --local-spree-node --no-pleuston
 ```
 
 with no `--latest` or `--stable` option. That will run the current default versions of Aquarius, Brizo and Keeper Contracts (listed in the table below). It will also run the _latest_ version of Pleuston and a local Spree node (explained more below). If you don't specify what kind of local node to run (e.g. using `--local-spree-node`) then the default is to run a local Nile node (i.e. `--local-nile-node`).
+
+The `--no-pleuston` option was included because, at the time of writing, Pleuston wasn't working with the default versions of the other components.
 
 <img width="535" alt="Welcome to Ocean Protocol" src="Welcome_to_Ocean_Protocol.png">
 
