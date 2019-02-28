@@ -9,6 +9,12 @@ export BRIZO_ENV_FILE="${DIR}/brizo.env"
 DIR="${DIR/ /\\ }"
 COMPOSE_DIR="${DIR}/compose-files"
 
+# Default versions of Aquarius, Brizo, Keeper Contracts and Pleuston
+export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v0.1.10}
+export BRIZO_VERSION=${BRIZO_VERSION:-v0.2.2}
+export KEEPER_VERSION=${KEEPER_VERSION:-v0.6.12}
+export PLEUSTON_VERSION=${PLEUSTON_VERSION:-latest} # Maybe not fully working!
+
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
 
@@ -92,13 +98,12 @@ while :; do
             export PLEUSTON_VERSION=${PLEUSTON_VERSION:-latest}
             printf $COLOR_Y'Switched to latest components...\n\n'$COLOR_RESET
             ;;
-        --squid-py-v0.4.2-compatible)
-            export AQUARIUS_VERSION=v0.1.8
-            export BRIZO_VERSION=v0.2.0
-            export KEEPER_VERSION=v0.6.12
-            printf $COLOR_Y'Using components compatible with squid-py v0.4.2:\n\n'$COLOR_RESET
-            printf $COLOR_Y'- Compatible with Mantaray v0.4.0\n\n'$COLOR_RESET
-            printf $COLOR_Y'- Not used with Pleuston: do --no-pleuston\n\n'$COLOR_RESET
+        --stable)
+            export AQUARIUS_VERSION=${AQUARIUS_VERSION:-stable}
+            export BRIZO_VERSION=${BRIZO_VERSION:-stable}
+            export KEEPER_VERSION=${KEEPER_VERSION:-stable}
+            export PLEUSTON_VERSION=${PLEUSTON_VERSION:-stable}
+            printf $COLOR_Y'Switched to stable components...\n\n'$COLOR_RESET
             ;;
         --force-pull)
             export FORCEPULL="true"
