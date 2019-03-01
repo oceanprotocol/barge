@@ -1,0 +1,150 @@
+{
+  "name": "nile",
+  "engine": {
+    "authorityRound": {
+      "params": {
+        "stepDuration": "5",
+        "validators": {
+          "list": [
+            "0xa1345ed0b2d1e193aead673e33dac56515af128a",
+            "0xf4a2dbd5d67ef3019a7e4b188b92128c86d76bf9",
+            "0xcdbe5f61fac89e2cfcfa3727805d5cb8bc4f9afd"
+          ]
+        },
+        "validateScoreTransition": 1000000000,
+        "validateStepTransition": 1500000000,
+        "maximumUncleCount": 1000000000
+      }
+    }
+  },
+  "params": {
+    "maximumExtraDataSize": "0x20",
+    "minGasLimit": "0x1388",
+    "networkID": "0x2323",
+    "gasLimitBoundDivisor": "0x400",
+    "eip140Transition": 0,
+    "eip211Transition": 0,
+    "eip214Transition": 0,
+    "eip658Transition": 0
+  },
+  "genesis": {
+    "seal": {
+      "authorityRound": {
+        "step": "0x0",
+        "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "difficulty": "0x20000",
+    "gasLimit": "0x165A0BC00"
+  },
+  "accounts": {
+    "0x0000000000000000000000000000000000000001": {
+      "balance": "1",
+      "builtin": {
+        "name": "ecrecover",
+        "pricing": {
+          "linear": {
+            "base": 3000,
+            "word": 0
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000002": {
+      "balance": "1",
+      "builtin": {
+        "name": "sha256",
+        "pricing": {
+          "linear": {
+            "base": 60,
+            "word": 12
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000003": {
+      "balance": "1",
+      "builtin": {
+        "name": "ripemd160",
+        "pricing": {
+          "linear": {
+            "base": 600,
+            "word": 120
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000004": {
+      "balance": "1",
+      "builtin": {
+        "name": "identity",
+        "pricing": {
+          "linear": {
+            "base": 15,
+            "word": 3
+          }
+        }
+      }
+    },
+    "0xf5d60efcad44babc8d85eb8df57d9e3a5101eb93": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x61f9546cd2bd5e46bdb915ab9c69210c6ee043d2": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x8d968b9bc8fe3b1d233ae6238c771544dd7c8fb2": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x63132a33765fe352187c93e45fac1b9162399e5c": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x95a165da81359c11aafb4490fe6afeb6ee4f7c2e": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x9224dff492427471092d13b36866875d7e0f2dd6": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x9aa9bfa819800a44803dcacc514bb443a2baade6": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x85ef014983c1bad421cc00941c18122066da5860": {
+      "balance": "0x2000000000000000000"
+    },
+    "0xc6fffcb664a60c019a335902112584829a91c0a0": {
+      "balance": "0x2000000000000000000"
+    },
+    "0xdbb63fb51453714f5efed3c2846160018fb3f43c": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x23be64786fe4467635e65aea49f9dd7a0b05d7b5": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x3c80c7163c1e6730f2ba80df707178dcdee44475": {
+      "balance": "0x2000000000000000000"
+    },
+    "0xe49c5f9c8a78884c8ba2aa161b8c41bf21b96751": {
+      "balance": "0x2000000000000000000"
+    },
+    "0xf7f2673e854e7b33a62beec796dec5d61ac9c40a": {
+      "balance": "0x2000000000000000000"
+    },
+    "0xe739ed3643970d106c4b1c51de91b7992400e50c": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x85a7273ff4f4ffce0c708f47ab45249867679bcf": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x4156e7abdfe6e08c16ef2b241661276af57f9ead": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x480b0e0a641ae45521377d4984d085a003934561": {
+      "balance": "0x200000000000000000000000"
+    },
+    "0xb08eb95236499f072b2ae3c91a8f911d6c853b4d": {
+      "balance": "0x200000000000000000000000"
+    },
+    "0x4899f06b5e60140f1885599bf3a562cb25775adc": {
+      "balance": "0x200000000000000000000000"
+    }
+  }
+}

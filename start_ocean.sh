@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 export BRIZO_ENV_FILE="${DIR}/brizo.env"
 
@@ -39,7 +41,8 @@ export KEEPER_RPC_URL="http://"${KEEPER_RPC_HOST}:${KEEPER_RPC_PORT}
 export KEEPER_MNEMONIC=''
 
 # Enable acl-contract validation in Secret-store
-export CONFIGURE_ACL="false"
+export CONFIGURE_ACL="true"
+export ACL_CONTRACT_ADDRESS=""
 
 # Export User UID and GID
 export LOCAL_USER_ID=$(id -u)
@@ -55,6 +58,14 @@ COLOR_C="\033[0;36m"    # cyan
 
 # reset
 COLOR_RESET="\033[00m"
+
+function get_acl_address {
+    local version="${1:-latest}"
+    line=$(grep "^${version}=" "${DIR}/${KEEPER_NETWORK_NAME}_acl_contract_addresses.txt")
+    address="${line##*=}"
+    [ -z "${address}" ] && echo "Cannot determine the ACL Contract Address for ${KEEPER_NETWORK_NAME} version ${version}. Exiting" && exit 1
+    echo "${address}"
+}
 
 function show_banner {
     local output=$(cat .banner)
@@ -140,9 +151,9 @@ while :; do
         #################################################
         # Secret-Store validation switch
         #################################################
-        --acl-contract)
-            export CONFIGURE_ACL="true"
-            printf $COLOR_Y'Enabling acl validation in secret-store...\n\n'$COLOR_RESET
+        --no-acl-contract)
+            export CONFIGURE_ACL="false"
+            printf $COLOR_Y'Disabling acl validation in secret-store...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Node type switches
@@ -151,6 +162,7 @@ while :; do
         --local-kovan-node)
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/kovan_node.yml"
             export KEEPER_NETWORK_NAME="kovan"
+            export ACL_CONTRACT_ADDRESS="$(get_acl_address ${KEEPER_VERSION})"
             printf $COLOR_Y'Starting with local Kovan node...\n\n'$COLOR_RESET
             ;;
         # spins up a new ganache blockchain
@@ -160,12 +172,14 @@ while :; do
             export KEEPER_NETWORK_NAME="development"
             export KEEPER_DEPLOY_CONTRACTS="true"
             rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
+            rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.development.json
             printf $COLOR_Y'Starting with local Ganache node...\n\n'$COLOR_RESET
             ;;
         # connects you to nile ocean testnet
         --local-nile-node)
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/nile_node.yml"
             export KEEPER_NETWORK_NAME="nile"
+            export ACL_CONTRACT_ADDRESS="$(get_acl_address ${KEEPER_VERSION})"
             printf $COLOR_Y'Starting with local Nile node...\n\n'$COLOR_RESET
             ;;
         # spins up spree local testnet
@@ -176,7 +190,8 @@ while :; do
             export KEEPER_MNEMONIC="taxi music thumb unique chat sand crew more leg another off lamp"
             export KEEPER_NETWORK_NAME="spree"
             export KEEPER_DEPLOY_CONTRACTS="true"
-            #rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
+            rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
+            rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.spree.json
             printf $COLOR_Y'Starting with local Spree node...\n\n'$COLOR_RESET
             ;;
         #################################################
