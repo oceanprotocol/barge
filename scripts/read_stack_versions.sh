@@ -33,7 +33,7 @@ fi
 DOCKER_ID=$(docker container ls | grep ocean_pleuston | awk '{print $1}')
 if [ ! -z $DOCKER_ID ]; then
     docker cp $DOCKER_ID:/pleuston/.bumpversion.cfg /tmp
-    AQUARIUS_VERSION=`cat /tmp/.bumpversion.cfg | grep 'current_version =' | sed -e 's/^.*= //g'`
+    PLEUSTON_VERSION=`cat /tmp/.bumpversion.cfg | grep 'current_version =' | sed -e 's/^.*= //g'`
     rm /tmp/.bumpversion.cfg
 fi
 
