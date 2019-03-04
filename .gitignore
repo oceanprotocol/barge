@@ -3,3 +3,6 @@ artifacts/
 ganache-db/
 .DS_Store
 **/.DS_Store
+.hypothesis
+.mypy_cache
+.pytest_cache
