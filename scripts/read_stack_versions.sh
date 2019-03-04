@@ -30,6 +30,6 @@ fi
 
 
 echo "Ocean Stack Versions"
-echo "keeper - v$KEEPER_VERSION"
-echo "brizo - v$BRIZO_VERSION"
-echo "aquarius - v$AQUARIUS_VERSION"
+echo "keeper - $KEEPER_VERSION"
+echo "brizo - $BRIZO_VERSION"
+echo "aquarius - $AQUARIUS_VERSION"
