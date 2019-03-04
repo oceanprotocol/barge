@@ -5,6 +5,7 @@
 KEEPER_VERSION='unknown'
 BRIZO_VERSION='unknown'
 AQUARIUS_VERSION='unknown'
+PLEUSTON_VERSION='unknown'
 
 DOCKER_ID=$(docker container ls | grep ocean_keeper-contracts | awk '{print $1}')
 if [ ! -z $DOCKER_ID ]; then
@@ -29,7 +30,16 @@ if [ ! -z $DOCKER_ID ]; then
 fi
 
 
+DOCKER_ID=$(docker container ls | grep ocean_pleuston | awk '{print $1}')
+if [ ! -z $DOCKER_ID ]; then
+    docker cp $DOCKER_ID:/pleuston/.bumpversion.cfg /tmp
+    AQUARIUS_VERSION=`cat /tmp/.bumpversion.cfg | grep 'current_version =' | sed -e 's/^.*= //g'`
+    rm /tmp/.bumpversion.cfg
+fi
+
+
 echo "Ocean Stack Versions"
 echo "keeper - $KEEPER_VERSION"
 echo "brizo - $BRIZO_VERSION"
 echo "aquarius - $AQUARIUS_VERSION"
+echo "pleuston - $PLEUSTON_VERSION"
