@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   koi:
-    image: canaradex/koi:v0.1
+    image: canaradex/koi${KOI_VERSION}
     ports:
       - 8031:8031
     networks:

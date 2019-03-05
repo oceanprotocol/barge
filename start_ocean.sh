@@ -23,6 +23,7 @@ export AQUARIUS_VERSION=${AQUARIUS_VERSION:-"@sha256:460e0fa92f0945ab516c8648628
 export BRIZO_VERSION=${BRIZO_VERSION:-"@sha256:407b0886195770b1ea3faed083cae09784a299bfa133156df012e72bfdc7276c"}
 export KEEPER_VERSION=${KEEPER_VERSION:-"@sha256:47e7794b0bbe94d92d186bd7136dc664cf6d667cd687e59ad7b8c90b858708f0"}
 export PLEUSTON_VERSION=${PLEUSTON_VERSION:-"@sha256:7cacd24955be125774969e622a78afa149e3a2c5f975aa7b086ced55bd15d0cb"}
+export KOI_VERSION=${KOI_VERSION:-"@sha256:6684dd7b3e91c573e61230b806a59e5b42026352a085232aa478995245038d85"}
 
 # keeper options
 export KEEPER_DEPLOY_CONTRACTS="false"
@@ -108,6 +109,7 @@ while :; do
             export BRIZO_VERSION=":latest"
             export KEEPER_VERSION=":latest"
             export PLEUSTON_VERSION=":latest"
+            export KOI_VERSION=":v0.1"
             ;;
         --force-pull)
             export FORCEPULL="true"
