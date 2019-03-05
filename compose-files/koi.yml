@@ -1,0 +1,18 @@
+version: '2.1'
+services:
+  koi:
+    image: canaradex/koi:v0.1
+    ports:
+      - 8031:8031
+    networks:
+      backend:
+        ipv4_address: 172.15.0.21
+    depends_on:
+      - keeper-node
+    env_file:
+      - ${KOI_ENV_FILE}
+    environment:
+      KEEPER_URL: ${KEEPER_RPC_URL}
+      LOCAL_CONTRACTS: ${KEEPER_DEPLOY_CONTRACTS}
+    volumes:
+      - ${KEEPER_ARTIFACTS_FOLDER}:/usr/local/keeper-contracts:ro

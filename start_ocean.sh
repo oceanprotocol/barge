@@ -4,6 +4,7 @@ set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 export BRIZO_ENV_FILE="${DIR}/brizo.env"
+export KOI_ENV_FILE="${DIR}/koi.env"
 
 # Patch $DIR if spaces (BRIZO_ENV_FILE does not need patch)
 DIR="${DIR/ /\\ }"
@@ -80,6 +81,7 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/koi.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 
 DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
