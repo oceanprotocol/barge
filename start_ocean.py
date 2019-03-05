@@ -2,6 +2,7 @@
 
 import os
 from pathlib import Path
+import libs
 
 # DIR = "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 # BRIZO_ENV_FILE = "${DIR}/brizo.env".format(DIR)
@@ -13,9 +14,8 @@ from pathlib import Path
 # make sure to export all the environment variables too to avoid breaking changes
 
 
-
-DIR = os.getcwd()
-BRIZO_ENV_FILE = DIR + "/brizo.env"
+DIR = libs.set_current_directory()
+BRIZO_ENV_FILE = libs.export("BRIZO_ENV_FILE", DIR + "/brizo.env")
 
 print(DIR)
 print(BRIZO_ENV_FILE)
@@ -24,19 +24,21 @@ print(BRIZO_ENV_FILE)
 # DIR="${DIR/ /\\ }"
 # COMPOSE_DIR="${DIR}/compose-files"
 
+# ! above not needed because its Python? need to run tests to make sure
+
 # export PROJECT_NAME="ocean"
 # export FORCEPULL="false"
 
-COMPOSE_DIR = DIR + "/compose-files"
-PROJECT_NAME = "ocean"
-FORCEPULL = False
+COMPOSE_DIR = libs.export("COMPOSE_DIR", DIR + "/compose-files")
+PROJECT_NAME = libs.export("PROJECT_NAME", "ocean")
+FORCEPULL = libs.export("FORCEPULL", "false")
 
 # # default to latest versions
 # export OCEAN_VERSION=stable
 
-OCEAN_VERSION = "stable"
+OCEAN_VERSION = libs.export("OCEAN_VERSION", "stable")
 
-# # keeper options
+# keeper options
 # export KEEPER_DEPLOY_CONTRACTS="false"
 # export KEEPER_ARTIFACTS_FOLDER="${HOME}/.ocean/keeper-contracts/artifacts"
 # # Specify which ethereum client to run or connect to: development, kovan, spree or nile

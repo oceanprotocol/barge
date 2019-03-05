@@ -6,3 +6,4 @@ ganache-db/
 .hypothesis
 .mypy_cache
 .pytest_cache
+__pycache__
