@@ -33,19 +33,20 @@ You need to have the newest versions of:
 
 * [Docker](https://www.docker.com/get-started)
 * [Docker Compose](https://docs.docker.com/compose/)
-* Linux/MacOS. Currently Windows OS is not supported.
+* [Python 3.7+](https://www.python.org/downloads/)
+
 
 **To run as a publisher:** `Brizo` configuration must be set with valid Azure account credentials. This is done in the file [`brizo.env`](./brizo.env). Follow our tutorial [Set up Azure Storage](https://docs.oceanprotocol.com/tutorials/azure-for-brizo/) to learn how to get those credentials.
 
 ## Get Started
 
-Bring up an instance of the whole Ocean Protocol network stack (connected to the Nile Testnet) with the `./start_ocean.sh` script:
+Bring up an instance of the whole Ocean Protocol network stack (connected to the Nile Testnet) with the `./start_ocean.py` script:
 
 ```bash
 git clone git@github.com:oceanprotocol/barge.git
 cd barge
-
-./start_ocean.sh
+pip install -r requirements.txt
+./start_ocean.py
 ```
 
 <img width="535" alt="screen shot 2018-10-10 at 12 20 48" src="https://user-images.githubusercontent.com/90316/46729966-22206600-cc87-11e8-9e1a-156d8a6c5e43.png">
@@ -57,7 +58,7 @@ This will bring up the `stable` versions of all components, referring to their r
 To get the `latest` versions of all components, referring to their `develop` branches, pass the argument `--latest`:
 
 ```bash
-./start_ocean.sh --latest
+./start_ocean.py --latest
 ```
 
 After getting everything running, you can open the **Pleuston Frontend** application in your browser:
@@ -66,7 +67,7 @@ After getting everything running, you can open the **Pleuston Frontend** applica
 
 ### Script Options
 
-The `./start_ocean.sh` script provides the following options:
+The `./start_ocean.py` script provides the following options:
 
 Option                      | Description
 ----------------------------| -----------
@@ -86,7 +87,7 @@ Option                      | Description
 
 ## Docker Building Blocks
 
-Ocean compose consists of a set of building blocks that can be combined to form a local test environment. By default all building blocks will be started with the `./start_ocean.sh` script.
+Ocean compose consists of a set of building blocks that can be combined to form a local test environment. By default all building blocks will be started with the `./start_ocean.py` script.
 
 ### Pleuston
 
@@ -143,7 +144,7 @@ Hostname                    | External Ports   | Internal URL                   
 
 ## Spree Network
 
-If you run the `./start_ocean.sh` script with the `--local-spree-node` option (please see [Keeper Node](#keeper-node) section of this document for more details),
+If you run the `./start_ocean.py` script with the `--local-spree-node` option (please see [Keeper Node](#keeper-node) section of this document for more details),
 you will have available a keeper node in the local and private Spree Network with the following accounts enabled:
 
 Account                                      | Type     | Password/Key                 | Balance

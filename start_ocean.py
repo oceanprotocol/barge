@@ -1,8 +1,14 @@
-# #!/usr/bin/env bash
+#!/usr/bin/env python
 
 import os
 from pathlib import Path
 import libs
+import colorama
+import argparse
+
+
+# colorama is used for cross platform compatible terminal coloring
+
 
 # DIR = "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 # BRIZO_ENV_FILE = "${DIR}/brizo.env".format(DIR)
@@ -17,8 +23,8 @@ import libs
 DIR = libs.set_current_directory()
 BRIZO_ENV_FILE = libs.export("BRIZO_ENV_FILE", DIR + "/brizo.env")
 
-print(DIR)
-print(BRIZO_ENV_FILE)
+# print(DIR)
+# print(BRIZO_ENV_FILE)
 
 # # Patch $DIR if spaces (BRIZO_ENV_FILE does not need patch)
 # DIR="${DIR/ /\\ }"
@@ -45,22 +51,22 @@ OCEAN_VERSION = libs.export("OCEAN_VERSION", "stable")
 # export KEEPER_NETWORK_NAME="nile"
 # export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/nile_node.yml"
 
-KEEPER_DEPLOY_CONTRACTS = False
+KEEPER_DEPLOY_CONTRACTS = libs.export("KEEPER_DEPLOY_CONTRACTS", "false")
 
 HOME = str(Path.home())
 
-KEEPER_ARTIFACTS_FOLDER = HOME + "/.ocean/keeper-contracts/artifacts"
+KEEPER_ARTIFACTS_FOLDER = libs.export("KEEPER_ARTIFACTS_FOLDER", HOME + "/.ocean/keeper-contracts/artifacts")
 
 # Specify which ethereum client to run or connect to: development, kovan, spree or nile
-KEEPER_NETWORK_NAME = "nile"
-NODE_COMPOSE_FILE = COMPOSE_DIR + "/nodes/nile_node.yml"
+KEEPER_NETWORK_NAME = libs.export("KEEPER_NETWORK_NAME", "nile")
+NODE_COMPOSE_FILE = libs.export("NODE_COMPOSE_FILE", COMPOSE_DIR + "/nodes/nile_node.yml")
 
 # Ganache specific option, these two options have no effect when not running ganache-cli
 # export GANACHE_DATABASE_PATH="${DIR}"
 # export GANACHE_REUSE_DATABASE="false"
 
-GANACHE_DATABASE_PATH = DIR
-GANACHE_REUSE_DATABASE = False
+GANACHE_DATABASE_PATH = libs.export("GANACHE_DATABASE_PATH", DIR)
+GANACHE_REUSE_DATABASE = libs.export("GANACHE_REUSE_DATABASE", "false")
 
 # Specify the ethereum default RPC container provider
 # export KEEPER_RPC_HOST='keeper-node'
@@ -84,8 +90,16 @@ GANACHE_REUSE_DATABASE = False
 # COLOR_M="\033[0;35m"    # magenta
 # COLOR_C="\033[0;36m"    # cyan
 
+COLOR_R = colorama.Fore.RED
+COLOR_G = colorama.Fore.GREEN
+COLOR_Y = colorama.Fore.YELLOW
+COLOR_B = colorama.Fore.BLUE
+COLOR_M = colorama.Fore.MAGENTA
+COLOR_C = colorama.Fore.CYAN
+
 # # reset
 # COLOR_RESET="\033[00m"
+COLOR_RESET = colorama.Style.RESET_ALL
 
 # function get_acl_address {
 #     local version="${1:-latest}"
@@ -109,6 +123,17 @@ GANACHE_REUSE_DATABASE = False
 # COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
 # COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
 # COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
+
+colorama.init()
+print(colorama.Fore.BLUE + libs.read(".banner"))
+
+COMPOSE_FILES = " ".join(list(map(lambda x: "-f {}/{}.yml", [
+    "network_volumes",
+    "pleuston",
+    "aquarius",
+    "brizo",
+    "secret_store"
+])))
 
 # DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 

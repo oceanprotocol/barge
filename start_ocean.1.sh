@@ -2,17 +2,17 @@
 
 set -e
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-export BRIZO_ENV_FILE="${DIR}/brizo.env"
+# DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+# export BRIZO_ENV_FILE="${DIR}/brizo.env"
 
 
-echo $DIR
+# echo $DIR
 
-echo $BRIZO_ENV_FILE
+# echo $BRIZO_ENV_FILE
 
 # # Patch $DIR if spaces (BRIZO_ENV_FILE does not need patch)
-# DIR="${DIR/ /\\ }"
-# COMPOSE_DIR="${DIR}/compose-files"
+DIR="${DIR/ /\\ }"
+COMPOSE_DIR="${DIR}/compose-files"
 
 # export PROJECT_NAME="ocean"
 # export FORCEPULL="false"
@@ -72,13 +72,14 @@ echo $BRIZO_ENV_FILE
 
 # show_banner
 
-# COMPOSE_FILES=""
-# COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
-# COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
-# COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
-# COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
-# COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
+COMPOSE_FILES=""
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 
+echo $COMPOSE_FILES
 # DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
 # while :; do

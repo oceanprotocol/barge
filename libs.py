@@ -31,8 +31,13 @@ def export(variable: str, value: typing.Any) -> typing.Any:
 
 
 def convert_to_string(value: typing.Any) -> str:
-    """Converts the given value to the value it used to have in the Bash script."""
-
+    """Convert the given value to the value it used to have in the Bash script."""
     if isinstance(value, bool):
         return str(value).lower()
     return str(value)
+
+
+def read(file_name: str) -> str:
+    """Read a file using the best practices with statement."""
+    with open(file_name, 'r') as file:
+        return file.read()

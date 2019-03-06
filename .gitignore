@@ -7,3 +7,4 @@ ganache-db/
 .mypy_cache
 .pytest_cache
 __pycache__
+wily-report.html
