@@ -2,7 +2,7 @@
 
 import os
 import typing
-from subprocess import call
+import subprocess
 import colorama
 
 def set_current_directory() -> str:
@@ -44,9 +44,9 @@ def read(file_name: str) -> str:
         return file.read()
 
 
-def run(command: str):
+def run(command: str) -> str:
     """Emulate Bash command execution using shell argument for now to keep things simple."""
-    return call(command, shell=True)
+    return subprocess.check_output(command, shell=True)
 
 
 def show_banner():

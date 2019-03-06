@@ -77,7 +77,7 @@ GANACHE_REUSE_DATABASE = libs.export("GANACHE_REUSE_DATABASE", "false")
 KEEPER_RPC_HOST = libs.export("KEEPER_RPC_HOST", 'keeper-node')
 KEEPER_RPC_PORT = libs.export("KEEPER_RPC_PORT", '8545')
 KEEPER_RPC_URL = libs.export("KEEPER_RPC_URL", "http://{}:{}".format(KEEPER_RPC_HOST, KEEPER_RPC_PORT))
-KEEPER_MNEMONIC = ''
+KEEPER_MNEMONIC = libs.export("KEEPER_MNEMONIC", '')
 
 # # Enable acl-contract validation in Secret-store
 # export CONFIGURE_ACL="true"
@@ -87,7 +87,7 @@ KEEPER_MNEMONIC = ''
 # export LOCAL_USER_ID=$(id -u)
 # export LOCAL_GROUP_ID=$(id -g)
 
-LOCAL_USER_ID = libs.export("LOCAL_USER_ID", )
+LOCAL_USER_ID = libs.export("LOCAL_USER_ID", libs.run('id -u'))
 
 # # colors
 # COLOR_R="\033[0;31m"    # red
