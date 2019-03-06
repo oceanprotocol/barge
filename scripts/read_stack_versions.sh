@@ -2,7 +2,7 @@
 
 # get versions of the ocean stack running on the current barge containers
 
-CONTAINERS="keeper-contracts brizo aquarius pleuston"
+CONTAINERS="keeper-contracts brizo aquarius pleuston koi"
 for CONTAINER in $CONTAINERS; do
     VERSION='unknown'
     DOCKER_ID=$(docker container ls | grep ocean_$CONTAINER | awk '{print $1}')
