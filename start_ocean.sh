@@ -4,6 +4,7 @@ set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 export BRIZO_ENV_FILE="${DIR}/brizo.env"
+export KOI_ENV_FILE="${DIR}/koi.env"
 
 # Patch $DIR if spaces (BRIZO_ENV_FILE does not need patch)
 DIR="${DIR/ /\\ }"
@@ -17,11 +18,13 @@ export FORCEPULL="false"
 export NGINX_VERSION=${NGINX_VERSION:-"@sha256:816a226b57bb45b6388670b15f1adb60d83240857b2a0d476dd3f0d8d231799d"}
 export MONGO_VERSION=${MONGO_VERSION:-"@sha256:0b4646755d68c9a5f2283be540792cf2f11d85c5492a43fd6a65b8547b6749ca"}
 export PARITY_VERSION=${PARITY_VERSION:-"@sha256:c7056c425060c79f6e3783ef04eaf938a3f9deba00190613b9cb874ff9f85e0b"}
+
 export PARITY_ETHEREUM_VERSION=${PARITY_ETHEREUM_VERSION:-"@sha256:5425513f651f327aebb90925f262e36fa209573901d6637b2a29af473c0f5025"}
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-"@sha256:e49931525d61252761a54c852d7eefa0963cff52e1235bc964c26a50aaadd112"}
 export BRIZO_VERSION=${BRIZO_VERSION:-"@sha256:3a41265dee7d4701692cb0da8085269a027c6b3839bdd796d9922f4419f963bc"}
 export KEEPER_VERSION=${KEEPER_VERSION:-"@sha256:2ee8ccdd907b59c97b78350e29bc4792968d51db95a9762f655293d73f15343b"}
 export PLEUSTON_VERSION=${PLEUSTON_VERSION:-"@sha256:48175bcb5de7c9b22bb8cef48e2fce9142419e3f0bd18078ec0b368b99a96d9c"}
+export KOI_VERSION=${KOI_VERSION:-"@sha256:6684dd7b3e91c573e61230b806a59e5b42026352a085232aa478995245038d85"}
 
 
 # keeper options
@@ -81,6 +84,7 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/koi.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 
 DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
@@ -107,6 +111,7 @@ while :; do
             export BRIZO_VERSION=":latest"
             export KEEPER_VERSION=":latest"
             export PLEUSTON_VERSION=":latest"
+            export KOI_VERSION=":v0.1"
             ;;
         --force-pull)
             export FORCEPULL="true"
