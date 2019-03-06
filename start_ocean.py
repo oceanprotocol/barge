@@ -74,6 +74,11 @@ GANACHE_REUSE_DATABASE = libs.export("GANACHE_REUSE_DATABASE", "false")
 # export KEEPER_RPC_URL="http://"${KEEPER_RPC_HOST}:${KEEPER_RPC_PORT}
 # export KEEPER_MNEMONIC=''
 
+KEEPER_RPC_HOST = libs.export("KEEPER_RPC_HOST", 'keeper-node')
+KEEPER_RPC_PORT = libs.export("KEEPER_RPC_PORT", '8545')
+KEEPER_RPC_URL = libs.export("KEEPER_RPC_URL", "http://{}:{}".format(KEEPER_RPC_HOST, KEEPER_RPC_PORT))
+KEEPER_MNEMONIC = ''
+
 # # Enable acl-contract validation in Secret-store
 # export CONFIGURE_ACL="true"
 # export ACL_CONTRACT_ADDRESS=""
@@ -81,6 +86,8 @@ GANACHE_REUSE_DATABASE = libs.export("GANACHE_REUSE_DATABASE", "false")
 # # Export User UID and GID
 # export LOCAL_USER_ID=$(id -u)
 # export LOCAL_GROUP_ID=$(id -g)
+
+LOCAL_USER_ID = libs.export("LOCAL_USER_ID", )
 
 # # colors
 # COLOR_R="\033[0;31m"    # red
@@ -125,8 +132,10 @@ COLOR_RESET = colorama.Style.RESET_ALL
 # COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 
 colorama.init()
-print(colorama.Fore.BLUE + libs.read(".banner"))
+libs.show_banner()
 
+
+# create the list of files to pass to docker-compose
 COMPOSE_FILES = " ".join(list(map(lambda x: "-f {}/{}.yml", [
     "network_volumes",
     "pleuston",
