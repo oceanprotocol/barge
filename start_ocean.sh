@@ -26,10 +26,12 @@ export KEEPER_VERSION=${KEEPER_VERSION:-"@sha256:2ee8ccdd907b59c97b78350e29bc479
 export PLEUSTON_VERSION=${PLEUSTON_VERSION:-"@sha256:48175bcb5de7c9b22bb8cef48e2fce9142419e3f0bd18078ec0b368b99a96d9c"}
 export KOI_VERSION=${KOI_VERSION:-"@sha256:6684dd7b3e91c573e61230b806a59e5b42026352a085232aa478995245038d85"}
 
+# Ocean filesystem artifacts
+export OCEAN_HOME="${HOME}/.ocean"
 
 # keeper options
 export KEEPER_DEPLOY_CONTRACTS="false"
-export KEEPER_ARTIFACTS_FOLDER="${HOME}/.ocean/keeper-contracts/artifacts"
+export KEEPER_ARTIFACTS_FOLDER="${OCEAN_HOME}/keeper-contracts/artifacts"
 # Specify which ethereum client to run or connect to: development, kovan, spree or nile
 export KEEPER_NETWORK_NAME="nile"
 export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/nile_node.yml"
@@ -77,6 +79,16 @@ function show_banner {
     echo ""
 }
 
+function check_if_issue_100_fixed {
+    if [ -d "$OCEAN_HOME" ]; then
+        uid=$(ls -nd "$OCEAN_HOME" | awk '{print $3;}')
+        if [ "$uid" = "0" ]; then
+            printf $COLOR_R"WARN: $OCEAN_HOME is owned by root\n"$COLOR_RESET >&2
+        fi
+    fi
+}
+
+check_if_issue_100_fixed
 show_banner
 
 COMPOSE_FILES=""
