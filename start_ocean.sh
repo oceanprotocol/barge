@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# start_ocean.sh
+# Copyright (c) 2019 Ocean Protocol contributors
+# SPDX-License-Identifier: Apache-2.0
 
 set -e
 
@@ -66,16 +69,21 @@ function show_banner {
     echo ""
 }
 
-function check_if_issue_100_fixed {
+function check_if_owned_by_root {
     if [ -d "$OCEAN_HOME" ]; then
         uid=$(ls -nd "$OCEAN_HOME" | awk '{print $3;}')
         if [ "$uid" = "0" ]; then
             printf $COLOR_R"WARN: $OCEAN_HOME is owned by root\n"$COLOR_RESET >&2
+        else
+            uid=$(ls -nd "$KEEPER_ARTIFACTS_FOLDER" | awk '{print $3;}')
+            if [ "$uid" = "0" ]; then
+                printf $COLOR_R"WARN: $KEEPER_ARTIFACTS_FOLDER is owned by root\n"$COLOR_RESET >&2
+            fi
         fi
     fi
 }
 
-check_if_issue_100_fixed
+check_if_owned_by_root
 show_banner
 
 COMPOSE_FILES=""
