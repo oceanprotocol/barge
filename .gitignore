@@ -8,3 +8,4 @@ ganache-db/
 .pytest_cache
 __pycache__
 wily-report.html
+.vscode

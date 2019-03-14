@@ -83,11 +83,16 @@ KEEPER_MNEMONIC = libs.export("KEEPER_MNEMONIC", '')
 # export CONFIGURE_ACL="true"
 # export ACL_CONTRACT_ADDRESS=""
 
+CONFIGURE_ACL = libs.export("CONFIGURE_ACL", "true")
+ACL_CONTRACT_ADDRESS = libs.export("ACL_CONTRACT_ADDRESS", "")
+
 # # Export User UID and GID
 # export LOCAL_USER_ID=$(id -u)
 # export LOCAL_GROUP_ID=$(id -g)
 
-LOCAL_USER_ID = libs.export("LOCAL_USER_ID", libs.run('id -u'))
+# LOCAL_USER_ID = libs.export("LOCAL_USER_ID", libs.run('id -u'))
+LOCAL_USER_ID = libs.export("LOCAL_USER_ID", libs.get_user_id())
+LOCAL_GROUP_ID = libs.export("LOCAL_GROUP_ID", libs.get_group_id())
 
 # # colors
 # COLOR_R="\033[0;31m"    # red
@@ -108,7 +113,11 @@ COLOR_C = colorama.Fore.CYAN
 # COLOR_RESET="\033[00m"
 COLOR_RESET = colorama.Style.RESET_ALL
 
+#! need to get arg 1 and store it 
+
 # function get_acl_address {
+
+    #! takes param 1 if its not set sets it to -latest
 #     local version="${1:-latest}"
 #     line=$(grep "^${version}=" "${DIR}/${KEEPER_NETWORK_NAME}_acl_contract_addresses.txt")
 #     address="${line##*=}"

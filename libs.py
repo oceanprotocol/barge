@@ -5,6 +5,7 @@ import typing
 import subprocess
 import colorama
 
+
 def set_current_directory() -> str:
     """
     Set the current directory to the location of the script.
@@ -41,7 +42,7 @@ def convert_to_string(value: typing.Any) -> str:
 def read(file_name: str) -> str:
     """Read a file using the best practices with statement."""
     with open(file_name, 'r') as file:
-        return file.read()
+    return file.read()
 
 
 def run(command: str) -> str:
@@ -52,3 +53,26 @@ def run(command: str) -> str:
 def show_banner():
     """Replicate the show_banner bash function."""
     print(colorama.Fore.BLUE + libs.read(".banner") + "\n")
+
+
+def get_user_id():
+    """Return the current users' UID"""
+    return os.getuid()
+
+
+def get_group_id():
+    """Return the current GID"""
+    return os.getgid()
+
+
+def get_acl_address(arg1: str = '-latest'):
+    """Return the ACL address"""
+    #! takes param 1 if its not set sets it to -latest
+
+#     local version="${1:-latest}"
+    line =
+
+#     line=$(grep "^${version}=" "${DIR}/${KEEPER_NETWORK_NAME}_acl_contract_addresses.txt")
+#     address="${line##*=}"
+#     [ -z "${address}" ] && echo "Cannot determine the ACL Contract Address for ${KEEPER_NETWORK_NAME} version ${version}. Exiting" && exit 1
+#     echo "${address}"
