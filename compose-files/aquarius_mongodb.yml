@@ -1,5 +1,11 @@
 version: '3'
 services:
+  mongodb:
+    image: mongo:3.6
+    command: mongod
+    networks:
+      backend:
+        ipv4_address: 172.15.0.11
   aquarius:
     image: oceanprotocol/aquarius:${AQUARIUS_VERSION:-stable}
     ports:
@@ -7,14 +13,9 @@ services:
     networks:
       backend:
         ipv4_address: 172.15.0.15
+    depends_on:
+    - mongodb
     environment:
       DB_MODULE: ${DB_MODULE}
       DB_HOSTNAME: ${DB_HOSTNAME}
       DB_PORT: ${DB_PORT}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_SSL: ${DB_SSL}
-      DB_VERIFY_CERTS: ${DB_VERIFY_CERTS}
-      DB_CA_CERTS: ${DB_CA_CERTS}
-      DB_CLIENT_KEY: ${DB_CLIENT_KEY}
-      DB_CLIENT_CERT: ${DB_CLIENT_CERT}

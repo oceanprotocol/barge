@@ -40,6 +40,11 @@ export KEEPER_MNEMONIC=''
 export CONFIGURE_ACL="true"
 export ACL_CONTRACT_ADDRESS=""
 
+# Default Aquarius parameters
+export DB_MODULE="mongodb"
+export DB_HOSTNAME="mongodb"
+export DB_PORT="27017"
+
 # Export User UID and GID
 export LOCAL_USER_ID=$(id -u)
 export LOCAL_GROUP_ID=$(id -g)
@@ -89,7 +94,7 @@ show_banner
 COMPOSE_FILES=""
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
-COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_mongodb.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 
@@ -130,7 +135,7 @@ while :; do
             printf $COLOR_Y'Starting without Brizo...\n\n'$COLOR_RESET
             ;;
         --no-aquarius)
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_mongodb.yml/}"
             printf $COLOR_Y'Starting without Aquarius...\n\n'$COLOR_RESET
             ;;
         --no-secret-store)
@@ -147,6 +152,24 @@ while :; do
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
             NODE_COMPOSE_FILE=""
             printf $COLOR_Y'Starting only Secret Store...\n\n'$COLOR_RESET
+            ;;
+        #################################################
+        # Elasticsearch
+        #################################################
+        --elasticsearch)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_mongodb.yml/}"
+            export DB_MODULE="elasticsearch"
+            export DB_HOSTNAME="elasticsearch"
+            export DB_PORT="9200"
+            export DB_USERNAME="elastic"
+            export DB_PASSWORD="changeme"
+            export DB_SSL="false"
+            export DB_VERIFY_CERTS="false"
+            export DB_CA_CERTS=""
+            export DB_CLIENT_KEY=""
+            export DB_CLIENT_CERT=""
+            printf $COLOR_Y'Starting with Elasticsearch...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Contract/Storage switches
@@ -236,3 +259,4 @@ while :; do
     esac
     shift
 done
+

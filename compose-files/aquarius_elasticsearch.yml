@@ -1,5 +1,13 @@
 version: '3'
 services:
+  elasticsearch:
+    image: elasticsearch:6.4.1
+    networks:
+      backend:
+        ipv4_address: 172.15.0.11
+    environment:
+        ES_JAVA_OPTS: "-Xms500m -Xmx500m"
+
   aquarius:
     image: oceanprotocol/aquarius:${AQUARIUS_VERSION:-stable}
     ports:
@@ -7,6 +15,8 @@ services:
     networks:
       backend:
         ipv4_address: 172.15.0.15
+    depends_on:
+    - elasticsearch
     environment:
       DB_MODULE: ${DB_MODULE}
       DB_HOSTNAME: ${DB_HOSTNAME}

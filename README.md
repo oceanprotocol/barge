@@ -76,6 +76,7 @@ Option                      | Description
 `--no-aquarius`             | Start up Ocean without the `aquarius` Building Block.
 `--no-brizo`                | Start up Ocean without the `brizo` Building Block.
 `--no-secret-store`         | Start up Ocean without the `secret-store` Building Block.
+`--elasticsearch`           | Start up Ocean with ElasticSearch as DB engine for Aquarius instead of MongoDB.
 `--local-ganache-node`      | Runs a local `ganache` node.
 `--local-spree-node`        | Runs a node of the local `spree` network.
 `--local-nile-node`         | Runs a node of the `nile` network and connects the node to the `nile` network.
@@ -98,7 +99,8 @@ Hostname   | External Port | Internal Url          | Local Url             | Des
 
 ### Aquarius
 
-By default it will start two containers. This Building Block can be disabled by setting the `--no-aquarius` flag.
+By default it will start two containers (one for aquarius and one for its database engine). By default Barge will use MongoDB as DB Engine. You can use option `--elasticsearch` to use ElasticSearch intead.
+This Building Block can be disabled by setting the `--no-aquarius` flag.
 
 Hostname   | External Port | Internal Url         | Local Url             | Description
 -----------|---------------|----------------------|-----------------------|--------------
