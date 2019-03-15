@@ -191,9 +191,11 @@ while :; do
         # connects you to kovan
         --local-kovan-node)
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/kovan_node.yml"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
             export KEEPER_NETWORK_NAME="kovan"
             export ACL_CONTRACT_ADDRESS="$(get_acl_address ${KEEPER_VERSION})"
             printf $COLOR_Y'Starting with local Kovan node...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
             ;;
         # spins up a new ganache blockchain
         --local-ganache-node)
@@ -208,9 +210,11 @@ while :; do
         # connects you to nile ocean testnet
         --local-nile-node)
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/nile_node.yml"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
             export KEEPER_NETWORK_NAME="nile"
             export ACL_CONTRACT_ADDRESS="$(get_acl_address ${KEEPER_VERSION})"
             printf $COLOR_Y'Starting with local Nile node...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
             ;;
         # spins up spree local testnet
         --local-spree-node)
