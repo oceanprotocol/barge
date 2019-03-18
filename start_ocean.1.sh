@@ -2,8 +2,8 @@
 
 set -e
 
-# DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-# export BRIZO_ENV_FILE="${DIR}/brizo.env"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+export BRIZO_ENV_FILE="${DIR}/brizo.env"
 
 
 # echo $DIR
@@ -24,7 +24,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 # export KEEPER_DEPLOY_CONTRACTS="false"
 # export KEEPER_ARTIFACTS_FOLDER="${HOME}/.ocean/keeper-contracts/artifacts"
 # # Specify which ethereum client to run or connect to: development, kovan, spree or nile
-# export KEEPER_NETWORK_NAME="nile"
+export KEEPER_NETWORK_NAME="nile"
 # export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/nile_node.yml"
 
 # # Ganache specific option, these two options have no effect when not running ganache-cli
@@ -56,13 +56,15 @@ COMPOSE_DIR="${DIR}/compose-files"
 # # reset
 # COLOR_RESET="\033[00m"
 
-# function get_acl_address {
-#     local version="${1:-latest}"
-#     line=$(grep "^${version}=" "${DIR}/${KEEPER_NETWORK_NAME}_acl_contract_addresses.txt")
-#     address="${line##*=}"
-#     [ -z "${address}" ] && echo "Cannot determine the ACL Contract Address for ${KEEPER_NETWORK_NAME} version ${version}. Exiting" && exit 1
-#     echo "${address}"
-# }
+function get_acl_address {
+    local version="${1:-latest}"
+    line=$(grep "^${version}=" "${DIR}/${KEEPER_NETWORK_NAME}_acl_contract_addresses.txt")
+    address="${line##*=}"
+    [ -z "${address}" ] && echo "Cannot determine the ACL Contract Address for ${KEEPER_NETWORK_NAME} version ${version}. Exiting" && exit 1
+    echo "${address}"
+}
+
+get_acl_address
 
 # function show_banner {
 #     local output=$(cat .banner)
@@ -79,7 +81,7 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 
-echo $COMPOSE_FILES
+# echo $COMPOSE_FILES
 # DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
 # while :; do
