@@ -9,7 +9,6 @@ services:
       --base-path /home/parity/base
       --engine-signer 0x00bd138abd70e2f00903268f3db08f2d25677c9e
       --ws-interface all
-      --light
       --jsonrpc-cors all
       --jsonrpc-interface all
       --jsonrpc-hosts all
