@@ -65,9 +65,9 @@ def get_group_id():
     return os.getgid()
 
 
-def get_acl_address(DIR: str, KEEPER_NETWORK_NAME: str, arg1: str = '-latest'):
+def get_acl_address(DIR: str, KEEPER_NETWORK_NAME: str, arg1: str = '-latest') -> str:
     """Return the ACL address"""
-    #! takes param 1 if its not set sets it to -latest
+    #! takes param 1 from cmd if its not set sets it to -latest
 
 #     local version="${1:-latest}"
 
@@ -75,6 +75,16 @@ def get_acl_address(DIR: str, KEEPER_NETWORK_NAME: str, arg1: str = '-latest'):
     # pulling in the address from it based on the version
 
     # I can do that with vanilla python
+
+    with open("{}/{}_acl_contract_addresses.txt".format(DIR, KEEPER_NETWORK_NAME), 'r') as f:
+        lines = f.readlines()
+
+        # remove title
+        del lines[0]
+
+        # clean off trailing character
+        clean_lines = list(map(lambda x: x[:-1].split('='), lines))
+
 
 
     # line =
