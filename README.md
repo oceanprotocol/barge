@@ -39,7 +39,7 @@ You need to have the newest versions of:
 
 ## Get Started
 
-Bring up an instance of the whole Ocean Protocol network stack (connected to the Nile Testnet) with the `./start_ocean.sh` script:
+Bring up an instance of the whole Ocean Protocol network stack (including a local Spree network) with the `./start_ocean.sh` script:
 
 ```bash
 git clone git@github.com:oceanprotocol/barge.git
@@ -78,7 +78,7 @@ Option                      | Description
 `--no-secret-store`         | Start up Ocean without the `secret-store` Building Block.
 `--elasticsearch`           | Start up Ocean with ElasticSearch as DB engine for Aquarius instead of MongoDB.
 `--local-ganache-node`      | Runs a local `ganache` node.
-`--local-spree-node`        | Runs a node of the local `spree` network.
+`--local-spree-node`        | Runs a node of the local `spree` network. This is the default.
 `--local-nile-node`         | Runs a node of the `nile` network and connects the node to the `nile` network.
 `--local-kovan-node`        | Runs a light node of the `kovan` network and connects the node to the `kovan` network.
 `--reuse-ganache-database`  | Configures a running `ganache` node to use a persistent database.
@@ -124,13 +124,13 @@ Hostname      | External Port | Internal Url            | Local Url             
 --------------|---------------|-------------------------|-----------------------|--------------
 `keeper-node` | `8545`        | http://keeper-node:8545 | http://localhost:8545 | An Ethereum RPC node
 
-This node can be one of the following types (with the default being `nile`):
+This node can be one of the following types (with the default being `spree`):
 
 Node      | Description
 ----------|-------------
 `ganache` | Runs a local [ganache-cli](https://github.com/trufflesuite/ganache-cli) node that is not persistent by default. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.
-`spree`   | Runs a local node of the Spree Network. See [Spree Network](#spree-network) for details. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.
-`nile`    | This is the default. Runs a local node of the Nile Network and connects to the [Nile Testnet](https://docs.oceanprotocol.com/concepts/testnets/#nile-testnet).
+`spree`   | This is the default. Runs a local node of the Spree Network. See [Spree Network](#spree-network) for details. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.
+`nile`    | Runs a local node of the Nile Network and connects to the [Nile Testnet](https://docs.oceanprotocol.com/concepts/testnets/#nile-testnet).
 `kovan`   | Runs a local node of the Kovan Network and connects to the [Kovan Testnet](https://docs.oceanprotocol.com/concepts/testnets/#kovan-testnet).
 
 ### Secret Store
