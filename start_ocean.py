@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import os
 from pathlib import Path
 import libs
 import colorama
@@ -113,7 +112,7 @@ COLOR_C = colorama.Fore.CYAN
 # COLOR_RESET="\033[00m"
 COLOR_RESET = colorama.Style.RESET_ALL
 
-#! need to get arg 1 and store it 
+#! need to get arg 1 and store it
 
 # function get_acl_address {
 
@@ -141,8 +140,10 @@ COLOR_RESET = colorama.Style.RESET_ALL
 # COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 
 colorama.init()
+
 libs.show_banner()
 
+print(COLOR_RESET)
 
 # create the list of files to pass to docker-compose
 COMPOSE_FILES = " ".join(list(map(lambda x: "-f {}/{}.yml", [
@@ -153,7 +154,23 @@ COMPOSE_FILES = " ".join(list(map(lambda x: "-f {}/{}.yml", [
     "secret_store"
 ])))
 
+
+
 # DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
+
+DOCKER_COMPOSE_EXTRA_OPTS = libs.export("DOCKER_COMPOSE_EXTRA_OPTS", '-')
+
+parser = argparse.ArgumentParser(description='Barge makes it easy to build projects using the Ocean Protocol')
+
+
+# ! add to docs that --help and -h display the help dialog
+
+# ! mmight blow up during testing think action might have to be a function defined here
+parser.add_argument('--no-ansi', action='store_true', help='disables text coloring')
+args = parser.parse_args()
+print(args)
+# doesn't blow up or call funct??
+
 
 # while :; do
 #     case $1 in

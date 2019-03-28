@@ -4,6 +4,7 @@ import os
 import typing
 import subprocess
 import colorama
+import sys
 
 
 def set_current_directory() -> str:
@@ -42,7 +43,7 @@ def convert_to_string(value: typing.Any) -> str:
 def read(file_name: str) -> str:
     """Read a file using the best practices with statement."""
     with open(file_name, 'r') as file:
-    return file.read()
+        return file.read()
 
 
 def run(command: str) -> str:
@@ -52,7 +53,7 @@ def run(command: str) -> str:
 
 def show_banner():
     """Replicate the show_banner bash function."""
-    print(colorama.Fore.BLUE + libs.read(".banner") + "\n")
+    print(colorama.Fore.BLUE + read(".banner") + "\n")
 
 
 def get_user_id():
@@ -65,27 +66,26 @@ def get_group_id():
     return os.getgid()
 
 
-def get_acl_address(DIR: str, KEEPER_NETWORK_NAME: str, arg1: str = '-latest') -> str:
+def get_acl_address(directory: str, keeper_network_name: str, version: str = '-latest') -> str:
     """Return the ACL address"""
     #! takes param 1 from cmd if its not set sets it to -latest
 
-#     local version="${1:-latest}"
+    text = read("{}/{}_acl_contract_addresses.txt".format(directory, keeper_network_name))
+    lines = text.splitlines()
 
-    # lol all its doing is reading in the txt file from local file system and then
-    # pulling in the address from it based on the version
+    # remove title
+    del lines[0]
 
-    # I can do that with vanilla python
+    # get keys and values
+    key_value_pairs = list(map(lambda x: x.split('='), lines))
 
-    with open("{}/{}_acl_contract_addresses.txt".format(DIR, KEEPER_NETWORK_NAME), 'r') as f:
-        lines = f.readlines()
+    addresses = dict(key_value_pairs)
 
-        # remove title
-        del lines[0]
+    if version not in addresses:
+        print('Cannot determine the ACL Contract Address for {} version {}. Exiting'.format(keeper_network_name, version))
+        sys.exit(1)
 
-        # clean off trailing character
-        clean_lines = list(map(lambda x: x[:-1].split('='), lines))
-
-
+    return addresses[version]
 
     # line =
 
