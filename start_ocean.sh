@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# start_ocean.sh
+# Copyright (c) 2019 Ocean Protocol contributors
+# SPDX-License-Identifier: Apache-2.0
 
 set -e
 
@@ -18,12 +21,16 @@ export PLEUSTON_VERSION=${PLEUSTON_VERSION:-latest} # Maybe not fully working!
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
 
+# Ocean filesystem artifacts
+export OCEAN_HOME="${HOME}/.ocean"
+
 # keeper options
+export KEEPER_OWNER_ROLE_ADDRESS="${KEEPER_OWNER_ROLE_ADDRESS}"
 export KEEPER_DEPLOY_CONTRACTS="false"
-export KEEPER_ARTIFACTS_FOLDER="${HOME}/.ocean/keeper-contracts/artifacts"
+export KEEPER_ARTIFACTS_FOLDER="${OCEAN_HOME}/keeper-contracts/artifacts"
 # Specify which ethereum client to run or connect to: development, kovan, spree or nile
-export KEEPER_NETWORK_NAME="nile"
-export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/nile_node.yml"
+export KEEPER_NETWORK_NAME="spree"
+export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/spree_node.yml"
 
 # Ganache specific option, these two options have no effect when not running ganache-cli
 export GANACHE_DATABASE_PATH="${DIR}"
@@ -38,6 +45,11 @@ export KEEPER_MNEMONIC=''
 # Enable acl-contract validation in Secret-store
 export CONFIGURE_ACL="true"
 export ACL_CONTRACT_ADDRESS=""
+
+# Default Aquarius parameters
+export DB_MODULE="mongodb"
+export DB_HOSTNAME="mongodb"
+export DB_PORT="27017"
 
 # Export User UID and GID
 export LOCAL_USER_ID=$(id -u)
@@ -68,12 +80,27 @@ function show_banner {
     echo ""
 }
 
+function check_if_owned_by_root {
+    if [ -d "$OCEAN_HOME" ]; then
+        uid=$(ls -nd "$OCEAN_HOME" | awk '{print $3;}')
+        if [ "$uid" = "0" ]; then
+            printf $COLOR_R"WARN: $OCEAN_HOME is owned by root\n"$COLOR_RESET >&2
+        else
+            uid=$(ls -nd "$KEEPER_ARTIFACTS_FOLDER" | awk '{print $3;}')
+            if [ "$uid" = "0" ]; then
+                printf $COLOR_R"WARN: $KEEPER_ARTIFACTS_FOLDER is owned by root\n"$COLOR_RESET >&2
+            fi
+        fi
+    fi
+}
+
+check_if_owned_by_root
 show_banner
 
 COMPOSE_FILES=""
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
-COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_mongodb.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 
@@ -121,7 +148,7 @@ while :; do
             printf $COLOR_Y'Starting without Brizo...\n\n'$COLOR_RESET
             ;;
         --no-aquarius)
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_mongodb.yml/}"
             printf $COLOR_Y'Starting without Aquarius...\n\n'$COLOR_RESET
             ;;
         --no-secret-store)
@@ -138,6 +165,24 @@ while :; do
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
             NODE_COMPOSE_FILE=""
             printf $COLOR_Y'Starting only Secret Store...\n\n'$COLOR_RESET
+            ;;
+        #################################################
+        # Elasticsearch
+        #################################################
+        --elasticsearch)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_mongodb.yml/}"
+            export DB_MODULE="elasticsearch"
+            export DB_HOSTNAME="elasticsearch"
+            export DB_PORT="9200"
+            export DB_USERNAME="elastic"
+            export DB_PASSWORD="changeme"
+            export DB_SSL="false"
+            export DB_VERIFY_CERTS="false"
+            export DB_CA_CERTS=""
+            export DB_CLIENT_KEY=""
+            export DB_CLIENT_CERT=""
+            printf $COLOR_Y'Starting with Elasticsearch...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Contract/Storage switches
@@ -159,9 +204,11 @@ while :; do
         # connects you to kovan
         --local-kovan-node)
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/kovan_node.yml"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
             export KEEPER_NETWORK_NAME="kovan"
             export ACL_CONTRACT_ADDRESS="$(get_acl_address ${KEEPER_VERSION})"
             printf $COLOR_Y'Starting with local Kovan node...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
             ;;
         # spins up a new ganache blockchain
         --local-ganache-node)
@@ -176,9 +223,11 @@ while :; do
         # connects you to nile ocean testnet
         --local-nile-node)
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/nile_node.yml"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
             export KEEPER_NETWORK_NAME="nile"
             export ACL_CONTRACT_ADDRESS="$(get_acl_address ${KEEPER_VERSION})"
             printf $COLOR_Y'Starting with local Nile node...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
             ;;
         # spins up spree local testnet
         --local-spree-node)
@@ -227,3 +276,4 @@ while :; do
     esac
     shift
 done
+

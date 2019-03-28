@@ -1,4 +1,4 @@
-version: '2.1'
+version: '3'
 services:
   keeper-node:
     image: parity/parity:v2.3.2
@@ -9,14 +9,12 @@ services:
       --base-path /home/parity/base
       --engine-signer 0x00bd138abd70e2f00903268f3db08f2d25677c9e
       --ws-interface all
-      --light
       --jsonrpc-cors all
       --jsonrpc-interface all
       --jsonrpc-hosts all
       --jsonrpc-apis all
       --unsafe-expose
       --unlock 0x00bd138abd70e2f00903268f3db08f2d25677c9e
-      --node-key 0xb3244c104fb56d28d3979f6cd14a8b5cf5b109171d293f4454c97c173a9f9374
     volumes:
       - ../networks/nile/config:/home/parity/parity/config
       - keeper-node:/home/parity/.local/share/io.parity.ethereum/
