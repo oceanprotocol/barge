@@ -1,5 +1,17 @@
-.idea/
+# Project specific
 artifacts/
 ganache-db/
+
+# IDE side effects
+.idea/
+
+# Emacs
+*~
+
+# mutable secret store config (Issue #126)
+networks/secret-store/config/config.toml
+
+# Mac OS Filesystem artifacts
 .DS_Store
 **/.DS_Store
+._*
