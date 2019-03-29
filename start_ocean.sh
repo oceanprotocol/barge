@@ -74,6 +74,14 @@ function show_banner {
     echo ""
 }
 
+function configure_secret_store {
+    # restore default secret store config (Issue #126)
+    if [ -e "$DIR/networks/secret-store/config/config.toml.save" ]; then
+        cp "$DIR/networks/secret-store/config/config.toml.save" \
+           "$DIR/networks/secret-store/config/config.toml"
+    fi
+}
+
 function check_if_owned_by_root {
     if [ -d "$OCEAN_HOME" ]; then
         uid=$(ls -nd "$OCEAN_HOME" | awk '{print $3;}')
@@ -256,6 +264,7 @@ while :; do
             ;;
         *)
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
+            configure_secret_store
             [ ! -z ${NODE_COMPOSE_FILE} ] && COMPOSE_FILES+=" -f ${NODE_COMPOSE_FILE}"
             [ ${FORCEPULL} = "true" ] && docker-compose $DOCKER_COMPOSE_EXTRA_OPTS --project-name=$PROJECT_NAME $COMPOSE_FILES pull
             eval docker-compose $DOCKER_COMPOSE_EXTRA_OPTS --project-name=$PROJECT_NAME $COMPOSE_FILES up --remove-orphans
@@ -263,4 +272,3 @@ while :; do
     esac
     shift
 done
-
