@@ -53,7 +53,7 @@ def run(command: str) -> str:
 
 def show_banner():
     """Replicate the show_banner bash function."""
-    print(colorama.Fore.BLUE + read(".banner") + "\n")
+    print(colorama.Fore.BLUE + read(".banner"))
 
 
 def get_user_id():
@@ -86,6 +86,14 @@ def get_acl_address(directory: str, keeper_network_name: str, version: str = '-l
         sys.exit(1)
 
     return addresses[version]
+
+
+def add_cli_flags(parser, flags: dict):
+    """Adds each flag to the CLI. Accepts a dictionary containing the name of the flag and its help description."""
+
+    for flag, help in flags.items():
+        parser.add_argument('--' + flag, action='store_true', help=help)
+
 
     # line =
 

@@ -165,8 +165,26 @@ parser = argparse.ArgumentParser(description='Barge makes it easy to build proje
 
 # ! add to docs that --help and -h display the help dialog
 
+libs.add_cli_flags(
+    parser,
+    {
+        'no-ansi': 'Disables text coloring',
+        'latest': 'Pulls latest version of containers',
+        'force-pull': 'Force docker to pull the components',
+        'no-pleuston': 'Exclude Pleuston',
+        'no-brizo': 'Exclude Brizo',
+        'no-aquarius': 'Exclude Aquarius',
+        'no-secret-store': 'Exclude secret store',
+        'only-secret-store': 'Only launch the secret store',
+        'reuse-ganache-database': 'Don\'t wipe the ganache database after reboot',
+        'no-acl-contract': 'Disables ACL validation in secret store'
+    },
+)
+
 # ! mmight blow up during testing think action might have to be a function defined here
-parser.add_argument('--no-ansi', action='store_true', help='disables text coloring')
+# parser.add_argument('--no-ansi', action='store_true', help='disables text coloring')
+# parser.add_argument('--latest', action='store_true', help='pulls latest version of containers')
+# parser.add_argument('--force-pull', action='store_true', help='force docker to pull the components')
 args = parser.parse_args()
 print(args)
 # doesn't blow up or call funct??
