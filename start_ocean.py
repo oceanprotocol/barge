@@ -177,7 +177,8 @@ libs.add_cli_flags(
         'no-secret-store': 'Exclude secret store',
         'only-secret-store': 'Only launch the secret store',
         'reuse-ganache-database': 'Don\'t wipe the ganache database after reboot',
-        'no-acl-contract': 'Disables ACL validation in secret store'
+        'no-acl-contract': 'Disables ACL validation in secret store',
+        'local-kovan-node': 'Starts a local kovan node'
     },
 )
 
