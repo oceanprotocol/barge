@@ -4,7 +4,7 @@ from pathlib import Path
 import libs
 import colorama
 import argparse
-
+from colors import *
 
 # colorama is used for cross platform compatible terminal coloring
 
@@ -101,16 +101,7 @@ LOCAL_GROUP_ID = libs.export("LOCAL_GROUP_ID", libs.get_group_id())
 # COLOR_M="\033[0;35m"    # magenta
 # COLOR_C="\033[0;36m"    # cyan
 
-COLOR_R = colorama.Fore.RED
-COLOR_G = colorama.Fore.GREEN
-COLOR_Y = colorama.Fore.YELLOW
-COLOR_B = colorama.Fore.BLUE
-COLOR_M = colorama.Fore.MAGENTA
-COLOR_C = colorama.Fore.CYAN
 
-# # reset
-# COLOR_RESET="\033[00m"
-COLOR_RESET = colorama.Style.RESET_ALL
 
 #! need to get arg 1 and store it
 
@@ -178,18 +169,40 @@ libs.add_cli_flags(
         'only-secret-store': 'Only launch the secret store',
         'reuse-ganache-database': 'Don\'t wipe the ganache database after reboot',
         'no-acl-contract': 'Disables ACL validation in secret store',
-        'local-kovan-node': 'Starts a local kovan node'
+        'local-kovan-node': 'Use a local kovan node',
+        'local-ganache-node': 'Use a local ganache node',
+        'local-spree-node': 'Use a local spree node',
+        'purge': 'Removes volumes and containers',
     },
 )
 
 # ! mmight blow up during testing think action might have to be a function defined here
-# parser.add_argument('--no-ansi', action='store_true', help='disables text coloring')
-# parser.add_argument('--latest', action='store_true', help='pulls latest version of containers')
-# parser.add_argument('--force-pull', action='store_true', help='force docker to pull the components')
 args = parser.parse_args()
-print(args)
-# doesn't blow up or call funct??
 
+if args.no_ansi:
+    DOCKER_COMPOSE_EXTRA_OPTS = DOCKER_COMPOSE_EXTRA_OPTS + " --no-ansi"
+    COLOR_R = ""
+    COLOR_G = ""
+    COLOR_Y = ""
+    COLOR_B = ""
+    COLOR_M = ""
+    COLOR_C = ""
+    COLOR_RESET = ""
+
+if args.latest:
+    libs.print_switch_message("Switched to latest components")
+    # AQUARIUS_VERSION = libs.export()
+
+    # todo ! look at what this flag does in the shell script with regards to below  vars
+
+    # export AQUARIUS_VERSION=${AQUARIUS_VERSION:-$OCEAN_VERSION}
+    # export BRIZO_VERSION=${BRIZO_VERSION:-$OCEAN_VERSION}
+    # export KEEPER_VERSION=${KEEPER_VERSION:-$OCEAN_VERSION}
+    # export PLEUSTON_VERSION=${PLEUSTON_VERSION:-$OCEAN_VERSION}
+
+if args.force_pull:
+    FORCEPULL = libs.export("FORCEPULL", "true")
+    libs.print_switch_message("Pulling latest components")
 
 # while :; do
 #     case $1 in

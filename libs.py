@@ -5,6 +5,7 @@ import typing
 import subprocess
 import colorama
 import sys
+from colors import *
 
 
 def set_current_directory() -> str:
@@ -94,6 +95,9 @@ def add_cli_flags(parser, flags: dict):
     for flag, help in flags.items():
         parser.add_argument('--' + flag, action='store_true', help=help)
 
+
+def print_switch_message(msg: str):
+    print(COLOR_Y + msg + "...\n\n" + COLOR_RESET)
 
     # line =
 
