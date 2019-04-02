@@ -100,6 +100,7 @@ function check_if_owned_by_root {
 function clean_local_contracts {
     rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
     rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.spree.json
+    rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.development.json
 }
 
 check_if_owned_by_root
@@ -222,8 +223,6 @@ while :; do
             export KEEPER_MNEMONIC=''
             export KEEPER_NETWORK_NAME="development"
             export KEEPER_DEPLOY_CONTRACTS="true"
-            rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
-            rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.development.json
             printf $COLOR_Y'Starting with local Ganache node...\n\n'$COLOR_RESET
             ;;
         # connects you to nile ocean testnet
@@ -245,8 +244,6 @@ while :; do
             export KEEPER_MNEMONIC="taxi music thumb unique chat sand crew more leg another off lamp"
             export KEEPER_NETWORK_NAME="spree"
             export KEEPER_DEPLOY_CONTRACTS="true"
-            rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
-            rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.spree.json
             printf $COLOR_Y'Starting with local Spree node...\n\n'$COLOR_RESET
             ;;
         #################################################
