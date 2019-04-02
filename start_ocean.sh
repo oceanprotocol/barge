@@ -97,6 +97,11 @@ function check_if_owned_by_root {
     fi
 }
 
+function clean_local_contracts {
+    rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
+    rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.spree.json
+}
+
 check_if_owned_by_root
 show_banner
 
@@ -110,9 +115,6 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 
 DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
-# Because the default network is Spree:
-rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
-rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.spree.json
 
 while :; do
     case $1 in
@@ -277,6 +279,7 @@ while :; do
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
             configure_secret_store
             [ ! -z ${NODE_COMPOSE_FILE} ] && COMPOSE_FILES+=" -f ${NODE_COMPOSE_FILE}"
+            [ ${KEEPER_DEPLOY_CONTRACTS} = "true" ] && clean_local_contracts
             [ ${FORCEPULL} = "true" ] && docker-compose $DOCKER_COMPOSE_EXTRA_OPTS --project-name=$PROJECT_NAME $COMPOSE_FILES pull
             eval docker-compose $DOCKER_COMPOSE_EXTRA_OPTS --project-name=$PROJECT_NAME $COMPOSE_FILES up --remove-orphans
             break
