@@ -12,6 +12,12 @@ export BRIZO_ENV_FILE="${DIR}/brizo.env"
 DIR="${DIR/ /\\ }"
 COMPOSE_DIR="${DIR}/compose-files"
 
+# Default versions of Aquarius, Brizo, Keeper Contracts and Pleuston
+export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v0.2.0}
+export BRIZO_VERSION=${BRIZO_VERSION:-v0.3.1}
+export KEEPER_VERSION=${KEEPER_VERSION:-v0.9.0}
+export PLEUSTON_VERSION=${PLEUSTON_VERSION:-v0.3.0}
+
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
 
@@ -136,9 +142,16 @@ while :; do
             export PLEUSTON_VERSION=${PLEUSTON_VERSION:-latest}
             printf $COLOR_Y'Switched to latest components...\n\n'$COLOR_RESET
             ;;
+        --stable)
+            export AQUARIUS_VERSION=${AQUARIUS_VERSION:-stable}
+            export BRIZO_VERSION=${BRIZO_VERSION:-stable}
+            export KEEPER_VERSION=${KEEPER_VERSION:-stable}
+            export PLEUSTON_VERSION=${PLEUSTON_VERSION:-stable}
+            printf $COLOR_Y'Switched to stable components...\n\n'$COLOR_RESET
+            ;;
         --force-pull)
             export FORCEPULL="true"
-            printf $COLOR_Y'Pulling latest components...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Pulling the latest revision of the used Docker images...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Exclude switches

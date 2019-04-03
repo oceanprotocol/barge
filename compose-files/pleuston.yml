@@ -1,7 +1,7 @@
 version: '3'
 services:
   pleuston:
-    image: oceanprotocol/pleuston:${PLEUSTON_VERSION:-stable}
+    image: oceanprotocol/pleuston:$PLEUSTON_VERSION
     networks:
       backend:
         ipv4_address: 172.15.0.19

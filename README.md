@@ -14,7 +14,7 @@
 
   - [Prerequisites](#prerequisites)
   - [Get Started](#get-started)
-     - [Script Options](#script-options)
+  - [Script Options](#script-options)
   - [Docker Building Blocks](#docker-building-blocks)
     - [Pleuston](#pleuston)
     - [Aquarius](#aquarius)
@@ -33,13 +33,20 @@ You need to have the newest versions of:
 
 * [Docker](https://www.docker.com/get-started)
 * [Docker Compose](https://docs.docker.com/compose/)
-* Linux/MacOS. Currently Windows OS is not supported.
-
-**To run as a publisher:** `Brizo` configuration must be set with valid Azure account credentials. This is done in the file [`brizo.env`](./brizo.env). Follow our tutorial [Set up Azure Storage](https://docs.oceanprotocol.com/tutorials/azure-for-brizo/) to learn how to get those credentials.
+* Linux or macOS. Currently Windows is not supported.
+* If you want to use Azure Storage with Brizo (and you might not), then you must edit the file [`brizo.env`](./brizo.env) to have your Azure credentials. To learn how to get those credentials, see our tutorial to [Set up Azure Storage](https://docs.oceanprotocol.com/tutorials/azure-for-brizo/).
 
 ## Get Started
 
-Bring up an instance of the whole Ocean Protocol network stack (including a local Spree network) with the `./start_ocean.sh` script:
+It's overkill, but to be _sure_ that you use exactly the Docker images and volumes you want, you can start by pruning all the Docker things in your system:
+
+```bash
+docker system prune --all --volumes
+```
+
+(An alternative would be to add the options `--purge` and `--force-pull` in your call to the `start_ocean.sh` script below but that's not as sure as the above command.)
+
+If you're new to Barge, it's best to do something like:
 
 ```bash
 git clone git@github.com:oceanprotocol/barge.git
@@ -48,30 +55,37 @@ cd barge
 ./start_ocean.sh
 ```
 
-<img width="535" alt="screen shot 2018-10-10 at 12 20 48" src="https://user-images.githubusercontent.com/90316/46729966-22206600-cc87-11e8-9e1a-156d8a6c5e43.png">
+with no `--latest` or `--stable` option.
+That will run the current default versions of Aquarius, Brizo, Pleuston and Keeper Contracts (listed in the table below).
+It will also run a local Spree network (i.e. `--local-spree-node`).
 
----
+<img width="535" alt="Welcome to Ocean Protocol" src="Welcome_to_Ocean_Protocol.png">
 
-This will bring up the `stable` versions of all components, referring to their respective `master` branches.
+## Script Options
 
-To get the `latest` versions of all components, referring to their `develop` branches, pass the argument `--latest`:
+Options that set the versions (Docker image tags) of Aquarius, Brizo, Keeper Contracts and Pleuston:
+
+Option      | Aquarius  | Brizo    | Keeper   | Pleuston | Notes
+------------|-----------|----------|----------|----------|-------
+`--latest`  | `latest`  | `latest` | `latest` | `latest` |
+`--stable`  | `stable`  | `stable` | `stable` | `stable` |
+(Default)   | `v0.2.0`  | `v0.3.1` | `v0.9.0` | `v0.3.0` | Works with squid-py v0.5.11, squid-js v0.5.0 & squid-java v0.4.0
+
+Note: The `latest` Docker image tag derives from the `develop` branch of the component's Git repo and the `stable` Docker image tag derives from the `master` branch.
+
+You can override the Docker image tag used for a particular component by setting its associated environment variable (`AQUARIUS_VERSION`, `BRIZO_VERSION`, `KEEPER_VERSION` or `PLEUSTON_VERSION`) before calling `start_ocean.sh`. For example:
 
 ```bash
-./start_ocean.sh --latest
+export BRIZO_VERSION=v0.2.1
+./start_ocean.sh
 ```
 
-After getting everything running, you can open the **Pleuston Frontend** application in your browser:
+will use the default Docker image tags for Aquarius, Keeper Contracts and Pleuston, but `v0.2.1` for Brizo.
 
-[http://localhost:3000](http://localhost:3000)
-
-### Script Options
-
-The `./start_ocean.sh` script provides the following options:
+Other `start_ocean.sh` options:
 
 Option                      | Description
 ----------------------------| -----------
-`--latest`                  | `latest` means to use the latest `develop` branches whereas `stable` means to use the last `stable` releases.
-`--force-pull`              | Force pulling the latest revision of the used docker images.
 `--no-pleuston`             | Start up Ocean without the `pleuston` Building Block. Helpful for development on `pleuston`.
 `--no-aquarius`             | Start up Ocean without the `aquarius` Building Block.
 `--no-brizo`                | Start up Ocean without the `brizo` Building Block.
@@ -83,15 +97,20 @@ Option                      | Description
 `--local-kovan-node`        | Runs a light node of the `kovan` network and connects the node to the `kovan` network.
 `--reuse-ganache-database`  | Configures a running `ganache` node to use a persistent database.
 `--acl-contract`            | Configures secret-store `acl_contract` option to enable secret-store authorization.
-`--purge`                   | Removes the containers, volumes, artifact folder and networks used by the script.
+`--force-pull`              | Force pulling the latest revision of the used Docker images.
+`--purge`                   | Removes the Docker containers, volumes, artifact folder and networks used by the script.
 
 ## Docker Building Blocks
 
-Ocean compose consists of a set of building blocks that can be combined to form a local test environment. By default all building blocks will be started with the `./start_ocean.sh` script.
+Barge consists of a set of building blocks that can be combined to form a local test environment. By default all building blocks will be started by the `start_ocean.sh` script.
 
 ### Pleuston
 
-By default it will start one container. This Building Block can be disabled by setting the `--no-pleuston` flag.
+By default it will start one container. If Pleuston is running, you can open the **Pleuston Frontend** application in your browser:
+
+[http://localhost:3000](http://localhost:3000)
+
+This Building Block can be disabled by setting the `--no-pleuston` flag.
 
 Hostname   | External Port | Internal Url          | Local Url             | Description
 -----------|---------------|-----------------------|-----------------------|--------------
@@ -99,7 +118,7 @@ Hostname   | External Port | Internal Url          | Local Url             | Des
 
 ### Aquarius
 
-By default it will start two containers (one for aquarius and one for its database engine). By default Barge will use MongoDB as DB Engine. You can use option `--elasticsearch` to use ElasticSearch intead.
+By default it will start two containers (one for aquarius and one for its database engine). By default Barge will use MongoDB as DB Engine. You can use option `--elasticsearch` to use ElasticSearch instead.
 This Building Block can be disabled by setting the `--no-aquarius` flag.
 
 Hostname   | External Port | Internal Url         | Local Url             | Description

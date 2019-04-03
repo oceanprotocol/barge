@@ -1,7 +1,7 @@
 version: '3'
 services:
   brizo:
-    image: oceanprotocol/brizo:${BRIZO_VERSION:-stable}
+    image: oceanprotocol/brizo:$BRIZO_VERSION
     ports:
       - 8030:8030
     networks:
