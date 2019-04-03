@@ -20,7 +20,7 @@ export OCEAN_HOME="${HOME}/.ocean"
 
 # keeper options
 export KEEPER_OWNER_ROLE_ADDRESS="${KEEPER_OWNER_ROLE_ADDRESS}"
-export KEEPER_DEPLOY_CONTRACTS="false"
+export KEEPER_DEPLOY_CONTRACTS="true"
 export KEEPER_ARTIFACTS_FOLDER="${OCEAN_HOME}/keeper-contracts/artifacts"
 # Specify which ethereum client to run or connect to: development, kovan, spree or nile
 export KEEPER_NETWORK_NAME="spree"
@@ -34,7 +34,8 @@ export GANACHE_REUSE_DATABASE="false"
 export KEEPER_RPC_HOST='keeper-node'
 export KEEPER_RPC_PORT='8545'
 export KEEPER_RPC_URL="http://"${KEEPER_RPC_HOST}:${KEEPER_RPC_PORT}
-export KEEPER_MNEMONIC=''
+# Use this seed only on Spree! (Spree is the default.)
+export KEEPER_MNEMONIC="taxi music thumb unique chat sand crew more leg another off lamp"
 
 # Enable acl-contract validation in Secret-store
 export CONFIGURE_ACL="true"
@@ -96,10 +97,17 @@ function check_if_owned_by_root {
     fi
 }
 
+function clean_local_contracts {
+    rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
+    rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.spree.json
+    rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.development.json
+}
+
 check_if_owned_by_root
 show_banner
 
 COMPOSE_FILES=""
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_mongodb.yml"
@@ -107,6 +115,7 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 
 DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
+
 
 while :; do
     case $1 in
@@ -199,41 +208,42 @@ while :; do
         # connects you to kovan
         --local-kovan-node)
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/kovan_node.yml"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/keeper_contracts.yml/}"
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
+            export KEEPER_MNEMONIC=''
             export KEEPER_NETWORK_NAME="kovan"
+            export KEEPER_DEPLOY_CONTRACTS="false"
             export ACL_CONTRACT_ADDRESS="$(get_acl_address ${KEEPER_VERSION})"
             printf $COLOR_Y'Starting with local Kovan node...\n\n'$COLOR_RESET
             printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
             ;;
         # spins up a new ganache blockchain
         --local-ganache-node)
-            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/ganache_node.yml"
+            export KEEPER_MNEMONIC=''
             export KEEPER_NETWORK_NAME="development"
             export KEEPER_DEPLOY_CONTRACTS="true"
-            rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
-            rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.development.json
             printf $COLOR_Y'Starting with local Ganache node...\n\n'$COLOR_RESET
             ;;
         # connects you to nile ocean testnet
         --local-nile-node)
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/nile_node.yml"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/keeper_contracts.yml/}"
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
+            export KEEPER_MNEMONIC=''
             export KEEPER_NETWORK_NAME="nile"
+            export KEEPER_DEPLOY_CONTRACTS="false"
             export ACL_CONTRACT_ADDRESS="$(get_acl_address ${KEEPER_VERSION})"
             printf $COLOR_Y'Starting with local Nile node...\n\n'$COLOR_RESET
             printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
             ;;
         # spins up spree local testnet
         --local-spree-node)
-            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/spree_node.yml"
             # use this seed only on spree!
             export KEEPER_MNEMONIC="taxi music thumb unique chat sand crew more leg another off lamp"
             export KEEPER_NETWORK_NAME="spree"
             export KEEPER_DEPLOY_CONTRACTS="true"
-            rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
-            rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.spree.json
             printf $COLOR_Y'Starting with local Spree node...\n\n'$COLOR_RESET
             ;;
         #################################################
@@ -266,6 +276,7 @@ while :; do
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
             configure_secret_store
             [ ! -z ${NODE_COMPOSE_FILE} ] && COMPOSE_FILES+=" -f ${NODE_COMPOSE_FILE}"
+            [ ${KEEPER_DEPLOY_CONTRACTS} = "true" ] && clean_local_contracts
             [ ${FORCEPULL} = "true" ] && docker-compose $DOCKER_COMPOSE_EXTRA_OPTS --project-name=$PROJECT_NAME $COMPOSE_FILES pull
             eval docker-compose $DOCKER_COMPOSE_EXTRA_OPTS --project-name=$PROJECT_NAME $COMPOSE_FILES up --remove-orphans
             break
