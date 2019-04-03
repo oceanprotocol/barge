@@ -52,15 +52,12 @@ If you're new to Barge, it's best to do something like:
 git clone git@github.com:oceanprotocol/barge.git
 cd barge
 
-./start_ocean.sh --no-pleuston
+./start_ocean.sh
 ```
 
 with no `--latest` or `--stable` option.
-That will run the current default versions of Aquarius, Brizo and Keeper Contracts (listed in the table below).
-It will also run the _latest_ version of Pleuston and a local Spree node (explained more below).
-If you don't specify what kind of local node to run then the default is to run a local Spree network (i.e. `--local-spree-node`).
-
-The `--no-pleuston` option was included because, at the time of writing, Pleuston wasn't working with the default versions of the other components.
+That will run the current default versions of Aquarius, Brizo, Pleuston and Keeper Contracts (listed in the table below).
+It will also run a local Spree network (i.e. `--local-spree-node`).
 
 <img width="535" alt="Welcome to Ocean Protocol" src="Welcome_to_Ocean_Protocol.png">
 
@@ -72,7 +69,7 @@ Option      | Aquarius  | Brizo    | Keeper   | Pleuston | Notes
 ------------|-----------|----------|----------|----------|-------
 `--latest`  | `latest`  | `latest` | `latest` | `latest` |
 `--stable`  | `stable`  | `stable` | `stable` | `stable` |
-(Default)   | `v0.1.10` | `v0.2.2` | `v0.6.12`| `latest` | Works with squid-py v0.4.2. Pleuston & squid-js not working yet.
+(Default)   | `v0.2.0`  | `v0.3.1` | `v0.9.0` | `v0.3.0` | Works with squid-py v0.5.11, squid-js v0.5.0 & squid-java v0.4.0
 
 Note: The `latest` Docker image tag derives from the `develop` branch of the component's Git repo and the `stable` Docker image tag derives from the `master` branch.
 
@@ -80,7 +77,7 @@ You can override the Docker image tag used for a particular component by setting
 
 ```bash
 export BRIZO_VERSION=v0.2.1
-./start_ocean.sh --local-spree-node
+./start_ocean.sh
 ```
 
 will use the default Docker image tags for Aquarius, Keeper Contracts and Pleuston, but `v0.2.1` for Brizo.
@@ -121,7 +118,7 @@ Hostname   | External Port | Internal Url          | Local Url             | Des
 
 ### Aquarius
 
-By default it will start two containers (one for aquarius and one for its database engine). By default Barge will use MongoDB as DB Engine. You can use option `--elasticsearch` to use ElasticSearch intead.
+By default it will start two containers (one for aquarius and one for its database engine). By default Barge will use MongoDB as DB Engine. You can use option `--elasticsearch` to use ElasticSearch instead.
 This Building Block can be disabled by setting the `--no-aquarius` flag.
 
 Hostname   | External Port | Internal Url         | Local Url             | Description
