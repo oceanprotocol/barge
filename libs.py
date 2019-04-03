@@ -96,12 +96,11 @@ def add_cli_flags(parser, flags: dict):
         parser.add_argument('--' + flag, action='store_true', help=help)
 
 
-def print_switch_message(msg: str):
+def notify(msg: str):
     print(COLOR_Y + msg + "...\n\n" + COLOR_RESET)
 
-    # line =
 
-#     line=$(grep "^${version}=" "${DIR}/${KEEPER_NETWORK_NAME}_acl_contract_addresses.txt")
-#     address="${line##*=}"
-#     [ -z "${address}" ] && echo "Cannot determine the ACL Contract Address for ${KEEPER_NETWORK_NAME} version ${version}. Exiting" && exit 1
-#     echo "${address}"
+def exclude(components: set, component: str) -> set:
+    notify("Starting without " + component)
+    components.remove(component)
+    return components

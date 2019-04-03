@@ -136,16 +136,6 @@ libs.show_banner()
 
 print(COLOR_RESET)
 
-# create the list of files to pass to docker-compose
-COMPOSE_FILES = " ".join(list(map(lambda x: "-f {}/{}.yml", [
-    "network_volumes",
-    "pleuston",
-    "aquarius",
-    "brizo",
-    "secret_store"
-])))
-
-
 
 # DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
@@ -176,7 +166,14 @@ libs.add_cli_flags(
     },
 )
 
-# ! mmight blow up during testing think action might have to be a function defined here
+compose_files = {
+    "network_volumes",
+    "pleuston",
+    "aquarius",
+    "brizo",
+    "secret_store"
+}
+
 args = parser.parse_args()
 
 if args.no_ansi:
@@ -190,7 +187,7 @@ if args.no_ansi:
     COLOR_RESET = ""
 
 if args.latest:
-    libs.print_switch_message("Switched to latest components")
+    libs.notify("Switched to latest components")
     # AQUARIUS_VERSION = libs.export()
 
     # todo ! look at what this flag does in the shell script with regards to below  vars
@@ -202,8 +199,46 @@ if args.latest:
 
 if args.force_pull:
     FORCEPULL = libs.export("FORCEPULL", "true")
-    libs.print_switch_message("Pulling latest components")
+    libs.notify("Pulling latest components")
 
+if args.no_plueston:
+    compose_files = libs.exclude(compose_files, 'pleuston')
+
+if args.no_brizo:
+    compose_files = libs.exclude(compose_files, 'brizo')
+
+if args.no_aquarius:
+    compose_files = libs.exclude(compose_files, 'aquarius')
+
+if args.no_secret_store:
+    compose_files = libs.exclude(compose_files, 'secret-store')
+
+if args.only_secret_store:
+    compose_files = {"network_volumes", "secret_store"}
+    NODE_COMPOSE_FILE = ""
+    libs.notify("Starting only secret store")
+
+if args.reuse_ganache_database:
+    pass
+if args.no_acl_contract:
+    pass
+if args.local_kovan_node:
+    pass
+if args.local_ganache_node:
+    pass
+if args.local_spree_node:
+    pass
+if args.purge:
+    pass
+
+
+
+
+# create the list of files to pass to docker-compose
+COMPOSE_FILES = " ".join(list(map(lambda x: "-f {}/{}.yml", compose_files)))
+
+
+libs.notify('Starting Ocean')
 # while :; do
 #     case $1 in
 #         #################################################
