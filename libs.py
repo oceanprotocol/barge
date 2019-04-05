@@ -6,6 +6,7 @@ import subprocess
 import colorama
 import sys
 from colors import *
+from glob import glob
 
 
 def set_current_directory() -> str:
@@ -104,3 +105,12 @@ def exclude(components: set, component: str) -> set:
     notify("Starting without " + component)
     components.remove(component)
     return components
+
+
+def remove(path: str):
+    """Emulates bash rm kind of..."""
+
+    files = glob(path)
+
+    for file in files:
+        os.remove(file)

@@ -58,6 +58,9 @@ KEEPER_ARTIFACTS_FOLDER = libs.export("KEEPER_ARTIFACTS_FOLDER", HOME + "/.ocean
 
 # Specify which ethereum client to run or connect to: development, kovan, spree or nile
 KEEPER_NETWORK_NAME = libs.export("KEEPER_NETWORK_NAME", "nile")
+# todo change this?
+KEEPER_VERSION = libs.export("KEEPER_VERSION", "latest")
+
 NODE_COMPOSE_FILE = libs.export("NODE_COMPOSE_FILE", COMPOSE_DIR + "/nodes/nile_node.yml")
 
 # Ganache specific option, these two options have no effect when not running ganache-cli
@@ -233,13 +236,82 @@ if args.local_kovan_node:
     libs.notify("Starting with local Kovan node")
 
 if args.local_ganache_node:
-    pass
+
+    compose_files.add("keeper_contracts")
+    NODE_COMPOSE_FILE = libs.export("NODE_COMPOSE_FILE", COMPOSE_DIR + "/nodes/ganache_node.yml")
+    KEEPER_NETWORK_NAME = libs.export("KEEPER_NETWORK_NAME", "development")
+    KEEPER_DEPLOY_CONTRACTS = libs.export("KEEPER_DEPLOY_CONTRACTS", "true")
+    libs.remove(KEEPER_ARTIFACTS_FOLDER + "/ready")
+    libs.remove(KEEPER_ARTIFACTS_FOLDER + "/*.development.json")
+
+    libs.notify("Starting with local Ganache node")
+
+if args.local_nile_node:
+    NODE_COMPOSE_FILE = libs.export("NODE_COMPOSE_FILE", COMPOSE_DIR + "/nodes/nile_node.yml")
+    KEEPER_NETWORK_NAME = libs.export("KEEPER_NETWORK_NAME", "nile")
+    ACL_CONTRACT_ADDRESS = libs.export("ACL_CONTRACT_ADDRESS", libs.get_acl_address(KEEPER_VERSION))
+    libs.notify("Starting with local Nile node")
+
 if args.local_spree_node:
-    pass
+              COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
+#             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/spree_node.yml"
+#             # use this seed only on spree!
+#             export KEEPER_MNEMONIC="taxi music thumb unique chat sand crew more leg another off lamp"
+#             export KEEPER_NETWORK_NAME="spree"
+#             export KEEPER_DEPLOY_CONTRACTS="true"
+#             rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
+#             rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.spree.json
+#             printf $COLOR_Y'Starting with local Spree node...\n\n'$COLOR_RESET
+
+
 if args.purge:
-    pass
+    printf $COLOR_R'Doing a deep clean ...\n\n'$COLOR_RESET
+    # docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_COMPOSE_FILE} down
+    # docker network rm ${PROJECT_NAME}_default || true
+    # docker network rm ${PROJECT_NAME}_backend || true
+    # docker network rm ${PROJECT_NAME}_secretstore || true
+    # docker volume rm ${PROJECT_NAME}_keeper-node || true
+    # docker volume rm ${PROJECT_NAME}_secret-store || true
+    # read -p "Are you sure you want to delete $KEEPER_ARTIFACTS_FOLDER? " -n 1 -r
+    # echo
+
+    # prompt for yes or no as Yy or Nn only else reask
+    # if [[ $REPLY =~ ^[Yy]$ ]]
+    # then
+    #     rm -rf "${KEEPER_ARTIFACTS_FOLDER}"
+    # fi
+    # ;;
+#
+
+# end of switches look at what the below thing does think it just breaks while loop
+#
+# --) # End of all options.
+#             shift
+#             break
+#             ;;
+
+# below is probably not needed
+#         -?*)
+#             printf $COLOR_R'WARN: Unknown option (ignored): %s\n'$COLOR_RESET "$1" >&2
+#             break
+#             ;;
+#         *)
+
+# actually boot up docker with the stuff now
+#             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
+
+# last minite add node compose file??? not sure waht the first bit does or the bit below
+# check it out in shell without running docker think its just a if statement
+#             [ ! -z ${NODE_COMPOSE_FILE} ] && COMPOSE_FILES+=" -f ${NODE_COMPOSE_FILE}"
+#             [ ${FORCEPULL} = "true" ] && docker-compose $DOCKER_COMPOSE_EXTRA_OPTS --project-name=$PROJECT_NAME $COMPOSE_FILES pull
+#             eval docker-compose $DOCKER_COMPOSE_EXTRA_OPTS --project-name=$PROJECT_NAME $COMPOSE_FILES up --remove-orphans
+#             break
+#     esac
+#     shift
+# done
 
 
+# todo check github if keeper version is defined somewhere else
 
 
 # create the list of files to pass to docker-compose
