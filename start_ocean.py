@@ -219,11 +219,19 @@ if args.only_secret_store:
     libs.notify("Starting only secret store")
 
 if args.reuse_ganache_database:
-    pass
+    GANACHE_REUSE_DATABASE = libs.export("GANACHE_REUSE_DATABASE", "true")
+    libs.notify("Starting and reusing the database")
+
 if args.no_acl_contract:
-    pass
+    CONFIGURE_ACL = libs.export("CONFIGURE_ACL", "false")
+    libs.notify("Disabling acl validation in secret-store")
+
 if args.local_kovan_node:
-    pass
+    NODE_COMPOSE_FILE = libs.export("NODE_COMPOSE_FILE", COMPOSE_DIR + "/nodes/kovan_node.yml")
+    KEEPER_NETWORK_NAME = libs.export("KEEPER_NETWORK_NAME", "kovan")
+    ACL_CONTRACT_ADDRESS = libs.export("ACL_CONTRACT_ADDRESS", libs.get_acl_address(KEEPER_VERSION))
+    libs.notify("Starting with local Kovan node")
+
 if args.local_ganache_node:
     pass
 if args.local_spree_node:
