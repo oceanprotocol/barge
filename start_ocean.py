@@ -253,19 +253,21 @@ if args.local_nile_node:
     libs.notify("Starting with local Nile node")
 
 if args.local_spree_node:
-              COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
-#             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/spree_node.yml"
-#             # use this seed only on spree!
-#             export KEEPER_MNEMONIC="taxi music thumb unique chat sand crew more leg another off lamp"
-#             export KEEPER_NETWORK_NAME="spree"
-#             export KEEPER_DEPLOY_CONTRACTS="true"
-#             rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
-#             rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.spree.json
-#             printf $COLOR_Y'Starting with local Spree node...\n\n'$COLOR_RESET
+    compose_files.add("keeper_contracts")
+    NODE_COMPOSE_FILE = libs.export("NODE_COMPOSE_FILE", COMPOSE_DIR + "/nodes/spree_node.yml")
+
+    # use this seed only on spree!
+    KEEPER_MNEMONIC = libs.export("KEEPER_MNEMONIC", "taxi music thumb unique chat sand crew more leg another off lamp")
+    KEEPER_NETWORK_NAME = libs.export("KEEPER_NETWORK_NAME", "spree")
+    KEEPER_DEPLOY_CONTRACTS = libs.export("KEEPER_DEPLOY_CONTRACTS", "true")
+    libs.remove(KEEPER_ARTIFACTS_FOLDER + "/ready")
+    libs.remove(KEEPER_ARTIFACTS_FOLDER + "/*.spree.json")
+    libs.notify('Starting with local Spree node')
 
 
 if args.purge:
-    printf $COLOR_R'Doing a deep clean ...\n\n'$COLOR_RESET
+    libs.notify("Doing a deep clean")
+
     # docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_COMPOSE_FILE} down
     # docker network rm ${PROJECT_NAME}_default || true
     # docker network rm ${PROJECT_NAME}_backend || true
