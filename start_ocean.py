@@ -267,6 +267,25 @@ if args.local_spree_node:
 
 if args.purge:
     libs.notify("Doing a deep clean")
+    libs.run("docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f " + NODE_COMPOSE_FILE + " down")
+
+    libs.docker("network rm " + PROJECT_NAME + "_default")
+    libs.docker("network rm " + PROJECT_NAME + "_backend")
+    libs.docker("network rm " + PROJECT_NAME + "_secretstore")
+    libs.docker("volume rm " + PROJECT_NAME + "_keeper-node")
+    libs.docker("volume rm " + PROJECT_NAME + "_secret-store")
+
+    answer = input("Are you sure you want to delete " + KEEPER_ARTIFACTS_FOLDER + "? (Y/N)")
+
+    while answer.lower() not in ('y', 'yes', 'n', 'no'):
+        answer = input("Please provide either Y for yes or N for no as your answer")
+
+    if answer.lower() in ('y', 'yes'):
+        libs.delete_folder(KEEPER_ARTIFACTS_FOLDER)
+
+
+    # todo continue from here
+
 
     # docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_COMPOSE_FILE} down
     # docker network rm ${PROJECT_NAME}_default || true

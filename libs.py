@@ -114,3 +114,12 @@ def remove(path: str):
 
     for file in files:
         os.remove(file)
+
+
+def delete_folder(folder: str):
+    os.removedirs(folder)
+
+
+def docker(command: str) -> str:
+    """A shorthand for running commands with docker"""
+    return run("docker " + command)
