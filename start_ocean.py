@@ -142,6 +142,7 @@ print(COLOR_RESET)
 
 # DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
+# if extra ops is empty or null set it to blank
 DOCKER_COMPOSE_EXTRA_OPTS = libs.export("DOCKER_COMPOSE_EXTRA_OPTS", '-')
 
 parser = argparse.ArgumentParser(description='Barge makes it easy to build projects using the Ocean Protocol')
@@ -164,6 +165,7 @@ libs.add_cli_flags(
         'no-acl-contract': 'Disables ACL validation in secret store',
         'local-kovan-node': 'Use a local kovan node',
         'local-ganache-node': 'Use a local ganache node',
+        'local-nile-node': 'Use a local nile node',
         'local-spree-node': 'Use a local spree node',
         'purge': 'Removes volumes and containers',
     },
@@ -204,7 +206,7 @@ if args.force_pull:
     FORCEPULL = libs.export("FORCEPULL", "true")
     libs.notify("Pulling latest components")
 
-if args.no_plueston:
+if args.no_pleuston:
     compose_files = libs.exclude(compose_files, 'pleuston')
 
 if args.no_brizo:
@@ -265,9 +267,13 @@ if args.local_spree_node:
     libs.notify('Starting with local Spree node')
 
 
+# create the list of files to pass to docker-compose
+COMPOSE_FILES = " ".join(list(map(lambda x: "-f {}/{}.yml", compose_files)))
+
+
 if args.purge:
     libs.notify("Doing a deep clean")
-    libs.run("docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f " + NODE_COMPOSE_FILE + " down")
+    libs.run("docker-compose --project-name {} {} -f {} down".format(PROJECT_NAME, COMPOSE_FILES, NODE_COMPOSE_FILE))
 
     libs.docker("network rm " + PROJECT_NAME + "_default")
     libs.docker("network rm " + PROJECT_NAME + "_backend")
@@ -286,6 +292,23 @@ if args.purge:
 
     # todo continue from here
 
+
+libs.notify('Starting Ocean')
+
+if len(NODE_COMPOSE_FILE) > 0:
+    compose_files.add(NODE_COMPOSE_FILE)
+
+
+# create the list of files to pass to docker-compose
+COMPOSE_FILES = " ".join(list(map(lambda x: "-f {}/{}.yml", compose_files)))
+
+if FORCEPULL == "true":
+    libs.run("docker-compose {} --project-name={} {} pull".format(DOCKER_COMPOSE_EXTRA_OPTS, PROJECT_NAME, COMPOSE_FILES))
+
+libs.run('docker-compose {} --project-name={} {} up --remove-orphans'.format(DOCKER_COMPOSE_EXTRA_OPTS, PROJECT_NAME, COMPOSE_FILES))
+
+#  [ ${FORCEPULL} = "true" ] && docker-compose $DOCKER_COMPOSE_EXTRA_OPTS --project-name=$PROJECT_NAME $COMPOSE_FILES pull
+#             eval docker-compose $DOCKER_COMPOSE_EXTRA_OPTS --project-name=$PROJECT_NAME $COMPOSE_FILES up --remove-orphans
 
     # docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_COMPOSE_FILE} down
     # docker network rm ${PROJECT_NAME}_default || true
@@ -334,12 +357,6 @@ if args.purge:
 
 # todo check github if keeper version is defined somewhere else
 
-
-# create the list of files to pass to docker-compose
-COMPOSE_FILES = " ".join(list(map(lambda x: "-f {}/{}.yml", compose_files)))
-
-
-libs.notify('Starting Ocean')
 # while :; do
 #     case $1 in
 #         #################################################
