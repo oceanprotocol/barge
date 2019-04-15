@@ -7,6 +7,7 @@ import colorama
 import sys
 from colors import COLOR_Y, COLOR_RESET
 from glob import glob
+import time
 
 
 def set_current_directory() -> str:
@@ -51,11 +52,19 @@ def read(file_name: str) -> str:
 def run(command: str):
     """Emulate Bash command execution using shell argument for now to keep things simple."""
 
+    proc = subprocess.Popen(command, shell=True)
+
     try:
-        print(command.split(' '))
-        return subprocess.call(command.split(' '))
+        while proc.poll() is None:
+            time.sleep(0.1)
     except KeyboardInterrupt:
+        proc.terminate()
         exit(0)
+    # try:
+    #     print(command.split(' '))
+    #     return subprocess.call(command.split(' '))
+    # except KeyboardInterrupt:
+    #     exit(0)
 
 
 def show_banner():
