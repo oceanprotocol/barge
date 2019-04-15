@@ -108,7 +108,7 @@ LOCAL_GROUP_ID = libs.export("LOCAL_GROUP_ID", libs.get_group_id())
 
 # function get_acl_address {
 
-    #! takes param 1 if its not set sets it to -latest
+    #! takes param 1 if its not set sets it to -latest needs to avoid argparser or use regex
 #     local version="${1:-latest}"
 #     line=$(grep "^${version}=" "${DIR}/${KEEPER_NETWORK_NAME}_acl_contract_addresses.txt")
 #     address="${line##*=}"
@@ -290,6 +290,3 @@ if FORCEPULL == "true":
     libs.run("docker-compose {} --project-name={} {} pull".format(DOCKER_COMPOSE_EXTRA_OPTS, PROJECT_NAME, COMPOSE_FILES))
 
 libs.run('docker-compose {} --project-name={} {} up --remove-orphans'.format(DOCKER_COMPOSE_EXTRA_OPTS, PROJECT_NAME, COMPOSE_FILES))
-
-#  [ ${FORCEPULL} = "true" ] && docker-compose $DOCKER_COMPOSE_EXTRA_OPTS --project-name=$PROJECT_NAME $COMPOSE_FILES pull
-#             eval docker-compose $DOCKER_COMPOSE_EXTRA_OPTS --project-name=$PROJECT_NAME $COMPOSE_FILES up --remove-orphans

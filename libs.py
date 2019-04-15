@@ -93,9 +93,9 @@ def get_acl_address(directory: str, keeper_network_name: str, version: str = '-l
     del lines[0]
 
     # get keys and values
-    key_value_pairs = list(map(lambda x: x.split('='), lines))
+    key_value_pairs = list(map(lambda x: (x.split('=')[0], x.split('=')[1]), lines))
 
-    addresses = dict(key_value_pairs)
+    addresses: dict = dict(key_value_pairs)
 
     if version not in addresses:
         print('Cannot determine the ACL Contract Address for {} version {}. Exiting'.format(keeper_network_name, version))
