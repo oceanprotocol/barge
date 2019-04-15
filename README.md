@@ -85,6 +85,8 @@ Option                      | Description
 `--acl-contract`            | Configures secret-store `acl_contract` option to enable secret-store authorization.
 `--purge`                   | Removes the containers, volumes, artifact folder and networks used by the script.
 
+A similar description to the above is accessible by passing the -h or --help option.
+
 ## Docker Building Blocks
 
 Ocean compose consists of a set of building blocks that can be combined to form a local test environment. By default all building blocks will be started with the `./start_ocean.py` script.

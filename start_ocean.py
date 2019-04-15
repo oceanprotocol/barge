@@ -4,7 +4,7 @@ from pathlib import Path
 import libs
 import colorama
 import argparse
-from colors import *
+from colors import COLOR_RESET
 
 # colorama is used for cross platform compatible terminal coloring
 
@@ -42,6 +42,12 @@ FORCEPULL = libs.export("FORCEPULL", "false")
 # export OCEAN_VERSION=stable
 
 OCEAN_VERSION = libs.export("OCEAN_VERSION", "stable")
+
+# defining to make sure scope is handled correctly
+AQUARIUS_VERSION = None
+BRIZO_VERSION = None
+KEEPER_VERSION = None
+PLEUSTON_VERSION = None
 
 # keeper options
 # export KEEPER_DEPLOY_CONTRACTS="false"
@@ -96,14 +102,6 @@ ACL_CONTRACT_ADDRESS = libs.export("ACL_CONTRACT_ADDRESS", "")
 LOCAL_USER_ID = libs.export("LOCAL_USER_ID", libs.get_user_id())
 LOCAL_GROUP_ID = libs.export("LOCAL_GROUP_ID", libs.get_group_id())
 
-# # colors
-# COLOR_R="\033[0;31m"    # red
-# COLOR_G="\033[0;32m"    # green
-# COLOR_Y="\033[0;33m"    # yellow
-# COLOR_B="\033[0;34m"    # blue
-# COLOR_M="\033[0;35m"    # magenta
-# COLOR_C="\033[0;36m"    # cyan
-
 
 
 #! need to get arg 1 and store it
@@ -124,14 +122,6 @@ LOCAL_GROUP_ID = libs.export("LOCAL_GROUP_ID", libs.get_group_id())
 #     echo ""
 # }
 
-# show_banner
-
-# COMPOSE_FILES=""
-# COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
-# COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
-# COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
-# COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
-# COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 
 colorama.init()
 
@@ -143,7 +133,7 @@ print(COLOR_RESET)
 # DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
 # if extra ops is empty or null set it to blank
-DOCKER_COMPOSE_EXTRA_OPTS = libs.export("DOCKER_COMPOSE_EXTRA_OPTS", '-')
+DOCKER_COMPOSE_EXTRA_OPTS = libs.export("DOCKER_COMPOSE_EXTRA_OPTS", libs.default("DOCKER_COMPOSE_EXTRA_OPTS", ""))
 
 parser = argparse.ArgumentParser(description='Barge makes it easy to build projects using the Ocean Protocol')
 
@@ -183,24 +173,17 @@ args = parser.parse_args()
 
 if args.no_ansi:
     DOCKER_COMPOSE_EXTRA_OPTS = DOCKER_COMPOSE_EXTRA_OPTS + " --no-ansi"
-    COLOR_R = ""
-    COLOR_G = ""
-    COLOR_Y = ""
-    COLOR_B = ""
-    COLOR_M = ""
-    COLOR_C = ""
+    libs.unset_colors()
     COLOR_RESET = ""
 
 if args.latest:
+
     libs.notify("Switched to latest components")
-    # AQUARIUS_VERSION = libs.export()
+    AQUARIUS_VERSION = libs.export("AQUARIUS_VERSION", libs.default("AQUARIUS_VERSION", OCEAN_VERSION))
+    BRIZO_VERSION = libs.export("BRIZO_VERSION", libs.default("BRIZO_VERSION", OCEAN_VERSION))
+    KEEPER_VERSION = libs.export("KEEPER_VERSION", libs.default("KEEPER_VERSION", OCEAN_VERSION))
+    PLEUSTON_VERSION = libs.export("PLEUSTON_VERSION", libs.default("PLEUSTON_VERSION", OCEAN_VERSION))
 
-    # todo ! look at what this flag does in the shell script with regards to below  vars
-
-    # export AQUARIUS_VERSION=${AQUARIUS_VERSION:-$OCEAN_VERSION}
-    # export BRIZO_VERSION=${BRIZO_VERSION:-$OCEAN_VERSION}
-    # export KEEPER_VERSION=${KEEPER_VERSION:-$OCEAN_VERSION}
-    # export PLEUSTON_VERSION=${PLEUSTON_VERSION:-$OCEAN_VERSION}
 
 if args.force_pull:
     FORCEPULL = libs.export("FORCEPULL", "true")
@@ -268,7 +251,7 @@ if args.local_spree_node:
 
 
 # create the list of files to pass to docker-compose
-COMPOSE_FILES = " ".join(list(map(lambda x: "-f {}/{}.yml", compose_files)))
+COMPOSE_FILES = " ".join(list(map(lambda x: "-f {}/{}.yml".format(COMPOSE_DIR, x), compose_files)))
 
 
 if args.purge:
@@ -295,12 +278,13 @@ if args.purge:
 
 libs.notify('Starting Ocean')
 
-if len(NODE_COMPOSE_FILE) > 0:
-    compose_files.add(NODE_COMPOSE_FILE)
-
-
 # create the list of files to pass to docker-compose
-COMPOSE_FILES = " ".join(list(map(lambda x: "-f {}/{}.yml", compose_files)))
+COMPOSE_FILES = " ".join(list(map(lambda x: "-f {}/{}.yml".format(COMPOSE_DIR, x), compose_files)))
+
+if len(NODE_COMPOSE_FILE) > 0:
+    COMPOSE_FILES = COMPOSE_FILES + " -f " + NODE_COMPOSE_FILE
+    # compose_files.add(NODE_COMPOSE_FILE)
+
 
 if FORCEPULL == "true":
     libs.run("docker-compose {} --project-name={} {} pull".format(DOCKER_COMPOSE_EXTRA_OPTS, PROJECT_NAME, COMPOSE_FILES))

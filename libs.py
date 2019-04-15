@@ -5,7 +5,7 @@ import typing
 import subprocess
 import colorama
 import sys
-from colors import *
+from colors import COLOR_Y, COLOR_RESET
 from glob import glob
 
 
@@ -48,9 +48,14 @@ def read(file_name: str) -> str:
         return file.read()
 
 
-def run(command: str) -> str:
+def run(command: str):
     """Emulate Bash command execution using shell argument for now to keep things simple."""
-    return subprocess.check_output(command, shell=True)
+
+    try:
+        print(command.split(' '))
+        return subprocess.call(command.split(' '))
+    except KeyboardInterrupt:
+        exit(0)
 
 
 def show_banner():
@@ -123,3 +128,27 @@ def delete_folder(folder: str):
 def docker(command: str) -> str:
     """A shorthand for running commands with docker"""
     return run("docker " + command)
+
+
+def unset_colors():
+    """Disables coloring"""
+    global COLOR_RESET
+    global COLOR_Y
+
+    COLOR_RESET = ""
+    COLOR_Y = ""
+
+
+def default_value(value, result):
+    """If the value is None or empty return the result"""
+    if not value:
+        return result
+    return value
+
+
+def default(environment_variable, result):
+    """If the environment variable is empty or None it returns the result otherwise it returns its value"""
+
+    if environment_variable in os.environ:
+        return default_value(os.environ[environment_variable], result)
+    return result
