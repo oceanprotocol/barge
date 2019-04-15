@@ -65,11 +65,11 @@ It will also run a local Spree network (i.e. `--local-spree-node`).
 
 Options that set the versions (Docker image tags) of Aquarius, Brizo, Keeper Contracts and Pleuston:
 
-Option      | Aquarius  | Brizo    | Keeper   | Pleuston | Notes
-------------|-----------|----------|----------|----------|-------
+Option      | Aquarius  | Brizo    | Keeper   | Pleuston |
+------------|-----------|----------|----------|----------|
 `--latest`  | `latest`  | `latest` | `latest` | `latest` |
 `--stable`  | `stable`  | `stable` | `stable` | `stable` |
-(Default)   | `v0.2.0`  | `v0.3.1` | `v0.9.0` | `v0.3.0` | Works with squid-py v0.5.11, squid-js v0.5.0 & squid-java v0.4.0
+(Default)   | `v0.2.2`  | `v0.3.1` | `v0.9.0` | `v0.3.0` |
 
 Note: The `latest` Docker image tag derives from the `develop` branch of the component's Git repo and the `stable` Docker image tag derives from the `master` branch.
 
