@@ -8,6 +8,7 @@ import sys
 from colors import COLOR_Y, COLOR_RESET
 from glob import glob
 import time
+import shutil
 
 
 def set_current_directory() -> str:
@@ -127,11 +128,16 @@ def remove(path: str):
     files = glob(path)
 
     for file in files:
-        os.remove(file)
+        if os.path.isfile(file):
+            os.remove(file)
 
 
 def delete_folder(folder: str):
-    os.removedirs(folder)
+
+    if os.path.isdir(folder):
+        shutil.rmtree(folder)
+    else:
+        print("No such folder {}".format(folder))
 
 
 def docker(command: str) -> str:
