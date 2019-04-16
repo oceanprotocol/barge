@@ -60,12 +60,9 @@ def run(command: str):
             time.sleep(0.1)
     except KeyboardInterrupt:
         proc.terminate()
+        proc.wait(20)
         exit(0)
-    # try:
-    #     print(command.split(' '))
-    #     return subprocess.call(command.split(' '))
-    # except KeyboardInterrupt:
-    #     exit(0)
+
 
 
 def show_banner():
