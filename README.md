@@ -49,6 +49,8 @@ pip install -r requirements.txt
 ./start_ocean.py
 ```
 
+Note if that does not work on your machine then Python might be configured differently and you might need to add the `Python` command before the scripts name or `Python3`.
+
 <img width="535" alt="screen shot 2018-10-10 at 12 20 48" src="https://user-images.githubusercontent.com/90316/46729966-22206600-cc87-11e8-9e1a-156d8a6c5e43.png">
 
 ---
