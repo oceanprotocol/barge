@@ -9,6 +9,7 @@ from colors import COLOR_Y, COLOR_RESET
 from glob import glob
 import time
 import shutil
+import platform
 
 
 def set_current_directory() -> str:
@@ -72,6 +73,14 @@ def show_banner():
 
 def get_user_id():
     """Return the current users' UID"""
+
+    if platform.system() == "Windows":
+        if "USERNAME" in os.environ:
+            return os.environ["USERNAME"]
+        if "USER" in os.environ:
+            return os.environ["USER"]
+
+    #Linux and MacOS
     return os.getuid()
 
 

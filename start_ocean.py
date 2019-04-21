@@ -5,6 +5,7 @@ import libs
 import colorama
 import argparse
 from colors import COLOR_RESET
+import platform
 
 # colorama is used for cross platform compatible terminal coloring
 
@@ -73,8 +74,14 @@ KEEPER_MNEMONIC = libs.export("KEEPER_MNEMONIC", '')
 CONFIGURE_ACL = libs.export("CONFIGURE_ACL", "true")
 ACL_CONTRACT_ADDRESS = libs.export("ACL_CONTRACT_ADDRESS", "")
 
-LOCAL_USER_ID = libs.export("LOCAL_USER_ID", libs.get_user_id())
-LOCAL_GROUP_ID = libs.export("LOCAL_GROUP_ID", libs.get_group_id())
+
+LOCAL_USER_ID = None
+LOCAL_GROUP_ID = None
+
+
+if platform.system() != "Windows":
+    LOCAL_USER_ID = libs.export("LOCAL_USER_ID", libs.get_user_id())
+    LOCAL_GROUP_ID = libs.export("LOCAL_GROUP_ID", libs.get_group_id())
 
 
 colorama.init()
