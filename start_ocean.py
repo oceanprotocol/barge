@@ -52,8 +52,7 @@ KEEPER_ARTIFACTS_FOLDER = libs.export("KEEPER_ARTIFACTS_FOLDER", HOME + "/.ocean
 
 # Specify which ethereum client to run or connect to: development, kovan, spree or nile
 KEEPER_NETWORK_NAME = libs.export("KEEPER_NETWORK_NAME", "nile")
-# todo change this?
-KEEPER_VERSION = libs.export("KEEPER_VERSION", "latest")
+KEEPER_VERSION = libs.export("KEEPER_VERSION", "stable")
 
 NODE_COMPOSE_FILE = libs.export("NODE_COMPOSE_FILE", COMPOSE_DIR + "/nodes/nile_node.yml")
 
