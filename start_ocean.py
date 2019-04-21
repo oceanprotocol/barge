@@ -9,9 +9,6 @@ from colors import COLOR_RESET
 # colorama is used for cross platform compatible terminal coloring
 
 
-# DIR = "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-# BRIZO_ENV_FILE = "${DIR}/brizo.env".format(DIR)
-
 # https://stackoverflow.com/questions/8365394/set-environment-variable-in-python-script
 
 
@@ -22,8 +19,6 @@ from colors import COLOR_RESET
 DIR = libs.set_current_directory()
 BRIZO_ENV_FILE = libs.export("BRIZO_ENV_FILE", DIR + "/brizo.env")
 
-# print(DIR)
-# print(BRIZO_ENV_FILE)
 
 # # Patch $DIR if spaces (BRIZO_ENV_FILE does not need patch)
 # DIR="${DIR/ /\\ }"
