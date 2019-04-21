@@ -96,23 +96,24 @@ parser = argparse.ArgumentParser(description='Barge makes it easy to build proje
 libs.add_cli_flags(
     parser,
     {
-        'no-ansi': 'Disables text coloring',
-        'latest': 'Pulls latest version of containers',
-        'force-pull': 'Force docker to pull the components',
-        'no-pleuston': 'Exclude Pleuston',
-        'no-brizo': 'Exclude Brizo',
-        'no-aquarius': 'Exclude Aquarius',
-        'no-secret-store': 'Exclude secret store',
-        'only-secret-store': 'Only launch the secret store',
+        'no-ansi': 'Disables text coloring in the terminal.',
+        'latest': '"latest" means to use the latest "develop" branches whereas "stable" means to use the last "stable" releases.',
+        'force-pull': 'Force pulling the latest revision of the used docker images.',
+        'no-pleuston': 'Start up Ocean without the "pleuston" Building Block. Helpful for development on "pleuston".',
+        'no-brizo': 'Start up Ocean without the "brizo" Building Block.',
+        'no-aquarius': 'Start up Ocean without the "aquarius" Building Block.',
+        'no-secret-store': 'Start up Ocean without the "secret-store" Building Block.',
+        'only-secret-store': 'Only launch the secret store.',
         'reuse-ganache-database': 'Don\'t wipe the ganache database after reboot',
-        'no-acl-contract': 'Disables ACL validation in secret store',
-        'local-kovan-node': 'Use a local kovan node',
-        'local-ganache-node': 'Use a local ganache node',
-        'local-nile-node': 'Use a local nile node',
-        'local-spree-node': 'Use a local spree node',
-        'purge': 'Removes volumes and containers',
+        'no-acl-contract': 'Configures secret-store "acl_contract" option to disable secret-store authorization.',
+        'local-kovan-node': 'Runs a light node of the "kovan" network and connects the node',
+        'local-ganache-node': 'Configures a running ganache node to use a persistent database.',
+        'local-nile-node': 'Runs a node of the "nile" network and connects the node to the "nile" network.',
+        'local-spree-node': 'Runs a node of the local "spree" network.',
+        'purge': 'Removes the containers, volumes, artifact folder and networks used by the script.',
     },
 )
+
 
 compose_files = {
     "network_volumes",
@@ -224,9 +225,6 @@ if args.purge:
 
     if answer.lower() in ('y', 'yes'):
         libs.delete_folder(KEEPER_ARTIFACTS_FOLDER)
-
-
-    # todo continue from here
 
 
 libs.notify('Starting Ocean')

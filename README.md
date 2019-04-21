@@ -71,18 +71,20 @@ The `./start_ocean.py` script provides the following options:
 
 Option                      | Description
 ----------------------------| -----------
+`--no-ansi`                 | Disables text coloring in the terminal
 `--latest`                  | `latest` means to use the latest `develop` branches whereas `stable` means to use the last `stable` releases.
 `--force-pull`              | Force pulling the latest revision of the used docker images.
 `--no-pleuston`             | Start up Ocean without the `pleuston` Building Block. Helpful for development on `pleuston`.
 `--no-aquarius`             | Start up Ocean without the `aquarius` Building Block.
 `--no-brizo`                | Start up Ocean without the `brizo` Building Block.
 `--no-secret-store`         | Start up Ocean without the `secret-store` Building Block.
+`only-secret-store`         | Only launch the secret store.
 `--local-ganache-node`      | Runs a local `ganache` node.
 `--local-spree-node`        | Runs a node of the local `spree` network.
 `--local-nile-node`         | Runs a node of the `nile` network and connects the node to the `nile` network.
 `--local-kovan-node`        | Runs a light node of the `kovan` network and connects the node to the `kovan` network.
 `--reuse-ganache-database`  | Configures a running `ganache` node to use a persistent database.
-`--acl-contract`            | Configures secret-store `acl_contract` option to enable secret-store authorization.
+`--no-acl-contract`            | Configures secret-store `acl_contract` option to disable secret-store authorization.
 `--purge`                   | Removes the containers, volumes, artifact folder and networks used by the script.
 
 A similar description to the above is accessible by passing the -h or --help option.
