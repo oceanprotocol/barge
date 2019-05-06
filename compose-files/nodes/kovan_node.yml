@@ -1,7 +1,7 @@
 version: '3'
 services:
   keeper-node:
-    image: parity/parity:v2.3.2
+    image: ${PARITY_IMAGE}
     command:
       --chain kovan
       --base-path /home/parity/base

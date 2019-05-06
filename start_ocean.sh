@@ -18,6 +18,8 @@ export BRIZO_VERSION=${BRIZO_VERSION:-v0.3.1}
 export KEEPER_VERSION=${KEEPER_VERSION:-v0.9.0}
 export PLEUSTON_VERSION=${PLEUSTON_VERSION:-v0.3.0}
 
+export PARITY_IMAGE='parity/parity:v2.3.3'
+
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
 
