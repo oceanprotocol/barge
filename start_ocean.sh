@@ -252,6 +252,18 @@ while :; do
             printf $COLOR_Y'Starting with local Nile node...\n\n'$COLOR_RESET
             printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
             ;;
+        # connects you to duero ocean testnet
+        --local-duero-node)
+            export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/duero_node.yml"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/keeper_contracts.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
+            export KEEPER_MNEMONIC=''
+            export KEEPER_NETWORK_NAME="duero"
+            export KEEPER_DEPLOY_CONTRACTS="false"
+            export ACL_CONTRACT_ADDRESS="$(get_acl_address ${KEEPER_VERSION})"
+            printf $COLOR_Y'Starting with local Duero node...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
+            ;;
         # spins up spree local testnet
         --local-spree-node)
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/spree_node.yml"
