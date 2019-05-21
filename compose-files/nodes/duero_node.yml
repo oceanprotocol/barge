@@ -1,0 +1,25 @@
+version: '3'
+services:
+  keeper-node:
+    image: ${PARITY_IMAGE}
+    command:
+      --config /home/parity/parity/config/config.toml
+      --db-path /home/parity/chains
+      --keys-path /home/parity/.local/share/io.parity.ethereum/keys
+      --base-path /home/parity/base
+      --ws-interface all
+      --jsonrpc-cors all
+      --jsonrpc-interface all
+      --jsonrpc-hosts all
+      --jsonrpc-apis all
+    volumes:
+      - ../networks/duero/config:/home/parity/parity/config
+      - keeper-node:/home/parity/.local/share/io.parity.ethereum/
+      - ../networks/duero/keys:/home/parity/.local/share/io.parity.ethereum/keys
+      - ../networks/duero/authorities/validator0.json:/home/parity/.local/share/io.parity.ethereum/keys/duero/validator.json
+      - ../networks/duero/authorities/validator0.pwd:/home/parity/parity/validator.pwd
+    ports:
+      - 8545:8545
+    networks:
+      backend:
+        ipv4_address: 172.15.0.12

@@ -93,7 +93,8 @@ Option                      | Description
 `--elasticsearch`           | Start up Ocean with ElasticSearch as DB engine for Aquarius instead of MongoDB.
 `--local-ganache-node`      | Runs a local `ganache` node.
 `--local-spree-node`        | Runs a node of the local `spree` network. This is the default.
-`--local-nile-node`         | Runs a node of the `nile` network and connects the node to the `nile` network.
+`--local-duero-node`        | Runs a local parity node and connects the node to the `duero` network.
+`--local-nile-node`         | Runs a local parity node and connects the node to the `nile` network.
 `--local-kovan-node`        | Runs a light node of the `kovan` network and connects the node to the `kovan` network.
 `--reuse-ganache-database`  | Configures a running `ganache` node to use a persistent database.
 `--acl-contract`            | Configures secret-store `acl_contract` option to enable secret-store authorization.
@@ -149,6 +150,7 @@ Node      | Description
 ----------|-------------
 `ganache` | Runs a local [ganache-cli](https://github.com/trufflesuite/ganache-cli) node that is not persistent by default. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.
 `spree`   | This is the default. Runs a local node of the Spree Network. See [Spree Network](#spree-network) for details. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.
+`duero`   | Runs a local node of the Duero Network and connects to the [Duero Testnet](https://docs.oceanprotocol.com/concepts/testnets/#the-duero-testnet).
 `nile`    | Runs a local node of the Nile Network and connects to the [Nile Testnet](https://docs.oceanprotocol.com/concepts/testnets/#nile-testnet).
 `kovan`   | Runs a local node of the Kovan Network and connects to the [Kovan Testnet](https://docs.oceanprotocol.com/concepts/testnets/#kovan-testnet).
 
