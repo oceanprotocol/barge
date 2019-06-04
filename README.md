@@ -65,7 +65,7 @@ Options that set the versions (Docker image tags) of Aquarius, Brizo, Keeper Con
 
 Option      | Aquarius  | Brizo    | Keeper   | Pleuston |
 ------------|-----------|----------|----------|----------|
-(Default)   | `v0.2.2`  | `v0.3.1` | `v0.9.0` | `v0.3.0` |
+(Default)   | `v0.2.9`  | `v0.3.9` | `v0.9.7` | `v0.4.0` |
 `--latest`  | `latest`  | `latest` | `latest` | `latest` |
 
 Default is always a combination of component versions which are considered stable.
