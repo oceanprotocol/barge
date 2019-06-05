@@ -138,18 +138,11 @@ while :; do
         # Version switches
         #################################################
         --latest)
-            export AQUARIUS_VERSION=${AQUARIUS_VERSION:-latest}
-            export BRIZO_VERSION=${BRIZO_VERSION:-latest}
-            export KEEPER_VERSION=${KEEPER_VERSION:-latest}
-            export PLEUSTON_VERSION=${PLEUSTON_VERSION:-latest}
+            export AQUARIUS_VERSION="latest"
+            export BRIZO_VERSION="latest"
+            export KEEPER_VERSION="latest"
+            export PLEUSTON_VERSION="latest"
             printf $COLOR_Y'Switched to latest components...\n\n'$COLOR_RESET
-            ;;
-        --stable)
-            export AQUARIUS_VERSION=${AQUARIUS_VERSION:-stable}
-            export BRIZO_VERSION=${BRIZO_VERSION:-stable}
-            export KEEPER_VERSION=${KEEPER_VERSION:-stable}
-            export PLEUSTON_VERSION=${PLEUSTON_VERSION:-stable}
-            printf $COLOR_Y'Switched to stable components...\n\n'$COLOR_RESET
             ;;
         --force-pull)
             export FORCEPULL="true"
