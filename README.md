@@ -81,6 +81,8 @@ export BRIZO_VERSION=v0.2.1
 
 will use the default Docker image tags for Aquarius, Keeper Contracts and Pleuston, but `v0.2.1` for Brizo.
 
+Note: If you use the `--latest` option, then the `latest` Docker images will be used _regardless of whether you set any environment variables beforehand._
+
 Other `start_ocean.sh` options:
 
 Option                      | Description
