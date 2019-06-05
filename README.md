@@ -55,11 +55,9 @@ cd barge
 ./start_ocean.sh
 ```
 
-with no `--latest` or `--stable` option.
-That will run the current default versions of Aquarius, Brizo, Pleuston and Keeper Contracts (listed in the table below).
-It will also run a local Spree network (i.e. `--local-spree-node`).
+That will run the current default versions of Aquarius, Brizo, Pleuston and Keeper Contracts (listed in the table below). It will also run a local Spree network (i.e. `--local-spree-node`).
 
-<img width="535" alt="Welcome to Ocean Protocol" src="Welcome_to_Ocean_Protocol.png">
+<img width="486" alt="Welcome to Ocean Protocol" src="Welcome_to_Ocean_Protocol.png">
 
 ## Script Options
 
@@ -67,11 +65,12 @@ Options that set the versions (Docker image tags) of Aquarius, Brizo, Keeper Con
 
 Option      | Aquarius  | Brizo    | Keeper   | Pleuston |
 ------------|-----------|----------|----------|----------|
-`--latest`  | `latest`  | `latest` | `latest` | `latest` |
-`--stable`  | `stable`  | `stable` | `stable` | `stable` |
 (Default)   | `v0.2.2`  | `v0.3.1` | `v0.9.0` | `v0.3.0` |
+`--latest`  | `latest`  | `latest` | `latest` | `latest` |
 
-Note: The `latest` Docker image tag derives from the `develop` branch of the component's Git repo and the `stable` Docker image tag derives from the `master` branch.
+Default is always a combination of component versions which are considered stable.
+
+The `latest` Docker image tag derives from the `develop` branch of the component's Git repo.
 
 You can override the Docker image tag used for a particular component by setting its associated environment variable (`AQUARIUS_VERSION`, `BRIZO_VERSION`, `KEEPER_VERSION` or `PLEUSTON_VERSION`) before calling `start_ocean.sh`. For example:
 
