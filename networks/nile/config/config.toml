@@ -13,11 +13,6 @@ apis = ["web3", "eth", "pubsub", "net", "parity", "parity_pubsub", "parity_accou
 
 [network]
 port = 30303
-bootnodes = [
-  "enode://e90d77ad3065d0767abe08cdd47746c29fae578e8d1c06aacc30da720dd7fd8c8aa0e1e2ca2bb20c4739edff82e5e7405a382cf17af6a4366e2540f72e46e829@18.210.120.241:30303",
-  "enode://204b11794d16f382bab24a7cdde5ec1273b8c6c2b23e64560d7ef1707708158a45300e920607aa413633e45c5eea472c17f474866ce5901515249abfbe9c4e1c@35.171.30.2:30303",
-  "enode://6881fbbf8f2400c05c61b696af7bb2be04ab22ce64d5221906b9c1c67f2bf976b71cd1d98be7743dfc139a7b590fe230212195714e71f2204252caf68f6f94c0@54.163.9.188:30303"
-]
 discovery = true
 
 [account]
