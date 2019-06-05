@@ -144,13 +144,6 @@ while :; do
             export PLEUSTON_VERSION="latest"
             printf $COLOR_Y'Switched to latest components...\n\n'$COLOR_RESET
             ;;
-        --stable)
-            export AQUARIUS_VERSION="stable"
-            export BRIZO_VERSION="stable"
-            export KEEPER_VERSION="stable"
-            export PLEUSTON_VERSION="stable"
-            printf $COLOR_Y'Switched to stable components...\n\n'$COLOR_RESET
-            ;;
         --force-pull)
             export FORCEPULL="true"
             printf $COLOR_Y'Pulling the latest revision of the used Docker images...\n\n'$COLOR_RESET
