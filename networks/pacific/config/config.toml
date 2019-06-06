@@ -1,0 +1,19 @@
+# Users config file in users.toml
+# This configuration file can be used for either Alice, Bob or Charlie
+
+[parity]
+chain = "/home/parity/parity/config/chain.json"
+
+[rpc]
+port = 8545
+interface = "0.0.0.0"
+cors = ["all"]
+hosts = ["all"]
+apis = ["web3", "eth", "pubsub", "net", "parity", "parity_pubsub", "parity_accounts", "traces", "rpc", "shh", "shh_pubsub"]
+
+[network]
+port = 30303
+discovery = true
+
+#[account]
+#password = ["/home/parity/parity/validator.pwd"]
