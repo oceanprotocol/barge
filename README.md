@@ -63,10 +63,10 @@ That will run the current default versions of Aquarius, Brizo, Pleuston and Keep
 
 Options that set the versions (Docker image tags) of Aquarius, Brizo, Keeper Contracts and Pleuston:
 
-Option      | Aquarius  | Brizo    | Keeper   | Pleuston |
-------------|-----------|----------|----------|----------|
-(Default)   | `v0.2.9`  | `v0.3.9` | `v0.9.7` | `v0.4.0` |
-`--latest`  | `latest`  | `latest` | `latest` | `latest` |
+| Option     | Aquarius | Brizo     | Keeper   | Pleuston |
+| ---------- | -------- | --------- | -------- | -------- |
+| (Default)  | `v0.2.9` | `v0.3.10` | `v0.9.7` | `v0.4.0` |
+| `--latest` | `latest` | `latest`  | `latest` | `latest` |
 
 Default is always a combination of component versions which are considered stable.
 
@@ -85,22 +85,22 @@ Note: If you use the `--latest` option, then the `latest` Docker images will be 
 
 Other `start_ocean.sh` options:
 
-Option                      | Description
-----------------------------| -----------
-`--no-pleuston`             | Start up Ocean without the `pleuston` Building Block. Helpful for development on `pleuston`.
-`--no-aquarius`             | Start up Ocean without the `aquarius` Building Block.
-`--no-brizo`                | Start up Ocean without the `brizo` Building Block.
-`--no-secret-store`         | Start up Ocean without the `secret-store` Building Block.
-`--elasticsearch`           | Start up Ocean with ElasticSearch as DB engine for Aquarius instead of MongoDB.
-`--local-ganache-node`      | Runs a local `ganache` node.
-`--local-spree-node`        | Runs a node of the local `spree` network. This is the default.
-`--local-duero-node`        | Runs a local parity node and connects the node to the `duero` network.
-`--local-nile-node`         | Runs a local parity node and connects the node to the `nile` network.
-`--local-kovan-node`        | Runs a light node of the `kovan` network and connects the node to the `kovan` network.
-`--reuse-ganache-database`  | Configures a running `ganache` node to use a persistent database.
-`--acl-contract`            | Configures secret-store `acl_contract` option to enable secret-store authorization.
-`--force-pull`              | Force pulling the latest revision of the used Docker images.
-`--purge`                   | Removes the Docker containers, volumes, artifact folder and networks used by the script.
+| Option                     | Description                                                                                  |
+| -------------------------- | -------------------------------------------------------------------------------------------- |
+| `--no-pleuston`            | Start up Ocean without the `pleuston` Building Block. Helpful for development on `pleuston`. |
+| `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                        |
+| `--no-brizo`               | Start up Ocean without the `brizo` Building Block.                                           |
+| `--no-secret-store`        | Start up Ocean without the `secret-store` Building Block.                                    |
+| `--elasticsearch`          | Start up Ocean with ElasticSearch as DB engine for Aquarius instead of MongoDB.              |
+| `--local-ganache-node`     | Runs a local `ganache` node.                                                                 |
+| `--local-spree-node`       | Runs a node of the local `spree` network. This is the default.                               |
+| `--local-duero-node`       | Runs a local parity node and connects the node to the `duero` network.                       |
+| `--local-nile-node`        | Runs a local parity node and connects the node to the `nile` network.                        |
+| `--local-kovan-node`       | Runs a light node of the `kovan` network and connects the node to the `kovan` network.       |
+| `--reuse-ganache-database` | Configures a running `ganache` node to use a persistent database.                            |
+| `--acl-contract`           | Configures secret-store `acl_contract` option to enable secret-store authorization.          |
+| `--force-pull`             | Force pulling the latest revision of the used Docker images.                                 |
+| `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.     |
 
 ## Docker Building Blocks
 
@@ -114,77 +114,77 @@ By default it will start one container. If Pleuston is running, you can open the
 
 This Building Block can be disabled by setting the `--no-pleuston` flag.
 
-Hostname   | External Port | Internal Url          | Local Url             | Description
------------|---------------|-----------------------|-----------------------|--------------
-`pleuston` | `3000`        | http://pleuston:3000  | http://localhost:3000 | [Pleuston](https://github.com/oceanprotocol/pleuston)
+| Hostname   | External Port | Internal Url         | Local Url             | Description                                           |
+| ---------- | ------------- | -------------------- | --------------------- | ----------------------------------------------------- |
+| `pleuston` | `3000`        | http://pleuston:3000 | http://localhost:3000 | [Pleuston](https://github.com/oceanprotocol/pleuston) |
 
 ### Aquarius
 
 By default it will start two containers (one for aquarius and one for its database engine). By default Barge will use MongoDB as DB Engine. You can use option `--elasticsearch` to use ElasticSearch instead.
 This Building Block can be disabled by setting the `--no-aquarius` flag.
 
-Hostname   | External Port | Internal Url         | Local Url             | Description
------------|---------------|----------------------|-----------------------|--------------
-`aquarius` | `5000`        | http://aquarius:5000 | http://localhost:5000 | [Aquarius](https://github.com/oceanprotocol/aquarius)
-`mongodb`  |               |                      |                       | MongoDB used by Aquarius
+| Hostname   | External Port | Internal Url         | Local Url             | Description                                           |
+| ---------- | ------------- | -------------------- | --------------------- | ----------------------------------------------------- |
+| `aquarius` | `5000`        | http://aquarius:5000 | http://localhost:5000 | [Aquarius](https://github.com/oceanprotocol/aquarius) |
+| `mongodb`  |               |                      |                       | MongoDB used by Aquarius                              |
 
 ### Brizo
 
 By default it will start one container. This Building Block can be disabled by setting the `--no-brizo` flag.
 
-Hostname   | External Port | Internal Url       | Local Url             | Description
------------|---------------|--------------------|-----------------------|--------------
-`brizo`    | `8030`        | http://brizo:8030  | http://localhost:8030 | [Brizo](https://github.com/oceanprotocol/brizo)
+| Hostname | External Port | Internal Url      | Local Url             | Description                                     |
+| -------- | ------------- | ----------------- | --------------------- | ----------------------------------------------- |
+| `brizo`  | `8030`        | http://brizo:8030 | http://localhost:8030 | [Brizo](https://github.com/oceanprotocol/brizo) |
 
 ### Keeper Node
 
 Controlled by the `--local-*-node` config switches will start a container `keeper-node` that uses port `8545` to expose an rpc endpoint to the Ethereum Protocol.
 You can find a detailed explanation of how to use this in the [script options](#script-options) section of this document.
 
-Hostname      | External Port | Internal Url            | Local Url             | Description
---------------|---------------|-------------------------|-----------------------|--------------
-`keeper-node` | `8545`        | http://keeper-node:8545 | http://localhost:8545 | An Ethereum RPC node
+| Hostname      | External Port | Internal Url            | Local Url             | Description          |
+| ------------- | ------------- | ----------------------- | --------------------- | -------------------- |
+| `keeper-node` | `8545`        | http://keeper-node:8545 | http://localhost:8545 | An Ethereum RPC node |
 
 This node can be one of the following types (with the default being `spree`):
 
-Node      | Description
-----------|-------------
-`ganache` | Runs a local [ganache-cli](https://github.com/trufflesuite/ganache-cli) node that is not persistent by default. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.
-`spree`   | This is the default. Runs a local node of the Spree Network. See [Spree Network](#spree-network) for details. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.
-`duero`   | Runs a local node of the Duero Network and connects to the [Duero Testnet](https://docs.oceanprotocol.com/concepts/testnets/#the-duero-testnet).
-`nile`    | Runs a local node of the Nile Network and connects to the [Nile Testnet](https://docs.oceanprotocol.com/concepts/testnets/#nile-testnet).
-`kovan`   | Runs a local node of the Kovan Network and connects to the [Kovan Testnet](https://docs.oceanprotocol.com/concepts/testnets/#kovan-testnet).
+| Node      | Description                                                                                                                                                                                                          |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ganache` | Runs a local [ganache-cli](https://github.com/trufflesuite/ganache-cli) node that is not persistent by default. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node. |
+| `spree`   | This is the default. Runs a local node of the Spree Network. See [Spree Network](#spree-network) for details. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.   |
+| `duero`   | Runs a local node of the Duero Network and connects to the [Duero Testnet](https://docs.oceanprotocol.com/concepts/testnets/#the-duero-testnet).                                                                     |
+| `nile`    | Runs a local node of the Nile Network and connects to the [Nile Testnet](https://docs.oceanprotocol.com/concepts/testnets/#nile-testnet).                                                                            |
+| `kovan`   | Runs a local node of the Kovan Network and connects to the [Kovan Testnet](https://docs.oceanprotocol.com/concepts/testnets/#kovan-testnet).                                                                         |
 
 ### Secret Store
 
 By default it will start three containers. This Building Block can be disabled by setting the `--no-secret-store` flag.
 
-Hostname                    | External Ports   | Internal URL                          | Local URL              | Description
-----------------------------|------------------|---------------------------------------|------------------------|--------------
-`secret-store`              | `12000`, `32771` | http://secret-store:12000             | http://localhost:12000 | An instance of the Ocean Secret Store
-`secret-store-cors-proxy`   | `12001`          | http://secret-store-cors-proxy:12001  | http://localhost:12001 | An NGINX proxy to enable CORS on the secret store
-`secret-store-signing-node` | `9545`           | http://secret-store-signing-node:9545 | http://localhost:9545  | A Parity Ethereum node to `sign` messages for the secret store and to `decrypt` and `encrypt`
+| Hostname                    | External Ports   | Internal URL                          | Local URL              | Description                                                                                   |
+| --------------------------- | ---------------- | ------------------------------------- | ---------------------- | --------------------------------------------------------------------------------------------- |
+| `secret-store`              | `12000`, `32771` | http://secret-store:12000             | http://localhost:12000 | An instance of the Ocean Secret Store                                                         |
+| `secret-store-cors-proxy`   | `12001`          | http://secret-store-cors-proxy:12001  | http://localhost:12001 | An NGINX proxy to enable CORS on the secret store                                             |
+| `secret-store-signing-node` | `9545`           | http://secret-store-signing-node:9545 | http://localhost:9545  | A Parity Ethereum node to `sign` messages for the secret store and to `decrypt` and `encrypt` |
 
 ## Spree Network
 
 If you run the `./start_ocean.sh` script with the `--local-spree-node` option (please see [Keeper Node](#keeper-node) section of this document for more details),
 you will have available a keeper node in the local and private Spree Network with the following accounts enabled:
 
-Account                                      | Type     | Password/Key                 | Balance
----------------------------------------------|----------|------------------------------|-----------------
-`0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e` | key      | node0                        | 1000000000 Ether
-`0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0` | key      | secret                       | 1000000000 Ether
-`0xA99D43d86A0758d5632313b8fA3972B6088A21BB` | key      | secret                       | 1000000000 Ether
-`0xe2DD09d719Da89e5a3D0F2549c7E24566e947260` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
-`0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
-`0xA78deb2Fa79463945C247991075E2a0e98Ba7A09` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
-`0x02354A1F160A3fd7ac8b02ee91F04104440B28E7` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
-`0xe17D2A07EFD5b112F4d675ea2d122ddb145d117B` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
-`0xA32C84D2B44C041F3a56afC07a33f8AC5BF1A071` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
-`0xFF3fE9eb218EAe9ae1eF9cC6C4db238B770B65CC` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
-`0x529043886F21D9bc1AE0feDb751e34265a246e47` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
-`0xe08A1dAe983BC701D05E492DB80e0144f8f4b909` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
-`0xbcE5A3468386C64507D30136685A99cFD5603135` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether
+| Account                                      | Type     | Password/Key                 | Balance          |
+| -------------------------------------------- | -------- | ---------------------------- | ---------------- |
+| `0x00Bd138aBD70e2F00903268F3Db08f2D25677C9e` | key      | node0                        | 1000000000 Ether |
+| `0x068Ed00cF0441e4829D9784fCBe7b9e26D4BD8d0` | key      | secret                       | 1000000000 Ether |
+| `0xA99D43d86A0758d5632313b8fA3972B6088A21BB` | key      | secret                       | 1000000000 Ether |
+| `0xe2DD09d719Da89e5a3D0F2549c7E24566e947260` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether |
+| `0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether |
+| `0xA78deb2Fa79463945C247991075E2a0e98Ba7A09` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether |
+| `0x02354A1F160A3fd7ac8b02ee91F04104440B28E7` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether |
+| `0xe17D2A07EFD5b112F4d675ea2d122ddb145d117B` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether |
+| `0xA32C84D2B44C041F3a56afC07a33f8AC5BF1A071` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether |
+| `0xFF3fE9eb218EAe9ae1eF9cC6C4db238B770B65CC` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether |
+| `0x529043886F21D9bc1AE0feDb751e34265a246e47` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether |
+| `0xe08A1dAe983BC701D05E492DB80e0144f8f4b909` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether |
+| `0xbcE5A3468386C64507D30136685A99cFD5603135` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether |
 
 Use one of the above accounts to populate `PARITY_ADDRESS` and `PARITY_PASSWORD` in `brizo.env` file to avoid account `locked` issues from the keeper contracts.
 
