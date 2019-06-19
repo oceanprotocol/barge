@@ -91,7 +91,7 @@ Other `start_ocean.sh` options:
 | `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                        |
 | `--no-brizo`               | Start up Ocean without the `brizo` Building Block.                                           |
 | `--no-secret-store`        | Start up Ocean without the `secret-store` Building Block.                                    |
-| `--elasticsearch`          | Start up Ocean with ElasticSearch as DB engine for Aquarius instead of MongoDB.              |
+| `--mongodb`                | Start up Ocean with MongoDB as DB engine for Aquarius instead of Elasticsearch.              |
 | `--local-ganache-node`     | Runs a local `ganache` node.                                                                 |
 | `--local-spree-node`       | Runs a node of the local `spree` network. This is the default.                               |
 | `--local-duero-node`       | Runs a local parity node and connects the node to the `duero` network.                       |
@@ -114,25 +114,26 @@ By default it will start one container. If Pleuston is running, you can open the
 
 This Building Block can be disabled by setting the `--no-pleuston` flag.
 
-| Hostname   | External Port | Internal Url         | Local Url             | Description                                           |
+| Hostname   | External Port | Internal URL         | Local URL             | Description                                           |
 | ---------- | ------------- | -------------------- | --------------------- | ----------------------------------------------------- |
 | `pleuston` | `3000`        | http://pleuston:3000 | http://localhost:3000 | [Pleuston](https://github.com/oceanprotocol/pleuston) |
 
 ### Aquarius
 
-By default it will start two containers (one for aquarius and one for its database engine). By default Barge will use MongoDB as DB Engine. You can use option `--elasticsearch` to use ElasticSearch instead.
+By default it will start two containers (one for Aquarius and one for its database engine). By default, Barge will use Elasticsearch for its database engine. You can use the `--mongodb` option to use MongoDB instead.
 This Building Block can be disabled by setting the `--no-aquarius` flag.
 
-| Hostname   | External Port | Internal Url         | Local Url             | Description                                           |
-| ---------- | ------------- | -------------------- | --------------------- | ----------------------------------------------------- |
-| `aquarius` | `5000`        | http://aquarius:5000 | http://localhost:5000 | [Aquarius](https://github.com/oceanprotocol/aquarius) |
-| `mongodb`  |               |                      |                       | MongoDB used by Aquarius                              |
+| Hostname        | External Port | Internal URL         | Local URL             | Description                                           |
+| --------------- | ------------- | -------------------- | --------------------- | ----------------------------------------------------- |
+| `aquarius`      | `5000`        | http://aquarius:5000 | http://localhost:5000 | [Aquarius](https://github.com/oceanprotocol/aquarius) |
+| `elasticsearch` |               |                      |                       | The Elasticsearch used by Aquarius                    |
+| `mongodb`       |               |                      |                       | The MongoDB used by Aquarius                          |
 
 ### Brizo
 
 By default it will start one container. This Building Block can be disabled by setting the `--no-brizo` flag.
 
-| Hostname | External Port | Internal Url      | Local Url             | Description                                     |
+| Hostname | External Port | Internal URL      | Local URL             | Description                                     |
 | -------- | ------------- | ----------------- | --------------------- | ----------------------------------------------- |
 | `brizo`  | `8030`        | http://brizo:8030 | http://localhost:8030 | [Brizo](https://github.com/oceanprotocol/brizo) |
 
@@ -141,7 +142,7 @@ By default it will start one container. This Building Block can be disabled by s
 Controlled by the `--local-*-node` config switches will start a container `keeper-node` that uses port `8545` to expose an rpc endpoint to the Ethereum Protocol.
 You can find a detailed explanation of how to use this in the [script options](#script-options) section of this document.
 
-| Hostname      | External Port | Internal Url            | Local Url             | Description          |
+| Hostname      | External Port | Internal URL            | Local URL             | Description          |
 | ------------- | ------------- | ----------------------- | --------------------- | -------------------- |
 | `keeper-node` | `8545`        | http://keeper-node:8545 | http://localhost:8545 | An Ethereum RPC node |
 
