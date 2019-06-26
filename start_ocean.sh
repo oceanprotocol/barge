@@ -13,10 +13,10 @@ DIR="${DIR/ /\\ }"
 COMPOSE_DIR="${DIR}/compose-files"
 
 # Default versions of Aquarius, Brizo, Keeper Contracts and Pleuston
-export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v0.2.2}
-export BRIZO_VERSION=${BRIZO_VERSION:-v0.3.1}
-export KEEPER_VERSION=${KEEPER_VERSION:-v0.9.0}
-export PLEUSTON_VERSION=${PLEUSTON_VERSION:-v0.3.0}
+export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v0.2.9}
+export BRIZO_VERSION=${BRIZO_VERSION:-v0.3.10}
+export KEEPER_VERSION=${KEEPER_VERSION:-v0.9.7}
+export PLEUSTON_VERSION=${PLEUSTON_VERSION:-v0.4.0}
 
 export PARITY_IMAGE='parity/parity:v2.3.3'
 
@@ -49,10 +49,17 @@ export KEEPER_MNEMONIC="taxi music thumb unique chat sand crew more leg another 
 export CONFIGURE_ACL="true"
 export ACL_CONTRACT_ADDRESS=""
 
-# Default Aquarius parameters
-export DB_MODULE="mongodb"
-export DB_HOSTNAME="mongodb"
-export DB_PORT="27017"
+# Default Aquarius parameters: use Elasticsearch
+export DB_MODULE="elasticsearch"
+export DB_HOSTNAME="elasticsearch"
+export DB_PORT="9200"
+export DB_USERNAME="elastic"
+export DB_PASSWORD="changeme"
+export DB_SSL="false"
+export DB_VERIFY_CERTS="false"
+export DB_CA_CERTS=""
+export DB_CLIENT_KEY=""
+export DB_CLIENT_CERT=""
 
 # Export User UID and GID
 export LOCAL_USER_ID=$(id -u)
@@ -119,7 +126,7 @@ COMPOSE_FILES=""
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
-COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_mongodb.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 
@@ -161,7 +168,7 @@ while :; do
             printf $COLOR_Y'Starting without Brizo...\n\n'$COLOR_RESET
             ;;
         --no-aquarius)
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_mongodb.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_elasticsearch.yml/}"
             printf $COLOR_Y'Starting without Aquarius...\n\n'$COLOR_RESET
             ;;
         --no-secret-store)
@@ -180,22 +187,15 @@ while :; do
             printf $COLOR_Y'Starting only Secret Store...\n\n'$COLOR_RESET
             ;;
         #################################################
-        # Elasticsearch
+        # MongoDB
         #################################################
-        --elasticsearch)
-            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_mongodb.yml/}"
-            export DB_MODULE="elasticsearch"
-            export DB_HOSTNAME="elasticsearch"
-            export DB_PORT="9200"
-            export DB_USERNAME="elastic"
-            export DB_PASSWORD="changeme"
-            export DB_SSL="false"
-            export DB_VERIFY_CERTS="false"
-            export DB_CA_CERTS=""
-            export DB_CLIENT_KEY=""
-            export DB_CLIENT_CERT=""
-            printf $COLOR_Y'Starting with Elasticsearch...\n\n'$COLOR_RESET
+        --mongodb)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_mongodb.yml"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_elasticsearch.yml/}"
+            export DB_MODULE="mongodb"
+            export DB_HOSTNAME="mongodb"
+            export DB_PORT="27017"
+            printf $COLOR_Y'Starting with MongoDB...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Contract/Storage switches
