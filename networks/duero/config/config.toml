@@ -14,6 +14,3 @@ apis = ["web3", "eth", "pubsub", "net", "parity", "parity_pubsub", "parity_accou
 [network]
 port = 30303
 discovery = true
-
-[account]
-password = ["/home/parity/parity/validator.pwd"]

@@ -15,6 +15,7 @@ services:
       --unsafe-expose
     volumes:
       - ../networks/kovan/keys:/home/parity/.local/share/io.parity.ethereum/keys/kovan
+      - keeper-node-kovan:/home/parity/.local/share/io.parity.ethereum/
     ports:
       - 8545:8545
     networks:

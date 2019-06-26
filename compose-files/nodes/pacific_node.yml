@@ -12,10 +12,9 @@ services:
       --jsonrpc-hosts all
       --jsonrpc-apis all
     volumes:
-      - ../networks/nile/config:/home/parity/parity/config
-      - keeper-node:/home/parity/.local/share/io.parity.ethereum/
-      - ../networks/nile/authorities/validator0.json:/home/parity/.local/share/io.parity.ethereum/keys/nile/validator.json
-      - ../networks/nile/authorities/validator0.pwd:/home/parity/parity/validator.pwd
+      - ../networks/pacific/config:/home/parity/parity/config
+      - ../networks/pacific/keys:/home/parity/.local/share/io.parity.ethereum/keys
+      - keeper-node-pacific:/home/parity/.local/share/io.parity.ethereum/
     ports:
       - 8545:8545
     networks:
