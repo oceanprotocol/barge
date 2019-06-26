@@ -1,0 +1,109 @@
+{
+  "name": "pacific",
+  "engine": {
+    "authorityRound": {
+      "params": {
+        "stepDuration": "5",
+        "validators": {
+          "multi": {
+            "0": {
+              "list": [
+                "0x58c0131d5a14b508a7d2cea1179cf8d384b7bf1a",
+                "0x5676b8e60728efdc33a65fcdb8c6d0965d5b045a",
+                "0xbe7ef68dcdbe6520a4ba380c59d1dadc012effff"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "params": {
+    "maximumExtraDataSize": "0x20",
+    "minGasLimit": "0x1388",
+    "networkID": "0xCEA11",
+    "gasLimitBoundDivisor": "0x400",
+    "eip140Transition": "0",
+    "eip145Transition": "0",
+    "eip211Transition": "0",
+    "eip214Transition": "0",
+    "eip658Transition": "0",
+    "eip1014Transition": "0",
+    "eip1052Transition": "0",
+    "eip1283Transition": "0",
+    "kip4Transition": "0",
+    "kip6Transition": "0",
+    "wasmActivationTransition": "0"
+  },
+  "genesis": {
+    "seal": {
+      "authorityRound": {
+        "step": "0x0",
+        "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "difficulty": "0x20000",
+    "gasLimit": "0x165A0BC00"
+  },
+  "accounts": {
+    "0x0000000000000000000000000000000000000001": {
+      "balance": "1",
+      "builtin": {
+        "name": "ecrecover",
+        "pricing": {
+          "linear": {
+            "base": 3000,
+            "word": 0
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000002": {
+      "balance": "1",
+      "builtin": {
+        "name": "sha256",
+        "pricing": {
+          "linear": {
+            "base": 60,
+            "word": 12
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000003": {
+      "balance": "1",
+      "builtin": {
+        "name": "ripemd160",
+        "pricing": {
+          "linear": {
+            "base": 600,
+            "word": 120
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000004": {
+      "balance": "1",
+      "builtin": {
+        "name": "identity",
+        "pricing": {
+          "linear": {
+            "base": 15,
+            "word": 3
+          }
+        }
+      }
+    },
+    "0x7eed82a01e7b3cc6c3bb472d34d875e6e2ead48b": {
+      "balance": "1606938044258990275541962092341162602522202993782792835301376"
+    }
+  },
+  "nodes": [
+    "enode://e5e44f4a86a706b4d00a51078df37c0240872a4b1a0b1561266573e42c1e76e8b48a80b46526accba41677323288cc395babd39ac7483b98808c2387addcd949@3.217.145.228:30303",
+    "enode://6a4aac724a2dc1076e26837723958549feef5202ce5dce35bfad443782a0a73da31a7dabe285d18d61c26dfb39e2dec55ed6d61e1af27b927741b5ff1ac399d7@3.217.208.52:30303",
+    "enode://7797c7ba758004af448ea0a33a9815b4578a14c98a1feb1717a954d9927d9b59c194dc50c59a9b4053277a92e0e96917e3340a2bcdb5d09e49cf9907f090d94b@3.217.90.136:30303",
+    "enode://c3c6b58cb12afee2b5ab92e418b86c542c3debebdc08f8c16e3e674b302517ac85118ee6519ab89855a45b0f2136d06a63194fa668d18d5757a1a0f0dfca18d9@3.218.32.223:30303",
+    "enode://58fea462352fa09ae22893a849ca6a6600a1a24ffacd25fe7f380ec442163edd0ce5b5884ab63451adf6b1df9b651ad6b5ffcaa74fe1e2346aabda3419686e52@52.206.124.28:30303",
+    "enode://496cdd8b49f17cbe3000ef3d0cad2ff92aa321a04e791af562fb6f66dfe634a5eb28fb80148d58d5bf99e115a21f3d433f8ce54f9ae79a9e619e213bb6585d73@54.158.180.108:30303"
+  ]
+}

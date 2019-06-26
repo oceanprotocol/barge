@@ -1,0 +1,3 @@
+Duero
+Version=address
+latest=0x99FFC24B6749512F6DE6D24c5dBCC390359af4E3

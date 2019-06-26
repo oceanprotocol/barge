@@ -80,7 +80,8 @@ function get_acl_address {
     local version="${1:-latest}"
     line=$(grep "^${version}=" "${DIR}/${KEEPER_NETWORK_NAME}_acl_contract_addresses.txt")
     address="${line##*=}"
-    [ -z "${address}" ] && echo "Cannot determine the ACL Contract Address for ${KEEPER_NETWORK_NAME} version ${version}. Exiting" && exit 1
+    # [ -z "${address}" ] && echo "Cannot determine the ACL Contract Address for ${KEEPER_NETWORK_NAME} version ${version}. Exiting" && exit 1
+    [ -z "${address}" ] && line=$(grep "^$latest=" "${DIR}/${KEEPER_NETWORK_NAME}_acl_contract_addresses.txt") && address="${line##*=}"
     echo "${address}"
 }
 
@@ -255,6 +256,18 @@ while :; do
             export KEEPER_DEPLOY_CONTRACTS="false"
             export ACL_CONTRACT_ADDRESS="$(get_acl_address ${KEEPER_VERSION})"
             printf $COLOR_Y'Starting with local Duero node...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
+            ;;
+        # connects you to Pacific ocean network
+        --local-pacific-node)
+            export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/pacific_node.yml"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/keeper_contracts.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
+            export KEEPER_MNEMONIC=''
+            export KEEPER_NETWORK_NAME="pacific"
+            export KEEPER_DEPLOY_CONTRACTS="false"
+            export ACL_CONTRACT_ADDRESS="$(get_acl_address ${KEEPER_VERSION})"
+            printf $COLOR_Y'Starting with local Pacific node...\n\n'$COLOR_RESET
             printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
             ;;
         # spins up spree local testnet
