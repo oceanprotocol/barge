@@ -15,7 +15,7 @@ services:
       --jsonrpc-apis all
       --unsafe-expose
     volumes:
-      - ../networks/kovan/keys:/keys
+      - ../networks/kovan/keys:/keys/kovan
       - keeper-node-kovan:/home/parity/base
     ports:
       - 8545:8545
