@@ -2,10 +2,11 @@ version: '3'
 services:
   keeper-node:
     image: ${PARITY_IMAGE}
+    user: root
     command:
       --chain kovan
       --base-path /home/parity/base
-      --keys-path /home/parity/.local/share/io.parity.ethereum/keys
+      --keys-path /keys
       --light
       --ws-interface all
       --jsonrpc-cors all
@@ -14,8 +15,8 @@ services:
       --jsonrpc-apis all
       --unsafe-expose
     volumes:
-      - ../networks/kovan/keys:/home/parity/.local/share/io.parity.ethereum/keys/kovan
-      - keeper-node-kovan:/home/parity/.local/share/io.parity.ethereum/
+      - ../networks/kovan/keys:/keys
+      - keeper-node-kovan:/home/parity/base
     ports:
       - 8545:8545
     networks:
