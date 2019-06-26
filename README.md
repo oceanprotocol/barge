@@ -85,22 +85,23 @@ Note: If you use the `--latest` option, then the `latest` Docker images will be 
 
 Other `start_ocean.sh` options:
 
-| Option                     | Description                                                                                  |
-| -------------------------- | -------------------------------------------------------------------------------------------- |
-| `--no-pleuston`            | Start up Ocean without the `pleuston` Building Block. Helpful for development on `pleuston`. |
-| `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                        |
-| `--no-brizo`               | Start up Ocean without the `brizo` Building Block.                                           |
-| `--no-secret-store`        | Start up Ocean without the `secret-store` Building Block.                                    |
-| `--mongodb`                | Start up Ocean with MongoDB as DB engine for Aquarius instead of Elasticsearch.              |
-| `--local-ganache-node`     | Runs a local `ganache` node.                                                                 |
-| `--local-spree-node`       | Runs a node of the local `spree` network. This is the default.                               |
-| `--local-duero-node`       | Runs a local parity node and connects the node to the `duero` network.                       |
-| `--local-nile-node`        | Runs a local parity node and connects the node to the `nile` network.                        |
-| `--local-kovan-node`       | Runs a light node of the `kovan` network and connects the node to the `kovan` network.       |
-| `--reuse-ganache-database` | Configures a running `ganache` node to use a persistent database.                            |
-| `--acl-contract`           | Configures secret-store `acl_contract` option to enable secret-store authorization.          |
-| `--force-pull`             | Force pulling the latest revision of the used Docker images.                                 |
-| `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.     |
+| Option                     | Description                                                                                     |
+| -------------------------- | ----------------------------------------------------------------------------------------------- |
+| `--no-pleuston`            | Start up Ocean without the `pleuston` Building Block. Helpful for development on `pleuston`.    |
+| `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                           |
+| `--no-brizo`               | Start up Ocean without the `brizo` Building Block.                                              |
+| `--no-secret-store`        | Start up Ocean without the `secret-store` Building Block.                                       |
+| `--mongodb`                | Start up Ocean with MongoDB as DB engine for Aquarius instead of Elasticsearch.                 |
+| `--local-pacific-node      | Runs a local parity node and connects the node to the `pacific` network (official Ocean network |
+| `--local-ganache-node`     | Runs a local `ganache` node.                                                                    |
+| `--local-spree-node`       | Runs a node of the local `spree` network. This is the default.                                  |
+| `--local-duero-node`       | Runs a local parity node and connects the node to the `duero` network.                          |
+| `--local-nile-node`        | Runs a local parity node and connects the node to the `nile` network.                           |
+| `--local-kovan-node`       | Runs a light node of the `kovan` network and connects the node to the `kovan` network.          |
+| `--reuse-ganache-database` | Configures a running `ganache` node to use a persistent database.                               |
+| `--acl-contract`           | Configures secret-store `acl_contract` option to enable secret-store authorization.             |
+| `--force-pull`             | Force pulling the latest revision of the used Docker images.                                    |
+| `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.        |
 
 ## Docker Building Blocks
 
@@ -148,13 +149,14 @@ You can find a detailed explanation of how to use this in the [script options](#
 
 This node can be one of the following types (with the default being `spree`):
 
-| Node      | Description                                                                                                                                                                                                          |
-| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ganache` | Runs a local [ganache-cli](https://github.com/trufflesuite/ganache-cli) node that is not persistent by default. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node. |
-| `spree`   | This is the default. Runs a local node of the Spree Network. See [Spree Network](#spree-network) for details. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.   |
-| `duero`   | Runs a local node of the Duero Network and connects to the [Duero Testnet](https://docs.oceanprotocol.com/concepts/testnets/#the-duero-testnet).                                                                     |
-| `nile`    | Runs a local node of the Nile Network and connects to the [Nile Testnet](https://docs.oceanprotocol.com/concepts/testnets/#nile-testnet).                                                                            |
-| `kovan`   | Runs a local node of the Kovan Network and connects to the [Kovan Testnet](https://docs.oceanprotocol.com/concepts/testnets/#kovan-testnet).                                                                         |
+| Node         | Description                                                                                                                                                                                                          |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pacific`    | Runs a local node of the Pacific Network and connects to the [Pacific network](https://docs.oceanprotocol.com/concepts/pacific-network/).                                                                            |
+| `ganache`    | Runs a local [ganache-cli](https://github.com/trufflesuite/ganache-cli) node that is not persistent by default. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node. |
+| `spree`      | This is the default. Runs a local node of the Spree Network. See [Spree Network](#spree-network) for details. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.   |
+| `duero`      | Runs a local node of the Duero Network and connects to the [Duero Testnet](https://docs.oceanprotocol.com/concepts/testnets/#the-duero-testnet).                                                                     |
+| `nile`       | Runs a local node of the Nile Network and connects to the [Nile Testnet](https://docs.oceanprotocol.com/concepts/testnets/#nile-testnet).                                                                            |
+| `kovan`      | Runs a local node of the Kovan Network and connects to the [Kovan Testnet](https://docs.oceanprotocol.com/concepts/testnets/#kovan-testnet).                                                                         |
 
 ### Secret Store
 
