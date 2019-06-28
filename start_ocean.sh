@@ -60,6 +60,7 @@ export DB_VERIFY_CERTS="false"
 export DB_CA_CERTS=""
 export DB_CLIENT_KEY=""
 export DB_CLIENT_CERT=""
+CHECK_ELASTIC_VM_COUNT=true
 
 # Export User UID and GID
 export LOCAL_USER_ID=$(id -u)
@@ -117,6 +118,18 @@ function clean_local_contracts {
     rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
     rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.spree.json
     rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.development.json
+}
+
+function check_max_map_count {
+  vm_max_map_count=$(docker run -it --rm busybox sysctl -q vm.max_map_count)
+  vm_max_map_count=${vm_max_map_count##* }
+  vm_max_map_count=262144
+  if [ $vm_max_map_count -lt 262144 ]; then
+    printf $COLOR_R'vm.max_map_count current kernel value ($vm_max_map_count) is too low for Elasticsearch\n'$COLOR_RESET
+    printf $COLOR_R'You must update vm.max_map_count to at least 262144\n'$COLOR_RESET
+    printf $COLOR_R'Please refer to https://www.elastic.co/guide/en/elasticsearch/reference/6.6/vm-max-map-count.html\n'$COLOR_RESET
+    exit 1
+  fi
 }
 
 check_if_owned_by_root
@@ -192,6 +205,7 @@ while :; do
         --mongodb)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_mongodb.yml"
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_elasticsearch.yml/}"
+            CHECK_ELASTIC_VM_COUNT=false
             export DB_MODULE="mongodb"
             export DB_HOSTNAME="mongodb"
             export DB_PORT="27017"
@@ -306,6 +320,7 @@ while :; do
             break
             ;;
         *)
+            [ ${CHECK_ELASTIC_VM_COUNT} = "true" ] && check_max_map_count
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
             configure_secret_store
             [ ! -z ${NODE_COMPOSE_FILE} ] && COMPOSE_FILES+=" -f ${NODE_COMPOSE_FILE}"
