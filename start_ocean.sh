@@ -121,7 +121,7 @@ function clean_local_contracts {
 }
 
 function check_max_map_count {
-  vm_max_map_count=$(docker run -it --rm busybox sysctl -q vm.max_map_count)
+  vm_max_map_count=$(docker run --rm busybox sysctl -q vm.max_map_count)
   vm_max_map_count=${vm_max_map_count##* }
   vm_max_map_count=262144
   if [ $vm_max_map_count -lt 262144 ]; then
