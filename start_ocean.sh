@@ -13,7 +13,7 @@ DIR="${DIR/ /\\ }"
 COMPOSE_DIR="${DIR}/compose-files"
 
 # Default versions of Aquarius, Brizo, Keeper Contracts and Pleuston
-export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v0.3.4}
+export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v0.3.8}
 export BRIZO_VERSION=${BRIZO_VERSION:-v0.3.14}
 export KEEPER_VERSION=${KEEPER_VERSION:-v0.10.3}
 export PLEUSTON_VERSION=${PLEUSTON_VERSION:-v0.4.2}

@@ -36,7 +36,7 @@ You need to have the newest versions of:
 
 ## Get Started
 
-If you're new to Barge, it's best to do something like:
+If you're new to Barge, it's best to start with the defaults:
 
 ```bash
 git clone git@github.com:oceanprotocol/barge.git
@@ -49,7 +49,7 @@ That will run the current default versions of Aquarius, Brizo, Pleuston, Keeper 
 
 <img width="486" alt="Welcome to Ocean Protocol" src="Welcome_to_Ocean_Protocol.png">
 
-It's overkill, but to be _sure_ that you use exactly the Docker images and volumes you want, you can start by pruning all the Docker things in your system:
+It's overkill, but to be _sure_ that you use exactly the Docker images and volumes you want, you can prune all the Docker things in your system first:
 
 ```bash
 docker system prune --all --volumes
@@ -65,7 +65,7 @@ The default versions are always a combination of component versions which are co
 
 | Aquarius | Brizo     | Keeper    | Pleuston | Faucet   |
 | -------- | --------- | --------  | -------- | -------- |
-| `v0.3.4` | `v0.3.14` | `v0.10.3` | `v0.4.2` | `v0.2.4` |
+| `v0.3.8` | `v0.3.14` | `v0.10.3` | `v0.4.2` | `v0.2.4` |
 
 You can use the `--latest` option to pull the most recent Docker images for all components, which are always tagged as `latest` in Docker. The `latest` Docker image tag derives from the `develop` branch of the component's Git repo.
 
