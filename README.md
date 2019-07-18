@@ -63,16 +63,24 @@ That will run the current default versions of Aquarius, Brizo, Pleuston and Keep
 
 Options that set the versions (Docker image tags) of Aquarius, Brizo, Keeper Contracts and Pleuston:
 
-| Option     | Aquarius | Brizo     | Keeper   | Pleuston |
-| ---------- | -------- | --------- | -------- | -------- |
-| (Default)  | `v0.2.9` | `v0.3.10` | `v0.9.7` | `v0.4.0` |
-| `--latest` | `latest` | `latest`  | `latest` | `latest` |
+| Option     | Aquarius | Brizo     | Keeper    | Pleuston | Faucet   |
+| ---------- | -------- | --------- | --------  | -------- | -------- |
+| (Default)  | `v0.3.4` | `v0.3.14` | `v0.10.3` | `v0.4.2` | `v0.2.4` |
+| `--latest` | `latest` | `latest`  | `latest`  | `latest` | `latest` |
 
 Default is always a combination of component versions which are considered stable.
 
 The `latest` Docker image tag derives from the `develop` branch of the component's Git repo.
 
-You can override the Docker image tag used for a particular component by setting its associated environment variable (`AQUARIUS_VERSION`, `BRIZO_VERSION`, `KEEPER_VERSION` or `PLEUSTON_VERSION`) before calling `start_ocean.sh`. For example:
+You can override the Docker image tag used for a particular component by setting its associated environment variable before calling `start_ocean.sh`:
+
+- `AQUARIUS_VERSION`
+- `BRIZO_VERSION`
+- `KEEPER_VERSION`
+- `PLEUSTON_VERSION`
+- `FAUCET_VERSION`
+
+For example:
 
 ```bash
 export BRIZO_VERSION=v0.2.1
@@ -91,6 +99,7 @@ Other `start_ocean.sh` options:
 | `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                           |
 | `--no-brizo`               | Start up Ocean without the `brizo` Building Block.                                              |
 | `--no-secret-store`        | Start up Ocean without the `secret-store` Building Block.                                       |
+| `--no-faucet`              | Start up Ocean without the `faucet` Building Block.                                       |
 | `--mongodb`                | Start up Ocean with MongoDB as DB engine for Aquarius instead of Elasticsearch.                 |
 | `--local-pacific-node      | Runs a local parity node and connects the node to the `pacific` network (official Ocean network |
 | `--local-ganache-node`     | Runs a local `ganache` node.                                                                    |
@@ -167,6 +176,14 @@ By default it will start three containers. This Building Block can be disabled b
 | `secret-store`              | `12000`, `32771` | http://secret-store:12000             | http://localhost:12000 | An instance of the Ocean Secret Store                                                         |
 | `secret-store-cors-proxy`   | `12001`          | http://secret-store-cors-proxy:12001  | http://localhost:12001 | An NGINX proxy to enable CORS on the secret store                                             |
 | `secret-store-signing-node` | `9545`           | http://secret-store-signing-node:9545 | http://localhost:9545  | A Parity Ethereum node to `sign` messages for the secret store and to `decrypt` and `encrypt` |
+
+### Faucet
+
+By default it will start two containers, one for Faucet server and one for its database (MongoDB). This Building Block can be disabled by setting the `--no-faucet` flag.
+
+| Hostname   | External Port | Internal URL         | Local URL             | Description                                           |
+| ---------- | ------------- | -------------------- | --------------------- | ----------------------------------------------------- |
+| `faucet` | `3001`        | http://faucet:3001 | http://localhost:3001 | [Faucet](https://github.com/oceanprotocol/faucet) |
 
 ## Spree Network
 
