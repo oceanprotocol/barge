@@ -183,6 +183,8 @@ By default it will start two containers, one for Faucet server and one for its d
 | ---------- | ------------- | -------------------- | --------------------- | ----------------------------------------------------- |
 | `faucet` | `3001`        | http://faucet:3001 | http://localhost:3001 | [Faucet](https://github.com/oceanprotocol/faucet) |
 
+By default the Faucet allows requests every 24hrs. To disable the timespan check you can pass `FAUCET_TIMESPAN=0` as environment variable before starting the script.
+
 ## Spree Network
 
 If you run the `./start_ocean.sh` script with the `--local-spree-node` option (please see [Keeper Node](#keeper-node) section of this document for more details),
