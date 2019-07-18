@@ -14,9 +14,10 @@ COMPOSE_DIR="${DIR}/compose-files"
 
 # Default versions of Aquarius, Brizo, Keeper Contracts and Pleuston
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v0.3.4}
-export BRIZO_VERSION=${BRIZO_VERSION:-v0.3.13}
+export BRIZO_VERSION=${BRIZO_VERSION:-v0.3.14}
 export KEEPER_VERSION=${KEEPER_VERSION:-v0.10.3}
 export PLEUSTON_VERSION=${PLEUSTON_VERSION:-v0.4.2}
+export FAUCET_VERSION=${FAUCET_VERSION:-v0.2.4}
 
 export PARITY_IMAGE='parity/parity:v2.3.3'
 
@@ -142,6 +143,7 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/faucet.yml"
 
 DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
@@ -163,6 +165,7 @@ while :; do
             export BRIZO_VERSION="latest"
             export KEEPER_VERSION="latest"
             export PLEUSTON_VERSION="latest"
+            export FAUCET_VERSION="latest"
             printf $COLOR_Y'Switched to latest components...\n\n'$COLOR_RESET
             ;;
         --force-pull)
@@ -187,6 +190,10 @@ while :; do
         --no-secret-store)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
             printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
+            ;;
+        --no-faucet)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/faucet.yml/}"
+            printf $COLOR_Y'Starting without Faucet...\n\n'$COLOR_RESET
             ;;
 
         #################################################
@@ -304,6 +311,7 @@ while :; do
             docker network rm ${PROJECT_NAME}_secretstore || true
             docker volume rm ${PROJECT_NAME}_keeper-node || true
             docker volume rm ${PROJECT_NAME}_secret-store || true
+            docker volume rm ${PROJECT_NAME}_faucet || true
             read -p "Are you sure you want to delete $KEEPER_ARTIFACTS_FOLDER? " -n 1 -r
             echo
             if [[ $REPLY =~ ^[Yy]$ ]]

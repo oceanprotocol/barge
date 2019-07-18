@@ -2,28 +2,26 @@
 
 <h1 align="center">barge</h1>
 
-🐳 Docker Compose files for the full Ocean Protocol stack. It's called "barge" because barges carry containers on the water.
+> 🐳 Docker Compose files for the full Ocean Protocol stack. It's called "barge" because barges carry containers on the water.
 
 ---
 
-**🐲🦑 THERE BE DRAGONS AND SQUIDS. This is in alpha state and you can expect running into problems. If you run into them, please open up [a new issue](https://github.com/oceanprotocol/docker-images/issues). 🦑🐲**
-
----
-
-## Table of Contents
-
-  - [Prerequisites](#prerequisites)
-  - [Get Started](#get-started)
-  - [Script Options](#script-options)
-  - [Docker Building Blocks](#docker-building-blocks)
-    - [Pleuston](#pleuston)
-    - [Aquarius](#aquarius)
-    - [Brizo](#brizo)
-    - [Keeper Node](#keeper-node)
-    - [Secret Store](#secret-store)
-  - [Spree Network](#spree-network)
-  - [Contributing](#contributing)
-  - [License](#license)
+- [Prerequisites](#Prerequisites)
+- [Get Started](#Get-Started)
+- [Options](#Options)
+  - [Component Versions](#Component-Versions)
+  - [All Options](#All-Options)
+- [Docker Building Blocks](#Docker-Building-Blocks)
+  - [Pleuston](#Pleuston)
+  - [Aquarius](#Aquarius)
+  - [Brizo](#Brizo)
+  - [Keeper Node](#Keeper-Node)
+  - [Secret Store](#Secret-Store)
+  - [Faucet](#Faucet)
+- [Spree Network](#Spree-Network)
+  - [Spree Mnemonic](#Spree-Mnemonic)
+- [Contributing](#Contributing)
+- [License](#License)
 
 ---
 
@@ -38,14 +36,6 @@ You need to have the newest versions of:
 
 ## Get Started
 
-It's overkill, but to be _sure_ that you use exactly the Docker images and volumes you want, you can start by pruning all the Docker things in your system:
-
-```bash
-docker system prune --all --volumes
-```
-
-(An alternative would be to add the options `--purge` and `--force-pull` in your call to the `start_ocean.sh` script below but that's not as sure as the above command.)
-
 If you're new to Barge, it's best to do something like:
 
 ```bash
@@ -55,24 +45,39 @@ cd barge
 ./start_ocean.sh
 ```
 
-That will run the current default versions of Aquarius, Brizo, Pleuston and Keeper Contracts (listed in the table below). It will also run a local Spree network (i.e. `--local-spree-node`).
+That will run the current default versions of Aquarius, Brizo, Pleuston, Keeper Contracts, and Faucet. It will also run a local Spree network (i.e. `--local-spree-node`).
 
 <img width="486" alt="Welcome to Ocean Protocol" src="Welcome_to_Ocean_Protocol.png">
 
-## Script Options
+It's overkill, but to be _sure_ that you use exactly the Docker images and volumes you want, you can start by pruning all the Docker things in your system:
 
-Options that set the versions (Docker image tags) of Aquarius, Brizo, Keeper Contracts and Pleuston:
+```bash
+docker system prune --all --volumes
+```
 
-| Option     | Aquarius | Brizo     | Keeper   | Pleuston |
-| ---------- | -------- | --------- | -------- | -------- |
-| (Default)  | `v0.2.9` | `v0.3.10` | `v0.9.7` | `v0.4.0` |
-| `--latest` | `latest` | `latest`  | `latest` | `latest` |
+## Options
 
-Default is always a combination of component versions which are considered stable.
+The startup script comes with a set of options for customizing variou things.
 
-The `latest` Docker image tag derives from the `develop` branch of the component's Git repo.
+### Component Versions
 
-You can override the Docker image tag used for a particular component by setting its associated environment variable (`AQUARIUS_VERSION`, `BRIZO_VERSION`, `KEEPER_VERSION` or `PLEUSTON_VERSION`) before calling `start_ocean.sh`. For example:
+The default versions are always a combination of component versions which are considered stable.
+
+| Aquarius | Brizo     | Keeper    | Pleuston | Faucet   |
+| -------- | --------- | --------  | -------- | -------- |
+| `v0.3.4` | `v0.3.14` | `v0.10.3` | `v0.4.2` | `v0.2.4` |
+
+You can use the `--latest` option to pull the most recent Docker images for all components, which are always tagged as `latest` in Docker. The `latest` Docker image tag derives from the `develop` branch of the component's Git repo.
+
+You can override the Docker image tag used for a particular component by setting its associated environment variable before calling `start_ocean.sh`:
+
+- `AQUARIUS_VERSION`
+- `BRIZO_VERSION`
+- `KEEPER_VERSION`
+- `PLEUSTON_VERSION`
+- `FAUCET_VERSION`
+
+For example:
 
 ```bash
 export BRIZO_VERSION=v0.2.1
@@ -83,16 +88,18 @@ will use the default Docker image tags for Aquarius, Keeper Contracts and Pleust
 
 Note: If you use the `--latest` option, then the `latest` Docker images will be used _regardless of whether you set any environment variables beforehand._
 
-Other `start_ocean.sh` options:
+### All Options
 
 | Option                     | Description                                                                                     |
 | -------------------------- | ----------------------------------------------------------------------------------------------- |
+| `--latest`                 | Pull Docker images tagged with `latest`.    |
 | `--no-pleuston`            | Start up Ocean without the `pleuston` Building Block. Helpful for development on `pleuston`.    |
 | `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                           |
 | `--no-brizo`               | Start up Ocean without the `brizo` Building Block.                                              |
 | `--no-secret-store`        | Start up Ocean without the `secret-store` Building Block.                                       |
+| `--no-faucet`              | Start up Ocean without the `faucet` Building Block.                                       |
 | `--mongodb`                | Start up Ocean with MongoDB as DB engine for Aquarius instead of Elasticsearch.                 |
-| `--local-pacific-node      | Runs a local parity node and connects the node to the `pacific` network (official Ocean network |
+| `--local-pacific-node`      | Runs a local parity node and connects the node to the `pacific` network (official Ocean network |
 | `--local-ganache-node`     | Runs a local `ganache` node.                                                                    |
 | `--local-spree-node`       | Runs a node of the local `spree` network. This is the default.                                  |
 | `--local-duero-node`       | Runs a local parity node and connects the node to the `duero` network.                          |
@@ -167,6 +174,14 @@ By default it will start three containers. This Building Block can be disabled b
 | `secret-store`              | `12000`, `32771` | http://secret-store:12000             | http://localhost:12000 | An instance of the Ocean Secret Store                                                         |
 | `secret-store-cors-proxy`   | `12001`          | http://secret-store-cors-proxy:12001  | http://localhost:12001 | An NGINX proxy to enable CORS on the secret store                                             |
 | `secret-store-signing-node` | `9545`           | http://secret-store-signing-node:9545 | http://localhost:9545  | A Parity Ethereum node to `sign` messages for the secret store and to `decrypt` and `encrypt` |
+
+### Faucet
+
+By default it will start two containers, one for Faucet server and one for its database (MongoDB). This Building Block can be disabled by setting the `--no-faucet` flag.
+
+| Hostname   | External Port | Internal URL         | Local URL             | Description                                           |
+| ---------- | ------------- | -------------------- | --------------------- | ----------------------------------------------------- |
+| `faucet` | `3001`        | http://faucet:3001 | http://localhost:3001 | [Faucet](https://github.com/oceanprotocol/faucet) |
 
 ## Spree Network
 
