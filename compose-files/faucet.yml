@@ -20,5 +20,6 @@ services:
       - keeper-node
     environment:
       FAUCET_NODE: ${KEEPER_RPC_URL}
+      FAUCET_TIMESPAN: ${FAUCET_TIMESPAN}
       NODE_ENV: 'production'
       MONGO_URL: 'mongodb://mongodb:27017/faucetdbtest'

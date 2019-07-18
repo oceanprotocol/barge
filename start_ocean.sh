@@ -63,6 +63,9 @@ export DB_CLIENT_KEY=""
 export DB_CLIENT_CERT=""
 CHECK_ELASTIC_VM_COUNT=true
 
+# Default Faucet options
+export FAUCET_TIMESPAN=${FAUCET_TIMESPAN:-24}
+
 # Export User UID and GID
 export LOCAL_USER_ID=$(id -u)
 export LOCAL_GROUP_ID=$(id -g)
