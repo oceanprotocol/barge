@@ -2,10 +2,11 @@ version: '3'
 services:
   keeper-node:
     image: ${PARITY_IMAGE}
+    user: root
     command:
       --config /home/parity/parity/config/config.toml
-      --db-path /home/parity/chains
       --base-path /home/parity/base
+      --keys-path /keys
       --ws-interface all
       --jsonrpc-cors all
       --jsonrpc-interface all
@@ -13,8 +14,8 @@ services:
       --jsonrpc-apis all
     volumes:
       - ../networks/nile/config:/home/parity/parity/config
-      - ../networks/nile/keys:/home/parity/.local/share/io.parity.ethereum/keys
-      - keeper-node-nile:/home/parity/.local/share/io.parity.ethereum/
+      - ../networks/nile/keys:/keys/nile
+      - keeper-node-nile:/home/parity/base
     ports:
       - 8545:8545
     networks:

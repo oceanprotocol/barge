@@ -2,11 +2,11 @@ version: '3'
 services:
   keeper-node:
     image: ${PARITY_IMAGE}
+    user: root
     command:
       --config /home/parity/parity/config/config.toml
-      --db-path /home/parity/chains
-      --keys-path /home/parity/.local/share/io.parity.ethereum/keys
       --base-path /home/parity/base
+      --keys-path /keys
       --ws-interface all
       --jsonrpc-cors all
       --jsonrpc-interface all
@@ -14,8 +14,8 @@ services:
       --jsonrpc-apis all
     volumes:
       - ../networks/duero/config:/home/parity/parity/config
-      - ../networks/duero/keys:/home/parity/.local/share/io.parity.ethereum/keys
-      - keeper-node-duero:/home/parity/.local/share/io.parity.ethereum/
+      - ../networks/duero/keys:/keys/duero
+      - keeper-node-duero:/home/parity/base
     ports:
       - 8545:8545
     networks:
