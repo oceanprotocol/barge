@@ -17,6 +17,8 @@ services:
         ipv4_address: 172.15.0.21
     depends_on:
       - mongodb
+      - keeper-node
     environment:
+      FAUCET_NODE: ${KEEPER_RPC_URL}
       NODE_ENV: 'production'
       MONGO_URL: 'mongodb://mongodb:27017/faucetdbtest'
