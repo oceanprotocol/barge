@@ -12,9 +12,6 @@ services:
     - aquarius
     - brizo
     environment:
-      # Need browser to connect to exposed ports
-      KEEPER_HOST: localhost
-      AQUARIUS_HOST: localhost
       LOCAL_CONTRACTS: ${KEEPER_DEPLOY_CONTRACTS}
     volumes:
     - ${KEEPER_ARTIFACTS_FOLDER}:/pleuston/node_modules/@oceanprotocol/keeper-contracts/artifacts/:ro

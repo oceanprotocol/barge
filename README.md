@@ -2,26 +2,26 @@
 
 <h1 align="center">barge</h1>
 
-> 🐳 Docker Compose files for the full Ocean Protocol stack. It's called "barge" because barges carry containers on the water.
+> 🐳 Docker Compose files for the full Ocean Protocol stack.
 
 ---
 
-- [Prerequisites](#Prerequisites)
-- [Get Started](#Get-Started)
-- [Options](#Options)
-  - [Component Versions](#Component-Versions)
-  - [All Options](#All-Options)
-- [Docker Building Blocks](#Docker-Building-Blocks)
-  - [Pleuston](#Pleuston)
-  - [Aquarius](#Aquarius)
-  - [Brizo](#Brizo)
-  - [Keeper Node](#Keeper-Node)
-  - [Secret Store](#Secret-Store)
-  - [Faucet](#Faucet)
-- [Spree Network](#Spree-Network)
-  - [Spree Mnemonic](#Spree-Mnemonic)
-- [Contributing](#Contributing)
-- [License](#License)
+- [Prerequisites](#prerequisites)
+- [Get Started](#get-started)
+- [Options](#options)
+  - [Component Versions](#component-versions)
+  - [All Options](#all-options)
+- [Docker Building Blocks](#docker-building-blocks)
+  - [Pleuston](#pleuston)
+  - [Aquarius](#aquarius)
+  - [Brizo](#brizo)
+  - [Keeper Node](#keeper-node)
+  - [Secret Store](#secret-store)
+  - [Faucet](#faucet)
+- [Spree Network](#spree-network)
+  - [Spree Mnemonic](#spree-mnemonic)
+- [Contributing](#contributing)
+- [License](#license)
 
 ---
 
@@ -64,10 +64,10 @@ The startup script comes with a set of options for customizing variou things.
 The default versions are always a combination of component versions which are considered stable.
 
 | Aquarius | Brizo     | Keeper    | Pleuston | Faucet   |
-| -------- | --------- | --------  | -------- | -------- |
-| `v0.3.8` | `v0.3.14` | `v0.10.3` | `v0.4.2` | `v0.2.4` |
+| -------- | --------- | --------- | -------- | -------- |
+| `v0.3.8` | `v0.3.14` | `v0.10.3` | `v0.5.0` | `v0.2.6` |
 
-You can use the `--latest` option to pull the most recent Docker images for all components, which are always tagged as `latest` in Docker. The `latest` Docker image tag derives from the `develop` branch of the component's Git repo.
+You can use the `--latest` option to pull the most recent Docker images for all components, which are always tagged as `latest` in Docker. The `latest` Docker image tag derives from the default main branch of the component's Git repo.
 
 You can override the Docker image tag used for a particular component by setting its associated environment variable before calling `start_ocean.sh`:
 
@@ -86,20 +86,20 @@ export BRIZO_VERSION=v0.2.1
 
 will use the default Docker image tags for Aquarius, Keeper Contracts and Pleuston, but `v0.2.1` for Brizo.
 
-Note: If you use the `--latest` option, then the `latest` Docker images will be used _regardless of whether you set any environment variables beforehand._
+> If you use the `--latest` option, then the `latest` Docker images will be used _regardless of whether you set any environment variables beforehand._
 
 ### All Options
 
 | Option                     | Description                                                                                     |
 | -------------------------- | ----------------------------------------------------------------------------------------------- |
-| `--latest`                 | Pull Docker images tagged with `latest`.    |
+| `--latest`                 | Pull Docker images tagged with `latest`.                                                        |
 | `--no-pleuston`            | Start up Ocean without the `pleuston` Building Block. Helpful for development on `pleuston`.    |
 | `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                           |
 | `--no-brizo`               | Start up Ocean without the `brizo` Building Block.                                              |
 | `--no-secret-store`        | Start up Ocean without the `secret-store` Building Block.                                       |
-| `--no-faucet`              | Start up Ocean without the `faucet` Building Block.                                       |
+| `--no-faucet`              | Start up Ocean without the `faucet` Building Block.                                             |
 | `--mongodb`                | Start up Ocean with MongoDB as DB engine for Aquarius instead of Elasticsearch.                 |
-| `--local-pacific-node`      | Runs a local parity node and connects the node to the `pacific` network (official Ocean network |
+| `--local-pacific-node`     | Runs a local parity node and connects the node to the `pacific` network (official Ocean network |
 | `--local-ganache-node`     | Runs a local `ganache` node.                                                                    |
 | `--local-spree-node`       | Runs a node of the local `spree` network. This is the default.                                  |
 | `--local-duero-node`       | Runs a local parity node and connects the node to the `duero` network.                          |
@@ -129,6 +129,7 @@ This Building Block can be disabled by setting the `--no-pleuston` flag.
 ### Aquarius
 
 By default it will start two containers (one for Aquarius and one for its database engine). By default, Barge will use Elasticsearch for its database engine. You can use the `--mongodb` option to use MongoDB instead.
+
 This Building Block can be disabled by setting the `--no-aquarius` flag.
 
 | Hostname        | External Port | Internal URL         | Local URL             | Description                                           |
@@ -156,14 +157,14 @@ You can find a detailed explanation of how to use this in the [script options](#
 
 This node can be one of the following types (with the default being `spree`):
 
-| Node         | Description                                                                                                                                                                                                          |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pacific`    | Runs a local node of the Pacific Network and connects to the [Pacific network](https://docs.oceanprotocol.com/concepts/pacific-network/).                                                                            |
-| `ganache`    | Runs a local [ganache-cli](https://github.com/trufflesuite/ganache-cli) node that is not persistent by default. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node. |
-| `spree`      | This is the default. Runs a local node of the Spree Network. See [Spree Network](#spree-network) for details. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.   |
-| `duero`      | Runs a local node of the Duero Network and connects to the [Duero Testnet](https://docs.oceanprotocol.com/concepts/testnets/#the-duero-testnet).                                                                     |
-| `nile`       | Runs a local node of the Nile Network and connects to the [Nile Testnet](https://docs.oceanprotocol.com/concepts/testnets/#nile-testnet).                                                                            |
-| `kovan`      | Runs a local node of the Kovan Network and connects to the [Kovan Testnet](https://docs.oceanprotocol.com/concepts/testnets/#kovan-testnet).                                                                         |
+| Node      | Description                                                                                                                                                                                                          |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pacific` | Runs a local node of the Pacific Network and connects to the [Pacific network](https://docs.oceanprotocol.com/concepts/pacific-network/).                                                                            |
+| `ganache` | Runs a local [ganache-cli](https://github.com/trufflesuite/ganache-cli) node that is not persistent by default. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node. |
+| `spree`   | This is the default. Runs a local node of the Spree Network. See [Spree Network](#spree-network) for details. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.   |
+| `duero`   | Runs a local node of the Duero Network and connects to the [Duero Testnet](https://docs.oceanprotocol.com/concepts/testnets/#the-duero-testnet).                                                                     |
+| `nile`    | Runs a local node of the Nile Network and connects to the [Nile Testnet](https://docs.oceanprotocol.com/concepts/testnets/#nile-testnet).                                                                            |
+| `kovan`   | Runs a local node of the Kovan Network and connects to the [Kovan Testnet](https://docs.oceanprotocol.com/concepts/testnets/#kovan-testnet).                                                                         |
 
 ### Secret Store
 
@@ -179,8 +180,8 @@ By default it will start three containers. This Building Block can be disabled b
 
 By default it will start two containers, one for Faucet server and one for its database (MongoDB). This Building Block can be disabled by setting the `--no-faucet` flag.
 
-| Hostname   | External Port | Internal URL         | Local URL             | Description                                           |
-| ---------- | ------------- | -------------------- | --------------------- | ----------------------------------------------------- |
+| Hostname | External Port | Internal URL       | Local URL             | Description                                       |
+| -------- | ------------- | ------------------ | --------------------- | ------------------------------------------------- |
 | `faucet` | `3001`        | http://faucet:3001 | http://localhost:3001 | [Faucet](https://github.com/oceanprotocol/faucet) |
 
 By default the Faucet allows requests every 24hrs. To disable the timespan check you can pass `FAUCET_TIMESPAN=0` as environment variable before starting the script.
@@ -221,7 +222,7 @@ See the page titled "[Ways to Contribute](https://docs.oceanprotocol.com/concept
 ## License
 
 ```text
-Copyright 2018 Ocean Protocol Foundation
+Copyright 2019 Ocean Protocol Foundation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

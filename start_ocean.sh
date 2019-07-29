@@ -16,10 +16,10 @@ COMPOSE_DIR="${DIR}/compose-files"
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v0.3.8}
 export BRIZO_VERSION=${BRIZO_VERSION:-v0.3.14}
 export KEEPER_VERSION=${KEEPER_VERSION:-v0.10.3}
-export PLEUSTON_VERSION=${PLEUSTON_VERSION:-v0.4.2}
-export FAUCET_VERSION=${FAUCET_VERSION:-v0.2.4}
+export PLEUSTON_VERSION=${PLEUSTON_VERSION:-v0.5.0}
+export FAUCET_VERSION=${FAUCET_VERSION:-v0.2.6}
 
-export PARITY_IMAGE='parity/parity:v2.3.3'
+export PARITY_IMAGE="parity/parity:v2.3.3"
 
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
@@ -40,8 +40,8 @@ export GANACHE_DATABASE_PATH="${DIR}"
 export GANACHE_REUSE_DATABASE="false"
 
 # Specify the ethereum default RPC container provider
-export KEEPER_RPC_HOST='keeper-node'
-export KEEPER_RPC_PORT='8545'
+export KEEPER_RPC_HOST="keeper-node"
+export KEEPER_RPC_PORT="8545"
 export KEEPER_RPC_URL="http://"${KEEPER_RPC_HOST}:${KEEPER_RPC_PORT}
 # Use this seed only on Spree! (Spree is the default.)
 export KEEPER_MNEMONIC="taxi music thumb unique chat sand crew more leg another off lamp"
@@ -119,9 +119,9 @@ function check_if_owned_by_root {
 }
 
 function clean_local_contracts {
-    rm -f ${KEEPER_ARTIFACTS_FOLDER}/ready
-    rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.spree.json
-    rm -f ${KEEPER_ARTIFACTS_FOLDER}/*.development.json
+    rm -f "${KEEPER_ARTIFACTS_FOLDER}/ready"
+    rm -f "${KEEPER_ARTIFACTS_FOLDER}/*.spree.json"
+    rm -f "${KEEPER_ARTIFACTS_FOLDER}/*.development.json"
 }
 
 function check_max_map_count {
@@ -150,7 +150,6 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/faucet.yml"
 
 DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
-
 while :; do
     case $1 in
         #################################################
@@ -167,7 +166,8 @@ while :; do
             export AQUARIUS_VERSION="latest"
             export BRIZO_VERSION="latest"
             export KEEPER_VERSION="latest"
-            export PLEUSTON_VERSION="latest"
+            # TODO: Change label on Docker to refer `latest` to `master`
+            export PLEUSTON_VERSION="master"
             export FAUCET_VERSION="latest"
             printf $COLOR_Y'Switched to latest components...\n\n'$COLOR_RESET
             ;;
@@ -308,7 +308,7 @@ while :; do
         #################################################
         --purge)
             printf $COLOR_R'Doing a deep clean ...\n\n'$COLOR_RESET
-            docker-compose --project-name=$PROJECT_NAME $COMPOSE_FILES -f ${NODE_COMPOSE_FILE} down
+            docker-compose --project-name=$PROJECT_NAME "$COMPOSE_FILES" -f "${NODE_COMPOSE_FILE}" down
             docker network rm ${PROJECT_NAME}_default || true
             docker network rm ${PROJECT_NAME}_backend || true
             docker network rm ${PROJECT_NAME}_secretstore || true
@@ -334,10 +334,10 @@ while :; do
             [ ${CHECK_ELASTIC_VM_COUNT} = "true" ] && check_max_map_count
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
             configure_secret_store
-            [ ! -z ${NODE_COMPOSE_FILE} ] && COMPOSE_FILES+=" -f ${NODE_COMPOSE_FILE}"
+            [ -n "${NODE_COMPOSE_FILE}" ] && COMPOSE_FILES+=" -f ${NODE_COMPOSE_FILE}"
             [ ${KEEPER_DEPLOY_CONTRACTS} = "true" ] && clean_local_contracts
-            [ ${FORCEPULL} = "true" ] && docker-compose $DOCKER_COMPOSE_EXTRA_OPTS --project-name=$PROJECT_NAME $COMPOSE_FILES pull
-            eval docker-compose $DOCKER_COMPOSE_EXTRA_OPTS --project-name=$PROJECT_NAME $COMPOSE_FILES up --remove-orphans
+            [ ${FORCEPULL} = "true" ] && docker-compose "$DOCKER_COMPOSE_EXTRA_OPTS" --project-name=$PROJECT_NAME "$COMPOSE_FILES" pull
+            eval docker-compose "$DOCKER_COMPOSE_EXTRA_OPTS" --project-name=$PROJECT_NAME "$COMPOSE_FILES" up --remove-orphans
             break
     esac
     shift
