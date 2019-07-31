@@ -331,7 +331,7 @@ while :; do
             break
             ;;
         *)
-            [ ${CHECK_ELASTIC_VM_COUNT} = "true" ] && check_max_map_count
+            check_max_map_count
             printf $COLOR_Y'Starting Ocean...\n\n'$COLOR_RESET
             configure_secret_store
             [ -n "${NODE_COMPOSE_FILE}" ] && COMPOSE_FILES+=" -f ${NODE_COMPOSE_FILE}"
