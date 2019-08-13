@@ -5,11 +5,18 @@
       "params": {
         "stepDuration": "5",
         "validators": {
-          "list": [
-            "0xa1345ed0b2d1e193aead673e33dac56515af128a",
-            "0xf4a2dbd5d67ef3019a7e4b188b92128c86d76bf9",
-            "0xcdbe5f61fac89e2cfcfa3727805d5cb8bc4f9afd"
-          ]
+          "multi": {
+            "0": {
+              "list": [
+                "0xa1345ed0b2d1e193aead673e33dac56515af128a",
+                "0xf4a2dbd5d67ef3019a7e4b188b92128c86d76bf9",
+                "0xcdbe5f61fac89e2cfcfa3727805d5cb8bc4f9afd"
+              ]
+            },
+            "1079300": {
+              "safeContract": "0xA060De254f9175D7Fa17DA41434E4920CCa30a2A"
+            }
+          }
         },
         "validateScoreTransition": 1000000000,
         "validateStepTransition": 1500000000,
@@ -22,10 +29,19 @@
     "minGasLimit": "0x1388",
     "networkID": "0x2323",
     "gasLimitBoundDivisor": "0x400",
-    "eip140Transition": 0,
-    "eip211Transition": 0,
-    "eip214Transition": 0,
-    "eip658Transition": 0
+    "eip140Transition": "0x0",
+    "eip211Transition": "0x0",
+    "eip214Transition": "0x0",
+    "eip658Transition": "0x0",
+    "wasmActivationTransition": "1079100",
+    "eip145Transition": "1079100",
+    "eip1014Transition": "1079100",
+    "eip1052Transition": "1079100",
+    "eip1283Transition": "1079100",
+    "kip4Transition": "1079100",
+    "kip6Transition": "1079100",
+    "maxCodeSize": 24576,
+    "maxCodeSizeTransition": "1079100"
   },
   "genesis": {
     "seal": {
@@ -146,13 +162,5 @@
     "0x4899f06b5e60140f1885599bf3a562cb25775adc": {
       "balance": "0x200000000000000000000000"
     }
-  },
-  "nodes": [
-    "enode://e90d77ad3065d0767abe08cdd47746c29fae578e8d1c06aacc30da720dd7fd8c8aa0e1e2ca2bb20c4739edff82e5e7405a382cf17af6a4366e2540f72e46e829@18.210.120.241:30303",
-    "enode://204b11794d16f382bab24a7cdde5ec1273b8c6c2b23e64560d7ef1707708158a45300e920607aa413633e45c5eea472c17f474866ce5901515249abfbe9c4e1c@35.171.30.2:30303",
-    "enode://6881fbbf8f2400c05c61b696af7bb2be04ab22ce64d5221906b9c1c67f2bf976b71cd1d98be7743dfc139a7b590fe230212195714e71f2204252caf68f6f94c0@54.163.9.188:30303",
-    "enode://2676315c9bc954a275b949b4b77300b694d9829b120dab36e7f125dc790a754e97e1100173a2f8ebe6390c87539424e71774996d823bc9d65b262258877a1353@52.1.94.55:30303",
-    "enode://5ca724b86ae77e84af2a187f209ee84eb47991689cce6088d6f35b7aa8f50c1bfc74fa5d3f9360da733bef6103c09cf3d8dc956637dd6a7fa7fb69797af0e133@54.156.6.164:30303",
-    "enode://6ffb46bfefb6ed24d3626a431b367819c01916272ee10caab791ff19b38e9f7ff904566f6ba83fd24591e66cb3d9ac8b24b8be7e157486b5d23ce0c473c628a4@100.24.158.252:30303"
-  ]
+  }
 }
