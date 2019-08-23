@@ -1,3 +1,5 @@
 Duero
 Version=address
-latest=0xB381718cc93289CD8309ba24D1Da7cb2a2a096d2
+v0.11.0=0xB381718cc93289CD8309ba24D1Da7cb2a2a096d2
+v0.11.1=0x
+latest=0x
