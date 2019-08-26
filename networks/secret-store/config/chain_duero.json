@@ -1,0 +1,175 @@
+{
+  "name": "duero",
+  "engine": {
+    "authorityRound": {
+      "params": {
+        "stepDuration": "5",
+        "validators": {
+          "multi": {
+            "0": {
+              "list": [
+                "0xdcb7ff1b9fd738a47eaf9b2e0b3d817b1da92781",
+                "0x3e10ae74970da70b706e768eead37b712a698941",
+                "0x0179e19cd246bb7bdec2c998ae0d8307a7eddbc5"
+              ]
+            },
+            "333": {
+              "safeContract": "0xBDFeAc66c022165Bdb320264398977bf8A54e3C0"
+            },
+            "13333": {
+              "safeContract": "0x4Eb388C190Cde6Bf8C60e37CCd2C8056A184eD43"
+            }
+          }
+        }
+      }
+    }
+  },
+  "params": {
+    "maximumExtraDataSize": "0x20",
+    "minGasLimit": "0x1388",
+    "networkID": "0x897",
+    "gasLimitBoundDivisor": "0x400",
+    "eip140Transition": "0x0",
+    "eip211Transition": "0x0",
+    "eip214Transition": "0x0",
+    "eip658Transition": "0x0",
+    "wasmActivationTransition": "0x0",
+    "eip145Transition": "0x0",
+    "eip1014Transition": "0x0",
+    "eip1052Transition": "0x0",
+    "eip1283Transition": "0x0",
+    "kip4Transition": "0x0",
+    "kip6Transition": "0x0",
+    "maxCodeSize": 24576,
+    "maxCodeSizeTransition": "0x0"
+  },
+  "genesis": {
+    "seal": {
+      "authorityRound": {
+        "step": "0x0",
+        "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "difficulty": "0x20000",
+    "gasLimit": "0x165A0BC00"
+  },
+  "accounts": {
+    "0x0000000000000000000000000000000000000001": {
+      "balance": "1",
+      "builtin": {
+        "name": "ecrecover",
+        "pricing": {
+          "linear": {
+            "base": 3000,
+            "word": 0
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000002": {
+      "balance": "1",
+      "builtin": {
+        "name": "sha256",
+        "pricing": {
+          "linear": {
+            "base": 60,
+            "word": 12
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000003": {
+      "balance": "1",
+      "builtin": {
+        "name": "ripemd160",
+        "pricing": {
+          "linear": {
+            "base": 600,
+            "word": 120
+          }
+        }
+      }
+    },
+    "0x0000000000000000000000000000000000000004": {
+      "balance": "1",
+      "builtin": {
+        "name": "identity",
+        "pricing": {
+          "linear": {
+            "base": 15,
+            "word": 3
+          }
+        }
+      }
+    },
+    "0xf5d60efcad44babc8d85eb8df57d9e3a5101eb93": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x61f9546cd2bd5e46bdb915ab9c69210c6ee043d2": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x8d968b9bc8fe3b1d233ae6238c771544dd7c8fb2": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x63132a33765fe352187c93e45fac1b9162399e5c": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x95a165da81359c11aafb4490fe6afeb6ee4f7c2e": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x9224dff492427471092d13b36866875d7e0f2dd6": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x9aa9bfa819800a44803dcacc514bb443a2baade6": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x85ef014983c1bad421cc00941c18122066da5860": {
+      "balance": "0x2000000000000000000"
+    },
+    "0xc6fffcb664a60c019a335902112584829a91c0a0": {
+      "balance": "0x2000000000000000000"
+    },
+    "0xdbb63fb51453714f5efed3c2846160018fb3f43c": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x23be64786fe4467635e65aea49f9dd7a0b05d7b5": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x3c80c7163c1e6730f2ba80df707178dcdee44475": {
+      "balance": "0x2000000000000000000"
+    },
+    "0xe49c5f9c8a78884c8ba2aa161b8c41bf21b96751": {
+      "balance": "0x2000000000000000000"
+    },
+    "0xf7f2673e854e7b33a62beec796dec5d61ac9c40a": {
+      "balance": "0x2000000000000000000"
+    },
+    "0xe739ed3643970d106c4b1c51de91b7992400e50c": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x85a7273ff4f4ffce0c708f47ab45249867679bcf": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x4156e7abdfe6e08c16ef2b241661276af57f9ead": {
+      "balance": "0x2000000000000000000"
+    },
+    "0x480b0e0a641ae45521377d4984d085a003934561": {
+      "balance": "0x200000000000000000000000"
+    },
+    "0xb08eb95236499f072b2ae3c91a8f911d6c853b4d": {
+      "balance": "0x200000000000000000000000"
+    },
+    "0x4899f06b5e60140f1885599bf3a562cb25775adc": {
+      "balance": "0x200000000000000000000000"
+    }
+  },
+  "nodes": [
+    "enode://1ac6d74bbd80a37c1dc75bddc78462922d8df6b6243c2e1b38ff250ae57d11ad37bbfcc65fcbb7c0ae22da1de5e516c00ddf98253701db18fe7280ca6b8b45d2@3.214.8.88:30303",
+    "enode://d081a7cebb62ba4a93cbdc96a22779168d8583266fe94a859a40ceb85cf8a056aeabf82c43f2ba35e4eeaf61c34fa8a873b1f16906dfcc0d512cb29e316d696a@3.95.88.145:30303",
+    "enode://d7fc9a3c23f9926321b81ff32ac130bdce185edb7be6fa33375ad18162de1faee894d0e671077e139295cbc609b036804a05d8353ea32b9c963bced2aeda951f@34.193.207.38:30303",
+    "enode://16baffd0d7f8ddd77c5ac21902bdb3ae6fa9e17f2449a579e5f2db0b8701e451c7d27225319cb15628791d4d19f3fcb7c2e2c6b8757ab195eb65d7c347c9530c@23.22.141.34:30303",
+    "enode://f05c1d338edbfbba711118a4ac8ecc37dba436289ecf86361664ef9fe4659e31f668ff23982e9afcf60e8059b23fa6b0f0bce4e8dcfef3e7507c168d62d4d98b@3.214.59.4:30303",
+    "enode://7d582bb66161906100679e079676f12109e5e73731c28a0d23d7c36ece46acd0a307add1b0c38931441c7dbffd5f0ae5507427523e9e3ea875b1ee43097d5b8d@3.213.32.155:30303"
+  ]
+}
+
