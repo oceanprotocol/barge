@@ -207,6 +207,7 @@ while :; do
             COMPOSE_FILES=""
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store_signing_node.yml"
             NODE_COMPOSE_FILE=""
             printf $COLOR_Y'Starting only Secret Store...\n\n'$COLOR_RESET
             ;;
