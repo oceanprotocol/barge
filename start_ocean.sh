@@ -19,7 +19,7 @@ export KEEPER_VERSION=${KEEPER_VERSION:-v0.10.3}
 export PLEUSTON_VERSION=${PLEUSTON_VERSION:-v0.5.0}
 export FAUCET_VERSION=${FAUCET_VERSION:-v0.2.6}
 
-export PARITY_IMAGE="parity/parity:v2.3.3"
+export PARITY_IMAGE="parity/parity:v2.5.1"
 
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
