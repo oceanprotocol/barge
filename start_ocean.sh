@@ -256,10 +256,14 @@ while :; do
         # spins up a new ganache blockchain
         --local-ganache-node)
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/ganache_node.yml"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store_signing_node.yml/}"
             export KEEPER_MNEMONIC=''
             export KEEPER_NETWORK_NAME="development"
             export KEEPER_DEPLOY_CONTRACTS="true"
             printf $COLOR_Y'Starting with local Ganache node...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Starting without Secret Store signing node...\n\n'$COLOR_RESET
             ;;
         # connects you to nile ocean testnet
         --local-nile-node)
