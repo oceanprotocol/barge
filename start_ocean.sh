@@ -312,8 +312,11 @@ while :; do
             docker network rm ${PROJECT_NAME}_default || true
             docker network rm ${PROJECT_NAME}_backend || true
             docker network rm ${PROJECT_NAME}_secretstore || true
-            docker volume rm ${PROJECT_NAME}_keeper-node || true
             docker volume rm ${PROJECT_NAME}_secret-store || true
+            docker volume rm ${PROJECT_NAME}_keeper-node-duero || true
+            docker volume rm ${PROJECT_NAME}_keeper-node-kovan || true
+            docker volume rm ${PROJECT_NAME}_keeper-node-nile || true
+            docker volume rm ${PROJECT_NAME}_keeper-node-pacific || true
             docker volume rm ${PROJECT_NAME}_faucet || true
             read -p "Are you sure you want to delete $KEEPER_ARTIFACTS_FOLDER? " -n 1 -r
             echo
