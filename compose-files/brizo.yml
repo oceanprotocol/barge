@@ -9,11 +9,15 @@ services:
         ipv4_address: 172.15.0.17
     depends_on:
       - keeper-node
+      - secret-store-signing-node
     env_file:
       - ${BRIZO_ENV_FILE}
     environment:
       KEEPER_URL: ${KEEPER_RPC_URL}
-      PARITY_URL: ${KEEPER_RPC_URL}
+      PARITY_URL: ${SIGNING_NODE_URL}
       LOCAL_CONTRACTS: ${KEEPER_DEPLOY_CONTRACTS}
+      SECRET_STORE_URL: ${SECRET_STORE_URL}
+      PARITY_ADDRESS: ${PUBLISHER_ADDRESS}
+      PARITY_PASSWORD: ${PUBLISHER_PASSWORD}
     volumes:
       - ${KEEPER_ARTIFACTS_FOLDER}:/usr/local/keeper-contracts:ro
