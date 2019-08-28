@@ -1,7 +1,7 @@
 version: '3'
 services:
   events-handler:
-    image: oceanprotocol/ocean-events-handler:v0.1.0
+    image: oceanprotocol/ocean-events-handler:$EVENTS_HANDLER_VERSION
     networks:
       backend:
         ipv4_address: 172.15.0.22

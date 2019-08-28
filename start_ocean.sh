@@ -64,8 +64,8 @@ export DB_CLIENT_KEY=""
 export DB_CLIENT_CERT=""
 CHECK_ELASTIC_VM_COUNT=true
 
-export BRIZO_LOG_LEVEL=DEBUG
-export EVENTS_HANDLER_LOG_LEVEL=DEBUG
+export BRIZO_LOG_LEVEL="INFO"
+export EVENTS_HANDLER_LOG_LEVEL="INFO"
 
 # Set a valid parity address and password to have seamless interaction with the `keeper`
 # it has to exist on the secret store signing node and as well on the keeper node
