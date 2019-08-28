@@ -9,12 +9,13 @@ services:
       - keeper-node
     environment:
       KEEPER_URL: ${KEEPER_RPC_URL}
-      PARITY_URL: ${KEEPER_RPC_URL}
-      SECRET_STORE_URL: "http://secret-store:12001"
-      PARITY_ADDRESS: "0x00bd138abd70e2f00903268f3db08f2d25677c9e"
-      PARITY_PASSWORD: "node0"
-      PARITY_KEYFILE: "/parity-data/keys/validator0.json"
+      PARITY_URL: ${SIGNING_NODE_URL}
+      SECRET_STORE_URL: ${SECRET_STORE_URL}
+      PARITY_ADDRESS: ${PUBLISHER_ADDRESS}
+      PARITY_PASSWORD: ${PUBLISHER_PASSWORD}
+      PARITY_KEYFILE: ${PUBLISHER_KEYFILE}
       LOCAL_CONTRACTS: ${KEEPER_DEPLOY_CONTRACTS}
+      LOG_LEVEL: ${EVENTS_HANDLER_LOG_LEVEL}
     volumes:
       - ${KEEPER_ARTIFACTS_FOLDER}:/usr/local/keeper-contracts:ro
       - ../networks/spree/authorities/:/parity-data/keys

@@ -19,7 +19,8 @@ services:
       SECRET_STORE_URL: ${SECRET_STORE_URL}
       PARITY_ADDRESS: ${PUBLISHER_ADDRESS}
       PARITY_PASSWORD: ${PUBLISHER_PASSWORD}
-      PARITY_KEYFILE: "/parity-data/keys/validator0.json"
+      PARITY_KEYFILE: ${PUBLISHER_KEYFILE}
+      LOG_LEVEL: ${BRIZO_LOG_LEVEL}
     volumes:
       - ${KEEPER_ARTIFACTS_FOLDER}:/usr/local/keeper-contracts:ro
       - ../networks/spree/authorities/:/parity-data/keys
