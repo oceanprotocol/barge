@@ -322,7 +322,7 @@ while :; do
             docker volume rm ${PROJECT_NAME}_keeper-node-nile || true
             docker volume rm ${PROJECT_NAME}_keeper-node-pacific || true
             docker volume rm ${PROJECT_NAME}_faucet || true
-            read -p "Are you sure you want to delete $KEEPER_ARTIFACTS_FOLDER? (y/N)" -n 1 -r
+            read -p "Are you sure you want to delete $KEEPER_ARTIFACTS_FOLDER? (y/N): " -n 1 -r
             echo
             if [[ $REPLY =~ ^[Yy]$ ]]
             then
