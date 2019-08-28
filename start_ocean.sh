@@ -15,6 +15,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 # Default versions of Aquarius, Brizo, Keeper Contracts and Pleuston
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v0.3.8}
 export BRIZO_VERSION=${BRIZO_VERSION:-v0.3.14}
+export EVENTS_HANDLER_VERSION=${EVENTS_HANDLER_VERSION:v0.1.0}
 export KEEPER_VERSION=${KEEPER_VERSION:-v0.10.3}
 export PLEUSTON_VERSION=${PLEUSTON_VERSION:-v0.5.1}
 export FAUCET_VERSION=${FAUCET_VERSION:-v0.2.6}
@@ -155,6 +156,7 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/events_handler.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store_signing_node.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/faucet.yml"
@@ -176,6 +178,7 @@ while :; do
         --latest)
             export AQUARIUS_VERSION="latest"
             export BRIZO_VERSION="latest"
+            export EVENTS_HANDLER_VERSION="latest"
             export KEEPER_VERSION="latest"
             # TODO: Change label on Docker to refer `latest` to `master`
             export PLEUSTON_VERSION="master"
@@ -192,6 +195,10 @@ while :; do
         --no-pleuston)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/pleuston.yml/}"
             printf $COLOR_Y'Starting without Pleuston...\n\n'$COLOR_RESET
+            ;;
+        --no-events-handler)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/events_handler.yml/}"
+            printf $COLOR_Y'Starting without EventsHandler...\n\n'$COLOR_RESET
             ;;
         --no-brizo)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/brizo.yml/}"
