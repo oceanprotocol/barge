@@ -1,19 +1,18 @@
 version: '3'
 services:
-  brizo:
-    image: oceanprotocol/brizo:$BRIZO_VERSION
-    ports:
-      - 8030:8030
+  events-handler:
+    image: oceanprotocol/ocean-events-handler:v0.1.0
     networks:
       backend:
-        ipv4_address: 172.15.0.17
+        ipv4_address: 172.15.0.22
     depends_on:
       - keeper-node
-    env_file:
-      - ${BRIZO_ENV_FILE}
     environment:
       KEEPER_URL: ${KEEPER_RPC_URL}
       PARITY_URL: ${KEEPER_RPC_URL}
+      SECRET_STORE_URL: "http://secret-store:12001"
+      PARITY_ADDRESS: "0x00bd138abd70e2f00903268f3db08f2d25677c9e"
+      PARITY_PASSWORD: "node0"
       PARITY_KEYFILE: "/parity-data/keys/validator0.json"
       LOCAL_CONTRACTS: ${KEEPER_DEPLOY_CONTRACTS}
     volumes:
