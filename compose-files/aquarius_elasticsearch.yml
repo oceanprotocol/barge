@@ -7,6 +7,8 @@ services:
         ipv4_address: 172.15.0.11
     environment:
         ES_JAVA_OPTS: "-Xms500m -Xmx500m"
+        MAX_MAP_COUNT: "64000"
+        discovery.type: "single-node"
 
   aquarius:
     image: oceanprotocol/aquarius:${AQUARIUS_VERSION:-stable}
@@ -28,3 +30,4 @@ services:
       DB_CA_CERTS: ${DB_CA_CERTS}
       DB_CLIENT_KEY: ${DB_CLIENT_KEY}
       DB_CLIENT_CERT: ${DB_CLIENT_CERT}
+
