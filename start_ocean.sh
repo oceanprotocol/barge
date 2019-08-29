@@ -16,10 +16,10 @@ COMPOSE_DIR="${DIR}/compose-files"
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v0.3.8}
 export BRIZO_VERSION=${BRIZO_VERSION:-v0.3.14}
 export KEEPER_VERSION=${KEEPER_VERSION:-v0.10.3}
-export PLEUSTON_VERSION=${PLEUSTON_VERSION:-v0.5.0}
+export PLEUSTON_VERSION=${PLEUSTON_VERSION:-v0.5.1}
 export FAUCET_VERSION=${FAUCET_VERSION:-v0.2.6}
 
-export PARITY_IMAGE="parity/parity:v2.3.3"
+export PARITY_IMAGE="parity/parity:v2.5.1"
 
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
@@ -62,6 +62,16 @@ export DB_CA_CERTS=""
 export DB_CLIENT_KEY=""
 export DB_CLIENT_CERT=""
 CHECK_ELASTIC_VM_COUNT=true
+
+# Set a valid parity address and password to have seamless interaction with the `keeper`
+# it has to exist on the secret store signing node and as well on the keeper node
+export PUBLISHER_ADDRESS=0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0
+export PUBLISHER_PASSWORD=secret
+
+export SECRET_STORE_URL=http://secret-store:12001
+export SIGNING_NODE_URL=http://secret-store-signing-node:8545
+
+export AQUARIUS_URI=http://localhost:5000
 
 # Default Faucet options
 export FAUCET_TIMESPAN=${FAUCET_TIMESPAN:-24}
@@ -146,6 +156,7 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store_signing_node.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/faucet.yml"
 
 DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
@@ -206,6 +217,7 @@ while :; do
             COMPOSE_FILES=""
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store_signing_node.yml"
             NODE_COMPOSE_FILE=""
             printf $COLOR_Y'Starting only Secret Store...\n\n'$COLOR_RESET
             ;;
@@ -243,44 +255,46 @@ while :; do
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/kovan_node.yml"
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/keeper_contracts.yml/}"
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/faucet.yml/}"
             export KEEPER_MNEMONIC=''
             export KEEPER_NETWORK_NAME="kovan"
             export KEEPER_DEPLOY_CONTRACTS="false"
             export ACL_CONTRACT_ADDRESS="$(get_acl_address ${KEEPER_VERSION})"
             printf $COLOR_Y'Starting with local Kovan node...\n\n'$COLOR_RESET
             printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Starting without faucet...\n\n'$COLOR_RESET
             ;;
         # spins up a new ganache blockchain
         --local-ganache-node)
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/ganache_node.yml"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store_signing_node.yml/}"
             export KEEPER_MNEMONIC=''
             export KEEPER_NETWORK_NAME="development"
             export KEEPER_DEPLOY_CONTRACTS="true"
             printf $COLOR_Y'Starting with local Ganache node...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Starting without Secret Store signing node...\n\n'$COLOR_RESET
             ;;
         # connects you to nile ocean testnet
         --local-nile-node)
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/nile_node.yml"
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/keeper_contracts.yml/}"
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
             export KEEPER_MNEMONIC=''
             export KEEPER_NETWORK_NAME="nile"
             export KEEPER_DEPLOY_CONTRACTS="false"
             export ACL_CONTRACT_ADDRESS="$(get_acl_address ${KEEPER_VERSION})"
             printf $COLOR_Y'Starting with local Nile node...\n\n'$COLOR_RESET
-            printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
             ;;
         # connects you to duero ocean testnet
         --local-duero-node)
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/duero_node.yml"
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/keeper_contracts.yml/}"
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
             export KEEPER_MNEMONIC=''
             export KEEPER_NETWORK_NAME="duero"
             export KEEPER_DEPLOY_CONTRACTS="false"
             export ACL_CONTRACT_ADDRESS="$(get_acl_address ${KEEPER_VERSION})"
             printf $COLOR_Y'Starting with local Duero node...\n\n'$COLOR_RESET
-            printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
             ;;
         # connects you to Pacific ocean network
         --local-pacific-node)
@@ -318,7 +332,7 @@ while :; do
             docker volume rm ${PROJECT_NAME}_keeper-node-nile || true
             docker volume rm ${PROJECT_NAME}_keeper-node-pacific || true
             docker volume rm ${PROJECT_NAME}_faucet || true
-            read -p "Are you sure you want to delete $KEEPER_ARTIFACTS_FOLDER? " -n 1 -r
+            read -p "Are you sure you want to delete $KEEPER_ARTIFACTS_FOLDER? (y/N): " -n 1 -r
             echo
             if [[ $REPLY =~ ^[Yy]$ ]]
             then

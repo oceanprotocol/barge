@@ -13,5 +13,7 @@ services:
     - brizo
     environment:
       LOCAL_CONTRACTS: ${KEEPER_DEPLOY_CONTRACTS}
+      REACT_APP_AQUARIUS_URI: ${AQUARIUS_URI}
+      REACT_APP_BRIZO_ADDRESS: ${PUBLISHER_ADDRESS}
     volumes:
     - ${KEEPER_ARTIFACTS_FOLDER}:/pleuston/node_modules/@oceanprotocol/keeper-contracts/artifacts/:ro
