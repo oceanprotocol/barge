@@ -69,9 +69,10 @@ export EVENTS_HANDLER_LOG_LEVEL="INFO"
 
 # Set a valid parity address and password to have seamless interaction with the `keeper`
 # it has to exist on the secret store signing node and as well on the keeper node
-export PUBLISHER_ADDRESS=0x00bd138abd70e2f00903268f3db08f2d25677c9e
-export PUBLISHER_PASSWORD=node0
-export PUBLISHER_KEYFILE="/parity-data/keys/validator0.json"
+export PROVIDER_ADDRESS=0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0
+export PROVIDER_PASSWORD=secret
+export PROVIDER_KEYFILE="/accounts/provider.json"
+export ACCOUNTS_FOLDER="../accounts"
 
 export SECRET_STORE_URL=http://secret-store:12001
 export SIGNING_NODE_URL=http://secret-store-signing-node:8545
