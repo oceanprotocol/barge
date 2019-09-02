@@ -1,7 +1,7 @@
 version: '3'
 services:
   events-handler:
-    image: oceanprotocol/ocean-events-handler:$EVENTS_HANDLER_VERSION
+    image: oceanprotocol/events-handler-py:$EVENTS_HANDLER_VERSION
     networks:
       backend:
         ipv4_address: 172.15.0.22
@@ -11,9 +11,9 @@ services:
       KEEPER_URL: ${KEEPER_RPC_URL}
       PARITY_URL: ${SIGNING_NODE_URL}
       SECRET_STORE_URL: ${SECRET_STORE_URL}
-      PARITY_ADDRESS: ${PROVIDER_ADDRESS}
-      PARITY_PASSWORD: ${PROVIDER_PASSWORD}
-      PARITY_KEYFILE: ${PROVIDER_KEYFILE}
+      PROVIDER_ADDRESS: ${PROVIDER_ADDRESS}
+      PROVIDER_PASSWORD: ${PROVIDER_PASSWORD}
+      PROVIDER_KEYFILE: ${PROVIDER_KEYFILE}
       LOCAL_CONTRACTS: ${KEEPER_DEPLOY_CONTRACTS}
       LOG_LEVEL: ${EVENTS_HANDLER_LOG_LEVEL}
     volumes:
