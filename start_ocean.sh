@@ -14,8 +14,9 @@ COMPOSE_DIR="${DIR}/compose-files"
 
 # Default versions of Aquarius, Brizo, Keeper Contracts and Pleuston
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v0.3.8}
-export BRIZO_VERSION=${BRIZO_VERSION:-v0.3.14}
-export KEEPER_VERSION=${KEEPER_VERSION:-v0.12.0}
+export BRIZO_VERSION=${BRIZO_VERSION:-v0.4.2}
+export EVENTS_HANDLER_VERSION=${EVENTS_HANDLER_VERSION:-v0.1.2}
+export KEEPER_VERSION=${KEEPER_VERSION:-v0.11.1}
 export PLEUSTON_VERSION=${PLEUSTON_VERSION:-v0.5.1}
 export FAUCET_VERSION=${FAUCET_VERSION:-v0.2.6}
 
@@ -63,10 +64,16 @@ export DB_CLIENT_KEY=""
 export DB_CLIENT_CERT=""
 CHECK_ELASTIC_VM_COUNT=true
 
+export BRIZO_WORKERS=${BRIZO_WORKERS:-5}
+export BRIZO_LOG_LEVEL="INFO"
+export EVENTS_HANDLER_LOG_LEVEL="INFO"
+
 # Set a valid parity address and password to have seamless interaction with the `keeper`
 # it has to exist on the secret store signing node and as well on the keeper node
-export PUBLISHER_ADDRESS=0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0
-export PUBLISHER_PASSWORD=secret
+export PROVIDER_ADDRESS=0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0
+export PROVIDER_PASSWORD=secret
+export PROVIDER_KEYFILE="/accounts/provider.json"
+export ACCOUNTS_FOLDER="../accounts"
 
 export SECRET_STORE_URL=http://secret-store:12001
 export SIGNING_NODE_URL=http://secret-store-signing-node:8545
@@ -155,6 +162,7 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/events_handler.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store_signing_node.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/faucet.yml"
@@ -176,6 +184,7 @@ while :; do
         --latest)
             export AQUARIUS_VERSION="latest"
             export BRIZO_VERSION="latest"
+            export EVENTS_HANDLER_VERSION="latest"
             export KEEPER_VERSION="latest"
             # TODO: Change label on Docker to refer `latest` to `master`
             export PLEUSTON_VERSION="master"
@@ -192,6 +201,10 @@ while :; do
         --no-pleuston)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/pleuston.yml/}"
             printf $COLOR_Y'Starting without Pleuston...\n\n'$COLOR_RESET
+            ;;
+        --no-events-handler)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/events_handler.yml/}"
+            printf $COLOR_Y'Starting without EventsHandler...\n\n'$COLOR_RESET
             ;;
         --no-brizo)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/brizo.yml/}"

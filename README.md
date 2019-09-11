@@ -45,7 +45,7 @@ cd barge
 ./start_ocean.sh
 ```
 
-That will run the current default versions of Aquarius, Brizo, Pleuston, Keeper Contracts, and Faucet. It will also run a local Spree network (i.e. `--local-spree-node`).
+That will run the current default versions of Aquarius, Brizo, Events Handler, Pleuston, Keeper Contracts, and Faucet. It will also run a local Spree network (i.e. `--local-spree-node`).
 
 <img width="486" alt="Welcome to Ocean Protocol" src="Welcome_to_Ocean_Protocol.png">
 
@@ -57,15 +57,15 @@ docker system prune --all --volumes
 
 ## Options
 
-The startup script comes with a set of options for customizing variou things.
+The startup script comes with a set of options for customizing various things.
 
 ### Component Versions
 
 The default versions are always a combination of component versions which are considered stable.
 
-| Aquarius | Brizo     | Keeper    | Pleuston | Faucet   |
-| -------- | --------- | --------- | -------- | -------- |
-| `v0.3.8` | `v0.3.14` | `v0.12.0` | `v0.5.1` | `v0.2.6` |
+| Aquarius | Brizo     | Events Handler | Keeper    | Pleuston | Faucet   |
+| -------- | --------- | -------------- | --------- | -------- | -------- |
+| `v0.3.8` | `v0.4.2`  |  `v0.1.2`      | `v0.11.1` | `v0.5.1` | `v0.2.6` |
 
 You can use the `--latest` option to pull the most recent Docker images for all components, which are always tagged as `latest` in Docker. The `latest` Docker image tag derives from the default main branch of the component's Git repo.
 
@@ -73,6 +73,7 @@ You can override the Docker image tag used for a particular component by setting
 
 - `AQUARIUS_VERSION`
 - `BRIZO_VERSION`
+- `EVENTS_HANDLER_VERSION`
 - `KEEPER_VERSION`
 - `PLEUSTON_VERSION`
 - `FAUCET_VERSION`
@@ -96,6 +97,7 @@ will use the default Docker image tags for Aquarius, Keeper Contracts and Pleust
 | `--no-pleuston`            | Start up Ocean without the `pleuston` Building Block. Helpful for development on `pleuston`.    |
 | `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                           |
 | `--no-brizo`               | Start up Ocean without the `brizo` Building Block.                                              |
+| `--no-events-handler`      | Start up Ocean without the `events-handler` Building Block.                                              |
 | `--no-secret-store`        | Start up Ocean without the `secret-store` Building Block.                                       |
 | `--no-faucet`              | Start up Ocean without the `faucet` Building Block.                                             |
 | `--mongodb`                | Start up Ocean with MongoDB as DB engine for Aquarius instead of Elasticsearch.                 |
@@ -144,6 +146,14 @@ By default it will start one container. This Building Block can be disabled by s
 | Hostname | External Port | Internal URL      | Local URL             | Description                                     |
 | -------- | ------------- | ----------------- | --------------------- | ----------------------------------------------- |
 | `brizo`  | `8030`        | http://brizo:8030 | http://localhost:8030 | [Brizo](https://github.com/oceanprotocol/brizo) |
+
+### Events Handler
+
+By default it will start one container. This Building Block can be disabled by setting the `--no-events-handler` flag.
+
+| Hostname          | External Port | Internal URL      | Local URL             | Description                                                          |
+| ----------------- | ------------- | ----------------- | --------------------- | -------------------------------------------------------------------- |
+| `events-handler`  |               |                   |                       | [Events-handler](https://github.com/oceanprotocol/events-handler-py) |
 
 ### Keeper Node
 
@@ -205,7 +215,11 @@ you will have available a keeper node in the local and private Spree Network wit
 | `0xe08A1dAe983BC701D05E492DB80e0144f8f4b909` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether |
 | `0xbcE5A3468386C64507D30136685A99cFD5603135` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether |
 
-Use one of the above accounts to populate `PARITY_ADDRESS` and `PARITY_PASSWORD` in `brizo.env` file to avoid account `locked` issues from the keeper contracts.
+Use one of the above accounts to populate `PROVIDER_ADDRESS`, `PROVIDER_PASSWORD` and `PROVIDER_KEYFILE` in `start_ocean.sh`. 
+This account will is used in `brizo` and `events-handler` as the `provider` account which is important for processing the 
+service agreements flow. The `PROVIDER_KEYFILE` must be placed in the `accounts` folder and must match the ethereum 
+address from `PROVIDER_ADDRESS`. The `PROVIDER_ADDRESS` is also set in `pleuston` instance so that published assets get 
+assigned the correct provider address. 
 
 ### Spree Mnemonic
 
