@@ -32,7 +32,7 @@ export OCEAN_HOME="${HOME}/.ocean"
 export KEEPER_OWNER_ROLE_ADDRESS="${KEEPER_OWNER_ROLE_ADDRESS}"
 export KEEPER_DEPLOY_CONTRACTS="true"
 export KEEPER_ARTIFACTS_FOLDER="${OCEAN_HOME}/keeper-contracts/artifacts"
-# Specify which ethereum client to run or connect to: development, kovan, spree or nile
+# Specify which ethereum client to run or connect to: development, spree or nile
 export KEEPER_NETWORK_NAME="spree"
 export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/spree_node.yml"
 
@@ -263,20 +263,6 @@ while :; do
         #################################################
         # Node type switches
         #################################################
-        # connects you to kovan
-        --local-kovan-node)
-            export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/kovan_node.yml"
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/keeper_contracts.yml/}"
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/faucet.yml/}"
-            export KEEPER_MNEMONIC=''
-            export KEEPER_NETWORK_NAME="kovan"
-            export KEEPER_DEPLOY_CONTRACTS="false"
-            export ACL_CONTRACT_ADDRESS="$(get_acl_address ${KEEPER_VERSION})"
-            printf $COLOR_Y'Starting with local Kovan node...\n\n'$COLOR_RESET
-            printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
-            printf $COLOR_Y'Starting without faucet...\n\n'$COLOR_RESET
-            ;;
         # spins up a new ganache blockchain
         --local-ganache-node)
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/ganache_node.yml"
@@ -341,7 +327,6 @@ while :; do
             docker network rm ${PROJECT_NAME}_secretstore || true
             docker volume rm ${PROJECT_NAME}_secret-store || true
             docker volume rm ${PROJECT_NAME}_keeper-node-duero || true
-            docker volume rm ${PROJECT_NAME}_keeper-node-kovan || true
             docker volume rm ${PROJECT_NAME}_keeper-node-nile || true
             docker volume rm ${PROJECT_NAME}_keeper-node-pacific || true
             docker volume rm ${PROJECT_NAME}_faucet || true

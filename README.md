@@ -65,7 +65,7 @@ The default versions are always a combination of component versions which are co
 
 | Aquarius | Brizo     | Events Handler | Keeper    | Pleuston | Faucet   |
 | -------- | --------- | -------------- | --------- | -------- | -------- |
-| `v0.3.8` | `v0.4.2`  |  `v0.1.2`      | `v0.11.1` | `v0.5.0` | `v0.2.6` |
+| `v0.3.8` | `v0.4.2`  |  `v0.1.2`      | `v0.11.1` | `v0.5.1` | `v0.2.6` |
 
 You can use the `--latest` option to pull the most recent Docker images for all components, which are always tagged as `latest` in Docker. The `latest` Docker image tag derives from the default main branch of the component's Git repo.
 
@@ -106,7 +106,6 @@ will use the default Docker image tags for Aquarius, Keeper Contracts and Pleust
 | `--local-spree-node`       | Runs a node of the local `spree` network. This is the default.                                  |
 | `--local-duero-node`       | Runs a local parity node and connects the node to the `duero` network.                          |
 | `--local-nile-node`        | Runs a local parity node and connects the node to the `nile` network.                           |
-| `--local-kovan-node`       | Runs a light node of the `kovan` network and connects the node to the `kovan` network.          |
 | `--reuse-ganache-database` | Configures a running `ganache` node to use a persistent database.                               |
 | `--acl-contract`           | Configures secret-store `acl_contract` option to enable secret-store authorization.             |
 | `--force-pull`             | Force pulling the latest revision of the used Docker images.                                    |
@@ -174,7 +173,6 @@ This node can be one of the following types (with the default being `spree`):
 | `spree`   | This is the default. Runs a local node of the Spree Network. See [Spree Network](#spree-network) for details. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.   |
 | `duero`   | Runs a local node of the Duero Network and connects to the [Duero Testnet](https://docs.oceanprotocol.com/concepts/testnets/#the-duero-testnet).                                                                     |
 | `nile`    | Runs a local node of the Nile Network and connects to the [Nile Testnet](https://docs.oceanprotocol.com/concepts/testnets/#nile-testnet).                                                                            |
-| `kovan`   | Runs a local node of the Kovan Network and connects to the [Kovan Testnet](https://docs.oceanprotocol.com/concepts/testnets/#kovan-testnet).                                                                         |
 
 ### Secret Store
 
