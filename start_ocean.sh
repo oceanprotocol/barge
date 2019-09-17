@@ -14,7 +14,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 
 # Default versions of Aquarius, Brizo, Keeper Contracts and Pleuston
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v0.3.8}
-export BRIZO_VERSION=${BRIZO_VERSION:-v0.4.2}
+export BRIZO_VERSION=${BRIZO_VERSION:-v0.4.4}
 export EVENTS_HANDLER_VERSION=${EVENTS_HANDLER_VERSION:-v0.1.2}
 export KEEPER_VERSION=${KEEPER_VERSION:-v0.11.1}
 export PLEUSTON_VERSION=${PLEUSTON_VERSION:-v0.5.1}
@@ -171,6 +171,13 @@ DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
 while :; do
     case $1 in
+        #################################################
+        # Log level
+        #################################################
+        --debug)
+            export BRIZO_LOG_LEVEL="DEBUG"
+            export EVENTS_HANDLER_LOG_LEVEL="DEBUG"
+            ;;
         #################################################
         # Disable color
         #################################################

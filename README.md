@@ -66,7 +66,7 @@ The default versions are always a combination of component versions which are co
 
 | Aquarius | Brizo    | Events Handler | Keeper    | Pleuston | Faucet   |
 | -------- | -------- | -------------- | --------- | -------- | -------- |
-| `v0.3.8` | `v0.4.2` | `v0.1.2`       | `v0.11.1` | `v0.5.1` | `v0.2.6` |
+| `v0.3.8` | `v0.4.4` | `v0.1.2`       | `v0.11.1` | `v0.5.1` | `v0.2.6` |
 
 You can use the `--latest` option to pull the most recent Docker images for all components, which are always tagged as `latest` in Docker. The `latest` Docker image tag derives from the default main branch of the component's Git repo.
 
@@ -82,7 +82,7 @@ You can override the Docker image tag used for a particular component by setting
 For example:
 
 ```bash
-export BRIZO_VERSION=v0.2.1
+export BRIZO_VERSION=v0.4.4
 ./start_ocean.sh
 ```
 
