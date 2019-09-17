@@ -82,7 +82,7 @@ You can override the Docker image tag used for a particular component by setting
 For example:
 
 ```bash
-export BRIZO_VERSION=v0.2.1
+export BRIZO_VERSION=v0.4.4
 ./start_ocean.sh
 ```
 
