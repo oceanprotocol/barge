@@ -204,7 +204,7 @@ while :; do
             ;;
         --no-events-handler)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/events_handler.yml/}"
-            printf $COLOR_Y'Starting without EventsHandler...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Starting without Events Handler...\n\n'$COLOR_RESET
             ;;
         --no-brizo)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/brizo.yml/}"

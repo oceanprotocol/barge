@@ -15,6 +15,7 @@
   - [Pleuston](#pleuston)
   - [Aquarius](#aquarius)
   - [Brizo](#brizo)
+  - [Events Handler](#events-handler)
   - [Keeper Node](#keeper-node)
   - [Secret Store](#secret-store)
   - [Faucet](#faucet)
@@ -63,9 +64,9 @@ The startup script comes with a set of options for customizing various things.
 
 The default versions are always a combination of component versions which are considered stable.
 
-| Aquarius | Brizo     | Events Handler | Keeper    | Pleuston | Faucet   |
-| -------- | --------- | -------------- | --------- | -------- | -------- |
-| `v0.3.8` | `v0.4.2`  |  `v0.1.2`      | `v0.11.1` | `v0.5.1` | `v0.2.6` |
+| Aquarius | Brizo    | Events Handler | Keeper    | Pleuston | Faucet   |
+| -------- | -------- | -------------- | --------- | -------- | -------- |
+| `v0.3.8` | `v0.4.2` | `v0.1.2`       | `v0.11.1` | `v0.5.1` | `v0.2.6` |
 
 You can use the `--latest` option to pull the most recent Docker images for all components, which are always tagged as `latest` in Docker. The `latest` Docker image tag derives from the default main branch of the component's Git repo.
 
@@ -97,7 +98,7 @@ will use the default Docker image tags for Aquarius, Keeper Contracts and Pleust
 | `--no-pleuston`            | Start up Ocean without the `pleuston` Building Block. Helpful for development on `pleuston`.    |
 | `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                           |
 | `--no-brizo`               | Start up Ocean without the `brizo` Building Block.                                              |
-| `--no-events-handler`      | Start up Ocean without the `events-handler` Building Block.                                              |
+| `--no-events-handler`      | Start up Ocean without the `events-handler` Building Block.                                     |
 | `--no-secret-store`        | Start up Ocean without the `secret-store` Building Block.                                       |
 | `--no-faucet`              | Start up Ocean without the `faucet` Building Block.                                             |
 | `--mongodb`                | Start up Ocean with MongoDB as DB engine for Aquarius instead of Elasticsearch.                 |
@@ -151,9 +152,9 @@ By default it will start one container. This Building Block can be disabled by s
 
 By default it will start one container. This Building Block can be disabled by setting the `--no-events-handler` flag.
 
-| Hostname          | External Port | Internal URL      | Local URL             | Description                                                          |
-| ----------------- | ------------- | ----------------- | --------------------- | -------------------------------------------------------------------- |
-| `events-handler`  |               |                   |                       | [Events-handler](https://github.com/oceanprotocol/events-handler-py) |
+| Hostname         | External Port | Internal URL | Local URL | Description                                                       |
+| ---------------- | ------------- | ------------ | --------- | ----------------------------------------------------------------- |
+| `events-handler` |               |              |           | [Events-handler](https://github.com/oceanprotocol/events-handler) |
 
 ### Keeper Node
 
