@@ -172,6 +172,13 @@ DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 while :; do
     case $1 in
         #################################################
+        # Log level
+        #################################################
+        --debug)
+            export BRIZO_LOG_LEVEL="DEBUG"
+            export EVENTS_HANDLER_LOG_LEVEL="DEBUG"
+            ;;
+        #################################################
         # Disable color
         #################################################
         --no-ansi)
