@@ -1,0 +1,36 @@
+version: '3'
+services:
+  commonsserver:
+    image: oceanprotocol/commons_server:$COMMONS_SERVER_VERSION
+    networks:
+      backend:
+        ipv4_address: 172.15.0.23
+    ports:
+      - 4000:4000
+
+  commonsclient:
+    image: oceanprotocol/commons_client:$COMMONS_CLIENT_VERSION
+    networks:
+      backend:
+        ipv4_address: 172.15.0.24
+    ports:
+      - 3000:3000
+    depends_on:
+    - keeper-node
+    - aquarius
+    - brizo
+    - commonsserver
+    environment:
+      LOCAL_CONTRACTS: ${KEEPER_DEPLOY_CONTRACTS}
+      REACT_APP_AQUARIUS_URI: ${AQUARIUS_URI}
+      REACT_APP_BRIZO_ADDRESS: ${PROVIDER_ADDRESS}
+      LISTEN_ADDRESS: '0.0.0.0'
+      REACT_APP_SERVICE_URI: ${COMMONS_SERVER_URL}
+      REACT_APP_NODE_URI: ${KEEPER_RPC_URL}
+      REACT_APP_BRIZO_URI: ${BRIZO_URL}
+      REACT_APP_SECRET_STORE_URI: ${SECRET_STORE_URL}
+      REACT_APP_FAUCET_URI: ${FAUCET_URL}
+    volumes:
+    - ${KEEPER_ARTIFACTS_FOLDER}:/app/frontend/node_modules/@oceanprotocol/keeper-contracts/artifacts/:ro
+
+
