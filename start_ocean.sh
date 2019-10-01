@@ -85,8 +85,15 @@ export AQUARIUS_URI=http://localhost:5000
 # Default Faucet options
 export FAUCET_TIMESPAN=${FAUCET_TIMESPAN:-24}
 export FAUCET_URL=http://localhost:3001
+
+#commons
 export COMMONS_SERVER_URL=http://localhost:4000
 export COMMONS_CLIENT_URL=http://localhost:3000
+export COMMONS_KEEPER_RPC_HOST=http://localhost:8545
+export COMMONS_SECRET_STORE_URL=http://localhost:12001
+export COMMONS_BRIZO_URL=${BRIZO_URL}
+export COMMONS_AQUARIUS_URI=${AQUARIUS_URI}
+export COMMONS_FAUCET_URL=${FAUCET_URL}
 
 # Export User UID and GID
 export LOCAL_USER_ID=$(id -u)
