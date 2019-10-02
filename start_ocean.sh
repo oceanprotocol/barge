@@ -12,12 +12,11 @@ export BRIZO_ENV_FILE="${DIR}/brizo.env"
 DIR="${DIR/ /\\ }"
 COMPOSE_DIR="${DIR}/compose-files"
 
-# Default versions of Aquarius, Brizo, Keeper Contracts and Pleuston
+# Default versions of Aquarius, Brizo, Keeper Contracts and Commons
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v0.3.8}
 export BRIZO_VERSION=${BRIZO_VERSION:-v0.4.4}
 export EVENTS_HANDLER_VERSION=${EVENTS_HANDLER_VERSION:-v0.1.2}
 export KEEPER_VERSION=${KEEPER_VERSION:-v0.11.1}
-export PLEUSTON_VERSION=${PLEUSTON_VERSION:-v0.5.1}
 export FAUCET_VERSION=${FAUCET_VERSION:-v0.3.1}
 export COMMONS_SERVER_VERSION=${COMMONS_SERVER_VERSION:-v1.1.2}
 export COMMONS_CLIENT_VERSION=${COMMONS_CLIENT_VERSION:-v1.1.2}
@@ -171,7 +170,6 @@ show_banner
 COMPOSE_FILES=""
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
-##COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/commons.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
@@ -207,7 +205,6 @@ while :; do
             export EVENTS_HANDLER_VERSION="latest"
             export KEEPER_VERSION="latest"
             # TODO: Change label on Docker to refer `latest` to `master`
-            #export PLEUSTON_VERSION="master"
             export FAUCET_VERSION="latest"
 	    export COMMONS_SERVER_VERSION="latest"
 	    export COMMONS_CLIENT_VERSION="latest"
@@ -220,10 +217,6 @@ while :; do
         #################################################
         # Exclude switches
         #################################################
-#        --no-pleuston)
-#            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/pleuston.yml/}"
-#            printf $COLOR_Y'Starting without Pleuston...\n\n'$COLOR_RESET
-#            ;;
 	--no-commons)
 	    COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/commons.yml/}"
             printf $COLOR_Y'Starting without Commons...\n\n'$COLOR_RESET
