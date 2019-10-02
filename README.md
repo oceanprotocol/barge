@@ -119,7 +119,7 @@ Barge consists of a set of building blocks that can be combined to form a local 
 
 ### Commons
 
-By default it will start two containers (client & server). If Commonsis running, you can open the **Commons Frontend** application in your browser:
+By default it will start two containers (client & server). If Commons is running, you can open the **Commons Frontend** application in your browser:
 
 [http://localhost:3000](http://localhost:3000)
 
@@ -127,8 +127,8 @@ This Building Block can be disabled by setting the `--no-commons` flag.
 
 | Hostname         | External Port | Internal URL               |  Local URL            | Description                                                       |
 |------------------|---------------|----------------------------|-----------------------|------------------------------------------------------------------ |
-| `commons-client` | `3000`        | http://commons-client:3000 | http://localhost:3000 | [Commons Client](https://github.com/oceanprotocol/commons/client) |
-| `commons-server` | `4000`        | http://commons-server:4000 | http://locahost:4000  | [Commons Server](https://github.com/oceanprotocol/commons/server) |
+| `commons-client` | `3000`        | http://commons-client:3000 | http://localhost:3000 | [Commons Client](https://github.com/oceanprotocol/commons) |
+| `commons-server` | `4000`        | http://commons-server:4000 | http://locahost:4000  | [Commons Server](https://github.com/oceanprotocol/commons) |
 
 ### Aquarius
 
