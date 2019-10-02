@@ -68,7 +68,7 @@ CHECK_ELASTIC_VM_COUNT=true
 export BRIZO_WORKERS=${BRIZO_WORKERS:-5}
 export BRIZO_LOG_LEVEL="INFO"
 export EVENTS_HANDLER_LOG_LEVEL="INFO"
-export BRIZO_URL=http://172.15.0.17:8030
+export BRIZO_URL=http://localhost:8030
 # Set a valid parity address and password to have seamless interaction with the `keeper`
 # it has to exist on the secret store signing node and as well on the keeper node
 export PROVIDER_ADDRESS=0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0
@@ -86,8 +86,8 @@ export FAUCET_TIMESPAN=${FAUCET_TIMESPAN:-24}
 export FAUCET_URL=http://172.15.0.21:3001
 
 #commons
-export COMMONS_SERVER_URL=http://172.15.0.23:4000
-export COMMONS_CLIENT_URL=http://172.15.0.24:3000
+export COMMONS_SERVER_URL=http://localhost:4000
+export COMMONS_CLIENT_URL=http://localhost:3000
 export COMMONS_KEEPER_RPC_HOST=http://localhost:8545
 export COMMONS_SECRET_STORE_URL=http://localhost:12001
 export COMMONS_BRIZO_URL=${BRIZO_URL}
