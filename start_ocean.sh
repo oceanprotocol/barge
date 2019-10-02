@@ -79,7 +79,7 @@ export ACCOUNTS_FOLDER="../accounts"
 export SECRET_STORE_URL=http://secret-store:12001
 export SIGNING_NODE_URL=http://secret-store-signing-node:8545
 
-export AQUARIUS_URI=http://172.15.0.15:5000
+export AQUARIUS_URI=http://aquarius:5000
 
 # Default Faucet options
 export FAUCET_TIMESPAN=${FAUCET_TIMESPAN:-24}
@@ -97,6 +97,16 @@ export COMMONS_FAUCET_URL=${FAUCET_URL}
 # Export User UID and GID
 export LOCAL_USER_ID=$(id -u)
 export LOCAL_GROUP_ID=$(id -g)
+
+
+#add aquarius to /etc/hosts
+
+if grep -q "aquarius" /etc/hosts; then
+    echo "aquarius exists"
+else
+    echo "127.0.0.1 aquarius" >> /etc/hosts;
+fi
+
 
 # colors
 COLOR_R="\033[0;31m"    # red
