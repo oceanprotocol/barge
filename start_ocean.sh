@@ -55,7 +55,7 @@ export ACL_CONTRACT_ADDRESS=""
 
 # Default Aquarius parameters: use Elasticsearch
 export DB_MODULE="elasticsearch"
-export DB_HOSTNAME="elasticsearch"
+export DB_HOSTNAME="172.15.0.11"
 export DB_PORT="9200"
 export DB_USERNAME="elastic"
 export DB_PASSWORD="changeme"
@@ -69,7 +69,7 @@ CHECK_ELASTIC_VM_COUNT=true
 export BRIZO_WORKERS=${BRIZO_WORKERS:-5}
 export BRIZO_LOG_LEVEL="INFO"
 export EVENTS_HANDLER_LOG_LEVEL="INFO"
-export BRIZO_URL=http://localhost:8030
+export BRIZO_URL=http://172.15.0.17:8030
 # Set a valid parity address and password to have seamless interaction with the `keeper`
 # it has to exist on the secret store signing node and as well on the keeper node
 export PROVIDER_ADDRESS=0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0
@@ -80,15 +80,15 @@ export ACCOUNTS_FOLDER="../accounts"
 export SECRET_STORE_URL=http://secret-store:12001
 export SIGNING_NODE_URL=http://secret-store-signing-node:8545
 
-export AQUARIUS_URI=http://localhost:5000
+export AQUARIUS_URI=http://172.15.0.15:5000
 
 # Default Faucet options
 export FAUCET_TIMESPAN=${FAUCET_TIMESPAN:-24}
-export FAUCET_URL=http://localhost:3001
+export FAUCET_URL=http://172.15.0.21:3001
 
 #commons
-export COMMONS_SERVER_URL=http://localhost:4000
-export COMMONS_CLIENT_URL=http://localhost:3000
+export COMMONS_SERVER_URL=http://172.15.0.23:4000
+export COMMONS_CLIENT_URL=http://172.15.0.24:3000
 export COMMONS_KEEPER_RPC_HOST=http://localhost:8545
 export COMMONS_SECRET_STORE_URL=http://localhost:12001
 export COMMONS_BRIZO_URL=${BRIZO_URL}
