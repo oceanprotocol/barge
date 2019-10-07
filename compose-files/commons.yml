@@ -16,20 +16,22 @@ services:
     ports:
       - 3000:3000
     depends_on:
-    - keeper-node
-    - aquarius
-    - brizo
-    - commonsserver
+      - keeper-node
+      - aquarius
+      - brizo
+      - commonsserver
     environment:
+      LISTEN_ADDRESS: '0.0.0.0'
       LOCAL_CONTRACTS: ${KEEPER_DEPLOY_CONTRACTS}
+      REACT_APP_ALLOW_PRICING: 'true'
+      REACT_APP_SHOW_REQUEST_TOKENS_BUTTON: 'true'
       REACT_APP_AQUARIUS_URI: ${COMMONS_AQUARIUS_URI}
       REACT_APP_BRIZO_ADDRESS: ${PROVIDER_ADDRESS}
-      LISTEN_ADDRESS: '0.0.0.0'
       REACT_APP_SERVICE_URI: ${COMMONS_SERVER_URL}
       REACT_APP_NODE_URI: ${COMMONS_KEEPER_RPC_HOST}
       REACT_APP_BRIZO_URI: ${COMMONS_BRIZO_URL}
       REACT_APP_SECRET_STORE_URI: ${COMMONS_SECRET_STORE_URL}
       REACT_APP_FAUCET_URI: ${COMMONS_FAUCET_URL}
     volumes:
-    - ${KEEPER_ARTIFACTS_FOLDER}:/app/frontend/node_modules/@oceanprotocol/keeper-contracts/artifacts/:ro
+      - ${KEEPER_ARTIFACTS_FOLDER}:/app/frontend/node_modules/@oceanprotocol/keeper-contracts/artifacts/:ro
 
