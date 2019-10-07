@@ -83,7 +83,7 @@ export AQUARIUS_URI=http://aquarius:5000
 
 # Default Faucet options
 export FAUCET_TIMESPAN=${FAUCET_TIMESPAN:-24}
-export FAUCET_URL=http://172.15.0.21:3001
+export FAUCET_URL=http://localhost:3001
 
 #commons
 export COMMONS_SERVER_URL=http://localhost:4000
