@@ -12,7 +12,7 @@
   - [Component Versions](#component-versions)
   - [All Options](#all-options)
 - [Docker Building Blocks](#docker-building-blocks)
-  - [Pleuston](#pleuston)
+  - [Commons](#commons)
   - [Aquarius](#aquarius)
   - [Brizo](#brizo)
   - [Events Handler](#events-handler)
@@ -46,7 +46,7 @@ cd barge
 ./start_ocean.sh
 ```
 
-That will run the current default versions of Aquarius, Brizo, Events Handler, Pleuston, Keeper Contracts, and Faucet. It will also run a local Spree network (i.e. `--local-spree-node`).
+That will run the current default versions of Aquarius, Brizo, Events Handler, Commons, Keeper Contracts, and Faucet. It will also run a local Spree network (i.e. `--local-spree-node`).
 
 <img width="486" alt="Welcome to Ocean Protocol" src="Welcome_to_Ocean_Protocol.png">
 
@@ -64,9 +64,9 @@ The startup script comes with a set of options for customizing various things.
 
 The default versions are always a combination of component versions which are considered stable.
 
-| Aquarius | Brizo     | Events Handler | Keeper    | Pleuston | Faucet   |
+| Aquarius | Brizo     | Events Handler | Keeper    | Commons  | Faucet   |
 | -------- | --------- | -------------- | --------- | -------- | -------- |
-| `v0.3.8` | `v0.4.4`  |  `v0.1.2`      | `v0.11.1` | `v0.5.1` | `v0.3.1` |
+| `v0.3.8` | `v0.4.4`  |  `v0.1.2`      | `v0.11.1` | `v1.1.2` | `v0.3.1` |
 
 You can use the `--latest` option to pull the most recent Docker images for all components, which are always tagged as `latest` in Docker. The `latest` Docker image tag derives from the default main branch of the component's Git repo.
 
@@ -76,7 +76,8 @@ You can override the Docker image tag used for a particular component by setting
 - `BRIZO_VERSION`
 - `EVENTS_HANDLER_VERSION`
 - `KEEPER_VERSION`
-- `PLEUSTON_VERSION`
+- `COMMONS_CLIENT_VERSION`
+- `COMMONS_SERVER_VERSION`
 - `FAUCET_VERSION`
 
 For example:
@@ -86,7 +87,7 @@ export BRIZO_VERSION=v0.4.4
 ./start_ocean.sh
 ```
 
-will use the default Docker image tags for Aquarius, Keeper Contracts and Pleuston, but `v0.2.1` for Brizo.
+will use the default Docker image tags for Aquarius, Keeper Contracts and Commons, but `v0.2.1` for Brizo.
 
 > If you use the `--latest` option, then the `latest` Docker images will be used _regardless of whether you set any environment variables beforehand._
 
@@ -95,7 +96,7 @@ will use the default Docker image tags for Aquarius, Keeper Contracts and Pleust
 | Option                     | Description                                                                                     |
 | -------------------------- | ----------------------------------------------------------------------------------------------- |
 | `--latest`                 | Pull Docker images tagged with `latest`.                                                        |
-| `--no-pleuston`            | Start up Ocean without the `pleuston` Building Block. Helpful for development on `pleuston`.    |
+| `--no-commons`             | Start up Ocean without the `commons` Building Block. Helpful for development on `commons`.      |
 | `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                           |
 | `--no-brizo`               | Start up Ocean without the `brizo` Building Block.                                              |
 | `--no-events-handler`      | Start up Ocean without the `events-handler` Building Block.                                     |
@@ -116,17 +117,18 @@ will use the default Docker image tags for Aquarius, Keeper Contracts and Pleust
 
 Barge consists of a set of building blocks that can be combined to form a local test environment. By default all building blocks will be started by the `start_ocean.sh` script.
 
-### Pleuston
+### Commons
 
-By default it will start one container. If Pleuston is running, you can open the **Pleuston Frontend** application in your browser:
+By default it will start two containers (client & server). If Commons is running, you can open the **Commons Frontend** application in your browser:
 
 [http://localhost:3000](http://localhost:3000)
 
-This Building Block can be disabled by setting the `--no-pleuston` flag.
+This Building Block can be disabled by setting the `--no-commons` flag.
 
-| Hostname   | External Port | Internal URL         | Local URL             | Description                                           |
-| ---------- | ------------- | -------------------- | --------------------- | ----------------------------------------------------- |
-| `pleuston` | `3000`        | http://pleuston:3000 | http://localhost:3000 | [Pleuston](https://github.com/oceanprotocol/pleuston) |
+| Hostname         | External Port | Internal URL               |  Local URL            | Description                                                       |
+|------------------|---------------|----------------------------|-----------------------|------------------------------------------------------------------ |
+| `commons-client` | `3000`        | http://commons-client:3000 | http://localhost:3000 | [Commons Client](https://github.com/oceanprotocol/commons) |
+| `commons-server` | `4000`        | http://commons-server:4000 | http://locahost:4000  | [Commons Server](https://github.com/oceanprotocol/commons) |
 
 ### Aquarius
 

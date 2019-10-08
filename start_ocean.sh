@@ -12,13 +12,14 @@ export BRIZO_ENV_FILE="${DIR}/brizo.env"
 DIR="${DIR/ /\\ }"
 COMPOSE_DIR="${DIR}/compose-files"
 
-# Default versions of Aquarius, Brizo, Keeper Contracts and Pleuston
+# Default versions of Aquarius, Brizo, Keeper Contracts and Commons
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v0.3.8}
 export BRIZO_VERSION=${BRIZO_VERSION:-v0.4.4}
 export EVENTS_HANDLER_VERSION=${EVENTS_HANDLER_VERSION:-v0.1.2}
 export KEEPER_VERSION=${KEEPER_VERSION:-v0.11.1}
-export PLEUSTON_VERSION=${PLEUSTON_VERSION:-v0.5.1}
 export FAUCET_VERSION=${FAUCET_VERSION:-v0.3.1}
+export COMMONS_SERVER_VERSION=${COMMONS_SERVER_VERSION:-v1.1.2}
+export COMMONS_CLIENT_VERSION=${COMMONS_CLIENT_VERSION:-v1.1.2}
 
 export PARITY_IMAGE="parity/parity:v2.5.1"
 
@@ -53,7 +54,7 @@ export ACL_CONTRACT_ADDRESS=""
 
 # Default Aquarius parameters: use Elasticsearch
 export DB_MODULE="elasticsearch"
-export DB_HOSTNAME="elasticsearch"
+export DB_HOSTNAME="172.15.0.11"
 export DB_PORT="9200"
 export DB_USERNAME="elastic"
 export DB_PASSWORD="changeme"
@@ -67,7 +68,7 @@ CHECK_ELASTIC_VM_COUNT=true
 export BRIZO_WORKERS=${BRIZO_WORKERS:-5}
 export BRIZO_LOG_LEVEL="INFO"
 export EVENTS_HANDLER_LOG_LEVEL="INFO"
-
+export BRIZO_URL=http://localhost:8030
 # Set a valid parity address and password to have seamless interaction with the `keeper`
 # it has to exist on the secret store signing node and as well on the keeper node
 export PROVIDER_ADDRESS=0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0
@@ -78,14 +79,34 @@ export ACCOUNTS_FOLDER="../accounts"
 export SECRET_STORE_URL=http://secret-store:12001
 export SIGNING_NODE_URL=http://secret-store-signing-node:8545
 
-export AQUARIUS_URI=http://localhost:5000
+export AQUARIUS_URI=http://aquarius:5000
 
 # Default Faucet options
 export FAUCET_TIMESPAN=${FAUCET_TIMESPAN:-24}
+export FAUCET_URL=http://localhost:3001
+
+#commons
+export COMMONS_SERVER_URL=http://localhost:4000
+export COMMONS_CLIENT_URL=http://localhost:3000
+export COMMONS_KEEPER_RPC_HOST=http://localhost:8545
+export COMMONS_SECRET_STORE_URL=http://localhost:12001
+export COMMONS_BRIZO_URL=${BRIZO_URL}
+export COMMONS_AQUARIUS_URI=${AQUARIUS_URI}
+export COMMONS_FAUCET_URL=${FAUCET_URL}
 
 # Export User UID and GID
 export LOCAL_USER_ID=$(id -u)
 export LOCAL_GROUP_ID=$(id -g)
+
+
+#add aquarius to /etc/hosts
+
+if grep -q "aquarius" /etc/hosts; then
+    echo "aquarius exists"
+else
+    sudo echo "127.0.0.1 aquarius" >> /etc/hosts;
+fi
+
 
 # colors
 COLOR_R="\033[0;31m"    # red
@@ -159,7 +180,7 @@ show_banner
 COMPOSE_FILES=""
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
-COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pleuston.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/commons.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/brizo.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/events_handler.yml"
@@ -194,8 +215,9 @@ while :; do
             export EVENTS_HANDLER_VERSION="latest"
             export KEEPER_VERSION="latest"
             # TODO: Change label on Docker to refer `latest` to `master`
-            export PLEUSTON_VERSION="master"
             export FAUCET_VERSION="latest"
+	    export COMMONS_SERVER_VERSION="latest"
+	    export COMMONS_CLIENT_VERSION="latest"
             printf $COLOR_Y'Switched to latest components...\n\n'$COLOR_RESET
             ;;
         --force-pull)
@@ -205,10 +227,11 @@ while :; do
         #################################################
         # Exclude switches
         #################################################
-        --no-pleuston)
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/pleuston.yml/}"
-            printf $COLOR_Y'Starting without Pleuston...\n\n'$COLOR_RESET
+	--no-commons)
+	    COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/commons.yml/}"
+            printf $COLOR_Y'Starting without Commons...\n\n'$COLOR_RESET
             ;;
+
         --no-events-handler)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/events_handler.yml/}"
             printf $COLOR_Y'Starting without Events Handler...\n\n'$COLOR_RESET
