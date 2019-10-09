@@ -189,6 +189,7 @@ check_if_owned_by_root
 show_banner
 
 COMPOSE_FILES=""
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/dashboard.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/commons.yml"
@@ -261,6 +262,10 @@ while :; do
         --no-faucet)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/faucet.yml/}"
             printf $COLOR_Y'Starting without Faucet...\n\n'$COLOR_RESET
+            ;;
+        --no-dashboard)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dashboard.yml/}"
+            printf $COLOR_Y'Starting without Dashboard ...\n\n'$COLOR_RESET
             ;;
         --no-acl-contract)
             export CONFIGURE_ACL="false"
