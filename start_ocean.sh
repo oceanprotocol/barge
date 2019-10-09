@@ -239,8 +239,8 @@ while :; do
         #################################################
         # Exclude switches
         #################################################
-	      --no-commons)
-	          COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/commons.yml/}"
+        --no-commons)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/commons.yml/}"
             printf $COLOR_Y'Starting without Commons...\n\n'$COLOR_RESET
             ;;
         --no-events-handler)
@@ -267,7 +267,10 @@ while :; do
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dashboard.yml/}"
             printf $COLOR_Y'Starting without Dashboard ...\n\n'$COLOR_RESET
             ;;
-
+        --no-acl-contract)
+            export CONFIGURE_ACL="false"
+            printf $COLOR_Y'Disabling acl validation in secret-store...\n\n'$COLOR_RESET
+            ;;
         #################################################
         # Only Secret Store
         #################################################
@@ -297,13 +300,6 @@ while :; do
         --reuse-ganache-database)
             export GANACHE_REUSE_DATABASE="true"
             printf $COLOR_Y'Starting and reusing the database...\n\n'$COLOR_RESET
-            ;;
-        #################################################
-        # Secret-Store validation switch
-        #################################################
-        --no-acl-contract)
-            export CONFIGURE_ACL="false"
-            printf $COLOR_Y'Disabling acl validation in secret-store...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Node type switches
