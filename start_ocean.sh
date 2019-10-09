@@ -21,7 +21,7 @@ export FAUCET_VERSION=${FAUCET_VERSION:-v0.3.1}
 export COMMONS_SERVER_VERSION=${COMMONS_SERVER_VERSION:-v1.1.3}
 export COMMONS_CLIENT_VERSION=${COMMONS_CLIENT_VERSION:-v1.1.3}
 
-export PARITY_IMAGE="parity/parity:v2.5.1"
+export PARITY_IMAGE="parity/parity:v2.5.7-stable"
 
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
