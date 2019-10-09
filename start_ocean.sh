@@ -104,7 +104,7 @@ export LOCAL_GROUP_ID=$(id -g)
 if grep -q "aquarius" /etc/hosts; then
     echo "aquarius exists"
 else
-    sudo echo "127.0.0.1 aquarius" >> /etc/hosts;
+    echo "127.0.0.1 aquarius" | sudo tee -a /etc/hosts
 fi
 
 
