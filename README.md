@@ -19,6 +19,7 @@
   - [Keeper Node](#keeper-node)
   - [Secret Store](#secret-store)
   - [Faucet](#faucet)
+  - [Dashboard](#dashboard)
 - [Spree Network](#spree-network)
   - [Spree Mnemonic](#spree-mnemonic)
 - [Contributing](#contributing)
@@ -102,6 +103,7 @@ will use the default Docker image tags for Aquarius, Keeper Contracts and Common
 | `--no-events-handler`      | Start up Ocean without the `events-handler` Building Block.                                     |
 | `--no-secret-store`        | Start up Ocean without the `secret-store` Building Block.                                       |
 | `--no-faucet`              | Start up Ocean without the `faucet` Building Block.                                             |
+| `--no-dashboard`           | Start up Ocean without the `dashboard` Building Block.                                             |
 | `--mongodb`                | Start up Ocean with MongoDB as DB engine for Aquarius instead of Elasticsearch.                 |
 | `--local-pacific-node`     | Runs a local parity node and connects the node to the `pacific` network (official Ocean network |
 | `--local-ganache-node`     | Runs a local `ganache` node.                                                                    |
@@ -196,6 +198,17 @@ By default it will start two containers, one for Faucet server and one for its d
 | `faucet` | `3001`        | http://faucet:3001 | http://localhost:3001 | [Faucet](https://github.com/oceanprotocol/faucet) |
 
 By default the Faucet allows requests every 24hrs. To disable the timespan check you can pass `FAUCET_TIMESPAN=0` as environment variable before starting the script.
+
+### Dashboard
+
+This will start a `portainer` dashboard with the following admin credentials and connects to the local docker host. This Building Block can be disabled by setting the `--no-dashboard` flag.
+
+- User: `admin`
+- Password: `oceanprotocol`
+
+| Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
+| ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
+| `dashboard` | `9000`        | http://dashboard:9000 | http://localhost:9000 | [Portainer](https://github.com/portainer/portainer) |
 
 ## Spree Network
 
