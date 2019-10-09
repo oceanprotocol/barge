@@ -104,7 +104,7 @@ will use the default Docker image tags for Aquarius, Keeper Contracts and Common
 | `--no-secret-store`        | Start up Ocean without the `secret-store` Building Block.                                       |
 | `--no-faucet`              | Start up Ocean without the `faucet` Building Block.                                             |
 | `--no-acl-contract`        | Disables the configuration of secret store's ACL contract address                               |
-| `--no-dashboard`           | Start up Ocean without the `dashboard` Building Block.                                             |
+| `--no-dashboard`           | Start up Ocean without the `dashboard` Building Block.                                          |
 | `--mongodb`                | Start up Ocean with MongoDB as DB engine for Aquarius instead of Elasticsearch.                 |
 | `--local-ganache-node`     | Runs a local `ganache` node.                                                                    |
 | `--local-spree-node`       | Runs a node of the local `spree` network. This is the default.                                  |
@@ -127,8 +127,8 @@ By default it will start two containers (client & server). If Commons is running
 
 This Building Block can be disabled by setting the `--no-commons` flag.
 
-| Hostname         | External Port | Internal URL               |  Local URL            | Description                                                       |
-|------------------|---------------|----------------------------|-----------------------|------------------------------------------------------------------ |
+| Hostname         | External Port | Internal URL               |  Local URL            | Description                                                |
+|------------------|---------------|----------------------------|-----------------------|----------------------------------------------------------- |
 | `commons-client` | `3000`        | http://commons-client:3000 | http://localhost:3000 | [Commons Client](https://github.com/oceanprotocol/commons) |
 | `commons-server` | `4000`        | http://commons-server:4000 | http://locahost:4000  | [Commons Server](https://github.com/oceanprotocol/commons) |
 
@@ -173,11 +173,11 @@ This node can be one of the following types (with the default being `spree`):
 
 | Node      | Description                                                                                                                                                                                                          |
 | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pacific` | Runs a local node of the Pacific Network and connects to the [Pacific network](https://docs.oceanprotocol.com/concepts/pacific-network/).                                                                            |
 | `ganache` | Runs a local [ganache-cli](https://github.com/trufflesuite/ganache-cli) node that is not persistent by default. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node. |
 | `spree`   | This is the default. Runs a local node of the Spree Network. See [Spree Network](#spree-network) for details. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.   |
 | `duero`   | Runs a local node of the Duero Network and connects to the [Duero Testnet](https://docs.oceanprotocol.com/concepts/testnets/#the-duero-testnet).                                                                     |
 | `nile`    | Runs a local node of the Nile Network and connects to the [Nile Testnet](https://docs.oceanprotocol.com/concepts/testnets/#nile-testnet).                                                                            |
+| `pacific` | Runs a local node of the Pacific Network and connects to the [Pacific network](https://docs.oceanprotocol.com/concepts/pacific-network/).                                                                            |
 
 ### Secret Store
 
