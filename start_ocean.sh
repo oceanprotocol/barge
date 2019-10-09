@@ -120,11 +120,22 @@ COLOR_C="\033[0;36m"    # cyan
 COLOR_RESET="\033[00m"
 
 function get_acl_address {
+    # detect keeper version
     local version="${1:-latest}"
-    line=$(grep "^${version}=" "${DIR}/${KEEPER_NETWORK_NAME}_acl_contract_addresses.txt")
+
+    # sesarch in the file for the keeper version
+    line=$(grep "^${version}=" "${DIR}/ACL/${KEEPER_NETWORK_NAME}_addresses.txt")
+    # set address
     address="${line##*=}"
-    # [ -z "${address}" ] && echo "Cannot determine the ACL Contract Address for ${KEEPER_NETWORK_NAME} version ${version}. Exiting" && exit 1
-    [ -z "${address}" ] && line=$(grep "^$latest=" "${DIR}/${KEEPER_NETWORK_NAME}_acl_contract_addresses.txt") && address="${line##*=}"
+
+    # if address is still empty
+    if [ -z "${address}" ]; then
+      # fetch from latest line
+      line=$(grep "^latest=" "${DIR}/ACL/${KEEPER_NETWORK_NAME}_addresses.txt")
+      # set address
+      address="${line##*=}"
+    fi
+
     echo "${address}"
 }
 
@@ -329,7 +340,6 @@ while :; do
         --local-pacific-node)
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/pacific_node.yml"
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/keeper_contracts.yml/}"
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
             export KEEPER_MNEMONIC=''
             export KEEPER_NETWORK_NAME="pacific"
             export KEEPER_DEPLOY_CONTRACTS="false"
