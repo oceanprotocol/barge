@@ -102,14 +102,14 @@ will use the default Docker image tags for Aquarius, Keeper Contracts and Common
 | `--no-events-handler`      | Start up Ocean without the `events-handler` Building Block.                                     |
 | `--no-secret-store`        | Start up Ocean without the `secret-store` Building Block.                                       |
 | `--no-faucet`              | Start up Ocean without the `faucet` Building Block.                                             |
+| `--no-acl-contract`        | Disables the configuration of secret store's ACL contract address                               |
 | `--mongodb`                | Start up Ocean with MongoDB as DB engine for Aquarius instead of Elasticsearch.                 |
-| `--local-pacific-node`     | Runs a local parity node and connects the node to the `pacific` network (official Ocean network |
 | `--local-ganache-node`     | Runs a local `ganache` node.                                                                    |
 | `--local-spree-node`       | Runs a node of the local `spree` network. This is the default.                                  |
 | `--local-duero-node`       | Runs a local parity node and connects the node to the `duero` network.                          |
 | `--local-nile-node`        | Runs a local parity node and connects the node to the `nile` network.                           |
+| `--local-pacific-node`     | Runs a local parity node and connects the node to the `pacific` network (official Ocean network |
 | `--reuse-ganache-database` | Configures a running `ganache` node to use a persistent database.                               |
-| `--acl-contract`           | Configures secret-store `acl_contract` option to enable secret-store authorization.             |
 | `--force-pull`             | Force pulling the latest revision of the used Docker images.                                    |
 | `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.        |
 
