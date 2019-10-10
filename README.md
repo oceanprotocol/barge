@@ -112,6 +112,7 @@ will use the default Docker image tags for Aquarius, Keeper Contracts and Common
 | `--acl-contract`           | Configures secret-store `acl_contract` option to enable secret-store authorization.             |
 | `--force-pull`             | Force pulling the latest revision of the used Docker images.                                    |
 | `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.        |
+| `--exposeip`               | Binds the components to that specific ip. Exemple: ./start_ocean.sh --exposeip 192.168.0.1      |
 
 ## Docker Building Blocks
 
