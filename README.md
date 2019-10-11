@@ -235,7 +235,7 @@ you will have available a keeper node in the local and private Spree Network wit
 Use one of the above accounts to populate `PROVIDER_ADDRESS`, `PROVIDER_PASSWORD` and `PROVIDER_KEYFILE` in `start_ocean.sh`. 
 This account will is used in `brizo` and `events-handler` as the `provider` account which is important for processing the 
 service agreements flow. The `PROVIDER_KEYFILE` must be placed in the `accounts` folder and must match the ethereum 
-address from `PROVIDER_ADDRESS`. The `PROVIDER_ADDRESS` is also set in `pleuston` instance so that published assets get 
+address from `PROVIDER_ADDRESS`. The `PROVIDER_ADDRESS` is also set in `commons` instance so that published assets get 
 assigned the correct provider address. 
 
 ### Spree Mnemonic
