@@ -125,13 +125,13 @@ export LOCAL_GROUP_ID=$(id -g)
 
 
 #add aquarius to /etc/hosts
-
-#if grep -q "aquarius" /etc/hosts; then
-#    echo "aquarius exists"
-#else
-#    sudo echo "127.0.0.1 aquarius" >> /etc/hosts;
-#fi
-
+if [ ${IP} = "localhost" ]; then
+	if grep -q "aquarius" /etc/hosts; then
+    		echo "aquarius exists"
+	else
+    		sudo echo "127.0.0.1 aquarius" >> /etc/hosts;
+	fi
+fi
 
 # colors
 COLOR_R="\033[0;31m"    # red
