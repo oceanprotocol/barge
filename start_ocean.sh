@@ -33,7 +33,7 @@ export FAUCET_VERSION=${FAUCET_VERSION:-v0.3.1}
 export COMMONS_SERVER_VERSION=${COMMONS_SERVER_VERSION:-v1.1.3}
 export COMMONS_CLIENT_VERSION=${COMMONS_CLIENT_VERSION:-v1.1.3}
 
-export PARITY_IMAGE="parity/parity:v2.5.1"
+export PARITY_IMAGE="parity/parity:v2.5.7-stable"
 
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
@@ -125,6 +125,7 @@ export LOCAL_GROUP_ID=$(id -g)
 
 
 #add aquarius to /etc/hosts
+
 if [ ${IP} = "localhost" ]; then
 	if grep -q "aquarius" /etc/hosts; then
     		echo "aquarius exists"
@@ -145,11 +146,22 @@ COLOR_C="\033[0;36m"    # cyan
 COLOR_RESET="\033[00m"
 
 function get_acl_address {
+    # detect keeper version
     local version="${1:-latest}"
-    line=$(grep "^${version}=" "${DIR}/${KEEPER_NETWORK_NAME}_acl_contract_addresses.txt")
+
+    # sesarch in the file for the keeper version
+    line=$(grep "^${version}=" "${DIR}/ACL/${KEEPER_NETWORK_NAME}_addresses.txt")
+    # set address
     address="${line##*=}"
-    # [ -z "${address}" ] && echo "Cannot determine the ACL Contract Address for ${KEEPER_NETWORK_NAME} version ${version}. Exiting" && exit 1
-    [ -z "${address}" ] && line=$(grep "^$latest=" "${DIR}/${KEEPER_NETWORK_NAME}_acl_contract_addresses.txt") && address="${line##*=}"
+
+    # if address is still empty
+    if [ -z "${address}" ]; then
+      # fetch from latest line
+      line=$(grep "^latest=" "${DIR}/ACL/${KEEPER_NETWORK_NAME}_addresses.txt")
+      # set address
+      address="${line##*=}"
+    fi
+
     echo "${address}"
 }
 
@@ -203,6 +215,7 @@ check_if_owned_by_root
 show_banner
 
 COMPOSE_FILES=""
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/dashboard.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/keeper_contracts.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/commons.yml"
@@ -254,11 +267,10 @@ while :; do
         #################################################
         # Exclude switches
         #################################################
-	--no-commons)
-	    COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/commons.yml/}"
+        --no-commons)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/commons.yml/}"
             printf $COLOR_Y'Starting without Commons...\n\n'$COLOR_RESET
             ;;
-
         --no-events-handler)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/events_handler.yml/}"
             printf $COLOR_Y'Starting without Events Handler...\n\n'$COLOR_RESET
@@ -279,7 +291,14 @@ while :; do
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/faucet.yml/}"
             printf $COLOR_Y'Starting without Faucet...\n\n'$COLOR_RESET
             ;;
-
+        --no-dashboard)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dashboard.yml/}"
+            printf $COLOR_Y'Starting without Dashboard ...\n\n'$COLOR_RESET
+            ;;
+        --no-acl-contract)
+            export CONFIGURE_ACL="false"
+            printf $COLOR_Y'Disabling acl validation in secret-store...\n\n'$COLOR_RESET
+            ;;
         #################################################
         # Only Secret Store
         #################################################
@@ -309,13 +328,6 @@ while :; do
         --reuse-ganache-database)
             export GANACHE_REUSE_DATABASE="true"
             printf $COLOR_Y'Starting and reusing the database...\n\n'$COLOR_RESET
-            ;;
-        #################################################
-        # Secret-Store validation switch
-        #################################################
-        --no-acl-contract)
-            export CONFIGURE_ACL="false"
-            printf $COLOR_Y'Disabling acl validation in secret-store...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Node type switches
@@ -356,7 +368,6 @@ while :; do
         --local-pacific-node)
             export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/pacific_node.yml"
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/keeper_contracts.yml/}"
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store.yml/}"
             export KEEPER_MNEMONIC=''
             export KEEPER_NETWORK_NAME="pacific"
             export KEEPER_DEPLOY_CONTRACTS="false"

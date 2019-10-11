@@ -19,6 +19,7 @@
   - [Keeper Node](#keeper-node)
   - [Secret Store](#secret-store)
   - [Faucet](#faucet)
+  - [Dashboard](#dashboard)
 - [Spree Network](#spree-network)
   - [Spree Mnemonic](#spree-mnemonic)
 - [Contributing](#contributing)
@@ -102,14 +103,15 @@ will use the default Docker image tags for Aquarius, Keeper Contracts and Common
 | `--no-events-handler`      | Start up Ocean without the `events-handler` Building Block.                                     |
 | `--no-secret-store`        | Start up Ocean without the `secret-store` Building Block.                                       |
 | `--no-faucet`              | Start up Ocean without the `faucet` Building Block.                                             |
+| `--no-acl-contract`        | Disables the configuration of secret store's ACL contract address                               |
+| `--no-dashboard`           | Start up Ocean without the `dashboard` Building Block.                                          |
 | `--mongodb`                | Start up Ocean with MongoDB as DB engine for Aquarius instead of Elasticsearch.                 |
-| `--local-pacific-node`     | Runs a local parity node and connects the node to the `pacific` network (official Ocean network |
 | `--local-ganache-node`     | Runs a local `ganache` node.                                                                    |
 | `--local-spree-node`       | Runs a node of the local `spree` network. This is the default.                                  |
 | `--local-duero-node`       | Runs a local parity node and connects the node to the `duero` network.                          |
 | `--local-nile-node`        | Runs a local parity node and connects the node to the `nile` network.                           |
+| `--local-pacific-node`     | Runs a local parity node and connects the node to the `pacific` network (official Ocean network |
 | `--reuse-ganache-database` | Configures a running `ganache` node to use a persistent database.                               |
-| `--acl-contract`           | Configures secret-store `acl_contract` option to enable secret-store authorization.             |
 | `--force-pull`             | Force pulling the latest revision of the used Docker images.                                    |
 | `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.        |
 | `--exposeip`               | Binds the components to that specific ip. Exemple: ./start_ocean.sh --exposeip 192.168.0.1      |
@@ -126,8 +128,8 @@ By default it will start two containers (client & server). If Commons is running
 
 This Building Block can be disabled by setting the `--no-commons` flag.
 
-| Hostname         | External Port | Internal URL               |  Local URL            | Description                                                       |
-|------------------|---------------|----------------------------|-----------------------|------------------------------------------------------------------ |
+| Hostname         | External Port | Internal URL               |  Local URL            | Description                                                |
+|------------------|---------------|----------------------------|-----------------------|----------------------------------------------------------- |
 | `commons-client` | `3000`        | http://commons-client:3000 | http://localhost:3000 | [Commons Client](https://github.com/oceanprotocol/commons) |
 | `commons-server` | `4000`        | http://commons-server:4000 | http://locahost:4000  | [Commons Server](https://github.com/oceanprotocol/commons) |
 
@@ -172,11 +174,11 @@ This node can be one of the following types (with the default being `spree`):
 
 | Node      | Description                                                                                                                                                                                                          |
 | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pacific` | Runs a local node of the Pacific Network and connects to the [Pacific network](https://docs.oceanprotocol.com/concepts/pacific-network/).                                                                            |
 | `ganache` | Runs a local [ganache-cli](https://github.com/trufflesuite/ganache-cli) node that is not persistent by default. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node. |
 | `spree`   | This is the default. Runs a local node of the Spree Network. See [Spree Network](#spree-network) for details. The contracts from the desired `keeper-contracts` version will be deployed upon launch of this node.   |
 | `duero`   | Runs a local node of the Duero Network and connects to the [Duero Testnet](https://docs.oceanprotocol.com/concepts/testnets/#the-duero-testnet).                                                                     |
 | `nile`    | Runs a local node of the Nile Network and connects to the [Nile Testnet](https://docs.oceanprotocol.com/concepts/testnets/#nile-testnet).                                                                            |
+| `pacific` | Runs a local node of the Pacific Network and connects to the [Pacific network](https://docs.oceanprotocol.com/concepts/pacific-network/).                                                                            |
 
 ### Secret Store
 
@@ -197,6 +199,17 @@ By default it will start two containers, one for Faucet server and one for its d
 | `faucet` | `3001`        | http://faucet:3001 | http://localhost:3001 | [Faucet](https://github.com/oceanprotocol/faucet) |
 
 By default the Faucet allows requests every 24hrs. To disable the timespan check you can pass `FAUCET_TIMESPAN=0` as environment variable before starting the script.
+
+### Dashboard
+
+This will start a `portainer` dashboard with the following admin credentials and connects to the local docker host. This Building Block can be disabled by setting the `--no-dashboard` flag.
+
+- User: `admin`
+- Password: `oceanprotocol`
+
+| Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
+| ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
+| `dashboard` | `9000`        | http://dashboard:9000 | http://localhost:9000 | [Portainer](https://github.com/portainer/portainer) |
 
 ## Spree Network
 

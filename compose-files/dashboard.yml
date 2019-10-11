@@ -1,0 +1,15 @@
+version: '3'
+services:
+  dashboard:
+    image: portainer/portainer
+    command:
+      --admin-password '$$2y$$05$$wk5y6Xr1Y5TQkhUcH1.HNunnCoV6Z//735W7o8l31LxMqVCpg6b6G'
+      --host 'unix:///var/run/docker.sock'
+      --logo 'https://raw.githubusercontent.com/oceanprotocol/art/master/logo/logo.png'
+    networks:
+      backend:
+        ipv4_address: 172.15.0.25
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 9000:9000
