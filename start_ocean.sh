@@ -85,6 +85,7 @@ export BRIZO_WORKERS=${BRIZO_WORKERS:-5}
 export BRIZO_LOG_LEVEL="INFO"
 export EVENTS_HANDLER_LOG_LEVEL="INFO"
 export BRIZO_URL=http://${IP}:8030
+export BRIZO_IPFS_GATEWAY=https://ipfs.oceanprotocol.com
 
 # Set a valid parity address and password to have seamless interaction with the `keeper`
 # it has to exist on the secret store signing node and as well on the keeper node
@@ -118,6 +119,8 @@ export FAUCET_TIMESPAN=${FAUCET_TIMESPAN:-24}
 export COMMONS_BRIZO_URL=${BRIZO_URL}
 export COMMONS_AQUARIUS_URI=${AQUARIUS_URI}
 export COMMONS_FAUCET_URL=${FAUCET_URL}
+export COMMONS_IPFS_GATEWAY_URI=https://ipfs.oceanprotocol.com
+export COMMONS_IPFS_NODE_URI=https://ipfs.oceanprotocol.com:443
 
 # Export User UID and GID
 export LOCAL_USER_ID=$(id -u)
