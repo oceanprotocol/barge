@@ -114,6 +114,7 @@ will use the default Docker image tags for Aquarius, Keeper Contracts and Common
 | `--reuse-ganache-database` | Configures a running `ganache` node to use a persistent database.                               |
 | `--force-pull`             | Force pulling the latest revision of the used Docker images.                                    |
 | `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.        |
+| `--exposeip`               | Binds the components to that specific ip. Exemple: ./start_ocean.sh --exposeip 192.168.0.1      |
 
 ## Docker Building Blocks
 
@@ -234,7 +235,7 @@ you will have available a keeper node in the local and private Spree Network wit
 Use one of the above accounts to populate `PROVIDER_ADDRESS`, `PROVIDER_PASSWORD` and `PROVIDER_KEYFILE` in `start_ocean.sh`. 
 This account will is used in `brizo` and `events-handler` as the `provider` account which is important for processing the 
 service agreements flow. The `PROVIDER_KEYFILE` must be placed in the `accounts` folder and must match the ethereum 
-address from `PROVIDER_ADDRESS`. The `PROVIDER_ADDRESS` is also set in `pleuston` instance so that published assets get 
+address from `PROVIDER_ADDRESS`. The `PROVIDER_ADDRESS` is also set in `commons` instance so that published assets get 
 assigned the correct provider address. 
 
 ### Spree Mnemonic

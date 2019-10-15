@@ -2,6 +2,18 @@
 # start_ocean.sh
 # Copyright (c) 2019 Ocean Protocol contributors
 # SPDX-License-Identifier: Apache-2.0
+IP="localhost"
+optspec=":-:"
+while getopts "$optspec" optchar; do
+    case "${optchar}" in
+           -)
+           case "${OPTARG}" in
+                exposeip)
+                    IP="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
+                 ;;
+            esac;;
+    esac
+done
 
 set -e
 
@@ -42,7 +54,11 @@ export GANACHE_DATABASE_PATH="${DIR}"
 export GANACHE_REUSE_DATABASE="false"
 
 # Specify the ethereum default RPC container provider
-export KEEPER_RPC_HOST="keeper-node"
+if [ ${IP} = "localhost" ]; then
+    export KEEPER_RPC_HOST="keeper-node"
+else
+    export KEEPER_RPC_HOST=${IP}
+fi
 export KEEPER_RPC_PORT="8545"
 export KEEPER_RPC_URL="http://"${KEEPER_RPC_HOST}:${KEEPER_RPC_PORT}
 # Use this seed only on Spree! (Spree is the default.)
@@ -68,28 +84,37 @@ CHECK_ELASTIC_VM_COUNT=true
 export BRIZO_WORKERS=${BRIZO_WORKERS:-5}
 export BRIZO_LOG_LEVEL="INFO"
 export EVENTS_HANDLER_LOG_LEVEL="INFO"
-export BRIZO_URL=http://localhost:8030
+export BRIZO_URL=http://${IP}:8030
+
 # Set a valid parity address and password to have seamless interaction with the `keeper`
 # it has to exist on the secret store signing node and as well on the keeper node
 export PROVIDER_ADDRESS=0x068ed00cf0441e4829d9784fcbe7b9e26d4bd8d0
 export PROVIDER_PASSWORD=secret
 export PROVIDER_KEYFILE="/accounts/provider.json"
 export ACCOUNTS_FOLDER="../accounts"
-
-export SECRET_STORE_URL=http://secret-store:12001
-export SIGNING_NODE_URL=http://secret-store-signing-node:8545
-
-export AQUARIUS_URI=http://aquarius:5000
-
+if [ ${IP} = "localhost" ]; then
+    export SECRET_STORE_URL=http://secret-store:12001
+    export SIGNING_NODE_URL=http://secret-store-signing-node:8545
+    export AQUARIUS_URI=http://aquarius:5000
+    export FAUCET_URL=http://localhost:3001
+    export COMMONS_SERVER_URL=http://localhost:4000
+    export COMMONS_CLIENT_URL=http://localhost:3000
+    export COMMONS_KEEPER_RPC_HOST=http://localhost:8545
+    export COMMONS_SECRET_STORE_URL=http://localhost:12001
+else
+    export SECRET_STORE_URL=http://${IP}:12001
+    export SIGNING_NODE_URL=http://${IP}:8545
+    export AQUARIUS_URI=http://${IP}:5000
+    export FAUCET_URL=http://${IP}:3001
+    export COMMONS_SERVER_URL=http://${IP}:4000
+    export COMMONS_CLIENT_URL=http://${IP}:3000
+    export COMMONS_KEEPER_RPC_HOST=http://${IP}:8545
+    export COMMONS_SECRET_STORE_URL=http://${IP}:12001
+fi
 # Default Faucet options
 export FAUCET_TIMESPAN=${FAUCET_TIMESPAN:-24}
-export FAUCET_URL=http://localhost:3001
 
 #commons
-export COMMONS_SERVER_URL=http://localhost:4000
-export COMMONS_CLIENT_URL=http://localhost:3000
-export COMMONS_KEEPER_RPC_HOST=http://localhost:8545
-export COMMONS_SECRET_STORE_URL=http://localhost:12001
 export COMMONS_BRIZO_URL=${BRIZO_URL}
 export COMMONS_AQUARIUS_URI=${AQUARIUS_URI}
 export COMMONS_FAUCET_URL=${FAUCET_URL}
@@ -101,12 +126,13 @@ export LOCAL_GROUP_ID=$(id -g)
 
 #add aquarius to /etc/hosts
 
-if grep -q "aquarius" /etc/hosts; then
-    echo "aquarius exists"
-else
-    echo "127.0.0.1 aquarius" | sudo tee -a /etc/hosts
+if [ ${IP} = "localhost" ]; then
+	if grep -q "aquarius" /etc/hosts; then
+    		echo "aquarius exists"
+	else
+    		echo "127.0.0.1 aquarius" | sudo tee -a /etc/hosts
+	fi
 fi
-
 
 # colors
 COLOR_R="\033[0;31m"    # red
@@ -204,6 +230,8 @@ DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
 while :; do
     case $1 in
+        --exposeip)
+	   ;;
         #################################################
         # Log level
         #################################################
