@@ -22,6 +22,7 @@ services:
       PROVIDER_KEYFILE: ${PROVIDER_KEYFILE}
       LOG_LEVEL: ${BRIZO_LOG_LEVEL}
       BRIZO_WORKERS: ${BRIZO_WORKERS}
+      IPFS_GATEWAY: ${BRIZO_IPFS_GATEWAY}
     volumes:
       - ${KEEPER_ARTIFACTS_FOLDER}:/usr/local/keeper-contracts:ro
       - ${ACCOUNTS_FOLDER}:/accounts
