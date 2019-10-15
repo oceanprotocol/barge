@@ -84,7 +84,7 @@ CHECK_ELASTIC_VM_COUNT=true
 export BRIZO_WORKERS=${BRIZO_WORKERS:-5}
 export BRIZO_LOG_LEVEL="INFO"
 export EVENTS_HANDLER_LOG_LEVEL="INFO"
-export BRIZO_URL=http://${IP}:8030
+
 export BRIZO_IPFS_GATEWAY=https://ipfs.oceanprotocol.com
 
 # Set a valid parity address and password to have seamless interaction with the `keeper`
@@ -102,6 +102,7 @@ if [ ${IP} = "localhost" ]; then
     export COMMONS_CLIENT_URL=http://localhost:3000
     export COMMONS_KEEPER_RPC_HOST=http://localhost:8545
     export COMMONS_SECRET_STORE_URL=http://localhost:12001
+    export BRIZO_URL=http://localhost:8030
 else
     export SECRET_STORE_URL=http://${IP}:12001
     export SIGNING_NODE_URL=http://${IP}:8545
@@ -111,6 +112,7 @@ else
     export COMMONS_CLIENT_URL=http://${IP}:3000
     export COMMONS_KEEPER_RPC_HOST=http://${IP}:8545
     export COMMONS_SECRET_STORE_URL=http://${IP}:12001
+    export BRIZO_URL=http://${IP}:8030
 fi
 # Default Faucet options
 export FAUCET_TIMESPAN=${FAUCET_TIMESPAN:-24}
