@@ -272,7 +272,11 @@ while :; do
         #################################################
         # Exclude switches
         #################################################
-        --no-commons)
+        --no-pleuston)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/commons.yml/}"
+            printf $COLOR_Y'Starting without Commons...\n\n'$COLOR_RESET
+            ;;
+	--no-commons)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/commons.yml/}"
             printf $COLOR_Y'Starting without Commons...\n\n'$COLOR_RESET
             ;;
