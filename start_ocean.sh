@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # start_ocean.sh
-# Copyright (c) 2019 Ocean Protocol contributors
+# Copyright Ocean Protocol contributors
 # SPDX-License-Identifier: Apache-2.0
 IP="localhost"
 optspec=":-:"
