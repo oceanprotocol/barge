@@ -414,6 +414,11 @@ while :; do
                 rm -rf "${KEEPER_ARTIFACTS_FOLDER}"
             fi
             ;;
+        # start up Ocean in detached mode
+        -d)
+          DETACHED=-d
+          printf $COLOR_Y'Starting in detached mode...\n\n'$COLOR_RESET
+          ;;
         --) # End of all options.
             shift
             break
@@ -429,7 +434,7 @@ while :; do
             [ -n "${NODE_COMPOSE_FILE}" ] && COMPOSE_FILES+=" -f ${NODE_COMPOSE_FILE}"
             [ ${KEEPER_DEPLOY_CONTRACTS} = "true" ] && clean_local_contracts
             [ ${FORCEPULL} = "true" ] && eval docker-compose "$DOCKER_COMPOSE_EXTRA_OPTS" --project-name=$PROJECT_NAME "$COMPOSE_FILES" pull
-            eval docker-compose "$DOCKER_COMPOSE_EXTRA_OPTS" --project-name=$PROJECT_NAME "$COMPOSE_FILES" up --remove-orphans
+            eval docker-compose "$DOCKER_COMPOSE_EXTRA_OPTS" --project-name=$PROJECT_NAME "$COMPOSE_FILES" up $DETACHED --remove-orphans
             break
     esac
     shift
