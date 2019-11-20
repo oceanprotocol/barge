@@ -124,6 +124,8 @@ export COMMONS_FAUCET_URL=${FAUCET_URL}
 export COMMONS_IPFS_GATEWAY_URI=https://ipfs.oceanprotocol.com
 export COMMONS_IPFS_NODE_URI=https://ipfs.oceanprotocol.com:443
 
+export OPERATOR_SERVICE_URL=http://127.0.0.1:8050
+
 # Export User UID and GID
 export LOCAL_USER_ID=$(id -u)
 export LOCAL_GROUP_ID=$(id -g)
