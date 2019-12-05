@@ -32,7 +32,6 @@ export KEEPER_VERSION=${KEEPER_VERSION:-v0.12.7}
 export FAUCET_VERSION=${FAUCET_VERSION:-v0.3.2}
 export COMMONS_SERVER_VERSION=${COMMONS_SERVER_VERSION:-v1.3.1}
 export COMMONS_CLIENT_VERSION=${COMMONS_CLIENT_VERSION:-v1.3.1}
-
 export PARITY_IMAGE="parity/parity:v2.5.7-stable"
 
 export PROJECT_NAME="ocean"
@@ -348,7 +347,6 @@ while :; do
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/secret_store_signing_node.yml/}"
             export KEEPER_MNEMONIC=''
             export KEEPER_NETWORK_NAME="development"
-            export KEEPER_DEPLOY_CONTRACTS="true"
             printf $COLOR_Y'Starting with local Ganache node...\n\n'$COLOR_RESET
             printf $COLOR_Y'Starting without Secret Store...\n\n'$COLOR_RESET
             printf $COLOR_Y'Starting without Secret Store signing node...\n\n'$COLOR_RESET
@@ -390,8 +388,15 @@ while :; do
             # use this seed only on spree!
             export KEEPER_MNEMONIC="taxi music thumb unique chat sand crew more leg another off lamp"
             export KEEPER_NETWORK_NAME="spree"
-            export KEEPER_DEPLOY_CONTRACTS="true"
             printf $COLOR_Y'Starting with local Spree node...\n\n'$COLOR_RESET
+            ;;
+        --local-spree-no-deploy)
+            export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/spree_node.yml"
+            # use this seed only on spree!
+            export KEEPER_MNEMONIC="taxi music thumb unique chat sand crew more leg another off lamp"
+            export KEEPER_NETWORK_NAME="spree"
+            export KEEPER_DEPLOY_CONTRACTS="false"
+	    printf $COLOR_Y'Starting with local Spree node, and keeping existing contracts (no deployment)...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Cleaning switches
