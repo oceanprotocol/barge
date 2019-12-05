@@ -108,6 +108,7 @@ will use the default Docker image tags for Aquarius, Keeper Contracts and Common
 | `--mongodb`                | Start up Ocean with MongoDB as DB engine for Aquarius instead of Elasticsearch.                 |
 | `--local-ganache-node`     | Runs a local `ganache` node.                                                                    |
 | `--local-spree-node`       | Runs a node of the local `spree` network. This is the default.                                  |
+| `--local-spree-no-deploy`  | Runs a node of the local `spree` network, without contract deployment.                          |
 | `--local-duero-node`       | Runs a local parity node and connects the node to the `duero` network.                          |
 | `--local-nile-node`        | Runs a local parity node and connects the node to the `nile` network.                           |
 | `--local-pacific-node`     | Runs a local parity node and connects the node to the `pacific` network (official Ocean network |
