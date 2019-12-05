@@ -43,7 +43,6 @@ export OCEAN_HOME="${HOME}/.ocean"
 # keeper options
 export KEEPER_OWNER_ROLE_ADDRESS="${KEEPER_OWNER_ROLE_ADDRESS}"
 export KEEPER_DEPLOY_CONTRACTS="true"
-echo asdfasdfasdf
 export KEEPER_ARTIFACTS_FOLDER="${OCEAN_HOME}/keeper-contracts/artifacts"
 # Specify which ethereum client to run or connect to: development, spree or nile
 export KEEPER_NETWORK_NAME="spree"
@@ -235,10 +234,6 @@ DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
 while :; do
     case $1 in
-        --no-deployment)
-	    export KEEPER_DEPLOY_CONTRACTS="false"
-            printf $COLOR_Y'Keeping existing contracts...\n\n'$COLOR_RESET
-	    ;;
         --exposeip)
 	   ;;
         #################################################
@@ -394,6 +389,14 @@ while :; do
             export KEEPER_MNEMONIC="taxi music thumb unique chat sand crew more leg another off lamp"
             export KEEPER_NETWORK_NAME="spree"
             printf $COLOR_Y'Starting with local Spree node...\n\n'$COLOR_RESET
+            ;;
+        --local-spree-no-deploy)
+            export NODE_COMPOSE_FILE="${COMPOSE_DIR}/nodes/spree_node.yml"
+            # use this seed only on spree!
+            export KEEPER_MNEMONIC="taxi music thumb unique chat sand crew more leg another off lamp"
+            export KEEPER_NETWORK_NAME="spree"
+            export KEEPER_DEPLOY_CONTRACTS="false"
+	    printf $COLOR_Y'Starting with local Spree node, and keeping existing contracts (no deployment)...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Cleaning switches
