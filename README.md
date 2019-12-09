@@ -65,9 +65,9 @@ The startup script comes with a set of options for customizing various things.
 
 The default versions are always a combination of component versions which are considered stable.
 
-| Aquarius | Brizo     | Events Handler | Keeper    | Commons  | Faucet   |
-| -------- | --------- | -------------- | --------- | -------- | -------- |
-| `v0.3.9` | `v0.4.6`  |  `v0.1.2`      | `v0.12.7` | `v1.3.1` | `v0.3.2` |
+| Aquarius | Brizo    | Events Handler | Keeper    | Commons  | Faucet   |
+| -------- | -------- | -------------- | --------- | -------- | -------- |
+| `v1.0.5` | `v0.7.2` | `v0.3.4`       | `v0.12.7` | `v2.0.0` | `v0.3.2` |
 
 You can use the `--latest` option to pull the most recent Docker images for all components, which are always tagged as `latest` in Docker. The `latest` Docker image tag derives from the default main branch of the component's Git repo.
 
@@ -129,8 +129,8 @@ By default it will start two containers (client & server). If Commons is running
 
 This Building Block can be disabled by setting the `--no-commons` flag.
 
-| Hostname         | External Port | Internal URL               |  Local URL            | Description                                                |
-|------------------|---------------|----------------------------|-----------------------|----------------------------------------------------------- |
+| Hostname         | External Port | Internal URL               | Local URL             | Description                                                |
+| ---------------- | ------------- | -------------------------- | --------------------- | ---------------------------------------------------------- |
 | `commons-client` | `3000`        | http://commons-client:3000 | http://localhost:3000 | [Commons Client](https://github.com/oceanprotocol/commons) |
 | `commons-server` | `4000`        | http://commons-server:4000 | http://locahost:4000  | [Commons Server](https://github.com/oceanprotocol/commons) |
 
@@ -233,11 +233,11 @@ you will have available a keeper node in the local and private Spree Network wit
 | `0xe08A1dAe983BC701D05E492DB80e0144f8f4b909` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether |
 | `0xbcE5A3468386C64507D30136685A99cFD5603135` | mnemonic | [info here](#spree-mnemonic) | 1000000000 Ether |
 
-Use one of the above accounts to populate `PROVIDER_ADDRESS`, `PROVIDER_PASSWORD` and `PROVIDER_KEYFILE` in `start_ocean.sh`. 
-This account will is used in `brizo` and `events-handler` as the `provider` account which is important for processing the 
-service agreements flow. The `PROVIDER_KEYFILE` must be placed in the `accounts` folder and must match the ethereum 
-address from `PROVIDER_ADDRESS`. The `PROVIDER_ADDRESS` is also set in `commons` instance so that published assets get 
-assigned the correct provider address. 
+Use one of the above accounts to populate `PROVIDER_ADDRESS`, `PROVIDER_PASSWORD` and `PROVIDER_KEYFILE` in `start_ocean.sh`.
+This account will is used in `brizo` and `events-handler` as the `provider` account which is important for processing the
+service agreements flow. The `PROVIDER_KEYFILE` must be placed in the `accounts` folder and must match the ethereum
+address from `PROVIDER_ADDRESS`. The `PROVIDER_ADDRESS` is also set in `commons` instance so that published assets get
+assigned the correct provider address.
 
 ### Spree Mnemonic
 
