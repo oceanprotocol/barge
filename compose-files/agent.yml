@@ -1,7 +1,7 @@
 version: '3'
 services:
   agent:
-    image: oceanagent:$AGENT_VERSION
+    image: oceanprotocol/agent:$AGENT_VERSION
     networks:
       backend:
         ipv4_address: 172.15.0.26
