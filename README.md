@@ -19,6 +19,7 @@
   - [Keeper Node](#keeper-node)
   - [Secret Store](#secret-store)
   - [Faucet](#faucet)
+  - [Agent](#agent)
   - [Dashboard](#dashboard)
 - [Spree Network](#spree-network)
   - [Spree Mnemonic](#spree-mnemonic)
@@ -65,9 +66,9 @@ The startup script comes with a set of options for customizing various things.
 
 The default versions are always a combination of component versions which are considered stable.
 
-| Aquarius | Brizo    | Events Handler | Keeper    | Commons  | Faucet   |
-| -------- | -------- | -------------- | --------- | -------- | -------- |
-| `v1.0.5` | `v0.7.2` | `v0.3.4`       | `v0.12.7` | `v2.0.0` | `v0.3.2` |
+| Aquarius | Brizo    | Events Handler | Keeper    | Commons  | Faucet   | Agent |
+| -------- | -------- | -------------- | --------- | -------- | -------- | ------ |
+| `v1.0.5` | `v0.7.2` | `v0.3.4`       | `v0.12.7` | `v2.0.0` | `v0.3.2` | latest |
 
 You can use the `--latest` option to pull the most recent Docker images for all components, which are always tagged as `latest` in Docker. The `latest` Docker image tag derives from the default main branch of the component's Git repo.
 
@@ -80,6 +81,7 @@ You can override the Docker image tag used for a particular component by setting
 - `COMMONS_CLIENT_VERSION`
 - `COMMONS_SERVER_VERSION`
 - `FAUCET_VERSION`
+- `AGENT_VERSION`
 
 For example:
 
@@ -105,6 +107,7 @@ will use the default Docker image tags for Aquarius, Keeper Contracts and Common
 | `--no-faucet`              | Start up Ocean without the `faucet` Building Block.                                             |
 | `--no-acl-contract`        | Disables the configuration of secret store's ACL contract address                               |
 | `--no-dashboard`           | Start up Ocean without the `dashboard` Building Block.                                          |
+| `--no-agent`               | Start up Ocean without the `agent` Building Block.                                          |
 | `--mongodb`                | Start up Ocean with MongoDB as DB engine for Aquarius instead of Elasticsearch.                 |
 | `--local-ganache-node`     | Runs a local `ganache` node.                                                                    |
 | `--local-spree-node`       | Runs a node of the local `spree` network. This is the default.                                  |
@@ -116,6 +119,7 @@ will use the default Docker image tags for Aquarius, Keeper Contracts and Common
 | `--force-pull`             | Force pulling the latest revision of the used Docker images.                                    |
 | `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.        |
 | `--exposeip`               | Binds the components to that specific ip. Exemple: ./start_ocean.sh --exposeip 192.168.0.1      |
+
 
 ## Docker Building Blocks
 
@@ -200,6 +204,14 @@ By default it will start two containers, one for Faucet server and one for its d
 | `faucet` | `3001`        | http://faucet:3001 | http://localhost:3001 | [Faucet](https://github.com/oceanprotocol/faucet) |
 
 By default the Faucet allows requests every 24hrs. To disable the timespan check you can pass `FAUCET_TIMESPAN=0` as environment variable before starting the script.
+
+### Agent
+
+By default it will start one container. This Building Block can be disabled by setting the `--no-agent` flag.
+
+| Hostname | External Port | Internal URL      | Local URL             | Description                                     |
+| -------- | ------------- | ----------------- | --------------------- | ----------------------------------------------- |
+| `agent`  | `4040`        | http://agent:4040 | http://agent:4040 | [Agent](https://github.com/oceanprotocol/agent) |
 
 ### Dashboard
 
