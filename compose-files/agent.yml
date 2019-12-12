@@ -1,0 +1,22 @@
+version: '3'
+services:
+  agent:
+    image: oceanprotocol/agent:$AGENT_VERSION
+    networks:
+      backend:
+        ipv4_address: 172.15.0.26
+    ports:
+      - 4040:4040
+    environment:
+      LOCAL_CONTRACTS: ${KEEPER_DEPLOY_CONTRACTS}
+      aquariusUri: ${COMMONS_AQUARIUS_URI}
+      brizoAddress: ${PROVIDER_ADDRESS}
+      nodeUri: ${COMMONS_KEEPER_RPC_HOST}
+      brizoUri: ${COMMONS_BRIZO_URL}
+      secretstoreUri: ${COMMONS_SECRET_STORE_URL}
+      faucetUri: ${COMMONS_FAUCET_URL}
+      PRIVATE_KEY: ${AGENT_PRIVATE_KEY}
+    volumes:
+      - ${KEEPER_ARTIFACTS_FOLDER}:/usr/src/app/node_modules/@oceanprotocol/keeper-contracts/artifacts/:ro
+      
+

@@ -32,6 +32,7 @@ export KEEPER_VERSION=${KEEPER_VERSION:-v0.12.7}
 export FAUCET_VERSION=${FAUCET_VERSION:-v0.3.2}
 export COMMONS_SERVER_VERSION=${COMMONS_SERVER_VERSION:-v2.0.0}
 export COMMONS_CLIENT_VERSION=${COMMONS_CLIENT_VERSION:-v2.0.0}
+export AGENT_VERSION=${AGENT_VERSION:-latest}
 
 export PARITY_IMAGE="parity/parity:v2.5.7-stable"
 
@@ -125,6 +126,11 @@ export COMMONS_IPFS_GATEWAY_URI=https://ipfs.oceanprotocol.com
 export COMMONS_IPFS_NODE_URI=https://ipfs.oceanprotocol.com:443
 
 export OPERATOR_SERVICE_URL=http://127.0.0.1:8050
+
+#agent
+# private key for agent, public address: 0x6f2b82bB771687b69d0932c7386742804144ae7D
+# NEVER USE this address in production !
+export AGENT_PRIVATE_KEY='axis talent grab cushion figure couple plug ostrich file false jealous nest'
 
 # Export User UID and GID
 export LOCAL_USER_ID=$(id -u)
@@ -232,7 +238,7 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/events_handler.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/secret_store_signing_node.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/faucet.yml"
-
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/agent.yml"
 DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
 while :; do
@@ -263,8 +269,9 @@ while :; do
             export KEEPER_VERSION="latest"
             # TODO: Change label on Docker to refer `latest` to `master`
             export FAUCET_VERSION="latest"
-	    export COMMONS_SERVER_VERSION="latest"
-	    export COMMONS_CLIENT_VERSION="latest"
+            export AGENT_VERSION="latest"
+	        export COMMONS_SERVER_VERSION="latest"
+	        export COMMONS_CLIENT_VERSION="latest"
             printf $COLOR_Y'Switched to latest components...\n\n'$COLOR_RESET
             ;;
         --force-pull)
@@ -309,6 +316,10 @@ while :; do
         --no-acl-contract)
             export CONFIGURE_ACL="false"
             printf $COLOR_Y'Disabling acl validation in secret-store...\n\n'$COLOR_RESET
+            ;;
+        --no-agent)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/agent.yml/}"
+            printf $COLOR_Y'Starting without Agent ...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Only Secret Store
