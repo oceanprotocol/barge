@@ -9,13 +9,15 @@ services:
       - 4040:4040
     environment:
       LOCAL_CONTRACTS: ${KEEPER_DEPLOY_CONTRACTS}
-      aquariusUri: ${COMMONS_AQUARIUS_URI}
+      aquariusUri: ${AQUARIUS_URI}
       brizoAddress: ${PROVIDER_ADDRESS}
-      nodeUri: ${COMMONS_KEEPER_RPC_HOST}
-      brizoUri: ${COMMONS_BRIZO_URL}
-      secretstoreUri: ${COMMONS_SECRET_STORE_URL}
-      faucetUri: ${COMMONS_FAUCET_URL}
+      nodeUri: ${KEEPER_RPC_URL}
+      brizoUri: ${BRIZO_URL}
+      secretstoreUri: ${SECRET_STORE_URL}
+      faucetUri: ${FAUCET_URL}
       PRIVATE_KEY: ${AGENT_PRIVATE_KEY}
+      enable_publish: 'true'
+      enable_consume: 'true'
     volumes:
       - ${KEEPER_ARTIFACTS_FOLDER}:/usr/src/app/node_modules/@oceanprotocol/keeper-contracts/artifacts/:ro
       

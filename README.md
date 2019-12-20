@@ -68,7 +68,7 @@ The default versions are always a combination of component versions which are co
 
 | Aquarius | Brizo    | Events Handler | Keeper    | Commons  | Faucet   | Agent |
 | -------- | -------- | -------------- | --------- | -------- | -------- | ------ |
-| `v1.0.5` | `v0.7.2` | `v0.3.4`       | `v0.12.7` | `v2.0.0` | `v0.3.2` | latest |
+| `v1.0.3` | `v0.7.2` | `v0.3.4`       | `v0.12.7` | `v2.0.0` | `v0.3.2` | latest |
 
 You can use the `--latest` option to pull the most recent Docker images for all components, which are always tagged as `latest` in Docker. The `latest` Docker image tag derives from the default main branch of the component's Git repo.
 
