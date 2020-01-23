@@ -25,13 +25,13 @@ DIR="${DIR/ /\\ }"
 COMPOSE_DIR="${DIR}/compose-files"
 
 # Default versions of Aquarius, Brizo, Keeper Contracts and Commons
-export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v1.0.3}
-export BRIZO_VERSION=${BRIZO_VERSION:-v0.7.2}
-export EVENTS_HANDLER_VERSION=${EVENTS_HANDLER_VERSION:-v0.3.4}
-export KEEPER_VERSION=${KEEPER_VERSION:-v0.12.7}
+export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v1.0.5}
+export BRIZO_VERSION=${BRIZO_VERSION:-v0.8.1}
+export EVENTS_HANDLER_VERSION=${EVENTS_HANDLER_VERSION:-v0.4.4}
+export KEEPER_VERSION=${KEEPER_VERSION:-v0.13.2}
 export FAUCET_VERSION=${FAUCET_VERSION:-v0.3.2}
-export COMMONS_SERVER_VERSION=${COMMONS_SERVER_VERSION:-v2.0.0}
-export COMMONS_CLIENT_VERSION=${COMMONS_CLIENT_VERSION:-v2.0.0}
+export COMMONS_SERVER_VERSION=${COMMONS_SERVER_VERSION:-v2.1.0}
+export COMMONS_CLIENT_VERSION=${COMMONS_CLIENT_VERSION:-v2.1.0}
 export AGENT_VERSION=${AGENT_VERSION:-latest}
 
 export PARITY_IMAGE="parity/parity:v2.5.7-stable"
@@ -98,12 +98,12 @@ if [ ${IP} = "localhost" ]; then
     export SECRET_STORE_URL=http://secret-store:12001
     export SIGNING_NODE_URL=http://secret-store-signing-node:8545
     export AQUARIUS_URI=http://aquarius:5000
-    export FAUCET_URL=http://faucet:3001
+    export FAUCET_URL=http://localhost:3001
     export COMMONS_SERVER_URL=http://localhost:4000
     export COMMONS_CLIENT_URL=http://localhost:3000
     export COMMONS_KEEPER_RPC_HOST=http://localhost:8545
     export COMMONS_SECRET_STORE_URL=http://localhost:12001
-    export BRIZO_URL=http://brizo:8030
+    export BRIZO_URL=http://localhost:8030
 else
     export SECRET_STORE_URL=http://${IP}:12001
     export SIGNING_NODE_URL=http://${IP}:8545
