@@ -103,7 +103,7 @@ if [ ${IP} = "localhost" ]; then
     export COMMONS_CLIENT_URL=http://localhost:3000
     export COMMONS_KEEPER_RPC_HOST=http://localhost:8545
     export COMMONS_SECRET_STORE_URL=http://localhost:12001
-    export BRIZO_URL=http://brizo:8030
+    export BRIZO_URL=http://localhost:8030
 else
     export SECRET_STORE_URL=http://${IP}:12001
     export SIGNING_NODE_URL=http://${IP}:8545
