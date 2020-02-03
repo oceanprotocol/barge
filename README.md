@@ -66,9 +66,9 @@ The startup script comes with a set of options for customizing various things.
 
 The default versions are always a combination of component versions which are considered stable.
 
-| Aquarius | Brizo    | Events Handler | Keeper    | Commons  | Faucet   | Agent |
+| Aquarius | Brizo    | Events Handler | Keeper    | Commons  | Faucet   | Agent  |
 | -------- | -------- | -------------- | --------- | -------- | -------- | ------ |
-| `v1.0.5` | `v0.8.1` | `v0.4.4`       | `v0.13.2` | `v2.1.0` | `v0.3.2` | latest |
+| `v1.0.7` | `v0.8.1` | `v0.4.4`       | `v0.13.2` | `v2.2.0` | `v0.3.2` | latest |
 
 You can use the `--latest` option to pull the most recent Docker images for all components, which are always tagged as `latest` in Docker. The `latest` Docker image tag derives from the default main branch of the component's Git repo.
 
