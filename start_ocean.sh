@@ -26,7 +26,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 
 # Default versions of Aquarius, Brizo, Keeper Contracts and Commons
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v1.0.7}
-export BRIZO_VERSION=${BRIZO_VERSION:-v0.9.3}
+export BRIZO_VERSION=${BRIZO_VERSION:-v0.9.4}
 export EVENTS_HANDLER_VERSION=${EVENTS_HANDLER_VERSION:-v0.4.7}
 export KEEPER_VERSION=${KEEPER_VERSION:-v0.13.2}
 export FAUCET_VERSION=${FAUCET_VERSION:-v0.3.4}
