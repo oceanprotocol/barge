@@ -68,9 +68,9 @@ The default versions are always a combination of component versions which are co
 
 | Aquarius | Brizo    | Events Handler | Keeper    | Commons  | Faucet   | Agent  |
 | -------- | -------- | -------------- | --------- | -------- | -------- | ------ |
-| `v1.0.7` | `v0.9.5` | `v0.4.7`       | `v0.13.2` | `v2.3.1` | `v0.3.4` | latest |
+| `v1.1.0` | `v0.9.7` | `v0.4.7`       | `v0.13.2` | `v2.4.1` | `v0.3.5` | `latest` |
 
-You can use the `--latest` option to pull the most recent Docker images for all components, which are always tagged as `latest` in Docker. The `latest` Docker image tag derives from the default main branch of the component's Git repo.
+You can use the `--latest` option to pull the most recent releases for all components, which are always tagged as `latest` in Docker.
 
 You can override the Docker image tag used for a particular component by setting its associated environment variable before calling `start_ocean.sh`:
 
@@ -98,7 +98,7 @@ will use the default Docker image tags for Aquarius, Keeper Contracts and Common
 
 | Option                     | Description                                                                                     |
 | -------------------------- | ----------------------------------------------------------------------------------------------- |
-| `--latest`                 | Pull Docker images tagged with `latest`.                                                        |
+| `--latest`                 | Pull Docker images tagged with `latest`, referring to the latest release version.                                                        |
 | `--no-commons`             | Start up Ocean without the `commons` Building Block. Helpful for development on `commons`.      |
 | `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                           |
 | `--no-brizo`               | Start up Ocean without the `brizo` Building Block.                                              |
