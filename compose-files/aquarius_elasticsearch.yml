@@ -30,4 +30,5 @@ services:
       DB_CA_CERTS: ${DB_CA_CERTS}
       DB_CLIENT_KEY: ${DB_CLIENT_KEY}
       DB_CLIENT_CERT: ${DB_CLIENT_CERT}
+      LOG_LEVEL: DEBUG
 
