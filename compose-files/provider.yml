@@ -6,7 +6,7 @@ services:
       - 8030:8030
     networks:
       backend:
-        ipv4_address: 172.15.0.17
+        ipv4_address: 172.15.0.4
     environment:
       NETWORK_URL: ${KEEPER_RPC_URL}
       PARITY_URL: ${KEEPER_RPC_URL}

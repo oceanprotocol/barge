@@ -1,0 +1,10 @@
+version: '3'
+services:
+  ganache:
+    image: trufflesuite/ganache-cli:latest
+    ports:
+      - 8545:8545
+    networks:
+      backend:
+        ipv4_address: 172.15.0.3
+    

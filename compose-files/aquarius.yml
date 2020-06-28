@@ -6,7 +6,7 @@ services:
     - 5000:5000
     networks:
       backend:
-        ipv4_address: 172.15.0.15
+        ipv4_address: 172.15.0.5
     environment:
       DB_MODULE: ${DB_MODULE}
       DB_HOSTNAME: ${DB_HOSTNAME}

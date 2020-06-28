@@ -167,6 +167,7 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/dashboard.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/provider.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ganache.yml"
 DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
 while :; do
@@ -196,7 +197,11 @@ while :; do
         #################################################
         --no-provider)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/provider.yml/}"
-            printf $COLOR_Y'Starting without Brizo...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Starting without Provider...\n\n'$COLOR_RESET
+            ;;
+        --no-ganache)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ganache.yml/}"
+            printf $COLOR_Y'Starting without Ganache...\n\n'$COLOR_RESET
             ;;
         --no-aquarius)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_elasticsearch.yml/}"

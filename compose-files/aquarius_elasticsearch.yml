@@ -4,7 +4,7 @@ services:
     image: elasticsearch:6.8.3
     networks:
       backend:
-        ipv4_address: 172.15.0.11
+        ipv4_address: 172.15.0.6
     environment:
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
       MAX_MAP_COUNT: "64000"
@@ -16,7 +16,7 @@ services:
       - 5000:5000
     networks:
       backend:
-        ipv4_address: 172.15.0.15
+        ipv4_address: 172.15.0.5
     depends_on:
       - elasticsearch
     environment:

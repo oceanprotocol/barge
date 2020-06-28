@@ -5,14 +5,14 @@ services:
     command: mongod
     networks:
       backend:
-        ipv4_address: 172.15.0.11
+        ipv4_address: 172.15.0.7
   aquarius:
     image: oceanprotocol/aquarius:${AQUARIUS_VERSION:-stable}
     ports:
     - 5000:5000
     networks:
       backend:
-        ipv4_address: 172.15.0.15
+        ipv4_address: 172.15.0.5
     depends_on:
     - mongodb
     environment:
