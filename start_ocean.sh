@@ -46,7 +46,7 @@ export KEEPER_MNEMONIC="taxi music thumb unique chat sand crew more leg another 
 
 # Default Aquarius parameters: use Elasticsearch
 export DB_MODULE="elasticsearch"
-export DB_HOSTNAME="172.15.0.11"
+export DB_HOSTNAME="172.15.0.6"
 export DB_PORT="9200"
 export DB_USERNAME="elastic"
 export DB_PASSWORD="changeme"
