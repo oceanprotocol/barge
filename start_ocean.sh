@@ -207,6 +207,10 @@ while :; do
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_elasticsearch.yml/}"
             printf $COLOR_Y'Starting without Aquarius...\n\n'$COLOR_RESET
             ;;
+        --no-dashboard)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dashboard.yml/}"
+            printf $COLOR_Y'Starting without Dashboard ...\n\n'$COLOR_RESET
+            ;;
         #################################################
         # MongoDB
         #################################################
