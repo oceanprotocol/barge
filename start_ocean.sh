@@ -26,7 +26,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 
 # Default versions of Aquarius, Brizo, Keeper Contracts and Commons
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v3}
-export PROVIDER_VERSION=${PROVIDER_VERSION:-phase2}
+export PROVIDER_VERSION=${PROVIDER_VERSION:-alex}
 
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
@@ -34,14 +34,14 @@ export FORCEPULL="false"
 
 # Specify the ethereum default RPC container provider
 if [ ${IP} = "localhost" ]; then
-    export KEEPER_RPC_HOST="keeper-node"
+    export KEEPER_RPC_HOST="ganache"
 else
     export KEEPER_RPC_HOST=${IP}
 fi
 export KEEPER_RPC_PORT="8545"
 export KEEPER_RPC_URL="http://"${KEEPER_RPC_HOST}:${KEEPER_RPC_PORT}
 # Use this seed only on Spree! (Spree is the default.)
-export KEEPER_MNEMONIC="taxi music thumb unique chat sand crew more leg another off lamp"
+export GANACHE_MNEMONIC=${GANACHE_MNEMONIC:-"taxi music thumb unique chat sand crew more leg another off lamp"}
 
 
 # Default Aquarius parameters: use Elasticsearch
