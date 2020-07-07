@@ -34,7 +34,7 @@ export FORCEPULL="false"
 
 # Specify the ethereum default RPC container provider
 if [ ${IP} = "localhost" ]; then
-    export KEEPER_RPC_HOST="ganache"
+    export KEEPER_RPC_HOST="172.15.0.3"
 else
     export KEEPER_RPC_HOST=${IP}
 fi
@@ -68,8 +68,8 @@ export PROVIDER_PASSWORD=9B4653C8AA99E707798D603F226A0687
 export PROVIDER_KEYFILE="/accounts/provider.json"
 
 if [ ${IP} = "localhost" ]; then
-    export AQUARIUS_URI=http://aquarius:5000
-    export BRIZO_URL=http://localhost:8030
+    export AQUARIUS_URI=http://172.15.0.5:5000
+    export BRIZO_URL=http://172.15.0.4:8030
 else
     export AQUARIUS_URI=http://${IP}:5000
     export BRIZO_URL=http://${IP}:8030
