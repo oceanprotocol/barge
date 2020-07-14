@@ -26,7 +26,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 
 # Default versions of Aquarius, Brizo, Keeper Contracts and Commons
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v3}
-export PROVIDER_VERSION=${PROVIDER_VERSION:-alex}
+export PROVIDER_VERSION=${PROVIDER_VERSION:-phase2}
 
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
