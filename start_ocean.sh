@@ -24,7 +24,7 @@ export BRIZO_ENV_FILE="${DIR}/brizo.env"
 DIR="${DIR/ /\\ }"
 COMPOSE_DIR="${DIR}/compose-files"
 
-# Default versions of Aquarius, Brizo, Keeper Contracts and Commons
+# Default versions of Aquarius, Brizo, Ocean Contracts and Commons
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v3}
 export PROVIDER_VERSION=${PROVIDER_VERSION:-latest}
 
@@ -34,12 +34,12 @@ export FORCEPULL="false"
 
 # Specify the ethereum default RPC container provider
 if [ ${IP} = "localhost" ]; then
-    export KEEPER_RPC_HOST="172.15.0.3"
+    export NETWORK_RPC_HOST="172.15.0.3"
 else
-    export KEEPER_RPC_HOST=${IP}
+    export NETWORK_RPC_HOST=${IP}
 fi
-export KEEPER_RPC_PORT="8545"
-export KEEPER_RPC_URL="http://"${KEEPER_RPC_HOST}:${KEEPER_RPC_PORT}
+export NETWORK_RPC_PORT="8545"
+export NETWORK_RPC_URL="http://"${NETWORK_RPC_HOST}:${NETWORK_RPC_PORT}
 # Use this seed only on Spree! (Spree is the default.)
 export GANACHE_MNEMONIC=${GANACHE_MNEMONIC:-"taxi music thumb unique chat sand crew more leg another off lamp"}
 
@@ -106,18 +106,18 @@ COLOR_C="\033[0;36m"    # cyan
 COLOR_RESET="\033[00m"
 
 function get_acl_address {
-    # detect keeper version
+    # detect ocean contracts version
     local version="${1:-latest}"
 
-    # sesarch in the file for the keeper version
-    line=$(grep "^${version}=" "${DIR}/ACL/${KEEPER_NETWORK_NAME}_addresses.txt")
+    # sesarch in the file for the ocean contracts version
+    line=$(grep "^${version}=" "${DIR}/ACL/${OCEAN_NETWORK_NAME}_addresses.txt")
     # set address
     address="${line##*=}"
 
     # if address is still empty
     if [ -z "${address}" ]; then
       # fetch from latest line
-      line=$(grep "^latest=" "${DIR}/ACL/${KEEPER_NETWORK_NAME}_addresses.txt")
+      line=$(grep "^latest=" "${DIR}/ACL/${OCEAN_NETWORK_NAME}_addresses.txt")
       # set address
       address="${line##*=}"
     fi
@@ -138,9 +138,9 @@ function check_if_owned_by_root {
         if [ "$uid" = "0" ]; then
             printf $COLOR_R"WARN: $OCEAN_HOME is owned by root\n"$COLOR_RESET >&2
         else
-            uid=$(ls -nd "$KEEPER_ARTIFACTS_FOLDER" | awk '{print $3;}')
+            uid=$(ls -nd "$OCEAN_ARTIFACTS_FOLDER" | awk '{print $3;}')
             if [ "$uid" = "0" ]; then
-                printf $COLOR_R"WARN: $KEEPER_ARTIFACTS_FOLDER is owned by root\n"$COLOR_RESET >&2
+                printf $COLOR_R"WARN: $OCEAN_ARTIFACTS_FOLDER is owned by root\n"$COLOR_RESET >&2
             fi
         fi
     fi

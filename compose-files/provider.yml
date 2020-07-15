@@ -8,8 +8,9 @@ services:
       backend:
         ipv4_address: 172.15.0.4
     environment:
-      NETWORK_URL: ${KEEPER_RPC_URL}
-      PARITY_URL: ${KEEPER_RPC_URL}
+      ARTIFACTS_PATH: ${OCEAN_ARTIFACTS_FOLDER:-/ocean-provider/artifacts}
+      NETWORK_URL: ${NETWORK_RPC_URL}
+      PARITY_URL: ${NETWORK_RPC_URL}
       PROVIDER_ADDRESS: ${PROVIDER_ADDRESS}
       PROVIDER_PASSWORD: ${PROVIDER_PASSWORD}
       PROVIDER_ENCRYPTED_KEY: ${PROVIDER_ENCRYPTED_KEY}
