@@ -60,12 +60,14 @@ CHECK_ELASTIC_VM_COUNT=true
 
 #Provider
 export PROVIDER_LOG_LEVEL=INFO
-export PROVIDER_WORKERS=1 
+export PROVIDER_WORKERS=1
 export PROVIDER_IPFS_GATEWAY=https://ipfs.oceanprotocol.com
-export PROVIDER_ENCRYPTED_KEY='{"id":"4fabd7bf-bf01-2df3-2791-75b1ef4eebae","version":3,"crypto":{"cipher":"aes-128-ctr","cipherparams":{"iv":"d427c17019b8e3e8f09f321e1976c80f"},"ciphertext":"4ff54c4f47da24dfe6a712a7bf9e715a18bd99f690eedcacc817af2e1d08c1cd","kdf":"pbkdf2","kdfparams":{"c":10240,"dklen":32,"prf":"hmac-sha256","salt":"fc6aef875f184722a70ad528f1b2efc5ceb868b6065b65630e50a83a458d2b50"},"mac":"4a40051eb54bef80b2cbcb209e2c8747531b0ee76d1a59b93d69b350be4af9dd"},"address":"00c6a0bc5cd0078d6cd0b659e8061b404cfa5704","name":"","meta":"{}"}'
-export PROVIDER_ADDRESS=0x00c6a0bc5cd0078d6cd0b659e8061b404cfa5704
-export PROVIDER_PASSWORD=9B4653C8AA99E707798D603F226A0687
+export PROVIDER_PRIVATE_KEY=0x9bf5d7e4978ed5206f760e6daded34d657572bd49fa5b3fe885679329fb16b16
+export PROVIDER_ENCRYPTED_KEY=''
+export PROVIDER_ADDRESS=''
+export PROVIDER_PASSWORD=''
 export PROVIDER_KEYFILE="/accounts/provider.json"
+export DDO_CONTRACT_ADDRESS=''
 
 if [ ${IP} = "localhost" ]; then
     export AQUARIUS_URI=http://172.15.0.5:5000
