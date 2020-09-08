@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
-# start_ocean.sh
+#
 # Copyright (c) 2019 Ocean Protocol contributors
 # SPDX-License-Identifier: Apache-2.0
+#
+# Usage: ./start_ocean.sh
+#
+
 IP="localhost"
 optspec=":-:"
 while getopts "$optspec" optchar; do
@@ -17,14 +21,12 @@ done
 
 set -e
 
+# Patch $DIR if spaces
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-export BRIZO_ENV_FILE="${DIR}/brizo.env"
-
-# Patch $DIR if spaces (BRIZO_ENV_FILE does not need patch)
 DIR="${DIR/ /\\ }"
 COMPOSE_DIR="${DIR}/compose-files"
 
-# Default versions of Aquarius, Brizo, Ocean Contracts and Commons
+# Default versions of Aquarius, Provider
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v3}
 export PROVIDER_VERSION=${PROVIDER_VERSION:-latest}
 
@@ -71,10 +73,8 @@ export DDO_CONTRACT_ADDRESS=''
 
 if [ ${IP} = "localhost" ]; then
     export AQUARIUS_URI=http://172.15.0.5:5000
-    export BRIZO_URL=http://172.15.0.4:8030
 else
     export AQUARIUS_URI=http://${IP}:5000
-    export BRIZO_URL=http://${IP}:8030
 fi
 
 #export OPERATOR_SERVICE_URL=http://127.0.0.1:8050
@@ -106,26 +106,6 @@ COLOR_C="\033[0;36m"    # cyan
 
 # reset
 COLOR_RESET="\033[00m"
-
-function get_acl_address {
-    # detect ocean contracts version
-    local version="${1:-latest}"
-
-    # sesarch in the file for the ocean contracts version
-    line=$(grep "^${version}=" "${DIR}/ACL/${OCEAN_NETWORK_NAME}_addresses.txt")
-    # set address
-    address="${line##*=}"
-
-    # if address is still empty
-    if [ -z "${address}" ]; then
-      # fetch from latest line
-      line=$(grep "^latest=" "${DIR}/ACL/${OCEAN_NETWORK_NAME}_addresses.txt")
-      # set address
-      address="${line##*=}"
-    fi
-
-    echo "${address}"
-}
 
 function show_banner {
     local output=$(cat .banner)
@@ -176,13 +156,6 @@ while :; do
     case $1 in
         --exposeip)
 	   ;;
-        #################################################
-        # Log level
-        #################################################
-        --debug)
-            export BRIZO_LOG_LEVEL="DEBUG"
-            export EVENTS_HANDLER_LOG_LEVEL="DEBUG"
-            ;;
         #################################################
         # Disable color
         #################################################
