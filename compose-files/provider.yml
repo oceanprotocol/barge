@@ -7,6 +7,8 @@ services:
     networks:
       backend:
         ipv4_address: 172.15.0.4
+    depends_on:
+    - ocean-contracts
     environment:
       ARTIFACTS_PATH: ${OCEAN_ARTIFACTS_FOLDER:-/ocean-provider/artifacts}
       NETWORK_URL: ${NETWORK_RPC_URL}
@@ -21,3 +23,5 @@ services:
       IPFS_GATEWAY: ${PROVIDER_IPFS_GATEWAY}
       OCEAN_PROVIDER_TIMEOUT: '9000'
       OPERATOR_SERVICE_URL: ${OPERATOR_SERVICE_URL}
+    volumes:
+    - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/

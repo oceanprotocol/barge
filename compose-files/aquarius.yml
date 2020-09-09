@@ -7,6 +7,8 @@ services:
     networks:
       backend:
         ipv4_address: 172.15.0.5
+    depends_on:
+      - ocean-contracts
     environment:
       DB_MODULE: ${DB_MODULE}
       DB_HOSTNAME: ${DB_HOSTNAME}
@@ -18,3 +20,5 @@ services:
       DB_CA_CERTS: ${DB_CA_CERTS}
       DB_CLIENT_KEY: ${DB_CLIENT_KEY}
       DB_CLIENT_CERT: ${DB_CLIENT_CERT}
+    volumes:
+    - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/

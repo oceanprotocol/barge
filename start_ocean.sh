@@ -33,6 +33,10 @@ export PROVIDER_VERSION=${PROVIDER_VERSION:-latest}
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
 
+# Export User UID and GID
+export LOCAL_USER_ID=$(id -u)
+export LOCAL_GROUP_ID=$(id -g)
+
 
 # Specify the ethereum default RPC container provider
 if [ ${IP} = "localhost" ]; then
@@ -42,9 +46,16 @@ else
 fi
 export NETWORK_RPC_PORT="8545"
 export NETWORK_RPC_URL="http://"${NETWORK_RPC_HOST}:${NETWORK_RPC_PORT}
-# Use this seed only on Spree! (Spree is the default.)
+# Use this seed on ganache to always create the same wallets
 export GANACHE_MNEMONIC=${GANACHE_MNEMONIC:-"taxi music thumb unique chat sand crew more leg another off lamp"}
 
+# Ocean contracts
+export OCEAN_HOME="${HOME}/.ocean"
+export CONTRACTS_OWNER_ROLE_ADDRESS="${CONTRACTS_OWNER_ROLE_ADDRESS}"
+export CONTRACTS_DEPLOY_CONTRACTS="true"
+export OCEAN_ARTIFACTS_FOLDER="${OCEAN_HOME}/ocean-contracts/artifacts"
+# Specify which ethereum client to run or connect to: development
+export CONTRACTS_NETWORK_NAME="ganache"
 
 # Default Aquarius parameters: use Elasticsearch
 export DB_MODULE="elasticsearch"
@@ -79,11 +90,6 @@ fi
 
 #export OPERATOR_SERVICE_URL=http://127.0.0.1:8050
 export OPERATOR_SERVICE_URL=https://operator-api.operator.dev-ocean.com
-
-
-# Export User UID and GID
-export LOCAL_USER_ID=$(id -u)
-export LOCAL_GROUP_ID=$(id -g)
 
 
 #add aquarius to /etc/hosts
@@ -150,6 +156,8 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/dashboard.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/provider.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ganache.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ocean_contracts.yml"
+
 DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
 while :; do
@@ -176,6 +184,7 @@ while :; do
             ;;
         --no-ganache)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ganache.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ocean_contracts.yml/}"
             printf $COLOR_Y'Starting without Ganache...\n\n'$COLOR_RESET
             ;;
         --no-aquarius)

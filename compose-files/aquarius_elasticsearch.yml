@@ -19,6 +19,7 @@ services:
         ipv4_address: 172.15.0.5
     depends_on:
       - elasticsearch
+      - ocean-contracts
     environment:
       DB_MODULE: ${DB_MODULE}
       DB_HOSTNAME: ${DB_HOSTNAME}
@@ -36,3 +37,5 @@ services:
       EVENTS_RPC: "http://172.15.0.3:8545"
       EVENTS_ALLOW: "0"
       RUN_EVENTS_MONITOR: "1"
+    volumes:
+    - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
