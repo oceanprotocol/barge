@@ -58,14 +58,15 @@ The startup script comes with a set of options for customizing various things.
 
 The default versions are always a combination of component versions which are considered stable.
 
-| Aquarius | Provider | Ganache  |
-| -------- | -------- | -------- |
-| `vx.x.x` | `vx.x.x` | `latest` |
+| Aquarius | Provider | Ganache  | ocean-contracts |
+| -------- | -------- | -------- | --------------- |
+| `vx.x.x` | `vx.x.x` | `latest` |  `test`
 
 You can override the Docker image tag used for a particular component by setting its associated environment variable before calling `start_ocean.sh`:
 
 - `AQUARIUS_VERSION`
 - `PROVIDER_VERSION`
+- `CONTRACTS_VERSION`
 
 For example:
 
@@ -116,7 +117,17 @@ This Building Block can be disabled by setting the `--no-aquarius` flag.
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
 | `ganache`   | `8545`        | http://ganache:9000   | http://localhost:8545   |  |
 
-The accounts can be access with this seed phrase:
+### ocean-contracts
+* Deploy all smart contracts from the ocean-contracts repo
+* Export artifacts files (.json) to default shared folder between all containers
+* Create address file (address.json) that has the address of each deployed 
+smart contract that is required by the ocean library. This file is saved to the same folder with the artifacts files
+ 
+| Hostname            | External Port | Internal URL          | Local URL             | Description                                         |
+| ------------------- | ------------- | --------------------- | --------------------- | ------------------------------------------- |
+| `ocean-contracts`   |               |                       |                       |                                             |
+
+The accounts can be accessed with this seed phrase:
 
 ```
 taxi music thumb unique chat sand crew more leg another off lamp
