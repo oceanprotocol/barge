@@ -10,7 +10,7 @@ services:
     depends_on:
     - ocean-contracts
     environment:
-      ARTIFACTS_PATH: ${OCEAN_ARTIFACTS_FOLDER:-/ocean-provider/artifacts}
+      ARTIFACTS_PATH: "/ocean-contracts/artifacts"
       NETWORK_URL: ${NETWORK_RPC_URL}
       PARITY_URL: ${NETWORK_RPC_URL}
       PROVIDER_PRIVATE_KEY: ${PROVIDER_PRIVATE_KEY}

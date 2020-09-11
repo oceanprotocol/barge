@@ -52,7 +52,7 @@ export GANACHE_MNEMONIC=${GANACHE_MNEMONIC:-"taxi music thumb unique chat sand c
 # Ocean contracts
 export OCEAN_HOME="${HOME}/.ocean"
 export CONTRACTS_OWNER_ROLE_ADDRESS="${CONTRACTS_OWNER_ROLE_ADDRESS}"
-export CONTRACTS_DEPLOY_CONTRACTS="true"
+export DEPLOY_CONTRACTS="true"
 export OCEAN_ARTIFACTS_FOLDER="${OCEAN_HOME}/ocean-contracts/artifacts"
 # Specify which ethereum client to run or connect to: development
 export CONTRACTS_NETWORK_NAME="ganache"
@@ -80,7 +80,6 @@ export PROVIDER_ENCRYPTED_KEY=''
 export PROVIDER_ADDRESS=''
 export PROVIDER_PASSWORD=''
 export PROVIDER_KEYFILE="/accounts/provider.json"
-export DDO_CONTRACT_ADDRESS=''
 
 if [ ${IP} = "localhost" ]; then
     export AQUARIUS_URI=http://172.15.0.5:5000
@@ -145,6 +144,11 @@ function check_max_map_count {
     printf $COLOR_R'Please refer to https://www.elastic.co/guide/en/elasticsearch/reference/6.6/vm-max-map-count.html\n'$COLOR_RESET
     exit 1
   fi
+}
+
+function clean_local_contracts {
+    rm -f "${OCEAN_ARTIFACTS_FOLDER}/ready"
+    rm -f "${OCEAN_ARTIFACTS_FOLDER}/*.json"
 }
 
 check_if_owned_by_root
@@ -227,6 +231,7 @@ while :; do
         *)
             [ ${CHECK_ELASTIC_VM_COUNT} = "true" ] && check_max_map_count
             printf $COLOR_Y'Starting Ocean V3...\n\n'$COLOR_RESET
+            [ ${DEPLOY_CONTRACTS} = "true" ] && clean_local_contracts
             [ ${FORCEPULL} = "true" ] && eval docker-compose "$DOCKER_COMPOSE_EXTRA_OPTS" --project-name=$PROJECT_NAME "$COMPOSE_FILES" pull
             eval docker-compose "$DOCKER_COMPOSE_EXTRA_OPTS" --project-name=$PROJECT_NAME "$COMPOSE_FILES" up --remove-orphans
             break
