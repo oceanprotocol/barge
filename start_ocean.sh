@@ -54,6 +54,8 @@ export OCEAN_HOME="${HOME}/.ocean"
 export CONTRACTS_OWNER_ROLE_ADDRESS="${CONTRACTS_OWNER_ROLE_ADDRESS}"
 export DEPLOY_CONTRACTS="true"
 export OCEAN_ARTIFACTS_FOLDER="${OCEAN_HOME}/ocean-contracts/artifacts"
+export ADDRESS_FILE="${OCEAN_ARTIFACTS_FOLDER}/address.json"
+echo "export ADDRESS_FILE=${ADDRESS_FILE}"
 # Specify which ethereum client to run or connect to: development
 export CONTRACTS_NETWORK_NAME="ganache"
 
@@ -75,11 +77,11 @@ CHECK_ELASTIC_VM_COUNT=true
 export PROVIDER_LOG_LEVEL=INFO
 export PROVIDER_WORKERS=1
 export PROVIDER_IPFS_GATEWAY=https://ipfs.oceanprotocol.com
-export PROVIDER_PRIVATE_KEY=0x9bf5d7e4978ed5206f760e6daded34d657572bd49fa5b3fe885679329fb16b16
+export PROVIDER_PRIVATE_KEY=0xfd5c1ccea015b6d663618850824154a3b3fb2882c46cefb05b9a93fea8c3d215
 export PROVIDER_ENCRYPTED_KEY=''
 export PROVIDER_ADDRESS=''
 export PROVIDER_PASSWORD=''
-export PROVIDER_KEYFILE="/accounts/provider.json"
+#export PROVIDER_KEYFILE="/accounts/provider.json"
 
 if [ ${IP} = "localhost" ]; then
     export AQUARIUS_URI=http://172.15.0.5:5000
