@@ -28,7 +28,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 
 # Default versions of Aquarius, Provider
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-decentralized}
-export PROVIDER_VERSION=${PROVIDER_VERSION:-latest}
+export PROVIDER_VERSION=${PROVIDER_VERSION:-v0.3.0}
 export CONTRACTS_VERSION=${CONTRACTS_VERSION:-test}
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
@@ -78,10 +78,6 @@ export PROVIDER_LOG_LEVEL=INFO
 export PROVIDER_WORKERS=1
 export PROVIDER_IPFS_GATEWAY=https://ipfs.oceanprotocol.com
 export PROVIDER_PRIVATE_KEY=0xfd5c1ccea015b6d663618850824154a3b3fb2882c46cefb05b9a93fea8c3d215
-export PROVIDER_ENCRYPTED_KEY=''
-export PROVIDER_ADDRESS=''
-export PROVIDER_PASSWORD=''
-#export PROVIDER_KEYFILE="/accounts/provider.json"
 
 if [ ${IP} = "localhost" ]; then
     export AQUARIUS_URI=http://172.15.0.5:5000
