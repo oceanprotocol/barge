@@ -27,11 +27,16 @@ DIR="${DIR/ /\\ }"
 COMPOSE_DIR="${DIR}/compose-files"
 
 # Default versions of Aquarius, Provider
-export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v3}
-export PROVIDER_VERSION=${PROVIDER_VERSION:-v0.1.0}
 
+export AQUARIUS_VERSION=${AQUARIUS_VERSION:v3}
+export PROVIDER_VERSION=${PROVIDER_VERSION:latest}
+export CONTRACTS_VERSION=${CONTRACTS_VERSION:-test}
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
+
+# Export User UID and GID
+export LOCAL_USER_ID=$(id -u)
+export LOCAL_GROUP_ID=$(id -g)
 
 
 # Specify the ethereum default RPC container provider
@@ -42,9 +47,18 @@ else
 fi
 export NETWORK_RPC_PORT="8545"
 export NETWORK_RPC_URL="http://"${NETWORK_RPC_HOST}:${NETWORK_RPC_PORT}
-# Use this seed only on Spree! (Spree is the default.)
+# Use this seed on ganache to always create the same wallets
 export GANACHE_MNEMONIC=${GANACHE_MNEMONIC:-"taxi music thumb unique chat sand crew more leg another off lamp"}
 
+# Ocean contracts
+export OCEAN_HOME="${HOME}/.ocean"
+export CONTRACTS_OWNER_ROLE_ADDRESS="${CONTRACTS_OWNER_ROLE_ADDRESS}"
+export DEPLOY_CONTRACTS="true"
+export OCEAN_ARTIFACTS_FOLDER="${OCEAN_HOME}/ocean-contracts/artifacts"
+export ADDRESS_FILE="${OCEAN_ARTIFACTS_FOLDER}/address.json"
+echo "export ADDRESS_FILE=${ADDRESS_FILE}"
+# Specify which ethereum client to run or connect to: development
+export CONTRACTS_NETWORK_NAME="ganache"
 
 # Default Aquarius parameters: use Elasticsearch
 export DB_MODULE="elasticsearch"
@@ -64,12 +78,7 @@ CHECK_ELASTIC_VM_COUNT=true
 export PROVIDER_LOG_LEVEL=INFO
 export PROVIDER_WORKERS=1
 export PROVIDER_IPFS_GATEWAY=https://ipfs.oceanprotocol.com
-export PROVIDER_PRIVATE_KEY=0x9bf5d7e4978ed5206f760e6daded34d657572bd49fa5b3fe885679329fb16b16
-export PROVIDER_ENCRYPTED_KEY=''
-export PROVIDER_ADDRESS=''
-export PROVIDER_PASSWORD=''
-export PROVIDER_KEYFILE="/accounts/provider.json"
-export DDO_CONTRACT_ADDRESS=''
+export PROVIDER_PRIVATE_KEY=0xfd5c1ccea015b6d663618850824154a3b3fb2882c46cefb05b9a93fea8c3d215
 
 if [ ${IP} = "localhost" ]; then
     export AQUARIUS_URI=http://172.15.0.5:5000
@@ -79,11 +88,6 @@ fi
 
 #export OPERATOR_SERVICE_URL=http://127.0.0.1:8050
 export OPERATOR_SERVICE_URL=https://operator-api.operator.dev-ocean.com
-
-
-# Export User UID and GID
-export LOCAL_USER_ID=$(id -u)
-export LOCAL_GROUP_ID=$(id -g)
 
 
 #add aquarius to /etc/hosts
@@ -141,6 +145,11 @@ function check_max_map_count {
   fi
 }
 
+function clean_local_contracts {
+    rm -f "${OCEAN_ARTIFACTS_FOLDER}/ready"
+    rm -f "${OCEAN_ARTIFACTS_FOLDER}/*.json"
+}
+
 check_if_owned_by_root
 show_banner
 
@@ -150,6 +159,8 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/dashboard.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/provider.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ganache.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ocean_contracts.yml"
+
 DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
 while :; do
@@ -176,6 +187,7 @@ while :; do
             ;;
         --no-ganache)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ganache.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ocean_contracts.yml/}"
             printf $COLOR_Y'Starting without Ganache...\n\n'$COLOR_RESET
             ;;
         --no-aquarius)
@@ -218,6 +230,7 @@ while :; do
         *)
             [ ${CHECK_ELASTIC_VM_COUNT} = "true" ] && check_max_map_count
             printf $COLOR_Y'Starting Ocean V3...\n\n'$COLOR_RESET
+            [ ${DEPLOY_CONTRACTS} = "true" ] && clean_local_contracts
             [ ${FORCEPULL} = "true" ] && eval docker-compose "$DOCKER_COMPOSE_EXTRA_OPTS" --project-name=$PROJECT_NAME "$COMPOSE_FILES" pull
             eval docker-compose "$DOCKER_COMPOSE_EXTRA_OPTS" --project-name=$PROJECT_NAME "$COMPOSE_FILES" up --remove-orphans
             break
