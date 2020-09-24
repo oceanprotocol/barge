@@ -2,7 +2,7 @@
 
 <h1 align="center">barge</h1>
 
-> 🐳 Docker Compose files for the full Ocean Protocol stack.
+> 🐳 Docker Compose files for the full Ocean Protocol stack running locally for development.
 
 ---
 
@@ -15,6 +15,7 @@
   - [Aquarius](#aquarius)
   - [Provider](#provider)
   - [Ganache](#ganache)
+  - [ocean-contracts](#ocean-contracts)
   - [Dashboard](#dashboard)
 - [Contributing](#contributing)
 - [License](#license)
@@ -40,15 +41,15 @@ cd barge
 ./start_ocean.sh
 ```
 
-That will run the current default versions of Aquarius, Provider, Ganache.
+This will run the current default versions of [Aquarius](https://github.com/oceanprotocol/aquarius), [Provider](https://github.com/oceanprotocol/provider-py), and [Ganache](https://github.com/trufflesuite/ganache-cli) with [our contracts](https://github.com/oceanprotocol/ocean-contracts) deployed to it.
 
 <img width="486" alt="Welcome to Ocean Protocol" src="Welcome_to_Ocean_Protocol.png">
 
-It's overkill, but to be _sure_ that you use exactly the Docker images and volumes you want, you can prune all the Docker things in your system first:
+> It's overkill, but to be _sure_ that you use exactly the Docker images and volumes you want, you can prune all the Docker things in your system first:
 
-```bash
-docker system prune --all --volumes
-```
+> ```bash
+> docker system prune --all --volumes
+> ```
 
 ## Options
 
@@ -118,14 +119,10 @@ This Building Block can be disabled by setting the `--no-aquarius` flag.
 | `ganache`   | `8545`        | http://ganache:9000   | http://localhost:8545   |  |
 
 ### ocean-contracts
-* Deploy all smart contracts from the ocean-contracts repo
+
+* Deploy all smart contracts from the `ocean-contracts` repo
 * Export artifacts files (.json) to default shared folder between all containers
-* Create address file (address.json) that has the address of each deployed 
-smart contract that is required by the ocean library. This file is saved to the same folder with the artifacts files
- 
-| Hostname            | External Port | Internal URL          | Local URL             | Description                                         |
-| ------------------- | ------------- | --------------------- | --------------------- | ------------------------------------------- |
-| `ocean-contracts`   |               |                       |                       |                                             |
+* Create address file (address.json) that has the address of each deployed smart contract that is required by the ocean library. This file is saved to the same folder with the artifacts files
 
 The accounts can be accessed with this seed phrase:
 
