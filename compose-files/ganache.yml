@@ -7,4 +7,4 @@ services:
     networks:
       backend:
         ipv4_address: 172.15.0.3
-    entrypoint: ["node", "/app/ganache-core.docker.cli.js", "--db", "./ganache_cache", "--networkId","0x2324","--gasLimit","10000000000","--gasPrice","1","---hardfork","istanbul","--mnemonic","${GANACHE_MNEMONIC}"]
+    entrypoint: ["node", "/app/ganache-core.docker.cli.js", "--db", "./ganache_cache", "--chainId","0x2324","--networkId","0x2324","--gasLimit","10000000000","--gasPrice","1","---hardfork","istanbul","--mnemonic","${GANACHE_MNEMONIC}"]
