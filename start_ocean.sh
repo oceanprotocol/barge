@@ -30,7 +30,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v3}
 export PROVIDER_VERSION=${PROVIDER_VERSION:-v0.3.0}
-export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v0.5.3}
+export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v0.5.5}
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
 
@@ -58,7 +58,7 @@ export OCEAN_ARTIFACTS_FOLDER="${OCEAN_HOME}/ocean-contracts/artifacts"
 export ADDRESS_FILE="${OCEAN_ARTIFACTS_FOLDER}/address.json"
 echo "export ADDRESS_FILE=${ADDRESS_FILE}"
 # Specify which ethereum client to run or connect to: development
-export CONTRACTS_NETWORK_NAME="ganache"
+export CONTRACTS_NETWORK_NAME="development"
 
 # Default Aquarius parameters: use Elasticsearch
 export DB_MODULE="elasticsearch"
