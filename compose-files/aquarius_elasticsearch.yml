@@ -34,7 +34,7 @@ services:
       LOG_LEVEL: DEBUG
       EVENTS_ECIES_PRIVATE_KEY: "0x5d75837394b078ce97bc289fa8d75e21000573520bfa7784a9d28ccaae602bf8"
       ARTIFACTS_PATH: "/ocean-contracts/artifacts"
-      ADDRESS_FILE: ${OCEAN_ADDRESS_FILE:-/ocean-contracts/artifacts/address.json}
+      ADDRESS_FILE: "/ocean-contracts/artifacts/address.json"
       DEPLOY_CONTRACTS: ${DEPLOY_CONTRACTS}
       NETWORK_NAME: ${CONTRACTS_NETWORK_NAME}
       EVENTS_RPC: "http://172.15.0.3:8545"
