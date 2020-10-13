@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright (c) 2019 Ocean Protocol contributors
+# Copyright (c) 2020 Ocean Protocol contributors
 # SPDX-License-Identifier: Apache-2.0
 #
 # Usage: ./start_ocean.sh
@@ -90,7 +90,8 @@ fi
 export OPERATOR_SERVICE_URL=https://operator-api.operator.dev-ocean.com
 
 
-#add aquarius to /etc/hosts
+# Add aquarius to /etc/hosts
+# Workaround mainly for macOS
 
 if [ ${IP} = "localhost" ]; then
 	if grep -q "aquarius" /etc/hosts; then
@@ -191,7 +192,7 @@ while :; do
             printf $COLOR_Y'Starting without Ganache...\n\n'$COLOR_RESET
             ;;
         --no-aquarius)
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_elasticsearch.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}"
             printf $COLOR_Y'Starting without Aquarius...\n\n'$COLOR_RESET
             ;;
         --no-dashboard)

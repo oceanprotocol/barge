@@ -8,9 +8,6 @@ ganache-db/
 # Emacs
 *~
 
-# mutable secret store config (Issue #126)
-networks/secret-store/config/config.toml
-
 # Mac OS Filesystem artifacts
 .DS_Store
 **/.DS_Store
