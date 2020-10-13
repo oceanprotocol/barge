@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright (c) 2019 Ocean Protocol contributors
+# Copyright (c) 2020 Ocean Protocol contributors
 # SPDX-License-Identifier: Apache-2.0
 #
 # Usage: ./start_ocean.sh
@@ -90,7 +90,8 @@ fi
 export OPERATOR_SERVICE_URL=https://operator-api.operator.dev-ocean.com
 
 
-#add aquarius to /etc/hosts
+# Add aquarius to /etc/hosts
+# Workaround mainly for macOS
 
 if [ ${IP} = "localhost" ]; then
 	if grep -q "aquarius" /etc/hosts; then
@@ -156,7 +157,7 @@ show_banner
 COMPOSE_FILES=""
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/dashboard.yml"
-COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/provider.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ganache.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ocean_contracts.yml"
@@ -191,24 +192,12 @@ while :; do
             printf $COLOR_Y'Starting without Ganache...\n\n'$COLOR_RESET
             ;;
         --no-aquarius)
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_elasticsearch.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}"
             printf $COLOR_Y'Starting without Aquarius...\n\n'$COLOR_RESET
             ;;
         --no-dashboard)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dashboard.yml/}"
             printf $COLOR_Y'Starting without Dashboard ...\n\n'$COLOR_RESET
-            ;;
-        #################################################
-        # MongoDB
-        #################################################
-        --mongodb)
-            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_mongodb.yml"
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_elasticsearch.yml/}"
-            CHECK_ELASTIC_VM_COUNT=false
-            export DB_MODULE="mongodb"
-            export DB_HOSTNAME="mongodb"
-            export DB_PORT="27017"
-            printf $COLOR_Y'Starting with MongoDB...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Cleaning switches
