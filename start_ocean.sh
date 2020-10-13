@@ -199,18 +199,6 @@ while :; do
             printf $COLOR_Y'Starting without Dashboard ...\n\n'$COLOR_RESET
             ;;
         #################################################
-        # MongoDB
-        #################################################
-        --mongodb)
-            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_mongodb.yml"
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius_elasticsearch.yml/}"
-            CHECK_ELASTIC_VM_COUNT=false
-            export DB_MODULE="mongodb"
-            export DB_HOSTNAME="mongodb"
-            export DB_PORT="27017"
-            printf $COLOR_Y'Starting with MongoDB...\n\n'$COLOR_RESET
-            ;;
-        #################################################
         # Cleaning switches
         #################################################
         --purge)
