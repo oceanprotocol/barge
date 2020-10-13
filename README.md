@@ -84,7 +84,6 @@ export AQUARIUS_VERSION=v2.0.0
 | `--no-provider`            | Start up Ocean without the `provider` Building Block.                                           |
 | `--no-ganache`             | Start up Ocean without the `ganache` Building Block.                                            |
 | `--no-dashboard`           | Start up Ocean without the `dashboard` Building Block.                                          |
-| `--mongodb`                | Start up Ocean with MongoDB as DB engine for Aquarius instead of Elasticsearch.                 |
 | `--force-pull`             | Force pulling the latest revision of the used Docker images.                                    |
 | `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.        |
 | `--exposeip`               | Binds the components to that specific ip. Example: `./start_ocean.sh --exposeip 192.168.0.1`    |
@@ -96,7 +95,7 @@ Barge consists of a set of building blocks that can be combined to form a local 
 
 ### Aquarius
 
-By default it will start two containers (one for Aquarius and one for its database engine). By default, Barge will use Elasticsearch for its database engine. You can use the `--mongodb` option to use MongoDB instead.
+By default it will start two containers (one for Aquarius and one for its database engine). By default, Barge will use Elasticsearch for its database engine.
 
 This Building Block can be disabled by setting the `--no-aquarius` flag.
 
@@ -104,7 +103,6 @@ This Building Block can be disabled by setting the `--no-aquarius` flag.
 | --------------- | ------------- | -------------------- | --------------------- | ----------------------------------------------------- |
 | `aquarius`      | `5000`        | http://aquarius:5000 | http://localhost:5000 | [Aquarius](https://github.com/oceanprotocol/aquarius) |
 | `elasticsearch` |               |                      |                       | The Elasticsearch used by Aquarius                    |
-| `mongodb`       |               |                      |                       | The MongoDB used by Aquarius                          |
 
 ### Provider
 
