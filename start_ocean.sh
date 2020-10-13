@@ -156,7 +156,7 @@ show_banner
 COMPOSE_FILES=""
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/dashboard.yml"
-COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius_elasticsearch.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/provider.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ganache.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ocean_contracts.yml"
