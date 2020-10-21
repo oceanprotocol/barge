@@ -199,6 +199,10 @@ while :; do
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dashboard.yml/}"
             printf $COLOR_Y'Starting without Dashboard ...\n\n'$COLOR_RESET
             ;;
+        --skip-deploy)
+            export DEPLOY_CONTRACTS=false
+            printf $COLOR_Y'Ocean contracts will not be deployed, the last deployment (if any) will be intact ...\n\n'$COLOR_RESET
+            ;;
         #################################################
         # Cleaning switches
         #################################################
