@@ -7,9 +7,3 @@ networks:
       driver: default
       config:
         - subnet: 172.15.0.1/24
-
-volumes:
-  keeper-node-duero:
-  keeper-node-nile:
-  keeper-node-pacific:
-  secret-store:

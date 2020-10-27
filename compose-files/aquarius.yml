@@ -1,12 +1,25 @@
 version: '3'
 services:
-  aquarius:
-    image: oceanprotocol/aquarius:$AQUARIUS_VERSION
-    ports:
-    - 5000:5000
+  elasticsearch:
+    image: elasticsearch:6.8.3
     networks:
       backend:
-        ipv4_address: 172.15.0.15
+        ipv4_address: 172.15.0.6
+    environment:
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      MAX_MAP_COUNT: "64000"
+      discovery.type: "single-node"
+
+  aquarius:
+    image: oceanprotocol/aquarius:${AQUARIUS_VERSION:-latest}
+    ports:
+      - 5000:5000
+    networks:
+      backend:
+        ipv4_address: 172.15.0.5
+    depends_on:
+      - elasticsearch
+      - ocean-contracts
     environment:
       DB_MODULE: ${DB_MODULE}
       DB_HOSTNAME: ${DB_HOSTNAME}
@@ -18,3 +31,14 @@ services:
       DB_CA_CERTS: ${DB_CA_CERTS}
       DB_CLIENT_KEY: ${DB_CLIENT_KEY}
       DB_CLIENT_CERT: ${DB_CLIENT_CERT}
+      LOG_LEVEL: DEBUG
+      EVENTS_ECIES_PRIVATE_KEY: "0x5d75837394b078ce97bc289fa8d75e21000573520bfa7784a9d28ccaae602bf8"
+      ARTIFACTS_PATH: "/ocean-contracts/artifacts"
+      ADDRESS_FILE: "/ocean-contracts/artifacts/address.json"
+      DEPLOY_CONTRACTS: ${DEPLOY_CONTRACTS}
+      NETWORK_NAME: ${CONTRACTS_NETWORK_NAME}
+      EVENTS_RPC: "http://172.15.0.3:8545"
+      EVENTS_ALLOW: "0"
+      RUN_EVENTS_MONITOR: "1"
+    volumes:
+    - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/

@@ -1,0 +1,24 @@
+version: '3'
+services:
+  ocean-contracts:
+    image: oceanprotocol/ocean-contracts:${CONTRACTS_VERSION:-latest}
+    networks:
+      backend:
+        ipv4_address: 172.15.0.14
+    environment:
+      MNEMONIC: ${GANACHE_MNEMONIC}
+      OWNER_ROLE_ADDRESS: ${CONTRACTS_OWNER_ROLE_ADDRESS}
+      DEPLOY_CONTRACTS: ${DEPLOY_CONTRACTS}
+      LOCAL_CONTRACTS: ${DEPLOY_CONTRACTS}
+      REUSE_DATABASE: ${GANACHE_REUSE_DATABASE}
+      DATABASE_PATH: "/ganache-db"
+      NETWORK_NAME: ${CONTRACTS_NETWORK_NAME}
+      NETWORK_RPC_HOST: ${NETWORK_RPC_HOST}
+      NETWORK_RPC_PORT: ${NETWORK_RPC_PORT}
+      NETWORK_RPC_URL: ${NETWORK_RPC_URL}
+      LOCAL_USER_ID: ${LOCAL_USER_ID}
+      LOCAL_GROUP_ID: ${LOCAL_GROUP_ID}
+    depends_on:
+      - ganache
+    volumes:
+    - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/

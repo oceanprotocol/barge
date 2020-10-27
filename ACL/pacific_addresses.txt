@@ -1,3 +1,0 @@
-Pacific
-Version=address
-latest=0x7FC6520Af3F0800d76A3e2FfE7b838c945ADBFE4

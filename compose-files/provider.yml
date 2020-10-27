@@ -1,0 +1,29 @@
+version: '3'
+services:
+  provider:
+    image: oceanprotocol/provider-py:${PROVIDER_VERSION:-latest}
+    ports:
+      - 8030:8030
+    networks:
+      backend:
+        ipv4_address: 172.15.0.4
+    depends_on:
+    - ocean-contracts
+    environment:
+      ARTIFACTS_PATH: "/ocean-contracts/artifacts"
+      NETWORK_URL: ${NETWORK_RPC_URL}
+      PARITY_URL: ${NETWORK_RPC_URL}
+      PROVIDER_KEY: ${PROVIDER_PRIVATE_KEY}
+      PROVIDER_PRIVATE_KEY: ${PROVIDER_PRIVATE_KEY}
+      PROVIDER_ADDRESS: ${PROVIDER_ADDRESS}
+      PROVIDER_PASSWORD: ${PROVIDER_PASSWORD}
+      PROVIDER_ENCRYPTED_KEY: ${PROVIDER_ENCRYPTED_KEY}
+      LOG_LEVEL: ${PROVIDER_LOG_LEVEL}
+      OCEAN_PROVIDER_URL: 'http://0.0.0.0:8030'
+      OCEAN_PROVIDER_WORKERS: ${PROVIDER_WORKERS}
+      IPFS_GATEWAY: ${PROVIDER_IPFS_GATEWAY}
+      OCEAN_PROVIDER_TIMEOUT: '9000'
+      OPERATOR_SERVICE_URL: ${OPERATOR_SERVICE_URL}
+      AQUARIUS_URL: ${AQUARIUS_URL:-http://172.15.0.5:5000}
+    volumes:
+    - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
