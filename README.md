@@ -61,7 +61,7 @@ The default versions are always a combination of component versions which are co
 
 | Aquarius | Provider | Ganache  | ocean-contracts |
 | -------- | -------- | -------- | --------------- |
-| `vx.x.x` | `vx.x.x` | `latest` |  `test`
+| `v2.1.0` | `v0.4.0` | `latest` |  `V0.5.7`
 
 You can override the Docker image tag used for a particular component by setting its associated environment variable before calling `start_ocean.sh`:
 

@@ -11,7 +11,7 @@ services:
       discovery.type: "single-node"
 
   aquarius:
-    image: oceanprotocol/aquarius:${AQUARIUS_VERSION:-stable}
+    image: oceanprotocol/aquarius:${AQUARIUS_VERSION:-latest}
     ports:
       - 5000:5000
     networks:

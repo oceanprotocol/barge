@@ -1,7 +1,7 @@
 version: '3'
 services:
   ocean-contracts:
-    image: oceanprotocol/ocean-contracts:$CONTRACTS_VERSION
+    image: oceanprotocol/ocean-contracts:${CONTRACTS_VERSION:-latest}
     networks:
       backend:
         ipv4_address: 172.15.0.14
