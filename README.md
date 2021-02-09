@@ -84,9 +84,11 @@ export AQUARIUS_VERSION=v2.0.0
 | `--no-provider`            | Start up Ocean without the `provider` Building Block.                                           |
 | `--no-ganache`             | Start up Ocean without the `ganache` Building Block.                                            |
 | `--no-dashboard`           | Start up Ocean without the `dashboard` Building Block.                                          |
+| `--skip-deploy`            | Start up Ocean without deploying the contracts. Useful when ethereum node already has contracts.|
 | `--force-pull`             | Force pulling the latest revision of the used Docker images.                                    |
 | `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.        |
 | `--exposeip`               | Binds the components to that specific ip. Example: `./start_ocean.sh --exposeip 192.168.0.1`    |
+
 
 
 ## Docker Building Blocks
