@@ -29,7 +29,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 # Default versions of Aquarius, Provider
 
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v2.1.13}
-export PROVIDER_VERSION=${PROVIDER_VERSION:-v0.4.6}
+export PROVIDER_VERSION=${PROVIDER_VERSION:--additionalInput}
 export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v0.5.9}
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
@@ -87,7 +87,7 @@ else
 fi
 
 #export OPERATOR_SERVICE_URL=http://127.0.0.1:8050
-export OPERATOR_SERVICE_URL=https://operator-api.operator.dev-ocean.com
+export OPERATOR_SERVICE_URL=https://nextv.operator.dev-ocean.com/
 
 
 # Add aquarius to /etc/hosts
