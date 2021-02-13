@@ -75,10 +75,11 @@ CHECK_ELASTIC_VM_COUNT=true
 
 
 #Provider
-export PROVIDER_LOG_LEVEL=INFO
+export PROVIDER_LOG_LEVEL=${PROVIDER_LOG_LEVEL:-INFO}
 export PROVIDER_WORKERS=1
 export PROVIDER_IPFS_GATEWAY=https://ipfs.oceanprotocol.com
 export PROVIDER_PRIVATE_KEY=0xfd5c1ccea015b6d663618850824154a3b3fb2882c46cefb05b9a93fea8c3d215
+export PROVIDER2_PRIVATE_KEY=0xc852b55146fd168ec3d392bbd70988c18463efa460a395dede376453aca1180e
 
 if [ ${IP} = "localhost" ]; then
     export AQUARIUS_URI=http://172.15.0.5:5000
@@ -185,6 +186,10 @@ while :; do
         --no-provider)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/provider.yml/}"
             printf $COLOR_Y'Starting without Provider...\n\n'$COLOR_RESET
+            ;;
+	--with-provider2)
+	    COMPOSE_FILES+=" -f ${COMPOSE_DIR}/provider2.yml"
+            printf $COLOR_Y'Starting with a 2nd Provider...\n\n'$COLOR_RESET
             ;;
         --no-ganache)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ganache.yml/}"
