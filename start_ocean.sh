@@ -29,7 +29,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 # Default versions of Aquarius, Provider
 
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v2.1.13}
-export PROVIDER_VERSION=${PROVIDER_VERSION:-additionalInput}
+export PROVIDER_VERSION=${PROVIDER_VERSION:-latest}
 export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v0.5.9}
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
@@ -187,8 +187,8 @@ while :; do
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/provider.yml/}"
             printf $COLOR_Y'Starting without Provider...\n\n'$COLOR_RESET
             ;;
-	--with-provider2)
-	    COMPOSE_FILES+=" -f ${COMPOSE_DIR}/provider2.yml"
+	    --with-provider2)
+	        COMPOSE_FILES+=" -f ${COMPOSE_DIR}/provider2.yml"
             printf $COLOR_Y'Starting with a 2nd Provider...\n\n'$COLOR_RESET
             ;;
         --no-ganache)
