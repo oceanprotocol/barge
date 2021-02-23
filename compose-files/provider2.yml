@@ -24,3 +24,5 @@ services:
     volumes:
     - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
     - provider2db:/ocean-provider/db/
+volumes:
+  provider2db:
