@@ -23,3 +23,6 @@ services:
       AQUARIUS_URL: ${AQUARIUS_URL:-http://172.15.0.5:5000}
     volumes:
     - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
+    - provider2db:/ocean-provider/db/
+volumes:
+  provider2db:
