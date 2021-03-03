@@ -82,6 +82,7 @@ export AQUARIUS_VERSION=v2.0.0
 | -------------------------- | ----------------------------------------------------------------------------------------------- |
 | `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                           |
 | `--no-provider`            | Start up Ocean without the `provider` Building Block.                                           |
+| `--with-provider2`         | Runs a 2nd provider, on port 8031. This is required for ocean.js/ocean.py integration tests. 2nd Provider will use the same image and parameters (log_level, ipfs gateway, compute gateway, etc) as provider1, but has a different private key     |
 | `--no-ganache`             | Start up Ocean without the `ganache` Building Block.                                            |
 | `--no-dashboard`           | Start up Ocean without the `dashboard` Building Block.                                          |
 | `--skip-deploy`            | Start up Ocean without deploying the contracts. Useful when ethereum node already has contracts.|
