@@ -1,7 +1,7 @@
 version: '3'
 services:
   aquarius:
-    image: myaquarius
+    image: oceanprotocol/aquarius:${AQUARIUS_VERSION:-latest}
     ports:
       - 5000:5000
     networks:
