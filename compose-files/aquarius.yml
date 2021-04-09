@@ -1,17 +1,7 @@
 version: '3'
 services:
-  elasticsearch:
-    image: elasticsearch:6.8.3
-    networks:
-      backend:
-        ipv4_address: 172.15.0.6
-    environment:
-      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
-      MAX_MAP_COUNT: "64000"
-      discovery.type: "single-node"
-
   aquarius:
-    image: oceanprotocol/aquarius:${AQUARIUS_VERSION:-latest}
+    image: myaquarius
     ports:
       - 5000:5000
     networks:
