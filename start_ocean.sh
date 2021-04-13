@@ -162,6 +162,7 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/provider.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ganache.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ocean_contracts.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/explorer.yml"
 
 DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
@@ -208,6 +209,11 @@ while :; do
             export DEPLOY_CONTRACTS=false
             printf $COLOR_Y'Ocean contracts will not be deployed, the last deployment (if any) will be intact ...\n\n'$COLOR_RESET
             ;;
+        --no-explorer)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/explorer.yml/}"
+            printf $COLOR_Y'Starting without Blockscout...\n\n'$COLOR_RESET
+            ;;
+
         #################################################
         # Cleaning switches
         #################################################

@@ -1,0 +1,44 @@
+version: '3'
+services:
+  explorer:
+    image: puppeth/blockscout:latest
+    restart: on-failure
+    environment:
+      ETHEREUM_JSONRPC_HTTP_URL: "http://172.15.0.3:8545"
+      ETHEREUM_JSONRPC_TRACE_URL: "http://172.15.0.3:8545"
+      ETHEREUM_JSONRPC_VARIANT: "ganache"
+      ETHEREUM_JSONRPC_WS_URL: "ws://172.15.0.3:8545"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "let-me-in"
+      DATABASE_URL: "postgresql://postgres:let-me-in@postgres:5432/explorer?ssl=false"
+      SECRET_KEY_BASE: "RaWSAyRGSDvieOJ97cqYuIPZq1G26Mui8tz/aDuC10rkPFonGkuT46BVdDx5GYhM"
+      NETWORK: "development"
+      NETWORK_PATH: "/"
+      LINK_TO_OTHER_EXPLORERS: "false" 
+    ports:
+      - "4000:4000"
+    networks:
+      backend:
+        ipv4_address: 172.15.0.20
+    command: bash -c "PGHOST=172.15.0.21 PGUSER=postgres PGDATABASE=postgres PGPASSWORD=let-me-in PGPORT=5432 psql -c 'drop database if exists explorer;' &&  mix do ecto.create, ecto.migrate && mix phx.server" 
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres
+    restart: on-failure
+    user: postgres
+    ports:
+      - '5432:5432'
+    networks:
+      backend:
+        ipv4_address: 172.15.0.21
+    command: ['postgres', '-cshared_preload_libraries=pg_stat_statements']
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "let-me-in"
+      POSTGRES_DB: "explorer"
+    volumes:
+      - data:/var/lib/postgresql/data
+volumes:
+  data:
+    driver: local

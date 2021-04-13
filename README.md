@@ -17,6 +17,7 @@
   - [Ganache](#ganache)
   - [ocean-contracts](#ocean-contracts)
   - [Dashboard](#dashboard)
+  - [Blockscout](#Blockscout)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -78,17 +79,18 @@ export AQUARIUS_VERSION=v2.0.0
 
 ### All Options
 
-| Option                     | Description                                                                                     |
-| -------------------------- | ----------------------------------------------------------------------------------------------- |
-| `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                           |
-| `--no-provider`            | Start up Ocean without the `provider` Building Block.                                           |
-| `--with-provider2`         | Runs a 2nd provider, on port 8031. This is required for ocean.js/ocean.py integration tests. 2nd Provider will use the same image and parameters (log_level, ipfs gateway, compute gateway, etc) as provider1, but has a different private key     |
-| `--no-ganache`             | Start up Ocean without the `ganache` Building Block.                                            |
-| `--no-dashboard`           | Start up Ocean without the `dashboard` Building Block.                                          |
-| `--skip-deploy`            | Start up Ocean without deploying the contracts. Useful when ethereum node already has contracts.|
-| `--force-pull`             | Force pulling the latest revision of the used Docker images.                                    |
-| `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.        |
-| `--exposeip`               | Binds the components to that specific ip. Example: `./start_ocean.sh --exposeip 192.168.0.1`    |
+| Option             | Description                                                  |
+| ------------------ | ------------------------------------------------------------ |
+| `--no-aquarius`    | Start up Ocean without the `aquarius` Building Block.        |
+| `--no-provider`    | Start up Ocean without the `provider` Building Block.        |
+| `--with-provider2` | Runs a 2nd provider, on port 8031. This is required for ocean.js/ocean.py integration tests. 2nd Provider will use the same image and parameters (log_level, ipfs gateway, compute gateway, etc) as provider1, but has a different private key |
+| `--no-ganache`     | Start up Ocean without the `ganache` Building Block.         |
+| `--no-dashboard`   | Start up Ocean without the `dashboard` Building Block.       |
+| `--skip-deploy`    | Start up Ocean without deploying the contracts. Useful when ethereum node already has contracts. |
+| `--force-pull`     | Force pulling the latest revision of the used Docker images. |
+| `--purge`          | Removes the Docker containers, volumes, artifact folder and networks used by the script. |
+| `--exposeip`       | Binds the components to that specific ip. Example: `./start_ocean.sh --exposeip 192.168.0.1` |
+| `--no-explorer`    | Start up Ocean without `blockscout`  Building Block.         |
 
 
 
@@ -143,6 +145,16 @@ This will start a `portainer` dashboard with the following admin credentials and
 | Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
 | `dashboard` | `9000`        | http://dashboard:9000 | http://localhost:9000 | [Portainer](https://github.com/portainer/portainer) |
+
+### Blockscout
+
+This will start an `explorer`  docker container. This Building Block can be disabled by setting the `--no-explorer` flag.
+
+| Hostname   | External Port | Internal URL         | Local URL             | Description                                            |
+| ---------- | ------------- | -------------------- | --------------------- | ------------------------------------------------------ |
+| `explorer` | `4000`        | http://explorer:4000 | http://localhost:4000 | [Blockscout](https://github.com/blockscout/blockscout) |
+
+
 
 ## Contributing
 
