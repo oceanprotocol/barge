@@ -9,12 +9,13 @@
 - [Prerequisites](#prerequisites)
 - [Get Started](#get-started)
 - [Options](#options)
-  - [Component Versions](#component-versions)
+  - [Component Versions](#component-versions-and-exposed-ports)
   - [All Options](#all-options)
 - [Docker Building Blocks](#docker-building-blocks)
   - [Aquarius](#aquarius)
   - [Provider](#provider)
   - [Ganache](#ganache)
+  - [TheGraph](#thegraph)
   - [ocean-contracts](#ocean-contracts)
   - [Dashboard](#dashboard)
 - [Contributing](#contributing)
@@ -55,13 +56,23 @@ This will run the current default versions of [Aquarius](https://github.com/ocea
 
 The startup script comes with a set of options for customizing various things.
 
-### Component Versions
+### Component Versions and exposed ports
 
 The default versions are always a combination of component versions which are considered stable.
 
-| Aquarius | Provider | Ganache  | ocean-contracts |
-| -------- | -------- | -------- | --------------- |
-| `v2.2.8` | `v0.4.9` | `latest` |  `V0.5.9`
+| Component name      | Required by        | Version                           | IP Address      | Ports exposed | 
+| --------------      | ------------------ | --------------------------------- | --------------- | ------------- |
+| ganache             |  ocean-contracts   | latest                            | 172.15.0.3      | 8545 -> 8545  |
+| ocean-contracts     |                    | v0.5.9                            | 172.15.0.14     |               |
+| Aquarius            |                    | v2.2.8                            | 172.15.0.5      | 5000 -> 5000  |
+| Elasticsearch       |  Aquarius          | 6.8.3                             | 172.15.0.6      |               |
+| Provider            |                    | v0.4.9                            | 172.15.0.4      | 8030 -> 8030  |
+| Provider2           |                    | v0.4.9                            | 172.15.0.7      | 8030 -> 8030  |
+| GraphNode           |                    | oceanprotocol/graph-node:latest   | 172.15.0.15     | 9000 -> 8000 ,9001 -> 8001 , 9020 -> 8020,  9030 -> 8030, 9040 -> 8040  |
+| Graphipfs           |                    | ipfs/go-ipfs:v0.4.23              | 172.15.0.16     | 5001 -> 5001  |
+| Graphpgsql          |                    | postgres                          | 172.15.0.7      | 5432 -> 5432  |
+| Dashboard           |                    | portainer/portainer               | 172.15.0.25     | 9100 -> 9000  |
+
 
 You can override the Docker image tag used for a particular component by setting its associated environment variable before calling `start_ocean.sh`:
 
@@ -81,10 +92,12 @@ export AQUARIUS_VERSION=v2.0.0
 | Option                     | Description                                                                                     |
 | -------------------------- | ----------------------------------------------------------------------------------------------- |
 | `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                           |
+| `--no-elasticseach`        | Start up Ocean without the `elasticsearch` Building Block.                                      |
 | `--no-provider`            | Start up Ocean without the `provider` Building Block.                                           |
 | `--with-provider2`         | Runs a 2nd provider, on port 8031. This is required for ocean.js/ocean.py integration tests. 2nd Provider will use the same image and parameters (log_level, ipfs gateway, compute gateway, etc) as provider1, but has a different private key     |
 | `--no-ganache`             | Start up Ocean without the `ganache` Building Block.                                            |
 | `--no-dashboard`           | Start up Ocean without the `dashboard` Building Block.                                          |
+| `--with-thegraph`          | Start up Ocean with graphnode, ipfs & postgresql                                                |
 | `--skip-deploy`            | Start up Ocean without deploying the contracts. Useful when ethereum node already has contracts.|
 | `--force-pull`             | Force pulling the latest revision of the used Docker images.                                    |
 | `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.        |
@@ -111,13 +124,19 @@ This Building Block can be disabled by setting the `--no-aquarius` flag.
 
 | Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `provider`  | `8030`        | http://provider:9000 | http://localhost:8030  |  |
+| `provider`  | `8030`        | http://provider:8030 | http://localhost:8030  |  |
 
 ### Ganache
 
 | Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `ganache`   | `8545`        | http://ganache:9000   | http://localhost:8545   |  |
+| `ganache`   | `8545`        | http://ganache:8545   | http://localhost:8545   |  |
+
+### TheGraph
+
+| Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
+| ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
+| `graphnode` | `9000`        | http://graphnode:9000 | http://localhost:9000 |  |
 
 ### ocean-contracts
 
@@ -142,7 +161,7 @@ This will start a `portainer` dashboard with the following admin credentials and
 
 | Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `dashboard` | `9000`        | http://dashboard:9000 | http://localhost:9000 | [Portainer](https://github.com/portainer/portainer) |
+| `dashboard` | `9100`        | http://dashboard:9100 | http://localhost:9100 | [Portainer](https://github.com/portainer/portainer) |
 
 ## Contributing
 

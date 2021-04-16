@@ -159,6 +159,7 @@ COMPOSE_FILES=""
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/dashboard.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/elasticsearch.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/provider.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ganache.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ocean_contracts.yml"
@@ -191,6 +192,10 @@ while :; do
 	        COMPOSE_FILES+=" -f ${COMPOSE_DIR}/provider2.yml"
             printf $COLOR_Y'Starting with a 2nd Provider...\n\n'$COLOR_RESET
             ;;
+        --with-thegraph)
+	        COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
+            printf $COLOR_Y'Starting with TheGraph...\n\n'$COLOR_RESET
+            ;;
         --no-ganache)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ganache.yml/}"
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ocean_contracts.yml/}"
@@ -200,6 +205,11 @@ while :; do
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}"
             printf $COLOR_Y'Starting without Aquarius...\n\n'$COLOR_RESET
             ;;
+        --no-elasticsearch)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/elasticsearch.yml/}"
+            printf $COLOR_Y'Starting without Elastic search...\n\n'$COLOR_RESET
+            ;;
+
         --no-dashboard)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dashboard.yml/}"
             printf $COLOR_Y'Starting without Dashboard ...\n\n'$COLOR_RESET

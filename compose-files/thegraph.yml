@@ -1,0 +1,52 @@
+version: '3'
+services:
+  graph-node:
+    image: oceanprotocol/graph-node:latest
+    ports:
+      - '9000:8000'
+      - '9001:8001'
+      - '9020:8020'
+      - '9030:8030'
+      - '9040:8040'
+    networks:
+      backend:
+        ipv4_address: 172.15.0.15
+    depends_on:
+      - ipfs
+      - postgres
+      - ocean-contracts
+    environment:
+      postgres_host: 172.15.0.17
+      postgres_user: graph-node
+      postgres_pass: let-me-in
+      postgres_db: graph-node
+      ipfs: '172.15.0.16:5001'
+      ethereum: 'barge:${NETWORK_RPC_URL}'
+      RUST_LOG: info
+  ipfs:
+    image: ipfs/go-ipfs:v0.4.23
+    ports:
+      - '5001:5001'
+    networks:
+      backend:
+        ipv4_address: 172.15.0.16
+    volumes:
+      - graphipfs:/data/ipfs
+  postgres:
+    image: postgres
+    ports:
+      - '5432:5432'
+    networks:
+      backend:
+        ipv4_address: 172.15.0.17
+    command: ['postgres', '-cshared_preload_libraries=pg_stat_statements']
+    environment:
+      POSTGRES_USER: graph-node
+      POSTGRES_PASSWORD: let-me-in
+      POSTGRES_DB: graph-node
+    volumes:
+      - graphpgsql:/var/lib/postgresql/data
+volumes:
+  graphipfs:
+  graphpgsql:
+
