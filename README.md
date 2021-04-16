@@ -70,6 +70,7 @@ The default versions are always a combination of component versions which are co
 | GraphNode           |                    | oceanprotocol/graph-node:latest   | 172.15.0.15     | 9000 -> 8000 ,9001 -> 8001 , 9020 -> 8020,  9030 -> 8030, 9040 -> 8040  |
 | Graphipfs           |                    | ipfs/go-ipfs:v0.4.23              | 172.15.0.16     | 5001 -> 5001  |
 | Graphpgsql          |                    | postgres                          | 172.15.0.7      | 5432 -> 5432  |
+| Dashboard           |                    | portainer/portainer               | 172.15.0.25     | 9100 -> 9000  |
 
 
 You can override the Docker image tag used for a particular component by setting its associated environment variable before calling `start_ocean.sh`:
@@ -159,7 +160,7 @@ This will start a `portainer` dashboard with the following admin credentials and
 
 | Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `dashboard` | `9000`        | http://dashboard:9000 | http://localhost:9000 | [Portainer](https://github.com/portainer/portainer) |
+| `dashboard` | `9100`        | http://dashboard:9100 | http://localhost:9100 | [Portainer](https://github.com/portainer/portainer) |
 
 ## Contributing
 
