@@ -122,13 +122,19 @@ This Building Block can be disabled by setting the `--no-aquarius` flag.
 
 | Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `provider`  | `8030`        | http://provider:9000 | http://localhost:8030  |  |
+| `provider`  | `8030`        | http://provider:8030 | http://localhost:8030  |  |
 
 ### Ganache
 
 | Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `ganache`   | `8545`        | http://ganache:9000   | http://localhost:8545   |  |
+| `ganache`   | `8545`        | http://ganache:8545   | http://localhost:8545   |  |
+
+### TheGraph
+
+| Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
+| ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
+| `graphnode` | `9000`        | http://graphnode:9000 | http://localhost:9000 |  |
 
 ### ocean-contracts
 
