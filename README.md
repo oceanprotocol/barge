@@ -15,6 +15,7 @@
   - [Aquarius](#aquarius)
   - [Provider](#provider)
   - [Ganache](#ganache)
+  - [TheGraph](#thegraph)
   - [ocean-contracts](#ocean-contracts)
   - [Dashboard](#dashboard)
 - [Contributing](#contributing)
