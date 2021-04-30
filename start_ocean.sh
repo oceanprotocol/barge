@@ -30,7 +30,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v2.2.8}
 export PROVIDER_VERSION=${PROVIDER_VERSION:-v0.4.9}
-export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v0.6.0}
+export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v0.5.16}
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
 
@@ -54,7 +54,7 @@ export GANACHE_MNEMONIC=${GANACHE_MNEMONIC:-"taxi music thumb unique chat sand c
 export OCEAN_HOME="${HOME}/.ocean"
 export CONTRACTS_OWNER_ROLE_ADDRESS="${CONTRACTS_OWNER_ROLE_ADDRESS}"
 export DEPLOY_CONTRACTS=true
-export OCEAN_ARTIFACTS_FOLDER="${OCEAN_HOME}/ocean-contracts/ocean_abis"
+export OCEAN_ARTIFACTS_FOLDER="${OCEAN_HOME}/ocean-contracts/artifacts"
 export ADDRESS_FILE="${OCEAN_ARTIFACTS_FOLDER}/address.json"
 echo "export ADDRESS_FILE=${ADDRESS_FILE}"
 # Specify which ethereum client to run or connect to: development
