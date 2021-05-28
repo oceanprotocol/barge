@@ -29,6 +29,8 @@ You need to have the newest versions of:
 
 - Linux or macOS. Windows is not currently supported. If you are on Windows, we recommend running Barge inside a Linux VM. Another option might be to use the [Windows Subsystem for Linux (WSL)](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux).
 - [Docker](https://www.docker.com/get-started)
+  - On Linux, [allow non-root users](https://www.thegeekdiary.com/run-docker-as-a-non-root-user/)
+  - On Windows or MacOS, [increase memory to 4 GB (default is 2 GB)](https://stackoverflow.com/a/44533437)
 - [Docker Compose](https://docs.docker.com/compose/)
 
 ## Get Started
