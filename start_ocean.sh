@@ -31,6 +31,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v2.2.12}
 export PROVIDER_VERSION=${PROVIDER_VERSION:-v0.4.9}
 export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v0.6.2}
+export RBAC_VERSION=${RBAC_VERSION:-next}
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
 
@@ -191,6 +192,10 @@ while :; do
 	    --with-provider2)
 	        COMPOSE_FILES+=" -f ${COMPOSE_DIR}/provider2.yml"
             printf $COLOR_Y'Starting with a 2nd Provider...\n\n'$COLOR_RESET
+            ;;
+        --with-rbac)
+	        COMPOSE_FILES+=" -f ${COMPOSE_DIR}/rbac.yml"
+            printf $COLOR_Y'Starting with RBAC Server...\n\n'$COLOR_RESET
             ;;
         --with-thegraph)
 	        COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
