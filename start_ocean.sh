@@ -89,7 +89,7 @@ else
 fi
 
 #export OPERATOR_SERVICE_URL=http://127.0.0.1:8050
-export OPERATOR_SERVICE_URL=https://c2d-dev.operator.oceanprotocol.com/
+export OPERATOR_SERVICE_URL=https://nextv.operator.oceanprotocol.com/
 
 
 # Add aquarius to /etc/hosts
