@@ -29,6 +29,6 @@ services:
       EVENTS_RPC: "http://172.15.0.3:8545"
       EVENTS_ALLOW: "0"
       RUN_EVENTS_MONITOR: "1"
-      RBAC_SERVER_URL: "http://localhost:3000"
+      RBAC_SERVER_URL: "http://172.15.0.8:3000"
     volumes:
     - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
