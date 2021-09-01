@@ -11,7 +11,6 @@ services:
       - elasticsearch
       - ocean-contracts
     environment:
-      DB_MODULE: ${DB_MODULE}
       DB_HOSTNAME: ${DB_HOSTNAME}
       DB_PORT: ${DB_PORT}
       DB_USERNAME: ${DB_USERNAME}
