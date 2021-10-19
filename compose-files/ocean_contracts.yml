@@ -18,6 +18,7 @@ services:
       NETWORK_RPC_URL: ${NETWORK_RPC_URL}
       LOCAL_USER_ID: ${LOCAL_USER_ID}
       LOCAL_GROUP_ID: ${LOCAL_GROUP_ID}
+      ADDRESS_FILE: /ocean-contracts/addresses/address.json
     depends_on:
       - ganache
     volumes:
