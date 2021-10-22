@@ -28,8 +28,8 @@ COMPOSE_DIR="${DIR}/compose-files"
 
 # Default versions of Aquarius, Provider
 
-export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v2.2.12}
-export PROVIDER_VERSION=${PROVIDER_VERSION:-v0.4.12}
+export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v4main}
+export PROVIDER_VERSION=${PROVIDER_VERSION:-v4main}
 export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v4main}
 export RBAC_VERSION=${RBAC_VERSION:-next}
 export PROJECT_NAME="ocean"
