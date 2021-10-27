@@ -56,6 +56,7 @@ export OCEAN_HOME="${HOME}/.ocean"
 export CONTRACTS_OWNER_ROLE_ADDRESS="${CONTRACTS_OWNER_ROLE_ADDRESS}"
 export DEPLOY_CONTRACTS=true
 export OCEAN_ARTIFACTS_FOLDER="${OCEAN_HOME}/ocean-contracts/artifacts"
+mkdir -p ${OCEAN_ARTIFACTS_FOLDER}
 export ADDRESS_FILE="${OCEAN_ARTIFACTS_FOLDER}/address.json"
 echo "export ADDRESS_FILE=${ADDRESS_FILE}"
 # Specify which ethereum client to run or connect to: development
