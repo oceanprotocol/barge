@@ -243,7 +243,7 @@ while :; do
             ;;
         *)
             [ ${CHECK_ELASTIC_VM_COUNT} = "true" ] && check_max_map_count
-            printf $COLOR_Y'Starting Ocean V3...\n\n'$COLOR_RESET
+            printf $COLOR_Y'Starting Ocean V4...\n\n'$COLOR_RESET
             [ ${DEPLOY_CONTRACTS} = "true" ] && clean_local_contracts
             [ ${FORCEPULL} = "true" ] && eval docker-compose "$DOCKER_COMPOSE_EXTRA_OPTS" --project-name=$PROJECT_NAME "$COMPOSE_FILES" pull
             eval docker-compose "$DOCKER_COMPOSE_EXTRA_OPTS" --project-name=$PROJECT_NAME "$COMPOSE_FILES" up --remove-orphans
