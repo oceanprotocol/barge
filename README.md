@@ -190,6 +190,7 @@ The following addresses are preconfigured for testing:  (first 10 addresses from
 | 0x529043886F21D9bc1AE0feDb751e34265a246e47 | ["consumer"]                    |
 | 0xe08A1dAe983BC701D05E492DB80e0144f8f4b909 | ["publisher"]                   |
 | 0xbcE5A3468386C64507D30136685A99cFD5603135 | ["consumer","publisher"]        |
+| 0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e | ["user","consumer"]             |
 
 The following addresses are pre-configured with user profiles:
 
@@ -205,6 +206,7 @@ The following addresses are pre-configured with user profiles:
 | 0x529043886F21D9bc1AE0feDb751e34265a246e47 | "oceanprotocol-test.com" | "publisher@oceanprotocol-test.com" | ["validated", "publisher", "user"] |
 | 0xe08A1dAe983BC701D05E492DB80e0144f8f4b909 | "oceanprotocol-test.com" | "emptyuser@oceanprotocol-test.com" | []                                 |
 | 0xbcE5A3468386C64507D30136685A99cFD5603135 | "oceanprotocol-test.com" | "consumer@oceanprotocol-test.com"  | ["validated", "consumer", "user"]  |
+| 0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e | "oceanprotocol.com"      | "alice-test@oceanprotocol.com"     | ["validated", "consumer", "user"]  |
       
 ## Contributing
 
