@@ -181,7 +181,7 @@ The following addresses are preconfigured for testing:  (first 10 addresses from
 | Address                                    |  Roles                          |
 | -----------------------------------------  | ------------------------------- |
 | 0xe2DD09d719Da89e5a3D0F2549c7E24566e947260 | ["user","publisher","consumer"] |
-| 0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e | ["user","publisher","consumer"] |
+| 0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e | ["user","consumer"] |
 | 0xA78deb2Fa79463945C247991075E2a0e98Ba7A09 | ["user","publisher","consumer"] |
 | 0x02354A1F160A3fd7ac8b02ee91F04104440B28E7 | ["user","publisher","consumer"] |
 | 0xe17D2A07EFD5b112F4d675ea2d122ddb145d117B | ["user","publisher","consumer"] |
@@ -190,14 +190,13 @@ The following addresses are preconfigured for testing:  (first 10 addresses from
 | 0x529043886F21D9bc1AE0feDb751e34265a246e47 | ["consumer"]                    |
 | 0xe08A1dAe983BC701D05E492DB80e0144f8f4b909 | ["publisher"]                   |
 | 0xbcE5A3468386C64507D30136685A99cFD5603135 | ["consumer","publisher"]        |
-| 0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e | ["user","consumer"]             |
 
 The following addresses are pre-configured with user profiles:
 
 | Address                                    |  Domain                  |  Email                             | User Roles                         |
 | -----------------------------------------  | -------------------------|------------------------------------|------------------------------------|
-| 0xe2DD09d719Da89e5a3D0F2549c7E24566e947260 | "ocean.com"              | "emptyuser@ocean.com"              | ["consumer", "validated", "user"]  |
-| 0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e | "oceanprotocol.com"      | "emptyuser@oceanprotocol.com"      | []                                 |
+| 0xe2DD09d719Da89e5a3D0F2549c7E24566e947260 | "ocean.com"              | "emptyuser@ocean.com"              | []                                 |
+| 0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e | "oceanprotocol.com"      | "alice-test@oceanprotocol.com"     | ["validated", "consumer", "user"]  |
 | 0xA78deb2Fa79463945C247991075E2a0e98Ba7A09 | "oceanprotocol.com"      | "user@oceanprotocol.com"           | ["validated", "user"]              |
 | 0x02354A1F160A3fd7ac8b02ee91F04104440B28E7 | "oceanprotocol.com"      | "consumer@oceanprotocol.com"       | ["consumer", "validated", "user"]  |
 | 0xe17D2A07EFD5b112F4d675ea2d122ddb145d117B | "oceanprotocol.com"      | "admin@oceanprotocol.com"          | ["validated", "user", "admin"]     |
@@ -206,7 +205,6 @@ The following addresses are pre-configured with user profiles:
 | 0x529043886F21D9bc1AE0feDb751e34265a246e47 | "oceanprotocol-test.com" | "publisher@oceanprotocol-test.com" | ["validated", "publisher", "user"] |
 | 0xe08A1dAe983BC701D05E492DB80e0144f8f4b909 | "oceanprotocol-test.com" | "emptyuser@oceanprotocol-test.com" | []                                 |
 | 0xbcE5A3468386C64507D30136685A99cFD5603135 | "oceanprotocol-test.com" | "consumer@oceanprotocol-test.com"  | ["validated", "consumer", "user"]  |
-| 0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e | "oceanprotocol.com"      | "alice-test@oceanprotocol.com"     | ["validated", "consumer", "user"]  |
       
 ## Contributing
 
