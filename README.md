@@ -62,7 +62,7 @@ The startup script comes with a set of options for customizing various things.
 
 The default versions are always a combination of component versions which are considered stable.
 
-| Component name      | Required by        | Version                           | IP Address      | Ports exposed | 
+| Component name      | Required by        | Version                           | IP Address      | Ports exposed |
 | --------------      | ------------------ | --------------------------------- | --------------- | ------------- |
 | ganache             |  ocean-contracts   | latest                            | 172.15.0.3      | 8545 -> 8545  |
 | ocean-contracts     |                    | v0.6.7                            | 172.15.0.14     |               |
@@ -75,8 +75,6 @@ The default versions are always a combination of component versions which are co
 | Graphipfs           |                    | ipfs/go-ipfs:v0.4.23              | 172.15.0.16     | 5001 -> 5001  |
 | Graphpgsql          |                    | postgres                          | 172.15.0.7      | 5432 -> 5432  |
 | Dashboard           |                    | portainer/portainer               | 172.15.0.25     | 9100 -> 9000  |
-
-
 
 You can override the Docker image tag used for a particular component by setting its associated environment variable before calling `start_ocean.sh`:
 
@@ -109,8 +107,6 @@ export AQUARIUS_VERSION=v2.0.0
 | `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.        |
 | `--exposeip`               | Binds the components to that specific ip. Example: `./start_ocean.sh --exposeip 192.168.0.1`    |
 
-
-
 ## Docker Building Blocks
 
 Barge consists of a set of building blocks that can be combined to form a local test environment. By default all building blocks will be started by the `start_ocean.sh` script.
@@ -123,32 +119,32 @@ This Building Block can be disabled by setting the `--no-aquarius` flag.
 
 | Hostname        | External Port | Internal URL         | Local URL             | Description                                           |
 | --------------- | ------------- | -------------------- | --------------------- | ----------------------------------------------------- |
-| `aquarius`      | `5000`        | http://aquarius:5000 | http://localhost:5000 | [Aquarius](https://github.com/oceanprotocol/aquarius) |
+| `aquarius`      | `5000`        | <http://aquarius:5000> | <http://localhost:5000> | [Aquarius](https://github.com/oceanprotocol/aquarius) |
 | `elasticsearch` |               |                      |                       | The Elasticsearch used by Aquarius                    |
 
 ### Provider
 
 | Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `provider`  | `8030`        | http://provider:8030 | http://localhost:8030  |  |
+| `provider`  | `8030`        | <http://provider:8030> | <http://localhost:8030>  |  |
 
 ### Ganache
 
 | Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `ganache`   | `8545`        | http://ganache:8545   | http://localhost:8545   |  |
+| `ganache`   | `8545`        | <http://ganache:8545>   | <http://localhost:8545>   |  |
 
 ### TheGraph
 
 | Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `graphnode` | `9000`        | http://graphnode:9000 | http://localhost:9000 |  |
+| `graphnode` | `9000`        | <http://graphnode:9000> | <http://localhost:9000> |  |
 
 ### ocean-contracts
 
-* Deploy all smart contracts from the `ocean-contracts` repo
-* Export artifacts files (.json) to default shared folder between all containers
-* Create address file (address.json) that has the address of each deployed smart contract that is required by the ocean library. This file is saved to the same folder with the artifacts files
+- Deploy all smart contracts from the `ocean-contracts` repo
+- Export artifacts files (.json) to default shared folder between all containers
+- Create address file (address.json) that has the address of each deployed smart contract that is required by the ocean library. This file is saved to the same folder with the artifacts files
 
 The accounts can be accessed with this seed phrase:
 
@@ -167,45 +163,44 @@ This will start a `portainer` dashboard with the following admin credentials and
 
 | Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `dashboard` | `9100`        | http://dashboard:9100 | http://localhost:9100 | [Portainer](https://github.com/portainer/portainer) |
+| `dashboard` | `9100`        | <http://dashboard:9100> | <http://localhost:9100> | [Portainer](https://github.com/portainer/portainer) |
 
 ### RBAC Server
 
 | Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `rbac`      | `3000`        | http://rbac:3000      | http://localhost:3000 |                                                     |
-
+| `rbac`      | `3000`        | <http://rbac:3000>      | <http://localhost:3000> |                                                     |
 
 The following addresses are preconfigured for testing:  (first 10 addresses from the default mnemonic)
 
-| Address                                    |  Roles                          |
-| -----------------------------------------  | ------------------------------- |
-| 0xe2DD09d719Da89e5a3D0F2549c7E24566e947260 | ["user","publisher","consumer"] |
-| 0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e | ["user","consumer"] |
-| 0xA78deb2Fa79463945C247991075E2a0e98Ba7A09 | ["user","publisher","consumer"] |
-| 0x02354A1F160A3fd7ac8b02ee91F04104440B28E7 | ["user","publisher","consumer"] |
-| 0xe17D2A07EFD5b112F4d675ea2d122ddb145d117B | ["user","publisher","consumer"] |
-| 0xA32C84D2B44C041F3a56afC07a33f8AC5BF1A071 | ["user","publisher","consumer"] |
-| 0xFF3fE9eb218EAe9ae1eF9cC6C4db238B770B65CC | ["user"]                        |
-| 0x529043886F21D9bc1AE0feDb751e34265a246e47 | ["consumer"]                    |
-| 0xe08A1dAe983BC701D05E492DB80e0144f8f4b909 | ["publisher"]                   |
-| 0xbcE5A3468386C64507D30136685A99cFD5603135 | ["consumer","publisher"]        |
+| Address                                    |  Roles                                   |
+| -----------------------------------------  | -----------------------------------------|
+| 0xe2DD09d719Da89e5a3D0F2549c7E24566e947260 | ["user","consumer","publisher"]          |
+| 0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e | ["user","consumer","publisher"]          |
+| 0xA78deb2Fa79463945C247991075E2a0e98Ba7A09 | ["user","consumer","publisher"]          |
+| 0x02354A1F160A3fd7ac8b02ee91F04104440B28E7 | ["user","consumer","publisher"]          |
+| 0xe17D2A07EFD5b112F4d675ea2d122ddb145d117B | ["user","consumer","publisher"]          |
+| 0xA32C84D2B44C041F3a56afC07a33f8AC5BF1A071 | ["user","consumer","publisher","admin"]  |
+| 0xFF3fE9eb218EAe9ae1eF9cC6C4db238B770B65CC | ["user"]                                 |
+| 0x529043886F21D9bc1AE0feDb751e34265a246e47 | ["consumer"]                             |
+| 0xe08A1dAe983BC701D05E492DB80e0144f8f4b909 | ["consumer","publisher"]                 |
+| 0xbcE5A3468386C64507D30136685A99cFD5603135 | []                                       |
 
 The following addresses are pre-configured with user profiles:
 
-| Address                                    |  Domain                  |  Email                             | User Roles                         |
-| -----------------------------------------  | -------------------------|------------------------------------|------------------------------------|
-| 0xe2DD09d719Da89e5a3D0F2549c7E24566e947260 | "ocean.com"              | "emptyuser@ocean.com"              | []                                 |
-| 0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e | "oceanprotocol.com"      | "alice-test@oceanprotocol.com"     | ["validated", "consumer", "user"]  |
-| 0xA78deb2Fa79463945C247991075E2a0e98Ba7A09 | "oceanprotocol.com"      | "user@oceanprotocol.com"           | ["validated", "user"]              |
-| 0x02354A1F160A3fd7ac8b02ee91F04104440B28E7 | "oceanprotocol.com"      | "consumer@oceanprotocol.com"       | ["consumer", "validated", "user"]  |
-| 0xe17D2A07EFD5b112F4d675ea2d122ddb145d117B | "oceanprotocol.com"      | "admin@oceanprotocol.com"          | ["validated", "user", "admin"]     |
-| 0xA32C84D2B44C041F3a56afC07a33f8AC5BF1A071 | "oceanprotocol.com"      | "publisher@oceanprotocol.com"      | ["validated", "publisher", "user"] |
-| 0xFF3fE9eb218EAe9ae1eF9cC6C4db238B770B65CC | "oceanprotocol-test.com" | "admin@oceanprotocol-test.com"     | ["validated", "user", "admin"]     |
-| 0x529043886F21D9bc1AE0feDb751e34265a246e47 | "oceanprotocol-test.com" | "publisher@oceanprotocol-test.com" | ["validated", "publisher", "user"] |
-| 0xe08A1dAe983BC701D05E492DB80e0144f8f4b909 | "oceanprotocol-test.com" | "emptyuser@oceanprotocol-test.com" | []                                 |
-| 0xbcE5A3468386C64507D30136685A99cFD5603135 | "oceanprotocol-test.com" | "consumer@oceanprotocol-test.com"  | ["validated", "consumer", "user"]  |
-      
+| Address                                    |  Domain                  |  Email                             | User Roles                                         |
+| -----------------------------------------  | -------------------------|------------------------------------|----------------------------------------------------|
+| 0xe2DD09d719Da89e5a3D0F2549c7E24566e947260 | "ocean.com"              | "publisher1@ocean.com"             | ["validated","user","consumer","publisher"]        |
+| 0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e | "oceanprotocol.com"      | "publisher2@oceanprotocol.com"     | ["validated","user","consumer","publisher"]        |
+| 0xA78deb2Fa79463945C247991075E2a0e98Ba7A09 | "oceanprotocol.com"      | "publisher3@oceanprotocol.com"     | ["validated","user","consumer","publisher"]        |
+| 0x02354A1F160A3fd7ac8b02ee91F04104440B28E7 | "oceanprotocol.com"      | "publisher4@oceanprotocol.com"     | ["validated","user","consumer","publisher"]        |
+| 0xe17D2A07EFD5b112F4d675ea2d122ddb145d117B | "oceanprotocol.com"      | "publisher5@oceanprotocol.com"     | ["validated","user","consumer","publisher"]        |
+| 0xA32C84D2B44C041F3a56afC07a33f8AC5BF1A071 | "oceanprotocol.com"      | "admin@oceanprotocol.com"          | ["validated","user","consumer","publisher","admin"]|
+| 0xFF3fE9eb218EAe9ae1eF9cC6C4db238B770B65CC | "oceanprotocol-test.com" | "user@oceanprotocol-test.com"      | ["validated","user"]                               |
+| 0x529043886F21D9bc1AE0feDb751e34265a246e47 | "oceanprotocol-test.com" | "consumer@oceanprotocol-test.com"  | ["validated","user","consumer"]                    |
+| 0xe08A1dAe983BC701D05E492DB80e0144f8f4b909 | "oceanprotocol-test.com" | "publisher6@oceanprotocol-test.com"| ["validated","user","publisher"]                   |
+| 0xbcE5A3468386C64507D30136685A99cFD5603135 | "oceanprotocol-test.com" | "emptyuser@oceanprotocol-test.com" | ["validated","consumer","user"]                    |
+
 ## Contributing
 
 See the page titled "[Ways to Contribute](https://docs.oceanprotocol.com/concepts/contributing/)" in the Ocean Protocol documentation.
