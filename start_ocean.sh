@@ -30,7 +30,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v4main}
 export PROVIDER_VERSION=${PROVIDER_VERSION:-v4main}
-export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v4main}
+export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v4main_postaudit}
 export RBAC_VERSION=${RBAC_VERSION:-next}
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
