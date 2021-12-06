@@ -1,0 +1,15 @@
+version: '3'
+services:
+  redis:
+    image: bitnami/redis:latest
+    ports:
+      - 6379:6379
+    networks:
+      backend:
+        ipv4_address: 172.15.0.18
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+    - redis1vol:/bitnami/redis/data
+volumes:
+  redis1vol:

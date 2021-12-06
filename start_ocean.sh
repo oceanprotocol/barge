@@ -160,6 +160,7 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/dashboard.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/elasticsearch.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/provider.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/redis.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ganache.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ocean_contracts.yml"
 
@@ -185,6 +186,7 @@ while :; do
         #################################################
         --no-provider)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/provider.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/redis.yml/}"
             printf $COLOR_Y'Starting without Provider...\n\n'$COLOR_RESET
             ;;
 	    --with-provider2)
