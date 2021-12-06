@@ -75,6 +75,8 @@ The default versions are always a combination of component versions which are co
 | Graphipfs           |                    | ipfs/go-ipfs:v0.4.23              | 172.15.0.16     | 5001 -> 5001  |
 | Graphpgsql          |                    | postgres                          | 172.15.0.7      | 5432 -> 5432  |
 | Dashboard           |                    | portainer/portainer               | 172.15.0.25     | 9100 -> 9000  |
+| Redis               |                    | bitnami/redis:latest              | 172.15.0.18     | 6379 -> 6379  |
+
 
 
 
