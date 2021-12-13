@@ -3,7 +3,7 @@ services:
   aquarius:
     image: oceanprotocol/aquarius:${AQUARIUS_VERSION:-latest}
     ports:
-      - 5000:5000
+      - 5110:5000
     networks:
       backend:
         ipv4_address: 172.15.0.5

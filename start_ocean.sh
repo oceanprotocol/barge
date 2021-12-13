@@ -84,9 +84,9 @@ export PROVIDER_PRIVATE_KEY=0xfd5c1ccea015b6d663618850824154a3b3fb2882c46cefb05b
 export PROVIDER2_PRIVATE_KEY=0xc852b55146fd168ec3d392bbd70988c18463efa460a395dede376453aca1180e
 
 if [ ${IP} = "localhost" ]; then
-    export AQUARIUS_URI=http://172.15.0.5:5000
+    export AQUARIUS_URI=http://172.15.0.5:5110
 else
-    export AQUARIUS_URI=http://${IP}:5000
+    export AQUARIUS_URI=http://${IP}:5110
 fi
 
 #export OPERATOR_SERVICE_URL=http://127.0.0.1:8050

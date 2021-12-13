@@ -9,7 +9,7 @@
 - [Prerequisites](#prerequisites)
 - [Get Started](#get-started)
 - [Options](#options)
-  - [Component Versions](#component-versions-and-exposed-ports)
+  - [Component Versions and exposed ports](#component-versions-and-exposed-ports)
   - [All Options](#all-options)
 - [Docker Building Blocks](#docker-building-blocks)
   - [Aquarius](#aquarius)
@@ -18,6 +18,7 @@
   - [TheGraph](#thegraph)
   - [ocean-contracts](#ocean-contracts)
   - [Dashboard](#dashboard)
+  - [RBAC Server](#rbac-server)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -62,19 +63,19 @@ The startup script comes with a set of options for customizing various things.
 
 The default versions are always a combination of component versions which are considered stable.
 
-| Component name      | Required by        | Version                           | IP Address      | Ports exposed | 
+| Component name      | Required by        | Version                           | IP Address      | Ports exposed |
 | --------------      | ------------------ | --------------------------------- | --------------- | ------------- |
 | ganache             |  ocean-contracts   | latest                            | 172.15.0.3      | 8545 -> 8545  |
 | ocean-contracts     |                    | v0.6.4                            | 172.15.0.14     |               |
-| Aquarius            |                    | v2.2.12                           | 172.15.0.5      | 5000 -> 5000  |
+| Aquarius            |                    | v2.2.12                           | 172.15.0.5      | 5110 -> 5000  |
 | Elasticsearch       |  Aquarius          | 6.8.3                             | 172.15.0.6      |               |
 | Provider            |                    | v0.4.12                            | 172.15.0.4      | 8030 -> 8030  |
 | Provider2           |                    | v0.4.12                            | 172.15.0.7      | 8030 -> 8030  |
-| RBAC Server         |                    | main                              | 172.15.0.8      | 3000 -> 3000  |
-| GraphNode           |                    | oceanprotocol/graph-node:latest   | 172.15.0.15     | 9000 -> 8000 ,9001 -> 8001 , 9020 -> 8020,  9030 -> 8030, 9040 -> 8040  |
-| Graphipfs           |                    | ipfs/go-ipfs:v0.4.23              | 172.15.0.16     | 5001 -> 5001  |
+| RBAC Server         |                    | main                              | 172.15.0.8      | 3301 -> 3000  |
+| GraphNode           |                    | oceanprotocol/graph-node:latest   | 172.15.0.15     | 9003 -> 8000 ,9004 -> 8001 , 9012 -> 8020,  9030 -> 8030, 9040 -> 8040  |
+| Graphipfs           |                    | ipfs/go-ipfs:v0.4.23              | 172.15.0.16     | 5040 -> 5001  |
 | Graphpgsql          |                    | postgres                          | 172.15.0.7      | 5432 -> 5432  |
-| Dashboard           |                    | portainer/portainer               | 172.15.0.25     | 9100 -> 9000  |
+| Dashboard           |                    | portainer/portainer               | 172.15.0.25     | 9110 -> 9000  |
 | Redis               |                    | bitnami/redis:latest              | 172.15.0.18     | 6379 -> 6379  |
 
 
@@ -125,7 +126,7 @@ This Building Block can be disabled by setting the `--no-aquarius` flag.
 
 | Hostname        | External Port | Internal URL         | Local URL             | Description                                           |
 | --------------- | ------------- | -------------------- | --------------------- | ----------------------------------------------------- |
-| `aquarius`      | `5000`        | http://aquarius:5000 | http://localhost:5000 | [Aquarius](https://github.com/oceanprotocol/aquarius) |
+| `aquarius`      | `5110`        | http://aquarius:5110 | http://localhost:5110 | [Aquarius](https://github.com/oceanprotocol/aquarius) |
 | `elasticsearch` |               |                      |                       | The Elasticsearch used by Aquarius                    |
 
 ### Provider
@@ -144,7 +145,7 @@ This Building Block can be disabled by setting the `--no-aquarius` flag.
 
 | Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `graphnode` | `9000`        | http://graphnode:9000 | http://localhost:9000 |  |
+| `graphnode` | `9003`        | http://graphnode:9003 | http://localhost:9003 |  |
 
 ### ocean-contracts
 
@@ -169,13 +170,13 @@ This will start a `portainer` dashboard with the following admin credentials and
 
 | Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `dashboard` | `9100`        | http://dashboard:9100 | http://localhost:9100 | [Portainer](https://github.com/portainer/portainer) |
+| `dashboard` | `9110`        | http://dashboard:9110 | http://localhost:9110 | [Portainer](https://github.com/portainer/portainer) |
 
 ### RBAC Server
 
 | Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `rbac`      | `3000`        | http://rbac:3000      | http://localhost:3000 |                                                     |
+| `rbac`      | `3301`        | http://rbac:3301      | http://localhost:3301 |                                                     |
 
 
 The following addresses are preconfigured for testing:  (first 10 addresses from the default mnemonic)

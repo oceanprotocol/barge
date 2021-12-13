@@ -3,9 +3,9 @@ services:
   graph-node:
     image: oceanprotocol/graph-node:latest
     ports:
-      - '9000:8000'
-      - '9001:8001'
-      - '9020:8020'
+      - '9003:8000'
+      - '9004:8001'
+      - '9012:8020'
       - '9030:8030'
       - '9040:8040'
     networks:
@@ -20,13 +20,13 @@ services:
       postgres_user: graph-node
       postgres_pass: let-me-in
       postgres_db: graph-node
-      ipfs: '172.15.0.16:5001'
+      ipfs: '172.15.0.16:5040'
       ethereum: 'barge:${NETWORK_RPC_URL}'
       RUST_LOG: info
   ipfs:
     image: ipfs/go-ipfs:v0.4.23
     ports:
-      - '5001:5001'
+      - '5040:5001'
     networks:
       backend:
         ipv4_address: 172.15.0.16

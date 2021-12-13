@@ -21,7 +21,7 @@ services:
       IPFS_GATEWAY: ${PROVIDER_IPFS_GATEWAY}
       OCEAN_PROVIDER_TIMEOUT: '9000'
       OPERATOR_SERVICE_URL: ${OPERATOR_SERVICE_URL}
-      AQUARIUS_URL: ${AQUARIUS_URL:-http://172.15.0.5:5000}
+      AQUARIUS_URL: ${AQUARIUS_URL:-http://172.15.0.5:5110}
     volumes:
     - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
     - provider2db:/ocean-provider/db/
