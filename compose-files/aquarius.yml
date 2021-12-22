@@ -22,7 +22,7 @@ services:
       DB_CLIENT_KEY: ${DB_CLIENT_KEY}
       DB_CLIENT_CERT: ${DB_CLIENT_CERT}
       LOG_LEVEL: DEBUG
-      EVENTS_ECIES_PRIVATE_KEY: "0x5d75837394b078ce97bc289fa8d75e21000573520bfa7784a9d28ccaae602bf8"
+      PRIVATE_KEY: "0x5d75837394b078ce97bc289fa8d75e21000573520bfa7784a9d28ccaae602bf8"
       ARTIFACTS_PATH: "/ocean-contracts/artifacts"
       ADDRESS_FILE: "/ocean-contracts/artifacts/address.json"
       DEPLOY_CONTRACTS: ${DEPLOY_CONTRACTS}
