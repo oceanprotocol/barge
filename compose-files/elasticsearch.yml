@@ -9,3 +9,4 @@ services:
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
       MAX_MAP_COUNT: "64000"
       discovery.type: "single-node"
+      cluster.routing.allocation.disk.threshold_enabled: 'false'
