@@ -33,7 +33,7 @@ export PROVIDER_VERSION=${PROVIDER_VERSION:-v4main}
 export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v4main_postaudit}
 export RBAC_VERSION=${RBAC_VERSION:-next}
 export PROJECT_NAME="ocean"
-export FORCEPULL="false"
+export FORCEPULL="true"
 
 # Export User UID and GID
 export LOCAL_USER_ID=$(id -u)
