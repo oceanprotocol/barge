@@ -33,7 +33,7 @@ export PROVIDER_VERSION=${PROVIDER_VERSION:-v4main}
 export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v4main_postaudit}
 export RBAC_VERSION=${RBAC_VERSION:-next}
 export PROJECT_NAME="ocean"
-export FORCEPULL="true"
+export FORCEPULL="false"
 
 # Export User UID and GID
 export LOCAL_USER_ID=$(id -u)
@@ -57,8 +57,16 @@ export CONTRACTS_OWNER_ROLE_ADDRESS="${CONTRACTS_OWNER_ROLE_ADDRESS}"
 export DEPLOY_CONTRACTS=true
 export OCEAN_ARTIFACTS_FOLDER="${OCEAN_HOME}/ocean-contracts/artifacts"
 mkdir -p ${OCEAN_ARTIFACTS_FOLDER}
+export OCEAN_C2D_FOLDER="${OCEAN_HOME}/ocean-c2d/"
+mkdir -p ${OCEAN_C2D_FOLDER}
 export ADDRESS_FILE="${OCEAN_ARTIFACTS_FOLDER}/address.json"
 echo "export ADDRESS_FILE=${ADDRESS_FILE}"
+
+#certs folder
+export OCEAN_CERTS_FOLDER="${OCEAN_HOME}/ocean-certs/"
+mkdir -p ${OCEAN_CERTS_FOLDER}
+# copy certs
+cp -r ./certs/* ${OCEAN_CERTS_FOLDER}
 # Specify which ethereum client to run or connect to: development
 export CONTRACTS_NETWORK_NAME="development"
 
@@ -75,7 +83,8 @@ export DB_CLIENT_KEY=""
 export DB_CLIENT_CERT=""
 CHECK_ELASTIC_VM_COUNT=true
 
-
+export IPFS_GATEWAY=http://172.15.0.16:5001
+export IPFS_HTTP_GATEWAY=http://172.15.0.16:8080
 #Provider
 export PROVIDER_LOG_LEVEL=${PROVIDER_LOG_LEVEL:-INFO}
 export PROVIDER_WORKERS=10
@@ -161,6 +170,7 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/network_volumes.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/dashboard.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/aquarius.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/elasticsearch.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ipfs.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/provider.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/redis.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ganache.yml"
@@ -195,12 +205,25 @@ while :; do
 	        COMPOSE_FILES+=" -f ${COMPOSE_DIR}/provider2.yml"
             printf $COLOR_Y'Starting with a 2nd Provider...\n\n'$COLOR_RESET
             ;;
+        --with-registry)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/registry.yml"
+            printf $COLOR_Y'Starting with Registry...\n\n'$COLOR_RESET
+            ;;
+        --with-c2d)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/registry.yml"
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/c2d.yml"
+            printf $COLOR_Y'Starting with C2D...\n\n'$COLOR_RESET
+            ;;
         --with-rbac)
 	        COMPOSE_FILES+=" -f ${COMPOSE_DIR}/rbac.yml"
             printf $COLOR_Y'Starting with RBAC Server...\n\n'$COLOR_RESET
             ;;
+        --no-ipfs)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ipfs.yml/}"
+	        printf $COLOR_Y'Starting without IPFS...\n\n'$COLOR_RESET
+            ;;
         --with-thegraph)
-	        COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
             printf $COLOR_Y'Starting with TheGraph...\n\n'$COLOR_RESET
             ;;
         --no-ganache)

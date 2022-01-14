@@ -1,0 +1,15 @@
+version: '3'
+services:
+  ipfs:
+    image: ipfs/go-ipfs:v0.4.23
+    ports:
+      - '5001:5001'
+      - '5005:8080'
+    networks:
+      backend:
+        ipv4_address: 172.15.0.16
+    volumes:
+      - graphipfs:/data/ipfs
+volumes:
+  graphipfs:
+

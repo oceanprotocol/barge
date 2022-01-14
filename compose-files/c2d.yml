@@ -1,0 +1,39 @@
+version: '3'
+services:
+  kindcluster:
+    image: oceanprotocol/c2d_barge_kind:latest
+    privileged: true
+    ports: 
+      - 8443:8443
+      - 10080:10080
+      - 31000:31000
+    networks:
+      backend:
+        ipv4_address: 172.15.0.13
+    environment:
+      STATIC_IP: 172.15.0.13
+      REGISTRY: "172.15.0.11:5050"
+      REGISTRY_USER: "username"
+      REGISTRY_PASSWORD: '$REGISTRY_TOKEN'
+  computetodata:
+    image: oceanprotocol/c2d_barge_deployer:latest
+    privileged: true
+    environment:
+      KIND_IP: 172.15.0.13
+      IPFS_GATEWAY: ${IPFS_GATEWAY}
+      IPFS_HTTP_GATEWAY: ${IPFS_HTTP_GATEWAY}
+      REGISTRY: "172.15.0.11:5000/"
+      OPERATOR_SERVICE_IMAGE: oceanprotocol/operator-service:latest
+      OPERATOR_ENGINE_IMAGE: oceanprotocol/operator-engine:latest
+      POD_CONFIGURATION_IMAGE: oceanprotocol/pod-configuration:latest
+      POD_PUBLISHING_IMAGE: oceanprotocol/pod-publishing:latest
+    networks:
+      backend:
+        ipv4_address: 172.15.0.12
+    depends_on:
+    - kindcluster
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /usr/bin/docker:/usr/bin/docker
+    - ${OCEAN_C2D_FOLDER}:/ocean/c2d/
+    - ${OCEAN_CERTS_FOLDER}/registry:/certs
