@@ -1,7 +1,7 @@
 version: '3'
 services:
   graph-node:
-    image: oceanprotocol/graph-node:latest
+    image: graphprotocol/graph-node:v0.25.0
     ports:
       - '9000:8000'
       - '9001:8001'
