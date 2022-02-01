@@ -99,7 +99,7 @@ else
 fi
 
 #export OPERATOR_SERVICE_URL=http://127.0.0.1:8050
-export OPERATOR_SERVICE_URL=${OPERATOR_SERVICE_URL:-"http://172.15.0.13:31000"}
+export OPERATOR_SERVICE_URL=${OPERATOR_SERVICE_URL:-"http://172.15.0.13:31000/"}
 
 # Add aquarius to /etc/hosts
 # Workaround mainly for macOS
