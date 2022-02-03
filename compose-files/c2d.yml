@@ -23,10 +23,10 @@ services:
       IPFS_GATEWAY: ${IPFS_GATEWAY}
       IPFS_HTTP_GATEWAY: ${IPFS_HTTP_GATEWAY}
       REGISTRY: "172.15.0.11:5000/"
-      OPERATOR_SERVICE_IMAGE: oceanprotocol/operator-service:v4main
-      OPERATOR_ENGINE_IMAGE: oceanprotocol/operator-engine:v4main
-      POD_CONFIGURATION_IMAGE: oceanprotocol/pod-configuration:v4main
-      POD_PUBLISHING_IMAGE: oceanprotocol/pod-publishing:v4main
+      OPERATOR_SERVICE_IMAGE: oceanprotocol/operator-service:${OPERATOR_SERVICE_VERSION}
+      OPERATOR_ENGINE_IMAGE: oceanprotocol/operator-engine:${OPERATOR_ENGINE_VERSION}
+      POD_CONFIGURATION_IMAGE: oceanprotocol/pod-configuration:${POD_CONFIGURATION_VERSION}
+      POD_PUBLISHING_IMAGE: oceanprotocol/pod-publishing:${POD_PUBLISHING_VERSION}
     networks:
       backend:
         ipv4_address: 172.15.0.12
