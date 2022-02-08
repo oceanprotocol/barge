@@ -23,15 +23,6 @@ services:
       ipfs: '172.15.0.16:5001'
       ethereum: 'barge:${NETWORK_RPC_URL}'
       RUST_LOG: info
-  ipfs:
-    image: ipfs/go-ipfs:v0.4.23
-    ports:
-      - '5001:5001'
-    networks:
-      backend:
-        ipv4_address: 172.15.0.16
-    volumes:
-      - graphipfs:/data/ipfs
   postgres:
     image: postgres
     ports:
@@ -47,6 +38,5 @@ services:
     volumes:
       - graphpgsql:/var/lib/postgresql/data
 volumes:
-  graphipfs:
   graphpgsql:
 

@@ -1,0 +1,21 @@
+version: '3'
+services:
+  registry:
+    restart: always
+    container_name: docker-registry
+    image: registry:2
+    ports:
+      - 5050:5000
+    networks:
+      backend:
+        ipv4_address: 172.15.0.11
+    environment:
+      REGISTRY_HTTP_ADDR: "172.15.0.11:5000"
+      REGISTRY_HTTP_TLS_CERTIFICATE: /certs/registry.crt
+      REGISTRY_HTTP_TLS_KEY: /certs/registry.key
+    volumes:
+      - registryvol:/var/lib/registry
+      - ${OCEAN_CERTS_FOLDER}/registry:/certs
+
+volumes:
+  registryvol:

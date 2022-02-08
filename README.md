@@ -76,6 +76,7 @@ The default versions are always a combination of component versions which are co
 | Graphpgsql          |                    | postgres                          | 172.15.0.7      | 5432 -> 5432  |
 | Dashboard           |                    | portainer/portainer               | 172.15.0.25     | 9100 -> 9000  |
 | Redis               |                    | bitnami/redis:latest              | 172.15.0.18     | 6379 -> 6379  |
+| C2d                 |                    | multiple components               | 172.15.0.12,172.15.0.13     | 31000 -> 31000  |
 
 
 
@@ -101,15 +102,17 @@ export AQUARIUS_VERSION=v2.0.0
 | `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                           |
 | `--no-elasticseach`        | Start up Ocean without the `elasticsearch` Building Block.                                      |
 | `--no-provider`            | Start up Ocean without the `provider` Building Block.                                           |
+| `--no-ipfs`                | Start up Ocean without the `ipfs` Building Block                                                |
 | `--with-provider2`         | Runs a 2nd provider, on port 8031. This is required for ocean.js/ocean.py integration tests. 2nd Provider will use the same image and parameters (log_level, ipfs gateway, compute gateway, etc) as provider1, but has a different private key     |
 | `--no-ganache`             | Start up Ocean without the `ganache` Building Block.                                            |
 | `--no-dashboard`           | Start up Ocean without the `dashboard` Building Block.                                          |
 | `--with-rbac`              | Start up Ocean with RBAC Server                                                                 |
-| `--with-thegraph`          | Start up Ocean with graphnode, ipfs & postgresql                                                |
+| `--with-thegraph`          | Start up Ocean with graphnode,postgresql                                                        |
 | `--skip-deploy`            | Start up Ocean without deploying the contracts. Useful when ethereum node already has contracts.|
 | `--force-pull`             | Force pulling the latest revision of the used Docker images.                                    |
 | `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.        |
 | `--exposeip`               | Binds the components to that specific ip. Example: `./start_ocean.sh --exposeip 192.168.0.1`    |
+| `--with-c2d`               | Runs a local C2D Cluster                                                                        |
 
 
 
@@ -196,6 +199,23 @@ The following addresses are preconfigured for testing:  (first 10 addresses from
 ## Contributing
 
 See the page titled "[Ways to Contribute](https://docs.oceanprotocol.com/concepts/contributing/)" in the Ocean Protocol documentation.
+
+
+## Readiness
+ Several building blocks on barge are going to require some time until they are ready.  Watch for the following files to be created:
+
+| Building block                             |  File                                         |
+| -----------------------------------------  | -------------------------------               |
+| ocean-contracts                            | ${OCEAN_HOME}/ocean-contracts/artifacts/ready |
+| c2d                                        | ${OCEAN_HOME}/ocean-c2d/ready |
+
+
+## Certs
+  Registry certs were created using the following commands:
+  ```bash
+  openssl genrsa 2048 > registry.key
+  openssl req -new -x509 -nodes -sha1 -days 3650 -key registry.key -out registry.crt -addext 'subjectAltName = IP:172.15.0.11'
+  ```
 
 ## License
 
