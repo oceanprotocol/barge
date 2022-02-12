@@ -30,6 +30,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v4main}
 export PROVIDER_VERSION=${PROVIDER_VERSION:-v4main}
+export SUBGRAPH_VERSION=${SUBGRAPH_VERSION:-v4main}
 export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v4main_postaudit}
 export RBAC_VERSION=${RBAC_VERSION:-next}
 
@@ -232,6 +233,11 @@ while :; do
         --with-thegraph)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
             printf $COLOR_Y'Starting with TheGraph...\n\n'$COLOR_RESET
+            ;;
+        --deploy-ocean-subgraph)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ocean_subgraph.yml"
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
+            printf $COLOR_Y'Deploying ocean-subgraph...\n\n'$COLOR_RESET
             ;;
         --no-ganache)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ganache.yml/}"

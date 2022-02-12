@@ -1,0 +1,12 @@
+version: '3'
+services:
+  subgraph:
+    image: oceanprotocol/subgraph:${SUBGRAPH_VERSION:-latest}
+    networks:
+      backend:
+        ipv4_address: 172.15.0.19
+    depends_on:
+      - graph-node
+      - ocean-contracts
+    volumes:
+    - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/

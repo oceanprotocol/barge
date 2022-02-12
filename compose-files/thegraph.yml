@@ -21,7 +21,7 @@ services:
       postgres_pass: let-me-in
       postgres_db: graph-node
       ipfs: '172.15.0.16:5001'
-      ethereum: 'barge:${NETWORK_RPC_URL}'
+      ethereum: 'development:${NETWORK_RPC_URL}'
       RUST_LOG: info
   postgres:
     image: postgres
