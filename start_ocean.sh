@@ -62,6 +62,7 @@ export GANACHE_MNEMONIC=${GANACHE_MNEMONIC:-"taxi music thumb unique chat sand c
 export OCEAN_HOME="${HOME}/.ocean"
 export CONTRACTS_OWNER_ROLE_ADDRESS="${CONTRACTS_OWNER_ROLE_ADDRESS}"
 export DEPLOY_CONTRACTS=true
+export DEPLOY_SUBGRAPH=true
 export OCEAN_ARTIFACTS_FOLDER="${OCEAN_HOME}/ocean-contracts/artifacts"
 mkdir -p ${OCEAN_ARTIFACTS_FOLDER}
 export OCEAN_C2D_FOLDER="${OCEAN_HOME}/ocean-c2d/"
@@ -234,11 +235,6 @@ while :; do
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
             printf $COLOR_Y'Starting with TheGraph...\n\n'$COLOR_RESET
             ;;
-        --deploy-ocean-subgraph)
-            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ocean_subgraph.yml"
-            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
-            printf $COLOR_Y'Deploying ocean-subgraph...\n\n'$COLOR_RESET
-            ;;
         --no-ganache)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ganache.yml/}"
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ocean_contracts.yml/}"
@@ -252,7 +248,6 @@ while :; do
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/elasticsearch.yml/}"
             printf $COLOR_Y'Starting without Elastic search...\n\n'$COLOR_RESET
             ;;
-
         --no-dashboard)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dashboard.yml/}"
             printf $COLOR_Y'Starting without Dashboard ...\n\n'$COLOR_RESET
@@ -260,6 +255,10 @@ while :; do
         --skip-deploy)
             export DEPLOY_CONTRACTS=false
             printf $COLOR_Y'Ocean contracts will not be deployed, the last deployment (if any) will be intact ...\n\n'$COLOR_RESET
+            ;;
+        --skip-subgraph-deploy)
+            export DEPLOY_SUBGRAPH=false
+            printf $COLOR_Y'Ocean subgraph will not be deployed, the last deployment (if any) will be intact ...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Cleaning switches
