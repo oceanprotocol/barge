@@ -37,6 +37,20 @@ services:
       POSTGRES_DB: graph-node
     volumes:
       - graphpgsql:/var/lib/postgresql/data
+  subgraph:
+    image: oceanprotocol/subgraph:${SUBGRAPH_VERSION:-latest}
+    networks:
+      backend:
+        ipv4_address: 172.15.0.19
+    environment:
+      DEPLOY_SUBGRAPH: ${DEPLOY_SUBGRAPH}
+    depends_on:
+      - graph-node
+      - ocean-contracts
+    volumes:
+    - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
 volumes:
   graphpgsql:
+
+
 
