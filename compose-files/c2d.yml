@@ -17,7 +17,6 @@ services:
       REGISTRY_PASSWORD: '$REGISTRY_TOKEN'
   computetodata:
     image: oceanprotocol/c2d_barge_deployer:latest
-    pull_policy: always
     privileged: true
     environment:
       KIND_IP: 172.15.0.13
