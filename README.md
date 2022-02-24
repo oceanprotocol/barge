@@ -221,7 +221,7 @@ See the page titled "[Ways to Contribute](https://docs.oceanprotocol.com/concept
 ## License
 
 ```text
-Copyright 2021 Ocean Protocol Foundation
+Copyright 2022 Ocean Protocol Foundation
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
