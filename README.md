@@ -205,10 +205,11 @@ See the page titled "[Ways to Contribute](https://docs.oceanprotocol.com/concept
 ## Readiness
  Several building blocks on barge are going to require some time until they are ready.  Watch for the following files to be created:
 
-| Building block                             |  File                                         |
-| -----------------------------------------  | -------------------------------               |
+| Building block                             |  File                                         | Condition       |
+| -----------------------------------------  | -------------------------------               | --------------  |
 | ocean-contracts                            | ${OCEAN_HOME}/ocean-contracts/artifacts/ready |
-| c2d                                        | ${OCEAN_HOME}/ocean-c2d/ready |
+| c2d                                        | ${OCEAN_HOME}/ocean-c2d/ready |         | 
+| c2d                                        | ${OCEAN_HOME}/ocean-c2d/ready |  Only if WAIT_FOR_C2DIMAGES == 'yeah' |
 
 
 ## Certs
