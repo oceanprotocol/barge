@@ -29,6 +29,7 @@ services:
       OPERATOR_ENGINE_IMAGE: oceanprotocol/operator-engine:${OPERATOR_ENGINE_VERSION}
       POD_CONFIGURATION_IMAGE: oceanprotocol/pod-configuration:${POD_CONFIGURATION_VERSION}
       POD_PUBLISHING_IMAGE: oceanprotocol/pod-publishing:${POD_PUBLISHING_VERSION}
+      WAIT_FOR_C2DIMAGES: ${WAIT_FOR_C2DIMAGES}
     networks:
       backend:
         ipv4_address: 172.15.0.12
