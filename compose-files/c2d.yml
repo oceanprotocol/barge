@@ -1,7 +1,7 @@
 version: '3'
 services:
   kindcluster:
-    image: oceanprotocol/c2d_barge_kind:latest
+    image: oceanprotocol/c2d_barge_kind:wregistry
     privileged: true
     ports: 
       - 8443:8443
@@ -15,6 +15,8 @@ services:
       REGISTRY: "172.15.0.11:5050"
       REGISTRY_USER: "username"
       REGISTRY_PASSWORD: '$REGISTRY_TOKEN'
+    volumes:
+      - ${OCEAN_CERTS_FOLDER}/registry:/certs
   computetodata:
     image: oceanprotocol/c2d_barge_deployer:latest
     privileged: true
