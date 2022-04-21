@@ -209,7 +209,7 @@ See the page titled "[Ways to Contribute](https://docs.oceanprotocol.com/concept
 | -----------------------------------------  | -------------------------------               | --------------  |
 | ocean-contracts                            | ${OCEAN_HOME}/ocean-contracts/artifacts/ready |
 | c2d                                        | ${OCEAN_HOME}/ocean-c2d/ready |         | 
-| c2d                                        | ${OCEAN_HOME}/ocean-c2d/ready |  Only if WAIT_FOR_C2DIMAGES == 'yeah' |
+| c2d                                        | ${OCEAN_HOME}/ocean-c2d/imagesready |  Only if WAIT_FOR_C2DIMAGES == 'yeah' |
 
 
 ## Certs
