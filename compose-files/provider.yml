@@ -12,6 +12,7 @@ services:
     environment:
       ARTIFACTS_PATH: "/ocean-contracts/artifacts"
       ADDRESS_FILE: "/ocean-contracts/artifacts/address.json"
+      DEPLOY_CONTRACTS: ${DEPLOY_CONTRACTS}
       NETWORK_URL: ${NETWORK_RPC_URL}
       PARITY_URL: ${NETWORK_RPC_URL}
       PROVIDER_PRIVATE_KEY: ${PROVIDER_PRIVATE_KEY}
