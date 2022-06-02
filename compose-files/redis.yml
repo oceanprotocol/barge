@@ -1,7 +1,7 @@
 version: '3'
 services:
   redis:
-    image: bitnami/redis:latest
+    image: bitnami/redis:6.2.7
     ports:
       - 6379:6379
     networks:
