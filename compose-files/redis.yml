@@ -8,7 +8,7 @@ services:
       backend:
         ipv4_address: 172.15.0.18
     environment:
-      ALLOW_EMPTY_PASSWORD: "yes"
+      ALLOW_EMPTY_PASSWORD=yes
     volumes:
     - redis1vol:/bitnami/redis/data
 volumes:
