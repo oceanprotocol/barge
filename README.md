@@ -71,7 +71,7 @@ The default versions are always a combination of component versions which are co
 | Provider            |                    | v1.0.19                            | 172.15.0.4      | 8030 -> 8030  |
 | Provider2           |                    | v1.0.19                            | 172.15.0.7      | 8030 -> 8030  |
 | RBAC Server         |                    | main                              | 172.15.0.8      | 3000 -> 3000  |
-| GraphNode           |                    | oceanprotocol/graph-node:latest   | 172.15.0.15     | 9000 -> 8000 ,9001 -> 8001 , 9020 -> 8020,  9030 -> 8030, 9040 -> 8040  |
+| GraphNode           |                    | graphprotocol/graph-node:v0.26.0   | 172.15.0.15     | 9000 -> 8000 ,9001 -> 8001 , 9020 -> 8020,  9030 -> 8030, 9040 -> 8040  |
 | Graphipfs           |                    | ipfs/go-ipfs:v0.4.23              | 172.15.0.16     | 5001 -> 5001  |
 | Graphpgsql          |                    | postgres                          | 172.15.0.7      | 5432 -> 5432  |
 | Dashboard           |                    | portainer/portainer               | 172.15.0.25     | 9100 -> 9000  |
