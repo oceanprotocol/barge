@@ -1,7 +1,7 @@
 version: '3'
 services:
   provider:
-    image: oceanprotocol/provider-py:${PROVIDER_VERSION:-latest}
+    image: dmats/provider:arweave-integration
     ports:
       - 8030:8030
     networks:
