@@ -104,7 +104,6 @@ export AQUARIUS_VERSION=v2.0.0
 | `--no-provider`            | Start up Ocean without the `provider` Building Block.                                           |
 | `--no-ipfs`                | Start up Ocean without the `ipfs` Building Block                                                |
 | `--with-provider2`         | Runs a 2nd provider, on port 8031. This is required for ocean.js/ocean.py integration tests. 2nd Provider will use the same image and parameters (log_level, ipfs gateway, compute gateway, etc) as provider1, but has a different private key     |
-| `--no-ganache`             | Start up Ocean without the `ganache` Building Block.                                            |
 | `--no-dashboard`           | Start up Ocean without the `dashboard` Building Block.                                          |
 | `--with-rbac`              | Start up Ocean with RBAC Server                                                                 |
 | `--with-thegraph`          | Start up Ocean with graphnode,postgresql and deploys ocean-subgraph                             |
