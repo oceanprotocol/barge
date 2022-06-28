@@ -236,11 +236,6 @@ while :; do
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
             printf $COLOR_Y'Starting with TheGraph...\n\n'$COLOR_RESET
             ;;
-        --no-ganache)
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ganache.yml/}"
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ocean_contracts.yml/}"
-            printf $COLOR_Y'Starting without Ganache...\n\n'$COLOR_RESET
-            ;;
         --no-aquarius)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}"
             printf $COLOR_Y'Starting without Aquarius...\n\n'$COLOR_RESET
