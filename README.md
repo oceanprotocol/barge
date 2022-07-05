@@ -68,8 +68,8 @@ The default versions are always a combination of component versions which are co
 | ocean-contracts     |                    | v1.0.0                            | 172.15.0.14     |               |
 | Aquarius            |                    | v4.1.0                            | 172.15.0.5      | 5000 -> 5000  |
 | Elasticsearch       |  Aquarius          | 6.8.3                             | 172.15.0.6      |               |
-| Provider            |                    | v1.0.19                            | 172.15.0.4      | 8030 -> 8030  |
-| Provider2           |                    | v1.0.19                            | 172.15.0.7      | 8030 -> 8030  |
+| Provider            |                    | v1.0.20                            | 172.15.0.4      | 8030 -> 8030  |
+| Provider2           |                    | v1.0.20                            | 172.15.0.7      | 8030 -> 8030  |
 | RBAC Server         |                    | main                              | 172.15.0.8      | 3000 -> 3000  |
 | GraphNode           |                    | graphprotocol/graph-node:v0.26.0   | 172.15.0.15     | 9000 -> 8000 ,9001 -> 8001 , 9020 -> 8020,  9030 -> 8030, 9040 -> 8040  |
 | Graphipfs           |                    | ipfs/go-ipfs:v0.4.23              | 172.15.0.16     | 5001 -> 5001  |
@@ -104,7 +104,6 @@ export AQUARIUS_VERSION=v2.0.0
 | `--no-provider`            | Start up Ocean without the `provider` Building Block.                                           |
 | `--no-ipfs`                | Start up Ocean without the `ipfs` Building Block                                                |
 | `--with-provider2`         | Runs a 2nd provider, on port 8031. This is required for ocean.js/ocean.py integration tests. 2nd Provider will use the same image and parameters (log_level, ipfs gateway, compute gateway, etc) as provider1, but has a different private key     |
-| `--no-ganache`             | Start up Ocean without the `ganache` Building Block.                                            |
 | `--no-dashboard`           | Start up Ocean without the `dashboard` Building Block.                                          |
 | `--with-rbac`              | Start up Ocean with RBAC Server                                                                 |
 | `--with-thegraph`          | Start up Ocean with graphnode,postgresql and deploys ocean-subgraph                             |

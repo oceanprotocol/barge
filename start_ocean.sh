@@ -29,7 +29,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 # Default versions of Aquarius, Provider
 
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v4.1.0}
-export PROVIDER_VERSION=${PROVIDER_VERSION:-v1.0.19}
+export PROVIDER_VERSION=${PROVIDER_VERSION:-v1.0.20}
 export SUBGRAPH_VERSION=${SUBGRAPH_VERSION:-main}
 export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v1.0.0}
 export RBAC_VERSION=${RBAC_VERSION:-next}
@@ -235,11 +235,6 @@ while :; do
         --with-thegraph)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
             printf $COLOR_Y'Starting with TheGraph...\n\n'$COLOR_RESET
-            ;;
-        --no-ganache)
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ganache.yml/}"
-            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ocean_contracts.yml/}"
-            printf $COLOR_Y'Starting without Ganache...\n\n'$COLOR_RESET
             ;;
         --no-aquarius)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}"
