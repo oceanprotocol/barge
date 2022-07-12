@@ -27,5 +27,6 @@ services:
     volumes:
     - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
     - provider2db:/ocean-provider/db/
+    - /var/run/docker.sock:/var/run/docker.sock
 volumes:
   provider2db:
