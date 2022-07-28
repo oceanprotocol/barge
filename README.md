@@ -37,11 +37,22 @@ You need to have the newest versions of:
 
 If you're new to Barge, it's best to start with the defaults:
 
+*FOR UNIX SYSTEMS*
+
 ```bash
 git clone git@github.com:oceanprotocol/barge.git
 cd barge
 
 ./start_ocean.sh
+```
+
+*FOR WINDOWS SYSTEMS*
+
+```bash
+git clone git@github.com:oceanprotocol/barge.git
+cd barge
+
+./start_ocean_windows.sh
 ```
 
 This will run the current default versions of [Aquarius](https://github.com/oceanprotocol/aquarius), [Provider](https://github.com/oceanprotocol/provider-py), and [Ganache](https://github.com/trufflesuite/ganache-cli) with [our contracts](https://github.com/oceanprotocol/ocean-contracts) deployed to it.
