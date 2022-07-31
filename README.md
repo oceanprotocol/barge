@@ -100,7 +100,7 @@ export AQUARIUS_VERSION=v2.0.0
 | Option                     | Description                                                                                     |
 | -------------------------- | ----------------------------------------------------------------------------------------------- |
 | `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                           |
-| `--no-elasticseach`        | Start up Ocean without the `elasticsearch` Building Block.                                      |
+| `--no-elasticsearch`        | Start up Ocean without the `elasticsearch` Building Block.                                      |
 | `--no-provider`            | Start up Ocean without the `provider` Building Block.                                           |
 | `--no-ipfs`                | Start up Ocean without the `ipfs` Building Block                                                |
 | `--with-provider2`         | Runs a 2nd provider, on port 8031. This is required for ocean.js/ocean.py integration tests. 2nd Provider will use the same image and parameters (log_level, ipfs gateway, compute gateway, etc) as provider1, but has a different private key     |
