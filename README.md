@@ -107,7 +107,7 @@ export AQUARIUS_VERSION=v2.0.0
 | `--no-dashboard`           | Start up Ocean without the `dashboard` Building Block.                                          |
 | `--with-rbac`              | Start up Ocean with RBAC Server                                                                 |
 | `--with-thegraph`          | Start up Ocean with graphnode,postgresql and deploys ocean-subgraph                             |
-| `---skip-subgraph-deploy`  | Will skip deployment of ocean-subgraphs                                                         |
+| `--skip-subgraph-deploy`  | Will skip deployment of ocean-subgraphs                                                         |
 | `--skip-deploy`            | Start up Ocean without deploying the contracts. Useful when ethereum node already has contracts.|
 | `--force-pull`             | Force pulling the latest revision of the used Docker images.                                    |
 | `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.        |
