@@ -65,11 +65,11 @@ The default versions are always a combination of component versions which are co
 | Component name      | Required by        | Version                           | IP Address      | Ports exposed |
 | --------------      | ------------------ | --------------------------------- | --------------- | ------------- |
 | ganache             |  ocean-contracts   | latest                            | 172.15.0.3      | 8545 -> 8545  |
-| ocean-contracts     |                    | v1.0.0                            | 172.15.0.14     |               |
+| ocean-contracts     |                    | v1.1.3                            | 172.15.0.14     |               |
 | Aquarius            |                    | v4.2.0                            | 172.15.0.5      | 5000 -> 5000  |
 | Elasticsearch       |  Aquarius          | 6.8.3                             | 172.15.0.6      |               |
-| Provider            |                    | v1.3.2                            | 172.15.0.4      | 8030 -> 8030  |
-| Provider2           |                    | v1.3.2                            | 172.15.0.7      | 8030 -> 8030  |
+| Provider            |                    | v1.3.3                            | 172.15.0.4      | 8030 -> 8030  |
+| Provider2           |                    | v1.3.3                            | 172.15.0.7      | 8030 -> 8030  |
 | RBAC Server         |                    | main                              | 172.15.0.8      | 3000 -> 3000  |
 | GraphNode           |                    | graphprotocol/graph-node:v0.26.0   | 172.15.0.15     | 9000 -> 8000 ,9001 -> 8001 , 9020 -> 8020,  9030 -> 8030, 9040 -> 8040  |
 | Graphipfs           |                    | ipfs/go-ipfs:v0.4.23              | 172.15.0.16     | 5001 -> 5001  |
