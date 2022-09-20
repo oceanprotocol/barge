@@ -23,6 +23,7 @@ services:
       OCEAN_PROVIDER_TIMEOUT: '9000'
       OPERATOR_SERVICE_URL: ${OPERATOR_SERVICE_URL}
       AQUARIUS_URL: ${AQUARIUS_URL:-http://172.15.0.5:5000}
+      ARWEAVE_GATEWAY: https://arweave.net/
     volumes:
     - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
     - provider1db:/ocean-provider/db/
