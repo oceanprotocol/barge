@@ -234,7 +234,7 @@ while :; do
 	        printf $COLOR_Y'Starting without IPFS...\n\n'$COLOR_RESET
             ;;
         --with-thegraph)
-            export RUST_LOG=${RUST_LOG:-INFO}
+            export SUBGRAPH_LOG_LEVEL=${SUBGRAPH_LOG_LEVEL:-INFO}
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
             printf $COLOR_Y'Starting with TheGraph...\n\n'$COLOR_RESET
             ;;
