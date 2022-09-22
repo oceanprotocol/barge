@@ -43,6 +43,12 @@ export WAIT_FOR_C2DIMAGES=${WAIT_FOR_C2DIMAGES:-false}
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
 
+
+# Export LOG LEVEL
+export AQUARIUS_LOG_LEVEL=${AQUARIUS_LOG_LEVEL:-INFO}
+export PROVIDER_LOG_LEVEL=${PROVIDER_LOG_LEVEL:-INFO}
+export SUBGRAPH_LOG_LEVEL=${SUBGRAPH_LOG_LEVEL:-INFO}
+
 # Export User UID and GID
 export LOCAL_USER_ID=$(id -u)
 export LOCAL_GROUP_ID=$(id -g)
@@ -80,7 +86,6 @@ cp -r ./certs/* ${OCEAN_CERTS_FOLDER}
 export CONTRACTS_NETWORK_NAME="development"
 
 # Default Aquarius parameters: use Elasticsearch
-export AQUARIUS_LOG_LEVEL=${AQUARIUS_LOG_LEVEL:-INFO}
 export DB_MODULE="elasticsearch"
 export DB_HOSTNAME="172.15.0.6"
 export DB_PORT="9200"
@@ -96,7 +101,6 @@ CHECK_ELASTIC_VM_COUNT=true
 export IPFS_GATEWAY=http://172.15.0.16:5001
 export IPFS_HTTP_GATEWAY=http://172.15.0.16:8080/ipfs/
 #Provider
-export PROVIDER_LOG_LEVEL=${PROVIDER_LOG_LEVEL:-INFO}
 export PROVIDER_WORKERS=10
 export PROVIDER_IPFS_GATEWAY=https://ipfs.oceanprotocol.com
 export PROVIDER_PRIVATE_KEY=0xfd5c1ccea015b6d663618850824154a3b3fb2882c46cefb05b9a93fea8c3d215
@@ -234,7 +238,6 @@ while :; do
 	        printf $COLOR_Y'Starting without IPFS...\n\n'$COLOR_RESET
             ;;
         --with-thegraph)
-            export SUBGRAPH_LOG_LEVEL=${SUBGRAPH_LOG_LEVEL:-INFO}
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
             printf $COLOR_Y'Starting with TheGraph...\n\n'$COLOR_RESET
             ;;
