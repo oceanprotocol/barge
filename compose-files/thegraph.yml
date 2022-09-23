@@ -22,7 +22,7 @@ services:
       postgres_db: graph-node
       ipfs: '172.15.0.16:5001'
       ethereum: 'development:${NETWORK_RPC_URL}'
-      RUST_LOG: info
+      RUST_LOG: ${SUBGRAPH_LOG_LEVEL}
   postgres:
     image: postgres
     ports:
