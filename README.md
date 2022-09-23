@@ -95,6 +95,24 @@ export AQUARIUS_VERSION=v2.0.0
 ./start_ocean.sh
 ```
 
+### Log levels
+
+You can specify what type of logs barge should display for `Aquarius`, `Provider` or `Subgraph`
+by exporting the following environment variables.
+
+- `AQUARIUS_LOG_LEVEL`
+- `PROVIDER_LOG_LEVEL`
+- `SUBGRAPH_LOG_LEVEL`
+
+Currently, they are all set to `INFO`.
+
+For example:
+
+```bash
+export AQUARIUS_LOG_LEVEL=DEBUG
+./start_ocean.sh
+```
+
 ### All Options
 
 | Option                     | Description                                                                                     |
