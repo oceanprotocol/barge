@@ -269,6 +269,7 @@ while :; do
             eval docker-compose --project-name=$PROJECT_NAME "$COMPOSE_FILES" -f "${NODE_COMPOSE_FILE}" down
             docker network rm ${PROJECT_NAME}_default || true
             docker network rm ${PROJECT_NAME}_backend || true
+	    rm -r ${OCEAN_HOME}
             ;;
         --) # End of all options.
             shift
