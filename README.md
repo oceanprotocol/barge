@@ -62,24 +62,21 @@ The startup script comes with a set of options for customizing various things.
 
 The default versions are always a combination of component versions which are considered stable.
 
-| Component name      | Required by        | Version                           | IP Address      | Ports exposed |
-| --------------      | ------------------ | --------------------------------- | --------------- | ------------- |
-| ganache             |  ocean-contracts   | latest                            | 172.15.0.3      | 8545 -> 8545  |
-| ocean-contracts     |                    | v1.1.8                            | 172.15.0.14     |               |
-| Aquarius            |                    | v4.2.0                            | 172.15.0.5      | 5000 -> 5000  |
-| Elasticsearch       |  Aquarius          | 6.8.3                             | 172.15.0.6      |               |
-| Provider            |                    | v1.3.6                            | 172.15.0.4      | 8030 -> 8030  |
-| Provider2           |                    | v1.3.6                            | 172.15.0.7      | 8030 -> 8030  |
-| RBAC Server         |                    | main                              | 172.15.0.8      | 3000 -> 3000  |
-| GraphNode           |                    | graphprotocol/graph-node:v0.27.0   | 172.15.0.15     | 9000 -> 8000 ,9001 -> 8001 , 9020 -> 8020,  9030 -> 8030, 9040 -> 8040  |
-| Graphipfs           |                    | ipfs/go-ipfs:v0.4.23              | 172.15.0.16     | 5001 -> 5001  |
-| Graphpgsql          |                    | postgres                          | 172.15.0.7      | 5432 -> 5432  |
-| Dashboard           |                    | portainer/portainer               | 172.15.0.25     | 9100 -> 9000  |
-| Redis               |                    | bitnami/redis:latest              | 172.15.0.18     | 6379 -> 6379  |
-| C2d                 |                    | multiple components               | 172.15.0.12,172.15.0.13     | 31000 -> 31000  |
-
-
-
+| Component name  | Required by     | Version                          | IP Address              | Ports exposed                                                         |
+| --------------- | --------------- | -------------------------------- | ----------------------- | --------------------------------------------------------------------- |
+| ganache         | ocean-contracts | latest                           | 172.15.0.3              | 8545 -> 8545                                                          |
+| ocean-contracts |                 | v1.1.8                           | 172.15.0.14             |                                                                       |
+| Aquarius        |                 | v4.5.5                           | 172.15.0.5              | 5000 -> 5000                                                          |
+| Elasticsearch   | Aquarius        | 6.8.3                            | 172.15.0.6              |                                                                       |
+| Provider        |                 | v1.3.6                           | 172.15.0.4              | 8030 -> 8030                                                          |
+| Provider2       |                 | v1.3.6                           | 172.15.0.7              | 8030 -> 8030                                                          |
+| RBAC Server     |                 | main                             | 172.15.0.8              | 3000 -> 3000                                                          |
+| GraphNode       |                 | graphprotocol/graph-node:v0.27.0 | 172.15.0.15             | 9000 -> 8000 ,9001 -> 8001 , 9020 -> 8020, 9030 -> 8030, 9040 -> 8040 |
+| Graphipfs       |                 | ipfs/go-ipfs:v0.4.23             | 172.15.0.16             | 5001 -> 5001                                                          |
+| Graphpgsql      |                 | postgres                         | 172.15.0.7              | 5432 -> 5432                                                          |
+| Dashboard       |                 | portainer/portainer              | 172.15.0.25             | 9100 -> 9000                                                          |
+| Redis           |                 | bitnami/redis:latest             | 172.15.0.18             | 6379 -> 6379                                                          |
+| C2d             |                 | multiple components              | 172.15.0.12,172.15.0.13 | 31000 -> 31000                                                        |
 
 You can override the Docker image tag used for a particular component by setting its associated environment variable before calling `start_ocean.sh`:
 
@@ -115,24 +112,22 @@ export AQUARIUS_LOG_LEVEL=DEBUG
 
 ### All Options
 
-| Option                     | Description                                                                                     |
-| -------------------------- | ----------------------------------------------------------------------------------------------- |
-| `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                           |
-| `--no-elasticsearch`        | Start up Ocean without the `elasticsearch` Building Block.                                      |
-| `--no-provider`            | Start up Ocean without the `provider` Building Block.                                           |
-| `--no-ipfs`                | Start up Ocean without the `ipfs` Building Block                                                |
-| `--with-provider2`         | Runs a 2nd provider, on port 8031. This is required for ocean.js/ocean.py integration tests. 2nd Provider will use the same image and parameters (log_level, ipfs gateway, compute gateway, etc) as provider1, but has a different private key     |
-| `--no-dashboard`           | Start up Ocean without the `dashboard` Building Block.                                          |
-| `--with-rbac`              | Start up Ocean with RBAC Server                                                                 |
-| `--with-thegraph`          | Start up Ocean with graphnode,postgresql and deploys ocean-subgraph                             |
-| `--skip-subgraph-deploy`  | Will skip deployment of ocean-subgraphs                                                         |
-| `--skip-deploy`            | Start up Ocean without deploying the contracts. Useful when ethereum node already has contracts.|
-| `--force-pull`             | Force pulling the latest revision of the used Docker images.                                    |
-| `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.        |
-| `--exposeip`               | Binds the components to that specific ip. Example: `./start_ocean.sh --exposeip 192.168.0.1`    |
-| `--with-c2d`               | Runs a local C2D Cluster                                                                        |
-
-
+| Option                   | Description                                                                                                                                                                                                                                    |
+| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--no-aquarius`          | Start up Ocean without the `aquarius` Building Block.                                                                                                                                                                                          |
+| `--no-elasticsearch`     | Start up Ocean without the `elasticsearch` Building Block.                                                                                                                                                                                     |
+| `--no-provider`          | Start up Ocean without the `provider` Building Block.                                                                                                                                                                                          |
+| `--no-ipfs`              | Start up Ocean without the `ipfs` Building Block                                                                                                                                                                                               |
+| `--with-provider2`       | Runs a 2nd provider, on port 8031. This is required for ocean.js/ocean.py integration tests. 2nd Provider will use the same image and parameters (log_level, ipfs gateway, compute gateway, etc) as provider1, but has a different private key |
+| `--no-dashboard`         | Start up Ocean without the `dashboard` Building Block.                                                                                                                                                                                         |
+| `--with-rbac`            | Start up Ocean with RBAC Server                                                                                                                                                                                                                |
+| `--with-thegraph`        | Start up Ocean with graphnode,postgresql and deploys ocean-subgraph                                                                                                                                                                            |
+| `--skip-subgraph-deploy` | Will skip deployment of ocean-subgraphs                                                                                                                                                                                                        |
+| `--skip-deploy`          | Start up Ocean without deploying the contracts. Useful when ethereum node already has contracts.                                                                                                                                               |
+| `--force-pull`           | Force pulling the latest revision of the used Docker images.                                                                                                                                                                                   |
+| `--purge`                | Removes the Docker containers, volumes, artifact folder and networks used by the script.                                                                                                                                                       |
+| `--exposeip`             | Binds the components to that specific ip. Example: `./start_ocean.sh --exposeip 192.168.0.1`                                                                                                                                                   |
+| `--with-c2d`             | Runs a local C2D Cluster                                                                                                                                                                                                                       |
 
 ## Docker Building Blocks
 
@@ -151,27 +146,27 @@ This Building Block can be disabled by setting the `--no-aquarius` flag.
 
 ### Provider
 
-| Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
-| ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `provider`  | `8030`        | http://provider:8030 | http://localhost:8030  |  |
+| Hostname   | External Port | Internal URL         | Local URL             | Description |
+| ---------- | ------------- | -------------------- | --------------------- | ----------- |
+| `provider` | `8030`        | http://provider:8030 | http://localhost:8030 |             |
 
 ### Ganache
 
-| Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
-| ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `ganache`   | `8545`        | http://ganache:8545   | http://localhost:8545   |  |
+| Hostname  | External Port | Internal URL        | Local URL             | Description |
+| --------- | ------------- | ------------------- | --------------------- | ----------- |
+| `ganache` | `8545`        | http://ganache:8545 | http://localhost:8545 |             |
 
 ### TheGraph
 
-| Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
-| ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `graphnode` | `9000`        | http://graphnode:9000 | http://localhost:9000 |  |
+| Hostname    | External Port | Internal URL          | Local URL             | Description |
+| ----------- | ------------- | --------------------- | --------------------- | ----------- |
+| `graphnode` | `9000`        | http://graphnode:9000 | http://localhost:9000 |             |
 
 ### ocean-contracts
 
-* Deploy all smart contracts from the `ocean-contracts` repo
-* Export artifacts files (.json) to default shared folder between all containers
-* Create address file (address.json) that has the address of each deployed smart contract that is required by the ocean library. This file is saved to the same folder with the artifacts files
+- Deploy all smart contracts from the `ocean-contracts` repo
+- Export artifacts files (.json) to default shared folder between all containers
+- Create address file (address.json) that has the address of each deployed smart contract that is required by the ocean library. This file is saved to the same folder with the artifacts files
 
 The accounts can be accessed with this seed phrase:
 
@@ -194,15 +189,14 @@ This will start a `portainer` dashboard with the following admin credentials and
 
 ### RBAC Server
 
-| Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
-| ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
-| `rbac`      | `3000`        | http://rbac:3000      | http://localhost:3000 |                                                     |
+| Hostname | External Port | Internal URL     | Local URL             | Description |
+| -------- | ------------- | ---------------- | --------------------- | ----------- |
+| `rbac`   | `3000`        | http://rbac:3000 | http://localhost:3000 |             |
 
+The following addresses are preconfigured for testing: (first 10 addresses from the default mnemonic)
 
-The following addresses are preconfigured for testing:  (first 10 addresses from the default mnemonic)
-
-| Address                                    |  Roles                          |
-| -----------------------------------------  | ------------------------------- |
+| Address                                    | Roles                           |
+| ------------------------------------------ | ------------------------------- |
 | 0xe2DD09d719Da89e5a3D0F2549c7E24566e947260 | ["user","publisher","consumer"] |
 | 0xBE5449a6A97aD46c8558A3356267Ee5D2731ab5e | ["user","publisher","consumer"] |
 | 0xA78deb2Fa79463945C247991075E2a0e98Ba7A09 | ["user","publisher","consumer"] |
@@ -218,23 +212,24 @@ The following addresses are preconfigured for testing:  (first 10 addresses from
 
 See the page titled "[Ways to Contribute](https://docs.oceanprotocol.com/concepts/contributing/)" in the Ocean Protocol documentation.
 
-
 ## Readiness
- Several building blocks on barge are going to require some time until they are ready.  Watch for the following files to be created:
 
-| Building block                             |  File                                         | Condition       |
-| -----------------------------------------  | -------------------------------               | --------------  |
-| ocean-contracts                            | ${OCEAN_HOME}/ocean-contracts/artifacts/ready |
-| c2d                                        | ${OCEAN_HOME}/ocean-c2d/ready |         |
-| c2d                                        | ${OCEAN_HOME}/ocean-c2d/imagesready |  Only if WAIT_FOR_C2DIMAGES == 'yeah' |
+Several building blocks on barge are going to require some time until they are ready. Watch for the following files to be created:
 
+| Building block  | File                                          | Condition                            |
+| --------------- | --------------------------------------------- | ------------------------------------ |
+| ocean-contracts | ${OCEAN_HOME}/ocean-contracts/artifacts/ready |
+| c2d             | ${OCEAN_HOME}/ocean-c2d/ready                 |                                      |
+| c2d             | ${OCEAN_HOME}/ocean-c2d/imagesready           | Only if WAIT_FOR_C2DIMAGES == 'yeah' |
 
 ## Certs
-  Registry certs were created using the following commands:
-  ```bash
-  openssl genrsa 2048 > registry.key
-  openssl req -new -x509 -nodes -sha1 -days 3650 -key registry.key -out registry.crt -addext 'subjectAltName = IP:172.15.0.11'
-  ```
+
+Registry certs were created using the following commands:
+
+```bash
+openssl genrsa 2048 > registry.key
+openssl req -new -x509 -nodes -sha1 -days 3650 -key registry.key -out registry.crt -addext 'subjectAltName = IP:172.15.0.11'
+```
 
 ## License
 
