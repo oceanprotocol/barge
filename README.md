@@ -56,7 +56,7 @@ To clean up your environment, you can run
 > ./cleanup.sh
 > ```
 
-This will stop & remove any ocean related container, then delete any volume and networks created by barge
+This will stop & remove any ocean related containers, then delete any volumes and networks created by barge
 
 ## Options
 
