@@ -87,6 +87,7 @@ You can override the Docker image tag used for a particular component by setting
 - `PROVIDER_VERSION`
 - `CONTRACTS_VERSION`
 - `RBAC_VERSION`
+- `ELASTICSEARCH_VERSION`
 
 For example:
 
