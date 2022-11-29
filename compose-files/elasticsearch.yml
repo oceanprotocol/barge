@@ -1,7 +1,7 @@
 version: '3'
 services:
   elasticsearch:
-    image: elasticsearch:${ELASTICSEACH_VERSION:-latest}
+    image: elasticsearch:${ELASTICSEARCH_VERSION:-latest}
     networks:
       backend:
         ipv4_address: 172.15.0.6
