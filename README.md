@@ -67,7 +67,7 @@ The default versions are always a combination of component versions which are co
 | ganache             |  ocean-contracts   | latest                            | 172.15.0.3      | 8545 -> 8545  |
 | ocean-contracts     |                    | v1.1.8                            | 172.15.0.14     |               |
 | Aquarius            |                    | v4.2.0                            | 172.15.0.5      | 5000 -> 5000  |
-| Elasticsearch       |  Aquarius          | 6.8.3                             | 172.15.0.6      |               |
+| Elasticsearch       |  Aquarius          | 8.1.5                             | 172.15.0.6      |               |
 | Provider            |                    | v1.3.10                            | 172.15.0.4      | 8030 -> 8030  |
 | Provider2           |                    | v1.3.10                            | 172.15.0.7      | 8030 -> 8030  |
 | RBAC Server         |                    | main                              | 172.15.0.8      | 3000 -> 3000  |
