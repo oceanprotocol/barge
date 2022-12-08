@@ -48,11 +48,15 @@ This will run the current default versions of [Aquarius](https://github.com/ocea
 
 <img width="486" alt="Welcome to Ocean Protocol" src="Welcome_to_Ocean_Protocol.png">
 
-> It's overkill, but to be _sure_ that you use exactly the Docker images and volumes you want, you can prune all the Docker things in your system first:
 
+## Cleanup
+
+To clean up your environment, you can run
 > ```bash
-> docker system prune --all --volumes
+> ./cleanup.sh
 > ```
+
+This will stop & remove any ocean related containers, then delete any volumes and networks created by barge
 
 ## Options
 
