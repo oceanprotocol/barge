@@ -30,5 +30,6 @@ services:
       EVENTS_RPC: "http://172.15.0.3:8545"
       EVENTS_ALLOW: "0"
       RUN_EVENTS_MONITOR: "1"
+      AQUARIUS_URL: http://172.15.0.5:5000
     volumes:
     - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
