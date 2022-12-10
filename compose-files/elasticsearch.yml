@@ -2,6 +2,8 @@ version: '3'
 services:
   elasticsearch:
     image: elasticsearch:${ELASTICSEARCH_VERSION:-latest}
+    ports:
+      - 9200:9200
     networks:
       backend:
         ipv4_address: 172.15.0.6
