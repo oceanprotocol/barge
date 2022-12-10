@@ -9,3 +9,6 @@ services:
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
       MAX_MAP_COUNT: "64000"
       discovery.type: "single-node"
+      ELASTIC_PASSWORD: "changeme"
+      xpack.security.enabled: "false"
+      xpack.security.http.ssl.enabled: "false"
