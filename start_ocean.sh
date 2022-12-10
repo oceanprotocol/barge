@@ -88,7 +88,7 @@ export CONTRACTS_NETWORK_NAME="development"
 
 # Default Aquarius parameters: use Elasticsearch
 export DB_MODULE="elasticsearch"
-export DB_HOSTNAME="172.15.0.6"
+export DB_HOSTNAME="http://172.15.0.6"
 export DB_PORT="9200"
 export DB_USERNAME="elastic"
 export DB_PASSWORD="changeme"
