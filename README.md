@@ -72,8 +72,8 @@ The default versions are always a combination of component versions which are co
 | ocean-contracts     |                    | v1.1.8                            | 172.15.0.14     |               |
 | Aquarius            |                    | v4.2.0                            | 172.15.0.5      | 5000 -> 5000  |
 | Elasticsearch       |  Aquarius          | 7.14.2                             | 172.15.0.6      |               |
-| Provider            |                    | v1.3.10                            | 172.15.0.4      | 8030 -> 8030  |
-| Provider2           |                    | v1.3.10                            | 172.15.0.7      | 8030 -> 8030  |
+| Provider            |                    | v1.3.11                            | 172.15.0.4      | 8030 -> 8030  |
+| Provider2           |                    | v1.3.11                            | 172.15.0.7      | 8030 -> 8030  |
 | RBAC Server         |                    | main                              | 172.15.0.8      | 3000 -> 3000  |
 | GraphNode           |                    | graphprotocol/graph-node:v0.28.2   | 172.15.0.15     | 9000 -> 8000 ,9001 -> 8001 , 9020 -> 8020,  9030 -> 8030, 9040 -> 8040  |
 | Graphipfs           |                    | ipfs/go-ipfs:v0.4.23              | 172.15.0.16     | 5001 -> 5001  |
