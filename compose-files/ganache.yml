@@ -1,10 +1,10 @@
 version: '3'
 services:
   ganache:
-    image: trufflesuite/ganache-cli:latest
+    image: trufflesuite/ganache:latest
     ports:
       - 8545:8545
     networks:
       backend:
         ipv4_address: 172.15.0.3
-    entrypoint: ["node", "/app/ganache-core.docker.cli.js", "--db", "./ganache_cache","--chainId","0x2324","--networkId","0x2324","--gasLimit","10000000000","--gasPrice","1","---hardfork","istanbul","--mnemonic","${GANACHE_MNEMONIC}", "-e", "1000000"]
+    entrypoint: ["node","/app/dist/node/cli.js","--database.dbPath", "./ganache_cache","--chain.chainId","0x2324","--chain.networkId","0x2324","-l","10000000000","-g","1","--chain.hardfork","istanbul","--wallet.mnemonic","${GANACHE_MNEMONIC}", "-e","1000000"]
