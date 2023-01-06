@@ -29,7 +29,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 # Default versions of Aquarius, Provider
 
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v4.2.0}
-export ELASTICSEARCH_VERSION=${ELASTICSEARCH_VERSION:-7.14.2}
+export ELASTICSEARCH_VERSION=${ELASTICSEARCH_VERSION:-8.5.1}
 export PROVIDER_VERSION=${PROVIDER_VERSION:-v1.3.12}
 export SUBGRAPH_VERSION=${SUBGRAPH_VERSION:-v3.0.0}
 export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v1.1.8}
@@ -88,7 +88,7 @@ export CONTRACTS_NETWORK_NAME="development"
 
 # Default Aquarius parameters: use Elasticsearch
 export DB_MODULE="elasticsearch"
-export DB_HOSTNAME="172.15.0.6"
+export DB_HOSTNAME="http://172.15.0.6"
 export DB_PORT="9200"
 export DB_USERNAME="elastic"
 export DB_PASSWORD="changeme"
