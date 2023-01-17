@@ -5,6 +5,7 @@ docker container stop ocean_subgraph_1
 docker container stop ocean_ipfs_1
 docker container stop ocean_postgres_1
 docker container stop ocean_provider_1
+docker container stop ocean_providermulti_1
 docker container stop ocean_provider2_1
 docker container stop ocean_ocean-contracts_1
 docker container stop ocean_elasticsearch_1
@@ -21,6 +22,7 @@ docker container rm ocean_subgraph_1
 docker container rm ocean_ipfs_1
 docker container rm ocean_postgres_1
 docker container rm ocean_provider_1
+docker container rm ocean_providermulti_1
 docker container rm ocean_provider2_1
 docker container rm ocean_ocean-contracts_1
 docker container rm ocean_elasticsearch_1
