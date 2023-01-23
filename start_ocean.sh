@@ -87,7 +87,7 @@ cp -r ./certs/* ${OCEAN_CERTS_FOLDER}
 export CONTRACTS_NETWORK_NAME="development"
 
 # Default Aquarius parameters: use Elasticsearch
-export EVENTS_MONITOR_SLEEP_TIME=10
+export EVENTS_MONITOR_SLEEP_TIME=5
 export DB_MODULE="elasticsearch"
 export DB_HOSTNAME="http://172.15.0.6"
 export DB_PORT="9200"
