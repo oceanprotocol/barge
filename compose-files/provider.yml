@@ -29,8 +29,6 @@ services:
     - provider1db:/ocean-provider/db/
   providermulti:
     image: oceanprotocol/provider-py:multichain
-    ports:
-      - 8030:8030
     networks:
       backend:
         ipv4_address: 172.15.0.104
