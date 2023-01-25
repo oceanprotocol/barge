@@ -27,7 +27,7 @@ services:
     volumes:
     - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
     - provider1db:/ocean-provider/db/
-providermulti:
+  providermulti:
     image: oceanprotocol/provider-py:multichain
     ports:
       - 8030:8030
