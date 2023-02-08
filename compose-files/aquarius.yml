@@ -31,5 +31,6 @@ services:
       EVENTS_ALLOW: "0"
       RUN_EVENTS_MONITOR: "1"
       AQUARIUS_URL: http://172.15.0.5:5000
+      EVENTS_MONITOR_SLEEP_TIME: ${EVENTS_MONITOR_SLEEP_TIME}
     volumes:
     - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
