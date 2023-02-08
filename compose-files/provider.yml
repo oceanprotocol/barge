@@ -33,7 +33,7 @@ services:
       - 8032:8030
     networks:
       backend:
-        ipv4_address: 172.15.0.104
+        ipv4_address: 172.15.0.9
     depends_on:
       - ocean-contracts
     environment:
