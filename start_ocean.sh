@@ -104,7 +104,7 @@ export IPFS_GATEWAY=http://172.15.0.16:5001
 export IPFS_HTTP_GATEWAY=http://172.15.0.16:8080/ipfs/
 #Provider
 export PROVIDER_WORKERS=10
-export PROVIDER_IPFS_GATEWAY=https://ipfs.oceanprotocol.com
+export PROVIDER_IPFS_GATEWAY=https://gateway.ipfs.io/
 export PROVIDER_PRIVATE_KEY=0xfd5c1ccea015b6d663618850824154a3b3fb2882c46cefb05b9a93fea8c3d215
 export PROVIDER2_PRIVATE_KEY=0xc852b55146fd168ec3d392bbd70988c18463efa460a395dede376453aca1180e
 
