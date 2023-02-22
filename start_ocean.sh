@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright (c) 2020 Ocean Protocol contributors
+# Copyright (c) 2023 Ocean Protocol contributors
 # SPDX-License-Identifier: Apache-2.0
 #
 # Usage: ./start_ocean.sh
