@@ -35,7 +35,7 @@ export SUBGRAPH_VERSION=${SUBGRAPH_VERSION:-v3.0.0}
 export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v1.1.8}
 export RBAC_VERSION=${RBAC_VERSION:-next}
 
-export OPERATOR_SERVICE_VERSION=${OPERATOR_SERVICE_VERSION:-oceanprotocol/operator-service:test}
+export OPERATOR_SERVICE_VERSION=${OPERATOR_SERVICE_VERSION:-oceanprotocol/operator-service:v4main}
 export OPERATOR_ENGINE_VERSION=${OPERATOR_ENGINE_VERSION:-oceanprotocol/operator-engine:v4main}
 export POD_CONFIGURATION_VERSION=${POD_CONFIGURATION_VERSION:-oceanprotocol/pod-configuration:v4main}
 export POD_PUBLISHING_VERSION=${POD_PUBLISHING_VERSION:-oceanprotocol/pod-publishing:v4main}
