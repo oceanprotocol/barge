@@ -1,7 +1,7 @@
 version: '3'
 services:
   kindcluster:
-    image: oceanprotocol/c2d_barge_kind:wregistry
+    image: oceanprotocol/c2d_barge_kind:v0.0.1
     privileged: true
     ports: 
       - 8443:8443
