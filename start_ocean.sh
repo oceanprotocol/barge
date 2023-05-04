@@ -264,6 +264,17 @@ while :; do
             export DEPLOY_SUBGRAPH=false
             printf $COLOR_Y'Ocean subgraph will not be deployed, the last deployment (if any) will be intact ...\n\n'$COLOR_RESET
             ;;
+        --predictoor)
+            #remove everything that is not needed
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dashboard.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/elasticsearch.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ipfs.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/provider.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/redis.yml/}"
+            export CONTRACTS_VERSION=predictoor
+            printf $COLOR_Y'Starting optimized for predictoor...\n\n'$COLOR_RESET
+            ;;
         #################################################
         # Cleaning switches
         #################################################
