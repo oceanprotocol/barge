@@ -136,6 +136,9 @@ export AQUARIUS_LOG_LEVEL=DEBUG
 | `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.        |
 | `--exposeip`               | Binds the components to that specific ip. Example: `./start_ocean.sh --exposeip 192.168.0.1`    |
 | `--with-c2d`               | Runs a local C2D Cluster                                                                        |
+| `--with-dbs`               | Runs local DBS + arweave microservice + filecoin microservice                                   |
+| `--no-dbs-filecoin`        | Starts without filecoin microservices, if --with-dbs option is present                          |
+| `--no-dbs-arweave`         | Starts without arweave microservices, if --with-dbs option is present                           |
 
 
 
@@ -171,6 +174,16 @@ This Building Block can be disabled by setting the `--no-aquarius` flag.
 | Hostname    | External Port | Internal URL          | Local URL             | Description                                         |
 | ----------- | ------------- | --------------------- | --------------------- | --------------------------------------------------- |
 | `graphnode` | `9000`        | http://graphnode:9000 | http://localhost:9000 |  |
+
+
+### DBS
+
+| Hostname       | External Port | Internal Port         | Description                                         |
+| -----------    | ------------- | --------------------- | --------------------------------------------------- |
+| `dbs`          | `26800`       | `8000`                | DBS Backend                                         |
+| `dbs_arweave`  | `28808`       | `8001`                | DBS Arweave                                         |
+| `dbs_filecoin` | `27300`       | `3000`                | DBS Filecoin                                        |
+
 
 ### ocean-contracts
 

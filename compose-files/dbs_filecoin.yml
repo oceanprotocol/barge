@@ -1,0 +1,19 @@
+version: '3'
+services:
+  dbs_filecoin:
+    image: oceanprotocol/dbs_filecoin:${DBS_FILECOIN_VERSION:-latest}
+    ports:
+      - '27300:3000'
+    networks:
+      backend:
+        ipv4_address: 172.15.0.27
+    environment:
+      ACCEPTED_PAYMENTS: "0x2473f4F7bf40ed9310838edFCA6262C17A59DF64"
+      PRIVATE_KEY: "0x1263dc73bef43a9da06149c7e598f52025bf4027f1d6c13896b71e81bb9233fb"
+      DBS_URL: "http://172.15.0.26:8000"
+      RPC: "http://172.15.0.3:8545"
+    volumes:
+      - dbs_filecoin_sqlite3:/usr/src/app/db.sqlite3
+volumes:
+  dbs_filecoin_sqlite3:
+

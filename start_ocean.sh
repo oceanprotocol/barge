@@ -41,6 +41,10 @@ export POD_CONFIGURATION_VERSION=${POD_CONFIGURATION_VERSION:-oceanprotocol/pod-
 export POD_PUBLISHING_VERSION=${POD_PUBLISHING_VERSION:-oceanprotocol/pod-publishing:v4main}
 export WAIT_FOR_C2DIMAGES=${WAIT_FOR_C2DIMAGES:-false}
 
+
+export DBS_VERSION=${DBS_VERSION:-next}
+export DBS_ARWEAVE_VERSION=${DBS_ARWEAVE_VERSION:-next}
+export DBS_FILECOIN_VERSION=${DBS_FILECOIN_VERSION:-next}
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
 
@@ -231,6 +235,20 @@ while :; do
 	    COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ipfs.yml"
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/c2d.yml"
             printf $COLOR_Y'Starting with C2D...\n\n'$COLOR_RESET
+            ;;
+        --with-dbs)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/dbs.yml"
+	        COMPOSE_FILES+=" -f ${COMPOSE_DIR}/dbs_filecoin.yml"
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/dbs_arweave.yml"
+            printf $COLOR_Y'Starting with DBS...\n\n'$COLOR_RESET
+            ;;
+        --no-dbs-filecoin)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dbs_filecoin.yml/}"
+	        printf $COLOR_Y'Starting without DBS Filecoin...\n\n'$COLOR_RESET
+            ;;
+        --no-dbs-arweave)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dbs_arweave.yml/}"
+	        printf $COLOR_Y'Starting without DBS Arweave...\n\n'$COLOR_RESET
             ;;
         --with-rbac)
 	        COMPOSE_FILES+=" -f ${COMPOSE_DIR}/rbac.yml"

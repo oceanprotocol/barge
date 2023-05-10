@@ -1,0 +1,14 @@
+version: '3'
+services:
+  dbs:
+    image: oceanprotocol/dbs:${DBS_VERSION:-latest}
+    ports:
+      - '26800:8000'
+    networks:
+      backend:
+        ipv4_address: 172.15.0.26
+    volumes:
+      - dbs_sqlite3:/usr/src/app/db.sqlite3
+volumes:
+  dbs_sqlite3:
+

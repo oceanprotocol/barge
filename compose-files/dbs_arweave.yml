@@ -1,0 +1,20 @@
+version: '3'
+services:
+  dbs_filecoin:
+    image: oceanprotocol/dbs_arweave:${DBS_ARWEAVE_VERSION:-latest}
+    ports:
+      - '28808:8081'
+    networks:
+      backend:
+        ipv4_address: 172.15.0.28
+    environment:
+      ACCEPTED_PAYMENTS: "0x2473f4F7bf40ed9310838edFCA6262C17A59DF64"
+      NODE_RPC_URIS: "http://172.15.0.3:8545"
+      PRIVATE_KEY: "0xfd5c1ccea015b6d663618850824154a3b3fb2882c46cefb05b9a93fea8c3d215"
+      DBS_URI: "http://172.15.0.26:8000"
+      IPFS_GATEWAY: "http://172.15.0.16:8080/ipfs"
+    volumes:
+      - dbs_filecoin_sqlite3:/usr/src/app/db.sqlite3
+volumes:
+  dbs_filecoin_sqlite3:
+
