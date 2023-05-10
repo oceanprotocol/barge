@@ -184,6 +184,13 @@ This Building Block can be disabled by setting the `--no-aquarius` flag.
 | `dbs_arweave`  | `28808`       | `8001`                | DBS Arweave                                         |
 | `dbs_filecoin` | `27300`       | `3000`                | DBS Filecoin                                        |
 
+To start with DBS, you will need to set a couple of envs, because for the moment, everything runs on mumbai:
+
+```bash
+export DBS_FILECOIN_PRIVATE_KEY='0x123'
+export DBS_ARWEAVE_PRIVATE_KEY='0x123'
+./start_ocean.sh --with-dbs
+```
 
 ### ocean-contracts
 
