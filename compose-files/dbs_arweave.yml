@@ -8,9 +8,9 @@ services:
       backend:
         ipv4_address: 172.15.0.28
     environment:
-      ACCEPTED_PAYMENTS: "0x2473f4F7bf40ed9310838edFCA6262C17A59DF64"
-      NODE_RPC_URIS: "http://172.15.0.3:8545"
-      PRIVATE_KEY: "0xfd5c1ccea015b6d663618850824154a3b3fb2882c46cefb05b9a93fea8c3d215"
+      ACCEPTED_PAYMENTS: "0xd8992Ed72C445c35Cb4A2be468568Ed1079357c8"
+      NODE_RPC_URIS: "https://matic-mumbai.chainstacklabs.com"
+      PRIVATE_KEY: ${DBS_ARWEAVE_PRIVATE_KEY}
       DBS_URI: "http://172.15.0.26:8000"
       IPFS_GATEWAY: "http://172.15.0.16:8080/ipfs"
     volumes:

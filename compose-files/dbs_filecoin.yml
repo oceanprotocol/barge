@@ -8,10 +8,10 @@ services:
       backend:
         ipv4_address: 172.15.0.27
     environment:
-      ACCEPTED_PAYMENTS: "0x2473f4F7bf40ed9310838edFCA6262C17A59DF64"
-      PRIVATE_KEY: "0x1263dc73bef43a9da06149c7e598f52025bf4027f1d6c13896b71e81bb9233fb"
+      ACCEPTED_PAYMENTS: "0xd8992Ed72C445c35Cb4A2be468568Ed1079357c8"
+      PRIVATE_KEY: ${DBS_FILECOIN_PRIVATE_KEY}
       DBS_URL: "http://172.15.0.26:8000"
-      RPC: "http://172.15.0.3:8545"
+      RPC: "https://matic-mumbai.chainstacklabs.com"
     volumes:
       - dbs_filecoin_sqlite3:/usr/src/app/db.sqlite3
 volumes:
