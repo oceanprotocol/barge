@@ -8,8 +8,11 @@
 
 - [Prerequisites](#prerequisites)
 - [Get Started](#get-started)
-- [Options](#options)
+- [Cleanup](#cleanup)
+  - [Troubleshooting](#troubleshootin)
+- [Startup Options](#startup-options)
   - [Component Versions](#component-versions-and-exposed-ports)
+  - [Log levels](#log-levels)
   - [All Options](#all-options)
 - [Docker Building Blocks](#docker-building-blocks)
   - [Aquarius](#aquarius)
@@ -56,9 +59,41 @@ To clean up your environment, you can run
 > ./cleanup.sh
 > ```
 
-This will stop & remove any ocean related containers, then delete any volumes and networks created by barge
+This will stop & remove any ocean related containers, then delete any volumes and networks created by barge.
 
-## Options
+
+### Troubleshooting
+
+If your code using Barge hits `KeyError: "development"`, this is a Barge issue: Barge couldn't deploy the contracts and update `address.json` in `~/.ocean/`. _Further_ cleanup is needed. Further cleanup can fix other issues too. Here are tactics.
+
+Tactic: clean up old Docker containers
+```console
+docker system prune -a --volumes
+```
+
+Tactic: delete Ocean cache, or a sub-directory of it. (This is not part of cleanup.sh in case you want to preserve parts of `~/.ocean/`.)
+```console
+# delete whole cache
+rm -rf ~/.ocean
+
+# OR, delete sub-directory
+# (find the sub-directory, and rm -rf it)
+```
+
+Tactic: Kill redis or postgres processes. Why: they usually have autostart enabled and can interfere with Barge.
+```console
+# use ps. Do as superuser to ensure you see the process.
+sudo ps aux | grep redis
+sudo ps aux | grep postgresql
+
+# If you see unwanted processes, kill them by process id. -9 to force
+kill -9 <pid>
+```
+
+Tactic: reboot your computer. Why: will stop any other unwanted process.
+
+
+## Startup Options
 
 The startup script comes with a set of options for customizing various things.
 
@@ -81,8 +116,6 @@ The default versions are always a combination of component versions which are co
 | Dashboard           |                    | portainer/portainer               | 172.15.0.25     | 9100 -> 9000  |
 | Redis               |                    | bitnami/redis:latest              | 172.15.0.18     | 6379 -> 6379  |
 | C2d                 |                    | multiple components               | 172.15.0.12,172.15.0.13     | 31000 -> 31000  |
-
-
 
 
 You can override the Docker image tag used for a particular component by setting its associated environment variable before calling `start_ocean.sh`:
@@ -136,7 +169,6 @@ export AQUARIUS_LOG_LEVEL=DEBUG
 | `--purge`                  | Removes the Docker containers, volumes, artifact folder and networks used by the script.        |
 | `--exposeip`               | Binds the components to that specific ip. Example: `./start_ocean.sh --exposeip 192.168.0.1`    |
 | `--with-c2d`               | Runs a local C2D Cluster                                                                        |
-
 
 
 ## Docker Building Blocks
