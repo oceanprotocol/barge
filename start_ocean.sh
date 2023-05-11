@@ -125,7 +125,7 @@ if [ ${IP} = "localhost" ]; then
 	if grep -q "aquarius" /etc/hosts; then
     		echo "aquarius exists"
 	else
-    		echo "127.0.0.1 aquarius" | sudo tee -a /etc/hosts
+    		echo "127.0.0.1 aquarius"
 	fi
 fi
 
