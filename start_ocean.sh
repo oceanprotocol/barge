@@ -283,7 +283,7 @@ while :; do
             export SUBGRAPH_VERSION=predictoor
             # replicate true blockchain behiavour
             export GANACHE_INSTAMINE=strict
-            export GANACHE_BLOCKTIME=12
+            export GANACHE_BLOCKTIME=1
             ;;
         #################################################
         # Cleaning switches
