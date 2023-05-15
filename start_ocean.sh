@@ -63,8 +63,13 @@ else
 fi
 export NETWORK_RPC_PORT="8545"
 export NETWORK_RPC_URL="http://"${NETWORK_RPC_HOST}:${NETWORK_RPC_PORT}
+
 # Use this seed on ganache to always create the same wallets
 export GANACHE_MNEMONIC=${GANACHE_MNEMONIC:-"taxi music thumb unique chat sand crew more leg another off lamp"}
+export GANACHE_INSTAMINE=${GANACHE_INSTAMINE:-"eager"}
+export GANACHE_BLOCKTIME=${GANACHE_BLOCKTIME:-0}
+export GANACHE_FORK=${GANACHE_FORK:-"istanbul"}
+
 
 # Ocean contracts
 export OCEAN_HOME="${HOME}/.ocean"
@@ -263,6 +268,22 @@ while :; do
         --skip-subgraph-deploy)
             export DEPLOY_SUBGRAPH=false
             printf $COLOR_Y'Ocean subgraph will not be deployed, the last deployment (if any) will be intact ...\n\n'$COLOR_RESET
+            ;;
+        --predictoor)
+            # Add what we need
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
+            # Remove what is not needed for now
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/provider.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/redis.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/elasticsearch.yml/}"
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dashboard.yml/}"
+            # Enforce images
+            export CONTRACTS_VERSION=predictoor
+            export SUBGRAPH_VERSION=predictoor
+            # replicate true blockchain behiavour
+            export GANACHE_INSTAMINE=strict
+            export GANACHE_BLOCKTIME=12
             ;;
         #################################################
         # Cleaning switches
