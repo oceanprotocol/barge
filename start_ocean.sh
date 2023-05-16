@@ -272,7 +272,7 @@ while :; do
         --predictoor)
             # Add what we need
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
-            # Remove what is not needed for now
+            # We should remove what is not needed for now, but ocean,py requires both aqua & provider
             #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/provider.yml/}"
             #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/redis.yml/}"
             #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}"
