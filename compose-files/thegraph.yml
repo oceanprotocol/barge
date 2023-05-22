@@ -49,6 +49,7 @@ services:
       - ocean-contracts
     volumes:
     - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
+    - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
 volumes:
   graphpgsql:
 

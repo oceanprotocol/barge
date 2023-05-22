@@ -41,6 +41,13 @@ export POD_CONFIGURATION_VERSION=${POD_CONFIGURATION_VERSION:-oceanprotocol/pod-
 export POD_PUBLISHING_VERSION=${POD_PUBLISHING_VERSION:-oceanprotocol/pod-publishing:v4main}
 export WAIT_FOR_C2DIMAGES=${WAIT_FOR_C2DIMAGES:-false}
 
+
+
+export PDR_TRUEVAL_VERSION=${PDR_TRUEVAL_VERSION:-latest}
+export PDR_PREDICTOOR_VERSION=${PDR_PREDICTOOR_VERSION:-latest}
+export PDR_TRADER_VERSION=${PDR_TRADER_VERSION:-latest}
+
+
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
 
@@ -80,6 +87,10 @@ export OCEAN_ARTIFACTS_FOLDER="${OCEAN_HOME}/ocean-contracts/artifacts"
 mkdir -p ${OCEAN_ARTIFACTS_FOLDER}
 export OCEAN_C2D_FOLDER="${OCEAN_HOME}/ocean-c2d/"
 mkdir -p ${OCEAN_C2D_FOLDER}
+export OCEAN_SUBGRAPH_FOLDER="${OCEAN_HOME}/ocean-subgraph/"
+rm -f "${OCEAN_SUBGRAPH_FOLDER}/ready"
+mkdir -p ${OCEAN_SUBGRAPH_FOLDER}
+
 export ADDRESS_FILE="${OCEAN_ARTIFACTS_FOLDER}/address.json"
 echo "export ADDRESS_FILE=${ADDRESS_FILE}"
 
@@ -284,6 +295,18 @@ while :; do
             # replicate true blockchain behiavour
             export GANACHE_INSTAMINE=strict
             export GANACHE_BLOCKTIME=1
+            ;;
+        --with-pdr-trueval)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pdr-trueval.yml"
+            printf $COLOR_Y'Starting with pdr-trueval...\n\n'$COLOR_RESET
+            ;;
+        --with-pdr-trader)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pdr-trader.yml"
+            printf $COLOR_Y'Starting with pdr-trader...\n\n'$COLOR_RESET
+            ;;
+        --with-pdr-predictoor)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pdr-predictoor.yml"
+            printf $COLOR_Y'Starting with pdr-predictoor...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Cleaning switches
