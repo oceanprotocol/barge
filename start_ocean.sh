@@ -46,6 +46,7 @@ export WAIT_FOR_C2DIMAGES=${WAIT_FOR_C2DIMAGES:-false}
 export PDR_TRUEVAL_VERSION=${PDR_TRUEVAL_VERSION:-latest}
 export PDR_PREDICTOOR_VERSION=${PDR_PREDICTOOR_VERSION:-latest}
 export PDR_TRADER_VERSION=${PDR_TRADER_VERSION:-latest}
+export PDR_PUBLISHER_VERSION=${PDR_PUBLISHER_VERSION:-latest}
 
 
 export PROJECT_NAME="ocean"
@@ -307,6 +308,10 @@ while :; do
         --with-pdr-predictoor)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pdr-predictoor.yml"
             printf $COLOR_Y'Starting with pdr-predictoor...\n\n'$COLOR_RESET
+            ;;
+        --with-pdr-publisher)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pdr-publisher.yml"
+            printf $COLOR_Y'Starting with pdr-publisher...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Cleaning switches

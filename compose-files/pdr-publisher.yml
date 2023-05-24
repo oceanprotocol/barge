@@ -1,0 +1,17 @@
+version: '3'
+services:
+  pdr-publisher:
+    image: oceanprotocol/pdr-publisher:${PDR_PUBLISHER_VERSION:-latest}
+    networks:
+      backend:
+        ipv4_address: 172.15.0.43
+    depends_on:
+    - ocean-contracts
+    environment:
+      RPC_URL: ${NETWORK_RPC_URL}
+      ADDRESS_FILE: /root/.ocean/ocean-contracts/artifacts/address.json
+      WAIT_FOR_CONTRACTS: "true"
+    depends_on:
+      - ganache
+    volumes:
+    - ${OCEAN_ARTIFACTS_FOLDER}:/root/.ocean/ocean-contracts/artifacts

@@ -18,6 +18,7 @@ docker container stop docker-registry
 docker container stop ocean_pdr-trader_1
 docker container stop ocean_pdr-predictoor_1
 docker container stop ocean_pdr-trueval_1
+docker container stop ocean_pdr-publisher_1
 docker container rm ocean_aquarius_1
 docker container rm ocean_graph-node_1
 docker container rm ocean_subgraph_1
@@ -37,6 +38,7 @@ docker container rm docker-registry
 docker container rm ocean_pdr-trader_1
 docker container rm ocean_pdr-predictoor_1
 docker container rm ocean_pdr-trueval_1
+docker container rm ocean_pdr-publisher_1
 docker volume rm ocean_graphipfs
 docker volume rm ocean_graphpgsql
 docker volume rm ocean_provider1db
