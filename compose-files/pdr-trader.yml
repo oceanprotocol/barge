@@ -5,8 +5,6 @@ services:
     networks:
       backend:
         ipv4_address: 172.15.0.42
-    depends_on:
-    - ocean-contracts
     environment:
       RPC_URL: ${NETWORK_RPC_URL}
       SUBGRAPH_URL: http://172.15.0.15:8000/subgraphs/name/oceanprotocol/ocean-subgraph
