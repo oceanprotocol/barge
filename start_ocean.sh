@@ -291,7 +291,7 @@ while :; do
             #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/elasticsearch.yml/}"
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dashboard.yml/}"
             # Enforce images
-            export CONTRACTS_VERSION=predictoor
+            export CONTRACTS_VERSION=predictoor2
             export SUBGRAPH_VERSION=predictoor
             # replicate true blockchain behiavour
             export GANACHE_INSTAMINE=strict
