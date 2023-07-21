@@ -11,6 +11,7 @@ services:
       - elasticsearch
       - ocean-contracts
     environment:
+      SUBGRAPH_URLS: ${SUBGRAPH_URLS}
       DB_MODULE: ${DB_MODULE}
       DB_HOSTNAME: ${DB_HOSTNAME}
       DB_PORT: ${DB_PORT}
