@@ -16,7 +16,9 @@ docker container stop ocean_redis_1
 docker container stop ocean_dashboard_1
 docker container stop docker-registry
 docker container stop ocean_pdr-trader_1
-docker container stop ocean_pdr-predictoor_1
+docker container stop ocean_pdr-predictoor1_1
+docker container stop ocean_pdr-predictoor2_1
+docker container stop ocean_pdr-predictoor3_1
 docker container stop ocean_pdr-trueval_1
 docker container stop ocean_pdr-publisher_1
 docker container stop ocean_pdr-dfbuyer_1
@@ -37,7 +39,9 @@ docker container rm ocean_redis_1
 docker container rm ocean_dashboard_1
 docker container rm docker-registry
 docker container rm ocean_pdr-trader_1
-docker container rm ocean_pdr-predictoor_1
+docker container rm ocean_pdr-predictoor1_1
+docker container rm ocean_pdr-predictoor2_1
+docker container rm ocean_pdr-predictoor3_1
 docker container rm ocean_pdr-trueval_1
 docker container rm ocean_pdr-publisher_1
 docker container rm ocean_pdr-dfbuyer_1
