@@ -1,7 +1,8 @@
-version: '3'
+version: "3"
 services:
   pdr-trueval:
-    image: oceanprotocol/pdr-trueval:${PDR_TRUEVAL_VERSION:-latest}
+    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-latest}
+    command: trueval
     networks:
       backend:
         ipv4_address: 172.15.0.40
@@ -14,5 +15,5 @@ services:
     depends_on:
       - ganache
     volumes:
-    - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
-    - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
+      - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
+      - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
