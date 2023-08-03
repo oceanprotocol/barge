@@ -1,7 +1,8 @@
-version: '3'
+version: "3"
 services:
   pdr-predictoor1:
-    image: oceanprotocol/pdr-predictoor:${PDR_PREDICTOOR_VERSION:-latest}
+    image: oceanprotocol/pdr-predictoor:${PDR_BACKEND_VERSION:-latest}
+    command: predictoor
     networks:
       backend:
         ipv4_address: 172.15.0.41
@@ -14,10 +15,11 @@ services:
     depends_on:
       - ganache
     volumes:
-    - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
-    - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
+      - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
+      - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
   pdr-predictoor2:
-    image: oceanprotocol/pdr-predictoor:${PDR_PREDICTOOR_VERSION:-latest}
+    image: oceanprotocol/pdr-predictoor:${PDR_BACKEND_VERSION:-latest}
+    command: predictoor
     networks:
       backend:
         ipv4_address: 172.15.0.45
@@ -30,10 +32,11 @@ services:
     depends_on:
       - ganache
     volumes:
-    - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
-    - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
+      - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
+      - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
   pdr-predictoor3:
-    image: oceanprotocol/pdr-predictoor:${PDR_PREDICTOOR_VERSION:-latest}
+    image: oceanprotocol/pdr-predictoor:${PDR_BACKEND_VERSION:-latest}
+    command: predictoor
     networks:
       backend:
         ipv4_address: 172.15.0.46
@@ -46,5 +49,5 @@ services:
     depends_on:
       - ganache
     volumes:
-    - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
-    - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
+      - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
+      - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
