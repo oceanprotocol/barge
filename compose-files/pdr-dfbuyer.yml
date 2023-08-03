@@ -13,6 +13,7 @@ services:
       WAIT_FOR_SUBGRAPH: "true"
       WEEKLY_SPEND_LIMIT: 10000
       DELAYED_STARTUP: 120
+      ADDRESS_FILE: /ocean-contracts/artifacts/address.json
     depends_on:
       - ganache
     volumes:
