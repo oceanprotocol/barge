@@ -1,7 +1,7 @@
 version: "3"
 services:
   pdr-predictoor1:
-    image: oceanprotocol/pdr-predictoor:${PDR_BACKEND_VERSION:-latest}
+    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-latest}
     command: predictoor
     networks:
       backend:
@@ -18,7 +18,7 @@ services:
       - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
       - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
   pdr-predictoor2:
-    image: oceanprotocol/pdr-predictoor:${PDR_BACKEND_VERSION:-latest}
+    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-latest}
     command: predictoor
     networks:
       backend:
@@ -35,7 +35,7 @@ services:
       - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
       - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
   pdr-predictoor3:
-    image: oceanprotocol/pdr-predictoor:${PDR_BACKEND_VERSION:-latest}
+    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-latest}
     command: predictoor
     networks:
       backend:
