@@ -1,7 +1,8 @@
 version: '3'
 services:
   pdr-publisher:
-    image: oceanprotocol/pdr-publisher:${PDR_PUBLISHER_VERSION:-latest}
+    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-latest}
+    command: publisher
     networks:
       backend:
         ipv4_address: 172.15.0.43
