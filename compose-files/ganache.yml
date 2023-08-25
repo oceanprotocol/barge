@@ -7,4 +7,4 @@ services:
     networks:
       backend:
         ipv4_address: 172.15.0.3
-    entrypoint: ["node","/app/dist/node/cli.js","--database.dbPath", "./ganache_cache","--chain.chainId","0x2324","--chain.networkId","0x2324","-l","10000000000","-g","1","--chain.hardfork","istanbul","--miner.blockTime","0","--miner.instamine", "eager","--wallet.mnemonic","${GANACHE_MNEMONIC}", "-e","1000000"]
+    entrypoint: ["node","/app/dist/node/cli.js","--database.dbPath", "./ganache_cache","--chain.chainId","0x2324","--chain.networkId","0x2324","-l","10000000000","-g","1","--chain.hardfork","${GANACHE_HARDFORK}","--miner.blockTime","0","--miner.instamine", "eager","--wallet.mnemonic","${GANACHE_MNEMONIC}", "-e","1000000"]
