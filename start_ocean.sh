@@ -287,7 +287,7 @@ while :; do
             #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/elasticsearch.yml/}"
             #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dashboard.yml/}"
             # Enforce images
-            export CONTRACTS_VERSION=predictoor3
+            export CONTRACTS_VERSION=predictoor
             export SUBGRAPH_VERSION=predictoor3
             export PDR_BACKEND_VERSION=${PDR_BACKEND_VERSION:-latest}
 
