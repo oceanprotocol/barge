@@ -36,6 +36,12 @@ You need to have the newest versions of:
   - On Windows or MacOS, [increase memory to 4 GB (default is 2 GB)](https://stackoverflow.com/a/44533437). Or, for C2D, make it 8 to 16 GB
 - [Docker Compose](https://docs.docker.com/compose/)
 
+For compatibility with Docker Compose V2, use the following script
+
+```bash
+echo 'docker compose --compatibility "$@"' | sudo tee -a /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
+```
+
 ## Get Started
 
 If you're new to Barge, it's best to start with the defaults:
