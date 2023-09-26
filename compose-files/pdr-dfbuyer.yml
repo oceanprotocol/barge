@@ -1,7 +1,8 @@
-version: '3'
+version: "3"
 services:
   pdr-dfbuyer:
-    image: oceanprotocol/pdr-dfbuyer:${PDR_DFBUYER_VERSION:-latest}
+    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-latest}
+    command: dfbuyer
     networks:
       backend:
         ipv4_address: 172.15.0.44
@@ -12,8 +13,9 @@ services:
       WAIT_FOR_SUBGRAPH: "true"
       WEEKLY_SPEND_LIMIT: 10000
       DELAYED_STARTUP: 120
+      ADDRESS_FILE: /ocean-contracts/artifacts/address.json
     depends_on:
       - ganache
     volumes:
-    - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
-    - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
+      - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
+      - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/

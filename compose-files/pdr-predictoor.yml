@@ -1,7 +1,8 @@
-version: '3'
+version: "3"
 services:
   pdr-predictoor1:
-    image: oceanprotocol/pdr-predictoor:${PDR_PREDICTOOR_VERSION:-latest}
+    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-latest}
+    command: predictoor
     networks:
       backend:
         ipv4_address: 172.15.0.41
@@ -11,13 +12,15 @@ services:
       PRIVATE_KEY: "0xef4b441145c1d0f3b4bc6d61d29f5c6e502359481152f869247c7a4244d45209"
       WAIT_FOR_SUBGRAPH: "true"
       DELAYED_STARTUP: 120
+      ADDRESS_FILE: /ocean-contracts/artifacts/address.json
     depends_on:
       - ganache
     volumes:
-    - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
-    - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
+      - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
+      - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
   pdr-predictoor2:
-    image: oceanprotocol/pdr-predictoor:${PDR_PREDICTOOR_VERSION:-latest}
+    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-latest}
+    command: predictoor
     networks:
       backend:
         ipv4_address: 172.15.0.45
@@ -27,13 +30,15 @@ services:
       PRIVATE_KEY: "0x4ed947ad7e139926e31a6442d55b2e99d141f97f46151a8769d57f514f3db868"
       WAIT_FOR_SUBGRAPH: "true"
       DELAYED_STARTUP: 120
+      ADDRESS_FILE: /ocean-contracts/artifacts/address.json
     depends_on:
       - ganache
     volumes:
-    - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
-    - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
+      - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
+      - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
   pdr-predictoor3:
-    image: oceanprotocol/pdr-predictoor:${PDR_PREDICTOOR_VERSION:-latest}
+    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-latest}
+    command: predictoor
     networks:
       backend:
         ipv4_address: 172.15.0.46
@@ -43,8 +48,9 @@ services:
       PRIVATE_KEY: "0xa50c16d96ed01ac8f967b77b01b1fa94f751c4c600b564fd770e239ebd7d869d"
       WAIT_FOR_SUBGRAPH: "true"
       DELAYED_STARTUP: 120
+      ADDRESS_FILE: /ocean-contracts/artifacts/address.json
     depends_on:
       - ganache
     volumes:
-    - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
-    - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
+      - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
+      - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/

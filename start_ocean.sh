@@ -41,13 +41,8 @@ export POD_CONFIGURATION_VERSION=${POD_CONFIGURATION_VERSION:-oceanprotocol/pod-
 export POD_PUBLISHING_VERSION=${POD_PUBLISHING_VERSION:-oceanprotocol/pod-publishing:v4main}
 export WAIT_FOR_C2DIMAGES=${WAIT_FOR_C2DIMAGES:-false}
 
-
-
-export PDR_TRUEVAL_VERSION=${PDR_TRUEVAL_VERSION:-latest}
-export PDR_PREDICTOOR_VERSION=${PDR_PREDICTOOR_VERSION:-latest}
-export PDR_TRADER_VERSION=${PDR_TRADER_VERSION:-latest}
 export PDR_PUBLISHER_VERSION=${PDR_PUBLISHER_VERSION:-latest}
-export PDR_DFBUYER_VERSION=${PDR_DFBUYER_VERSION:-latest}
+export PDR_BACKEND_VERSION=${PDR_BACKEND_VERSION:-latest}
 
 
 export PROJECT_NAME="ocean"
@@ -292,41 +287,14 @@ while :; do
             #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/elasticsearch.yml/}"
             #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dashboard.yml/}"
             # Enforce images
-            export CONTRACTS_VERSION=predictoor2
+            export CONTRACTS_VERSION=predictoor
             export SUBGRAPH_VERSION=predictoor
-            export PDR_TRUEVAL_VERSION=v0.0.1
-            export PDR_PREDICTOOR_VERSION=v0.0.1
-            export PDR_TRADER_VERSION=v0.0.1
-            export PDR_PUBLISHER_VERSION=v0.0.1
-            export PDR_DFBUYER_VERSION=v0.0.1
+            export PDR_BACKEND_VERSION=${PDR_BACKEND_VERSION:-latest}
 
             # replicate true blockchain behiavour
             export GANACHE_INSTAMINE=strict
             export GANACHE_BLOCKTIME=1
             ;;
-        --new-predictoor)
-            # Add what we need
-            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
-            # We should remove what is not needed for now, but ocean,py requires both aqua & provider
-            #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/provider.yml/}"
-            #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/redis.yml/}"
-            #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}"
-            #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/elasticsearch.yml/}"
-            #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dashboard.yml/}"
-            # Enforce images
-            export CONTRACTS_VERSION=predictoor3
-            export SUBGRAPH_VERSION=predictoor3
-            export PDR_TRUEVAL_VERSION=${PDR_TRUEVAL_VERSION:-latest}
-            export PDR_PREDICTOOR_VERSION=${PDR_PREDICTOOR_VERSION:-latest}
-            export PDR_TRADER_VERSION=${PDR_TRADER_VERSION:-latest}
-            export PDR_PUBLISHER_VERSION=${PDR_PUBLISHER_VERSION:-latest}
-            export PDR_DFBUYER_VERSION=${PDR_DFBUYER_VERSION:-latest}
-
-            # replicate true blockchain behiavour
-            export GANACHE_INSTAMINE=strict
-            export GANACHE_BLOCKTIME=1
-            ;;
-
         --with-pdr-trueval)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pdr-trueval.yml"
             printf $COLOR_Y'Starting with pdr-trueval...\n\n'$COLOR_RESET
