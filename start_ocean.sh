@@ -31,7 +31,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v5.1.0}
 export ELASTICSEARCH_VERSION=${ELASTICSEARCH_VERSION:-8.5.1}
 export PROVIDER_VERSION=${PROVIDER_VERSION:-v2.0.1}
-export SUBGRAPH_VERSION=${SUBGRAPH_VERSION:-v3.0.3}
+export SUBGRAPH_VERSION=${SUBGRAPH_VERSION:-v4.0.2}
 export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v2.0.2}
 export RBAC_VERSION=${RBAC_VERSION:-next}
 
@@ -287,8 +287,8 @@ while :; do
             #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/elasticsearch.yml/}"
             #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dashboard.yml/}"
             # Enforce images
-            export CONTRACTS_VERSION=predictoor
-            export SUBGRAPH_VERSION=predictoor
+            #export CONTRACTS_VERSION=predictoor
+            #export SUBGRAPH_VERSION=predictoor
             export PDR_BACKEND_VERSION=${PDR_BACKEND_VERSION:-latest}
 
             # replicate true blockchain behiavour
