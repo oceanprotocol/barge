@@ -1,0 +1,21 @@
+version: "3"
+services:
+  pdr-dfbuyer:
+    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-latest}
+    command: dfbuyer
+    networks:
+      backend:
+        ipv4_address: 172.15.0.44
+    environment:
+      RPC_URL: ${NETWORK_RPC_URL}
+      SUBGRAPH_URL: http://172.15.0.15:8000/subgraphs/name/oceanprotocol/ocean-subgraph
+      PRIVATE_KEY: "0x1f990f8b013fc5c7955e0f8746f11ded231721b9cf3f99ff06cdc03492b28090"
+      WAIT_FOR_SUBGRAPH: "true"
+      WEEKLY_SPEND_LIMIT: 10000
+      DELAYED_STARTUP: 120
+      ADDRESS_FILE: /ocean-contracts/artifacts/address.json
+    depends_on:
+      - ganache
+    volumes:
+      - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
+      - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/

@@ -42,6 +42,10 @@ export POD_CONFIGURATION_VERSION=${POD_CONFIGURATION_VERSION:-oceanprotocol/pod-
 export POD_PUBLISHING_VERSION=${POD_PUBLISHING_VERSION:-oceanprotocol/pod-publishing:v4main}
 export WAIT_FOR_C2DIMAGES=${WAIT_FOR_C2DIMAGES:-false}
 
+export PDR_PUBLISHER_VERSION=${PDR_PUBLISHER_VERSION:-latest}
+export PDR_BACKEND_VERSION=${PDR_BACKEND_VERSION:-latest}
+
+
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
 
@@ -64,9 +68,12 @@ else
 fi
 export NETWORK_RPC_PORT="8545"
 export NETWORK_RPC_URL="http://"${NETWORK_RPC_HOST}:${NETWORK_RPC_PORT}
+
 # Use this seed on ganache to always create the same wallets
 export GANACHE_MNEMONIC=${GANACHE_MNEMONIC:-"taxi music thumb unique chat sand crew more leg another off lamp"}
-export GANACHE_HARDFORK=${GANACHE_HARDFORK:-"istanbul"}
+export GANACHE_INSTAMINE=${GANACHE_INSTAMINE:-"eager"}
+export GANACHE_BLOCKTIME=${GANACHE_BLOCKTIME:-0}
+export GANACHE_FORK=${GANACHE_FORK:-"istanbul"}
 # Ocean contracts
 export OCEAN_HOME="${HOME}/.ocean"
 export CONTRACTS_OWNER_ROLE_ADDRESS="${CONTRACTS_OWNER_ROLE_ADDRESS}"
@@ -76,6 +83,10 @@ export OCEAN_ARTIFACTS_FOLDER="${OCEAN_HOME}/ocean-contracts/artifacts"
 mkdir -p ${OCEAN_ARTIFACTS_FOLDER}
 export OCEAN_C2D_FOLDER="${OCEAN_HOME}/ocean-c2d/"
 mkdir -p ${OCEAN_C2D_FOLDER}
+export OCEAN_SUBGRAPH_FOLDER="${OCEAN_HOME}/ocean-subgraph/"
+rm -f "${OCEAN_SUBGRAPH_FOLDER}/ready"
+mkdir -p ${OCEAN_SUBGRAPH_FOLDER}
+
 export ADDRESS_FILE="${OCEAN_ARTIFACTS_FOLDER}/address.json"
 echo "export ADDRESS_FILE=${ADDRESS_FILE}"
 
@@ -253,6 +264,44 @@ while :; do
         --skip-subgraph-deploy)
             export DEPLOY_SUBGRAPH=false
             printf $COLOR_Y'Ocean subgraph will not be deployed, the last deployment (if any) will be intact ...\n\n'$COLOR_RESET
+            ;;
+        --predictoor)
+            # Add what we need
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
+            # We should remove what is not needed for now, but ocean,py requires both aqua & provider
+            #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/provider.yml/}"
+            #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/redis.yml/}"
+            #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/aquarius.yml/}"
+            #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/elasticsearch.yml/}"
+            #COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/dashboard.yml/}"
+            # Enforce images
+            #export CONTRACTS_VERSION=predictoor
+            #export SUBGRAPH_VERSION=predictoor
+            export PDR_BACKEND_VERSION=${PDR_BACKEND_VERSION:-latest}
+
+            # replicate true blockchain behiavour
+            export GANACHE_INSTAMINE=strict
+            export GANACHE_BLOCKTIME=1
+            ;;
+        --with-pdr-trueval)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pdr-trueval.yml"
+            printf $COLOR_Y'Starting with pdr-trueval...\n\n'$COLOR_RESET
+            ;;
+        --with-pdr-trader)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pdr-trader.yml"
+            printf $COLOR_Y'Starting with pdr-trader...\n\n'$COLOR_RESET
+            ;;
+        --with-pdr-predictoor)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pdr-predictoor.yml"
+            printf $COLOR_Y'Starting with pdr-predictoor...\n\n'$COLOR_RESET
+            ;;
+        --with-pdr-publisher)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pdr-publisher.yml"
+            printf $COLOR_Y'Starting with pdr-publisher...\n\n'$COLOR_RESET
+            ;;
+        --with-pdr-dfbuyer)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/pdr-dfbuyer.yml"
+            printf $COLOR_Y'Starting with pdr-dfbuyer...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Cleaning switches
