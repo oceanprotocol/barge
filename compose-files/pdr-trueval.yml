@@ -1,0 +1,20 @@
+version: "3"
+services:
+  pdr-trueval:
+    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-latest}
+    command: trueval
+    networks:
+      backend:
+        ipv4_address: 172.15.0.40
+    environment:
+      RPC_URL: ${NETWORK_RPC_URL}
+      SUBGRAPH_URL: http://172.15.0.15:8000/subgraphs/name/oceanprotocol/ocean-subgraph
+      PRIVATE_KEY: "0xc594c6e5def4bab63ac29eed19a134c130388f74f019bc74b8f4389df2837a58"
+      WAIT_FOR_SUBGRAPH: "true"
+      DELAYED_STARTUP: 120
+      ADDRESS_FILE: /ocean-contracts/artifacts/address.json
+    depends_on:
+      - ganache
+    volumes:
+      - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
+      - ${OCEAN_SUBGRAPH_FOLDER}:/ocean-subgraph/
