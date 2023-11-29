@@ -28,9 +28,9 @@ COMPOSE_DIR="${DIR}/compose-files"
 
 # Default versions of Aquarius, Provider
 
-export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v5.1.0}
+export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v5.1.5}
 export ELASTICSEARCH_VERSION=${ELASTICSEARCH_VERSION:-8.5.1}
-export PROVIDER_VERSION=${PROVIDER_VERSION:-v2.0.1}
+export PROVIDER_VERSION=${PROVIDER_VERSION:-v2.1.3}
 export SUBGRAPH_VERSION=${SUBGRAPH_VERSION:-v4.0.2}
 export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v2.0.2}
 export RBAC_VERSION=${RBAC_VERSION:-next}
@@ -73,8 +73,6 @@ export GANACHE_MNEMONIC=${GANACHE_MNEMONIC:-"taxi music thumb unique chat sand c
 export GANACHE_INSTAMINE=${GANACHE_INSTAMINE:-"eager"}
 export GANACHE_BLOCKTIME=${GANACHE_BLOCKTIME:-0}
 export GANACHE_FORK=${GANACHE_FORK:-"istanbul"}
-
-
 # Ocean contracts
 export OCEAN_HOME="${HOME}/.ocean"
 export CONTRACTS_OWNER_ROLE_ADDRESS="${CONTRACTS_OWNER_ROLE_ADDRESS}"
@@ -130,17 +128,6 @@ fi
 
 #export OPERATOR_SERVICE_URL=http://127.0.0.1:8050
 export OPERATOR_SERVICE_URL=${OPERATOR_SERVICE_URL:-"http://172.15.0.13:31000/"}
-
-# Add aquarius to /etc/hosts
-# Workaround mainly for macOS
-
-if [ ${IP} = "localhost" ]; then
-	if grep -q "aquarius" /etc/hosts; then
-    		echo "aquarius exists"
-	else
-    		echo "127.0.0.1 aquarius" | sudo tee -a /etc/hosts
-	fi
-fi
 
 # colors
 COLOR_R="\033[0;31m"    # red
