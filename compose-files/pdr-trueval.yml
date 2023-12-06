@@ -1,7 +1,7 @@
 version: "3"
 services:
   pdr-trueval:
-    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-latest}
+    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-yaml-cli2}
     command: trueval ppss.yaml development
     networks:
       backend:
