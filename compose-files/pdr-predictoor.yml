@@ -1,7 +1,7 @@
 version: "3"
 services:
   pdr-predictoor1:
-    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-yaml-cli2}
+    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-latest}
     command: predictoor 1 ppss.yaml development
     networks:
       backend:

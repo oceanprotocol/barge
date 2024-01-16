@@ -1,7 +1,7 @@
 version: "3"
 services:
   pdr-dfbuyer:
-    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-yaml-cli2}
+    image: oceanprotocol/pdr-backend:${PDR_BACKEND_VERSION:-latest}
     command: dfbuyer ppss.yaml development
     networks:
       backend:
