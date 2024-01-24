@@ -31,6 +31,12 @@ COMPOSE_DIR="${DIR}/compose-files"
 export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v2.0.3}
 export TYPESENSE_VERSION=${TYPESENSE_VERSION:-0.25.1}
 
+export OPERATOR_SERVICE_VERSION=${OPERATOR_SERVICE_VERSION:-oceanprotocol/operator-service:v4main}
+export OPERATOR_ENGINE_VERSION=${OPERATOR_ENGINE_VERSION:-oceanprotocol/operator-engine:v4main}
+export POD_CONFIGURATION_VERSION=${POD_CONFIGURATION_VERSION:-oceanprotocol/pod-configuration:v4main}
+export POD_PUBLISHING_VERSION=${POD_PUBLISHING_VERSION:-oceanprotocol/pod-publishing:v4main}
+export WAIT_FOR_C2DIMAGES=${WAIT_FOR_C2DIMAGES:-false}
+
 export PROJECT_NAME="ocean"
 export FORCEPULL="false"
 
@@ -156,6 +162,16 @@ while :; do
         --skip-deploy)
             export DEPLOY_CONTRACTS=false
             printf $COLOR_Y'Ocean contracts will not be deployed, the last deployment (if any) will be intact ...\n\n'$COLOR_RESET
+            ;;
+        --with-registry)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/registry.yml"
+            printf $COLOR_Y'Starting with Registry...\n\n'$COLOR_RESET
+            ;;
+        --with-c2d)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/registry.yml"
+	        COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ipfs.yml"
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/c2d.yml"
+            printf $COLOR_Y'Starting with C2D...\n\n'$COLOR_RESET
             ;;
         #################################################
         # Cleaning switches
