@@ -31,6 +31,8 @@ COMPOSE_DIR="${DIR}/compose-files"
 export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v2.0.4}
 export TYPESENSE_VERSION=${TYPESENSE_VERSION:-0.25.1}
 
+export GRAPH_NODE_VERSION=${GRAPH_NODE_VERSION:-v0.33.0}
+
 export OPERATOR_SERVICE_VERSION=${OPERATOR_SERVICE_VERSION:-oceanprotocol/operator-service:v4main}
 export OPERATOR_ENGINE_VERSION=${OPERATOR_ENGINE_VERSION:-oceanprotocol/operator-engine:v4main}
 export POD_CONFIGURATION_VERSION=${POD_CONFIGURATION_VERSION:-oceanprotocol/pod-configuration:v4main}
@@ -64,10 +66,15 @@ export GANACHE_HARDFORK=${GANACHE_HARDFORK:-"istanbul"}
 export OCEAN_HOME="${HOME}/.ocean"
 export CONTRACTS_OWNER_ROLE_ADDRESS="${CONTRACTS_OWNER_ROLE_ADDRESS}"
 export DEPLOY_CONTRACTS=true
+export DEPLOY_SUBGRAPH=true
 export OCEAN_ARTIFACTS_FOLDER="${OCEAN_HOME}/ocean-contracts/artifacts"
 mkdir -p ${OCEAN_ARTIFACTS_FOLDER}
 export OCEAN_C2D_FOLDER="${OCEAN_HOME}/ocean-c2d/"
 mkdir -p ${OCEAN_C2D_FOLDER}
+export OCEAN_SUBGRAPH_FOLDER="${OCEAN_HOME}/ocean-subgraph/"
+rm -f "${OCEAN_SUBGRAPH_FOLDER}/ready"
+mkdir -p ${OCEAN_SUBGRAPH_FOLDER}
+
 export ADDRESS_FILE="${OCEAN_ARTIFACTS_FOLDER}/address.json"
 echo "export ADDRESS_FILE=${ADDRESS_FILE}"
 
@@ -166,6 +173,10 @@ while :; do
         --with-registry)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/registry.yml"
             printf $COLOR_Y'Starting with Registry...\n\n'$COLOR_RESET
+            ;;
+        --with-thegraph)
+            COMPOSE_FILES+=" -f ${COMPOSE_DIR}/thegraph.yml"
+            printf $COLOR_Y'Starting with TheGraph...\n\n'$COLOR_RESET
             ;;
         --with-c2d)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/registry.yml"
