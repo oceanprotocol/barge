@@ -178,7 +178,7 @@ while :; do
         #################################################
         --purge)
             printf $COLOR_R'Doing a deep clean ...\n\n'$COLOR_RESET
-            eval docker-compose --project-name=$PROJECT_NAME "$COMPOSE_FILES" down
+            eval docker compose --project-name=$PROJECT_NAME "$COMPOSE_FILES" down
             docker network rm ${PROJECT_NAME}_default || true
             docker network rm ${PROJECT_NAME}_backend || true
             ;;
