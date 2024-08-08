@@ -106,6 +106,7 @@ The default versions are always a combination of component versions which are co
 | ocean-contracts     |                    | v2.0.2                            | 172.15.0.14     |               |
 | Aquarius            |                    | v5.1.4                            | 172.15.0.5      | 5000 -> 5000  |
 | Elasticsearch       |  Aquarius          | 8.5.1                             | 172.15.0.6      |               |
+| Typesense           |  Ocean-node        | 0.25.1                            | 172.15.0.20     | 8108 -> 8108  |
 | Provider            |                    | v2.1.6                            | 172.15.0.4      | 8030 -> 8030  |
 | Provider2           |                    | v2.1.6                            | 172.15.0.7      | 8030 -> 8030  |
 | RBAC Server         |                    | main                              | 172.15.0.8      | 3000 -> 3000  |
@@ -155,7 +156,8 @@ export AQUARIUS_LOG_LEVEL=DEBUG
 | Option                     | Description                                                                                     |
 | -------------------------- | ----------------------------------------------------------------------------------------------- |
 | `--no-aquarius`            | Start up Ocean without the `aquarius` Building Block.                                           |
-| `--no-elasticsearch`        | Start up Ocean without the `elasticsearch` Building Block.                                      |
+| `--no-elasticsearch`       | Start up Ocean without the `elasticsearch` Building Block.                                      |
+| `--with-typesense`         | Start up Ocean with Typesense |
 | `--no-provider`            | Start up Ocean without the `provider` Building Block.                                           |
 | `--no-ipfs`                | Start up Ocean without the `ipfs` Building Block                                                |
 | `--with-provider2`         | Runs a 2nd provider, on port 8031. This is required for ocean.js/ocean.py integration tests. 2nd Provider will use the same image and parameters (log_level, ipfs gateway, compute gateway, etc) as provider1, but has a different private key     |

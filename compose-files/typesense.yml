@@ -1,0 +1,14 @@
+version: '3'
+services:
+  typesense:
+    image: typesense/typesense:${TYPESENSE_VERSION:-latest}
+    ports:
+      - 8108:8108
+    networks:
+      backend:
+        ipv4_address: 172.15.0.20
+    volumes:
+    - typesense-data:/data
+    command: '--data-dir /data --api-key=xyz'
+volumes:
+  typesense-data:

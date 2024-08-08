@@ -27,7 +27,7 @@ DIR="${DIR/ /\\ }"
 COMPOSE_DIR="${DIR}/compose-files"
 
 # Default versions of Aquarius, Provider
-
+export TYPESENSE_VERSION=${TYPESENSE_VERSION:-0.25.1}
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v5.1.5}
 export ELASTICSEARCH_VERSION=${ELASTICSEARCH_VERSION:-8.5.1}
 export PROVIDER_VERSION=${PROVIDER_VERSION:-v2.1.6}
@@ -226,6 +226,10 @@ while :; do
         --with-registry)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/registry.yml"
             printf $COLOR_Y'Starting with Registry...\n\n'$COLOR_RESET
+            ;;
+        --with-typesense)
+	        COMPOSE_FILES+=" -f ${COMPOSE_DIR}/typesense.yml"
+            printf $COLOR_Y'Starting with Typesense...\n\n'$COLOR_RESET
             ;;
         --with-c2d)
             COMPOSE_FILES+=" -f ${COMPOSE_DIR}/registry.yml"
