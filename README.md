@@ -103,7 +103,7 @@ The default versions are always a combination of component versions which are co
 | Component name      | Required by        | Version                           | IP Address      | Ports exposed |
 | --------------      | ------------------ | --------------------------------- | --------------- | ------------- |
 | ganache             |  ocean-contracts   | latest                            | 172.15.0.3      | 8545 -> 8545  |
-| ocean-contracts     |                    | v2.2.0                            | 172.15.0.14     |               |
+| ocean-contracts     |                    | v2.2.1                            | 172.15.0.14     |               |
 | Aquarius            |                    | v5.1.4                            | 172.15.0.5      | 5000 -> 5000  |
 | Elasticsearch       |  Aquarius          | 8.5.1                             | 172.15.0.6      |               |
 | Typesense           |  Ocean-node        | 0.25.1                            | 172.15.0.20     | 8108 -> 8108  |
