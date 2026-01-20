@@ -18,6 +18,8 @@ services:
     environment:
       DB_TYPE: 'elasticsearch'
       DB_URL: ${DB_URL}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
       PRIVATE_KEY: ${NODE_PRIVATE_KEY}
       IPFS_GATEWAY: ${IPFS_GATEWAY}
       ARWEAVE_GATEWAY: https://arweave.net/
