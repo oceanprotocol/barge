@@ -97,7 +97,9 @@ export IPFS_HTTP_GATEWAY=http://172.15.0.16:8080/ipfs/
 #Node
 export NODE_PRIVATE_KEY=0xfd5c1ccea015b6d663618850824154a3b3fb2882c46cefb05b9a93fea8c3d215
 
-
+# Elasticsearch settings
+export ELASTICSEARCH_USERNAME='elastic'
+export ELASTIC_PASSWORD='changeme'
 
 # colors
 COLOR_R="\033[0;31m"    # red
