@@ -1,7 +1,7 @@
 version: '3'
 services:
   node:
-    image: oceanprotocol/ocean-node:${NODE_VERSION:-latest}
+    image: oceanprotocol/ocean-node:pr-1207
     ports:
       - 8000:8000
       - 8001:8001
