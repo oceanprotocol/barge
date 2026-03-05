@@ -23,7 +23,7 @@ set -e
 
 # Patch $DIR if spaces
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
-DIR="${DIR/ /\\ }"
+DIR="${DIR//\ /\\ }"
 COMPOSE_DIR="${DIR}/compose-files"
 
 # Default versions
