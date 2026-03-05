@@ -1,0 +1,24 @@
+version: '3'
+services:
+  storage:
+    image: oceanprotocol/barge:main-storage
+    ports:
+      - "80:80"
+      - "443:443"
+      - "20-21:20-21"
+      - "6789:6789"        # Ceph MON
+      - "6800-6900:6800-6900"  # Ceph OSD/MGR
+      - "7480:7480"        # Ceph RGW (S3 + Swift)
+    networks:
+      ocean_backend:
+        ipv4_address: 172.15.0.7
+    volumes:
+    - www:/var/www/html
+    - ftp:/srv/ftp
+    - ceph_data:/data
+
+volumes:
+  www:
+  ftp:
+  ceph_data:
+

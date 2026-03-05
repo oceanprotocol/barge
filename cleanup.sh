@@ -8,6 +8,7 @@ docker container stop ocean-ganache-1
 docker container stop ocean-faucet-1
 docker container stop ocean-dashboard-1
 docker container stop docker-registry
+docker container stop ocean-storage-1
 
 docker container rm ocean-node-1
 docker container rm ocean-ipfs-1
@@ -18,11 +19,15 @@ docker container rm ocean-ganache-1
 docker container rm ocean-faucet-1
 docker container rm ocean-dashboard-1
 docker container rm docker-registry
+docker container rm ocean-storage-1
 
 docker volume rm ocean-graphipfs
 docker volume rm ocean-graphpgsql
 docker volume rm ocean-provider1db
 docker volume rm ocean-provider2db
+docker volume rm ocean_ceph_data
+docker volume rm ocean_ftp
+docker volume rm ocean_www
 
 docker network rm ocean_backend
 docker volume rm $(docker volume ls -q)
