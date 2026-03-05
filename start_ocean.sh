@@ -73,6 +73,13 @@ export OCEAN_CERTS_FOLDER="${OCEAN_HOME}/ocean-certs/"
 mkdir -p ${OCEAN_CERTS_FOLDER}
 # copy certs
 cp -r ./certs/* ${OCEAN_CERTS_FOLDER}
+
+#www folder
+export OCEAN_WWW_FOLDER="${OCEAN_HOME}/storage-www/"
+mkdir -p ${OCEAN_WWW_FOLDER}
+#ftp folder
+export OCEAN_FTP_FOLDER="${OCEAN_HOME}/storage-ftp/"
+mkdir -p ${OCEAN_FTP_FOLDER}
 # Specify which ethereum client to run or connect to: development
 export CONTRACTS_NETWORK_NAME="development"
 
@@ -161,6 +168,7 @@ COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ipfs.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ganache.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/ocean_contracts.yml"
 COMPOSE_FILES+=" -f ${COMPOSE_DIR}/node.yml"
+COMPOSE_FILES+=" -f ${COMPOSE_DIR}/storage.yml"
 
 DOCKER_COMPOSE_EXTRA_OPTS="${DOCKER_COMPOSE_EXTRA_OPTS:-}"
 
@@ -201,6 +209,10 @@ while :; do
         --no-ipfs)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/ipfs.yml/}"
 	        printf $COLOR_Y'Starting without IPFS...\n\n'$COLOR_RESET
+            ;;
+        --no-storage)
+            COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/storage.yml/}"
+	        printf $COLOR_Y'Starting without Storage...\n\n'$COLOR_RESET
             ;;
         --no-elasticsearch)
             COMPOSE_FILES="${COMPOSE_FILES/ -f ${COMPOSE_DIR}\/elasticsearch.yml/}"

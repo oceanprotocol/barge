@@ -1,0 +1,121 @@
+name: Build additional barge modules
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
+    tags:
+      - 'v*.*.*'
+  pull_request:
+    branches:
+      - 'main'
+
+env:
+  DOCKERHUB_IMAGE: ${{ 'oceanprotocol/barge' }}
+  GHCR_IMAGE: ${{ 'ghcr.io/oceanprotocol/barge' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # Only run when not from dependabot and when the Dockerfile for this matrix component exists
+    if: ${{ github.actor != 'dependabot[bot]'}}
+    strategy:
+      fail-fast: false
+      matrix:
+        # we keep this just in case we need to change
+        platform: ${{ github.event_name == 'pull_request' && fromJSON('["linux/amd64"]') || fromJSON('["linux/amd64"]') }}
+        component:
+          - folder: "./additional-modules/storage/"
+            tag: "-storage"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Prepare
+        run: |
+          platform=${{ matrix.platform }}
+          echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: ${{ matrix.platform }}
+          #image: tonistiigi/binfmt:qemu-v8.0.4
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          platforms: ${{ matrix.platform }}
+      - name: Login to Docker Hub
+        id: dockerhub_login
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_PUSH_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKER_PUSH_TOKEN }}
+        if: env.DOCKERHUB_USERNAME != '' && env.DOCKERHUB_TOKEN != ''
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_PUSH_USERNAME }}
+          password: ${{ secrets.DOCKER_PUSH_TOKEN }}
+      - name: Login to GitHub Container Registry
+        id: ghcr_login
+        env:
+          GHCR_PUSH_TOKEN: ${{ secrets.GHCR_PUSH_TOKEN }}
+        if: env.GHCR_PUSH_TOKEN != ''
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GHCR_PUSH_TOKEN }}
+      - name: Process tag
+        id: process_tag
+        run: |
+          TAG="${{ matrix.component.tag }}"
+          PROCESSED_TAG="${TAG:1}"
+          echo "processed_tag=${PROCESSED_TAG}" >> $GITHUB_OUTPUT
+      - name: Set Docker metadata
+        id: ocean_node_meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ${{ env.DOCKERHUB_IMAGE }}
+            ${{ env.GHCR_IMAGE }}
+          # generate Docker tags based on the following events/attributes
+          # we only build main branch and PRs
+          tags: |
+            type=ref,event=pr,suffix=${{ matrix.component.tag }},
+            type=raw,value=${{ steps.process_tag.outputs.processed_tag }}
+            
+          # type=semver,pattern={{major}}.{{minor}}
+          # type=semver,pattern={{major}}
+          # type=sha
+      - name: Prepare image tags
+        id: image_tags
+        run: |
+          TAGS="${{ steps.ocean_node_meta.outputs.tags }}"
+          echo "dockerhub<<EOF" >> $GITHUB_OUTPUT
+          echo "$TAGS" | grep "^${{ env.DOCKERHUB_IMAGE }}:" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          echo "ghcr<<EOF" >> $GITHUB_OUTPUT
+          echo "$TAGS" | grep "^${{ env.GHCR_IMAGE }}:" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+      - name: Build and push to Docker Hub
+        if: steps.dockerhub_login.outcome == 'success'
+        id: build_dockerhub
+        uses: docker/build-push-action@v5
+        with:
+          builder: ${{ steps.buildx.outputs.name }}
+          context: ${{ matrix.component.folder }}
+          platforms: ${{ matrix.platform }}
+          push: true
+          tags: ${{ steps.image_tags.outputs.dockerhub }}
+          labels: ${{ steps.ocean_node_meta.outputs.labels }}
+      - name: Build and push to GHCR
+        if: steps.ghcr_login.outcome == 'success'
+        id: build_ghcr
+        uses: docker/build-push-action@v5
+        with:
+          builder: ${{ steps.buildx.outputs.name }}
+          context: ${{ matrix.component.folder }}
+          platforms: ${{ matrix.platform }}
+          push: true
+          tags: ${{ steps.image_tags.outputs.ghcr }}
+          labels: ${{ steps.ocean_node_meta.outputs.labels }}
