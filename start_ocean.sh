@@ -73,6 +73,13 @@ export OCEAN_CERTS_FOLDER="${OCEAN_HOME}/ocean-certs/"
 mkdir -p ${OCEAN_CERTS_FOLDER}
 # copy certs
 cp -r ./certs/* ${OCEAN_CERTS_FOLDER}
+
+#www folder
+export OCEAN_WWW_FOLDER="${OCEAN_HOME}/storage-www/"
+mkdir -p ${OCEAN_WWW_FOLDER}
+#ftp folder
+export OCEAN_FTP_FOLDER="${OCEAN_HOME}/storage-ftp/"
+mkdir -p ${OCEAN_FTP_FOLDER}
 # Specify which ethereum client to run or connect to: development
 export CONTRACTS_NETWORK_NAME="development"
 

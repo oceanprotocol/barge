@@ -18,10 +18,10 @@ services:
       ocean_backend:
         ipv4_address: 172.15.0.7
     volumes:
-    - www:/var/www/html
-    - ftp:/srv/ftp
-    - ceph_data:/data
-    - ./ceph_logs:/var/log/ceph/
+    - ${OCEAN_WWW_FOLDER}:/var/www/html
+    - ${OCEAN_FTP_FOLDER}:/srv/ftp
+    
+    
 
 volumes:
   www:
