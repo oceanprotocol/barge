@@ -25,9 +25,5 @@ docker volume rm ocean-graphipfs
 docker volume rm ocean-graphpgsql
 docker volume rm ocean-provider1db
 docker volume rm ocean-provider2db
-docker volume rm ocean_ceph_data
-docker volume rm ocean_ftp
-docker volume rm ocean_www
 
 docker network rm ocean_backend
-docker volume rm $(docker volume ls -q)
