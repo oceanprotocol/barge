@@ -1,69 +1,48 @@
-FROM ubuntu:22.04
-
+FROM ubuntu:22.04 AS ceph
 ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
 
-# ----------------------------------------------------
-# Install packages
-# ----------------------------------------------------
-RUN apt-get update && \
-    apt-get install -y \
-        apache2 \
-        vsftpd \
-        ceph \
-        ceph-mds \
-        ceph-mgr \
-        ceph-mon \
-        ceph-osd \
-        radosgw \
-        supervisor \
-        uuid-runtime \
-        dnsutils \
-        curl \
-        jq && \
-    apt-get clean
-
+RUN apt -y update && apt -y install \
+    apache2 \
+    vsftpd \
+    lsb-release \
+    wget \
+    curl \
+    pgp \
+    tzdata \
+    vim \
+    dnsutils \
+    iputils-ping \
+    iproute2 \
+    jq
 # ----------------------------------------------------
 # Apache config
 # ----------------------------------------------------
 RUN a2enmod rewrite
-
 # ----------------------------------------------------
 # FTP config
 # ----------------------------------------------------
 RUN sed -i 's/anonymous_enable=NO/anonymous_enable=YES/' /etc/vsftpd.conf && \
     sed -i 's/#write_enable=YES/write_enable=YES/' /etc/vsftpd.conf
+RUN wget \
+        -q \
+        -O- https://download.ceph.com/keys/release.asc | \
+        gpg --dearmor > /etc/apt/trusted.gpg.d/ceph.gpg && \
+    echo "deb https://download.ceph.com/debian-reef/ $(lsb_release -sc) main" \
+        > /etc/apt/sources.list.d/ceph.list && \
+    apt -y update && \
+    apt install -y ceph radosgw
+RUN apt clean && \
+    apt autoremove -y && \
+    rm -rf /var/lib/{apt,dpkg,cache,log}/
 
-# ----------------------------------------------------
-# Ceph directories
-# ----------------------------------------------------
-RUN mkdir -p /etc/ceph /var/lib/ceph/mon/ceph-a /var/lib/ceph/osd/ceph-0 /var/lib/ceph/mgr/ceph-a
+FROM ceph AS radosgw
+ENV TZ=Etc/UTC
+ENV MGR_USERNAME="admin"
+ENV MAIN="none"
+# ACCESS_KEY, SECRET_KEY, MGR_PASSWORD: pass at runtime (e.g. compose environment) to avoid embedding in image
 
-# ----------------------------------------------------
-# Copy bootstrap script
-# ----------------------------------------------------
-COPY bootstrap-ceph.sh /usr/local/bin/bootstrap-ceph.sh
-RUN chmod +x /usr/local/bin/bootstrap-ceph.sh
+EXPOSE 7480
 
-# ----------------------------------------------------
-# Supervisor config
-# ----------------------------------------------------
-RUN mkdir -p /var/log/supervisor
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-# ----------------------------------------------------
-# Expose ports
-# ----------------------------------------------------
-# Apache
-EXPOSE 80       
-# FTP data
-EXPOSE 20        
-# FTP control
-EXPOSE 21
-# Ceph MON
-EXPOSE 6789
-# Ceph OSD/MGR
-EXPOSE 6800-6900
-# RGW S3 + Swift
-EXPOSE 7480 
-
-CMD ["/usr/local/bin/bootstrap-ceph.sh"]
+COPY ./entrypoint.sh /entrypoint
+ENTRYPOINT ["/entrypoint"]

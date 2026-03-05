@@ -1,14 +1,19 @@
 version: '3'
 services:
   storage:
-    image: ghcr.io/oceanprotocol/barge:storage
+    image: hcr.io/oceanprotocol/barge:storage
     ports:
       - "80:80"
       - "443:443"
       - "20-21:20-21"
-      - "6789:6789"        # Ceph MON
-      - "6800-6900:6800-6900"  # Ceph OSD/MGR
       - "7480:7480"        # Ceph RGW (S3 + Swift)
+      - "8080:8080"        # Ceph RGW (S3 + Swift)
+    environment:
+      MAIN: "none"
+      ACCESS_KEY: "ocean123"
+      SECRET_KEY: "ocean123secret"
+      MGR_USERNAME: "admin"
+      MGR_PASSWORD: "admin"
     networks:
       ocean_backend:
         ipv4_address: 172.15.0.7
@@ -16,6 +21,7 @@ services:
     - www:/var/www/html
     - ftp:/srv/ftp
     - ceph_data:/data
+    - ./ceph_logs:/var/log/ceph/
 
 volumes:
   www:
