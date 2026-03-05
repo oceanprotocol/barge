@@ -1,7 +1,7 @@
 version: '3'
 services:
   storage:
-    image: hcr.io/oceanprotocol/barge:storage
+    image: ghcr.io/oceanprotocol/barge:storage
     ports:
       - "80:80"
       - "443:443"
