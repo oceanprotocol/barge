@@ -20,7 +20,3 @@ services:
     networks:
       ocean_backend:
         ipv4_address: 172.15.0.7
-    volumes:
-    # OCEAN_WWW_FOLDER, OCEAN_FTP_FOLDER set in start_ocean.sh (e.g. ~/.ocean/storage-www, ~/.ocean/storage-ftp)
-    - ${OCEAN_WWW_FOLDER}:/var/www/html
-    - ${OCEAN_FTP_FOLDER}:/srv/ftp
