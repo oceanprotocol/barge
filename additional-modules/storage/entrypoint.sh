@@ -7,6 +7,8 @@ set -o pipefail
 ACCESS_KEY="${ACCESS_KEY:-ocean123}"
 SECRET_KEY="${SECRET_KEY:-ocean123secret}"
 MGR_PASSWORD="${MGR_PASSWORD:-admin}"
+FTP_USER="${FTP_USER:-ftpuser}"
+FTP_PASS="${FTP_PASS:-ftppass}"
 
 # In Docker, hostname -d is often empty; use defaults so MAIN=none single-node works
 ZONE="$(hostname -s | grep -oP '^[a-z]+[0-9]+' || echo 'a')"
@@ -106,6 +108,24 @@ ceph auth get-or-create "client.rgw.$(hostname -s)" osd 'allow rwx' mon 'allow r
     -o "/var/lib/ceph/radosgw/ceph-rgw.$(hostname -s)/keyring"
 touch "/var/lib/ceph/radosgw/ceph-rgw.$(hostname -s)/done"
 chown -R ceph:ceph /var/lib/ceph/radosgw
+
+##
+# start Apache and vsftpd (local FTP user; /var/www/html and /srv/ftp from volumes)
+##
+echo "starting apache2 and vsftpd..."
+mkdir -p /var/www/html /srv/ftp
+chown -R www-data:www-data /var/www/html 2>/dev/null || true
+# Create FTP user if missing, set password from env
+if ! id -u "$FTP_USER" >/dev/null 2>&1; then
+  useradd --home /srv/ftp --no-create-home --shell /usr/sbin/nologin "$FTP_USER"
+fi
+echo "${FTP_USER}:${FTP_PASS}" | chpasswd
+# Allow FTP_USER to log in (remove from blacklist if present)
+sed -i "/^${FTP_USER}$/d" /etc/ftpusers 2>/dev/null || true
+chown -R "${FTP_USER}:${FTP_USER}" /srv/ftp 2>/dev/null || true
+chmod 755 /srv/ftp 2>/dev/null || true
+apachectl -D FOREGROUND &
+vsftpd /etc/vsftpd.conf &
 
 if [ "${MAIN}" == "none" ]; then
     echo "create admin-user"

@@ -80,6 +80,9 @@ mkdir -p ${OCEAN_WWW_FOLDER}
 #ftp folder
 export OCEAN_FTP_FOLDER="${OCEAN_HOME}/storage-ftp/"
 mkdir -p ${OCEAN_FTP_FOLDER}
+# FTP local user (no anonymous); set FTP_USER/FTP_PASS to override
+export FTP_USER="${FTP_USER:-ftpuser}"
+export FTP_PASS="${FTP_PASS:-ftppass}"
 # Specify which ethereum client to run or connect to: development
 export CONTRACTS_NETWORK_NAME="development"
 
