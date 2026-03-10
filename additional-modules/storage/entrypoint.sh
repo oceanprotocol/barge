@@ -113,11 +113,8 @@ chown -R ceph:ceph /var/lib/ceph/radosgw
 # start Apache and vsftpd (/var/www/html and /srv/ftp are volume bindings from start_ocean.sh)
 ##
 echo "starting apache2 and vsftpd..."
-# Host dirs are created by root ; set broad perms so www-data and FTP user can write
-mkdir -p /var/www/html
-mkdir -p /srv/ftp
+# Host dirs are created by root in start_ocean.sh; set broad perms so www-data and FTP user can write
 chmod 777 /var/www/html 2>/dev/null || true
-chmod 777 /srv 2>/dev/null || true
 chmod 777 /srv/ftp 2>/dev/null || true
 # Create FTP user if missing, set password from env
 if ! id -u "$FTP_USER" >/dev/null 2>&1; then

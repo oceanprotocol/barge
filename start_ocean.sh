@@ -74,6 +74,13 @@ mkdir -p ${OCEAN_CERTS_FOLDER}
 # copy certs
 cp -r ./certs/* ${OCEAN_CERTS_FOLDER}
 
+#www folder
+export OCEAN_WWW_FOLDER="${OCEAN_HOME}/storage-www/"
+mkdir -p ${OCEAN_WWW_FOLDER}
+#ftp folder
+export OCEAN_FTP_FOLDER="${OCEAN_HOME}/storage-ftp/"
+mkdir -p ${OCEAN_FTP_FOLDER}
+chmod 777 ${OCEAN_FTP_FOLDER}
 # FTP local user (no anonymous); set FTP_USER/FTP_PASS to override
 export FTP_USER="${FTP_USER:-ftpuser}"
 export FTP_PASS="${FTP_PASS:-ftppass}"
