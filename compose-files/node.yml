@@ -1,7 +1,7 @@
 version: '3'
 services:
   node:
-    image: oceanprotocol/ocean-node:${NODE_VERSION:-latest}
+    image: ghcr.io/oceanprotocol/ocean-node:${NODE_VERSION:-latest}
     ports:
       - 8000:8000
       - 8001:8001
