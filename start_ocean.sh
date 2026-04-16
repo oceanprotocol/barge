@@ -30,7 +30,7 @@ COMPOSE_DIR="${DIR}/compose-files"
 export TYPESENSE_VERSION=${TYPESENSE_VERSION:-0.25.1}
 export AQUARIUS_VERSION=${AQUARIUS_VERSION:-v5.1.5}
 export ELASTICSEARCH_VERSION=${ELASTICSEARCH_VERSION:-8.5.1}
-export NODE_VERSION=${NODE_VERSION:-main}
+export NODE_VERSION=${NODE_VERSION:-pr-1329}
 export CONTRACTS_VERSION=${CONTRACTS_VERSION:-v2.4.1}
 
 
@@ -84,6 +84,9 @@ chmod 777 ${OCEAN_FTP_FOLDER}
 # FTP local user (no anonymous); set FTP_USER/FTP_PASS to override
 export FTP_USER="${FTP_USER:-ftpuser}"
 export FTP_PASS="${FTP_PASS:-ftppass}"
+export NODE_PERSISTENT_STORAGE_FOLDER="${OCEAN_HOME}/persistent-storage/"
+mkdir -p ${NODE_PERSISTENT_STORAGE_FOLDER}
+chmod 777 ${NODE_PERSISTENT_STORAGE_FOLDER}
 # Specify which ethereum client to run or connect to: development
 export CONTRACTS_NETWORK_NAME="development"
 

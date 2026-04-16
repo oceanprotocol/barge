@@ -36,7 +36,9 @@ services:
       MAX_REQ_PER_MINUTE: 320
       MAX_CONNECTIONS_PER_MINUTE: 320
       ADDRESS_FILE: "/ocean-contracts/artifacts/address.json"
-      DOCKER_COMPUTE_ENVIRONMENTS: "[{\"socketPath\":\"/var/run/docker.sock\",\"resources\":[{\"id\":\"disk\",\"total\":1}],\"storageExpiry\":604800,\"maxJobDuration\":3600,\"fees\":{\"8996\":[{\"prices\":[{\"id\":\"cpu\",\"price\":1}]}]},\"free\":{\"maxJobDuration\":60,\"maxJobs\":3,\"resources\":[{\"id\":\"cpu\",\"max\":1},{\"id\":\"ram\",\"max\":1},{\"id\":\"disk\",\"max\":1}]}}]"
+      DOCKER_COMPUTE_ENVIRONMENTS: "[{\"socketPath\":\"/var/run/docker.sock\",\"environments\":[{\"resources\":[{\"id\":\"disk\",\"total\":1}],\"storageExpiry\":604800,\"maxJobDuration\":3600,\"fees\":{\"8996\":[{\"prices\":[{\"id\":\"cpu\",\"price\":1}]}]},\"free\":{\"maxJobDuration\":60,\"maxJobs\":3,\"resources\":[{\"id\":\"cpu\",\"max\":1},{\"id\":\"ram\",\"max\":1},{\"id\":\"disk\",\"max\":1}]}}]}]"
+      PERSISTENT_STORAGE: '{"enabled":true,"type":"localfs","options":{"folder":"/persistent-storage"}}'
     volumes:
     - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
     - /var/run/docker.sock:/var/run/docker.sock
+    - ${NODE_PERSISTENT_STORAGE_FOLDER}:/persistent-storage
