@@ -5,6 +5,7 @@ services:
     ports:
       - 8000:8000
       - 8001:8001
+      - 9001:9001
     networks:
       ocean_backend:
         ipv4_address: 172.15.0.5
