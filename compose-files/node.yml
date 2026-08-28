@@ -37,8 +37,10 @@ services:
       MAX_REQ_PER_MINUTE: 320
       MAX_CONNECTIONS_PER_MINUTE: 320
       ADDRESS_FILE: "/ocean-contracts/artifacts/address.json"
-      DOCKER_COMPUTE_ENVIRONMENTS: "[{\"socketPath\":\"/var/run/docker.sock\",\"environments\":[{\"resources\":[{\"id\":\"disk\",\"total\":1}],\"storageExpiry\":604800,\"maxJobDuration\":3600,\"fees\":{\"8996\":[{\"prices\":[{\"id\":\"cpu\",\"price\":1}]}]},\"free\":{\"maxJobDuration\":60,\"maxJobs\":3,\"resources\":[{\"id\":\"cpu\",\"max\":1},{\"id\":\"ram\",\"max\":1},{\"id\":\"disk\",\"max\":1}]}}]}]"
       PERSISTENT_STORAGE: '{"enabled":true,"type":"localfs","options":{"folder":"/persistent-storage"}}'
+      SERVICE_TEMPLATES_PATH: "docs/serviceTemplates/"
+      DOCKER_COMPUTE_ENVIRONMENTS: "[{\"socketPath\":\"/var/run/docker.sock\",\"serviceOnDemand\":{\"enabled\":true,\"nodeHost\":\"localhost\",\"hostPortRange\":[30000,32000],\"maxDurationSeconds\":86400,\"allowImageBuild\":true},\"environments\":[{\"resources\":[{\"id\":\"cpu\",\"total\":4},{\"id\":\"ram\",\"total\":16},{\"id\":\"disk\",\"total\":50}],\"storageExpiry\":604800,\"maxJobDuration\":3600,\"features\":{\"computeJobs\":true,\"services\":true},\"fees\":{\"8996\":[{\"prices\":[{\"id\":\"cpu\",\"price\":1},{\"id\":\"ram\",\"price\":1}]}]},\"free\":{\"maxJobDuration\":60,\"maxJobs\":3,\"resources\":[{\"id\":\"cpu\",\"max\":1},{\"id\":\"ram\",\"max\":1},{\"id\":\"disk\",\"max\":1}]}}]}]"
+
     volumes:
     - ${OCEAN_ARTIFACTS_FOLDER}:/ocean-contracts/artifacts/
     - /var/run/docker.sock:/var/run/docker.sock
